@@ -1,7 +1,8 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // The dev overlay button sits on top of the sticky footer's status text.
+  devIndicators: false,
 };
 
 export default nextConfig;

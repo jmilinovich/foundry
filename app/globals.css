@@ -1,26 +1,72 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ink: #f2efe8;
+  --ink-dim: #8b877e;
+  --ink-faint: #4a4741;
+  --ground: #0b0b0c;
+  --panel: #121214;
+  --line: #232326;
+  --amber: #ff8a3d;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-ground: var(--ground);
+  --color-panel: var(--panel);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-ink-dim: var(--ink-dim);
+  --color-ink-faint: var(--ink-faint);
+  --color-amber: var(--amber);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* The specimen fades in only once its FontFace has actually loaded, so you
+   never see the string flash in a fallback face and then snap. */
+.specimen {
+  opacity: 0;
+  transition: opacity 420ms ease;
+}
+.specimen[data-loaded="true"] {
+  opacity: 1;
+}
+
+@keyframes shimmer {
+  0% { background-position: -280% 0; }
+  100% { background-position: 280% 0; }
+}
+.shimmer {
+  background: linear-gradient(
+    100deg,
+    transparent 42%,
+    rgba(255, 138, 61, 0.055) 50%,
+    transparent 58%
+  );
+  background-size: 280% 100%;
+  animation: shimmer 2.4s linear infinite;
+}
+
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+.rise {
+  animation: riseIn 460ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+input[type="range"] {
+  accent-color: var(--amber);
+}
+
+::selection {
+  background: var(--amber);
+  color: #0b0b0c;
 }

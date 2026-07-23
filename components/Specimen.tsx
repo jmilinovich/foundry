@@ -1,0 +1,136 @@
+'use client';
+
+import { toGenotype } from '@/lib/genome';
+import type { FontRecord } from '@/lib/types';
+import { useFoundryFont } from './useFoundryFont';
+
+const BADGE: Record<FontRecord['lineage'], { label: string; className: string }> = {
+  seed: { label: 'seed', className: 'text-ink-faint border-line' },
+  elite: { label: 'kept', className: 'text-amber border-amber/40' },
+  child: { label: 'child', className: 'text-ink-dim border-line' },
+  wildcard: { label: 'wildcard', className: 'text-sky-300/70 border-sky-300/25' },
+};
+
+export function Specimen({
+  font,
+  text,
+  size,
+  selected,
+  dimmed,
+  index,
+  onToggle,
+}: {
+  font: FontRecord;
+  text: string;
+  size: number;
+  selected: boolean;
+  dimmed: boolean;
+  index: number;
+  onToggle: (id: string) => void;
+}) {
+  const ready = font.status === 'ready';
+  const failed = font.status === 'failed';
+  const { family, isLoaded } = useFoundryFont(font.id, ready);
+  const genotype = toGenotype(font.genome);
+
+  // Every state shares one shell, so the grid never reflows as fonts land.
+  const bodyHeight = Math.round(size * 1.5);
+
+  const shell = failed
+    ? 'border-red-900/40 bg-red-950/[0.12]'
+    : selected
+      ? 'border-amber bg-amber/[0.04] shadow-[0_0_0_1px_var(--amber),0_10px_40px_-16px_rgba(255,138,61,0.5)]'
+      : 'border-line bg-panel' + (ready ? ' hover:border-ink-faint' : '');
+
+  return (
+    <div
+      role={ready ? 'button' : undefined}
+      tabIndex={ready ? 0 : undefined}
+      onClick={ready ? () => onToggle(font.id) : undefined}
+      onKeyDown={
+        ready
+          ? (e) => {
+              if (e.key === ' ' || e.key === 'Enter') {
+                e.preventDefault();
+                onToggle(font.id);
+              }
+            }
+          : undefined
+      }
+      style={ready ? { animationDelay: `${Math.min(index, 12) * 45}ms` } : undefined}
+      className={`group relative flex flex-col overflow-hidden rounded-lg border p-5 text-left outline-none transition-all duration-300 focus-visible:border-amber/70 ${shell} ${
+        ready ? 'rise cursor-pointer' : ''
+      } ${dimmed && !selected ? 'opacity-45 hover:opacity-90' : 'opacity-100'}`}
+    >
+      {!ready && !failed && <div className="shimmer pointer-events-none absolute inset-0" />}
+
+      <div className="relative flex items-center justify-between">
+        <span
+          className={`rounded border px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-widest ${
+            failed ? 'border-red-900/40 text-red-400/70' : BADGE[font.lineage].className
+          }`}
+        >
+          {failed ? 'failed' : BADGE[font.lineage].label}
+        </span>
+
+        {ready ? (
+          <a
+            href={`/api/fonts/${font.id}?download=${encodeURIComponent(font.name)}`}
+            onClick={(e) => e.stopPropagation()}
+            download
+            title="Download TTF"
+            className="font-mono text-[11px] text-ink-faint opacity-0 transition group-hover:opacity-100 hover:text-amber"
+          >
+            ↓ ttf
+          </a>
+        ) : (
+          <span className="font-mono text-[11px] tabular-nums text-ink-faint">
+            {failed ? '' : font.progress > 0 ? `${Math.round(font.progress)}%` : 'queued'}
+          </span>
+        )}
+      </div>
+
+      <div
+        className="relative mt-5 flex items-center"
+        style={{ minHeight: `${bodyHeight}px` }}
+      >
+        {ready ? (
+          <div
+            className="specimen w-full break-words leading-[1.05]"
+            data-loaded={isLoaded}
+            style={{ fontFamily: `"${family}", serif`, fontSize: `${size}px` }}
+          >
+            {text}
+          </div>
+        ) : failed ? (
+          <p className="text-sm leading-relaxed text-red-400/70">{font.error}</p>
+        ) : (
+          <div className="w-full">
+            <div className="h-px w-full bg-line">
+              <div
+                className="h-px bg-amber/60 transition-all duration-700"
+                style={{ width: `${Math.max(2, font.progress)}%` }}
+              />
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div className="relative mt-auto border-t border-line pt-3">
+        <div
+          className={`text-[15px] ${ready ? 'specimen text-ink-dim' : 'text-ink-faint'}`}
+          data-loaded={ready ? isLoaded : undefined}
+          style={ready ? { fontFamily: `"${family}", serif` } : undefined}
+        >
+          {font.name}
+        </div>
+        <p
+          className="mt-1.5 font-mono text-[10.5px] leading-relaxed text-ink-faint"
+          title={font.prompt}
+        >
+          {genotype}
+        </p>
+      </div>
+    </div>
+  );
+}
