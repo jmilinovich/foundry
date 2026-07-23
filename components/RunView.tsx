@@ -180,6 +180,7 @@ export function RunView({ initialRun }: { initialRun: Run }) {
             <Specimen
               key={f.id}
               font={f}
+              runId={run.id}
               text={text || 'Handgloves'}
               size={size}
               selected={selected.has(f.id)}

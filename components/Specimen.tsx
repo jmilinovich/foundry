@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 import { toGenotype } from '@/lib/genome';
 import type { FontRecord } from '@/lib/types';
 import { useFoundryFont } from './useFoundryFont';
@@ -13,6 +15,7 @@ const BADGE: Record<FontRecord['lineage'], { label: string; className: string }>
 
 export function Specimen({
   font,
+  runId,
   text,
   size,
   selected,
@@ -22,6 +25,7 @@ export function Specimen({
   onLineage,
 }: {
   font: FontRecord;
+  runId: string;
   text: string;
   size: number;
   selected: boolean;
@@ -77,6 +81,14 @@ export function Specimen({
 
         {ready ? (
           <span className="flex items-center gap-3 opacity-0 transition group-hover:opacity-100">
+            <Link
+              href={`/run/${runId}/font/${font.id}`}
+              onClick={(e) => e.stopPropagation()}
+              title="Open the full specimen"
+              className="font-mono text-[11px] text-ink-faint hover:text-amber"
+            >
+              ↗ open
+            </Link>
             {font.parents.length > 0 && (
               <button
                 onClick={(e) => {
@@ -133,13 +145,19 @@ export function Specimen({
       </div>
 
       <div className="relative mt-auto border-t border-line pt-3">
-        <div
-          className={`text-[15px] ${ready ? 'specimen text-ink-dim' : 'text-ink-faint'}`}
-          data-loaded={ready ? isLoaded : undefined}
-          style={ready ? { fontFamily: `"${family}", serif` } : undefined}
-        >
-          {font.name}
-        </div>
+        {ready ? (
+          <Link
+            href={`/run/${runId}/font/${font.id}`}
+            onClick={(e) => e.stopPropagation()}
+            className="specimen block text-[15px] text-ink-dim transition hover:text-amber"
+            data-loaded={isLoaded}
+            style={{ fontFamily: `"${family}", serif` }}
+          >
+            {font.name}
+          </Link>
+        ) : (
+          <div className="text-[15px] text-ink-faint">{font.name}</div>
+        )}
         <p
           className="mt-1.5 font-mono text-[10.5px] leading-relaxed text-ink-faint"
           title={font.prompt}

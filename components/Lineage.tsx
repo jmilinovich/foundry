@@ -34,11 +34,14 @@ export function Lineage({
   fonts,
   text,
   onClose,
+  inline = false,
 }: {
   child: FontRecord;
   fonts: FontRecord[];
   text: string;
-  onClose: () => void;
+  onClose?: () => void;
+  /** Rendered as a tab on the font detail page rather than a fullscreen overlay. */
+  inline?: boolean;
 }) {
   const parents = useMemo(
     () => child.parents.map((id) => fonts.find((f) => f.id === id)).filter((f): f is FontRecord => !!f),
@@ -174,21 +177,24 @@ export function Lineage({
   }, [parent, child.id, text]);
 
   useEffect(() => {
+    if (inline || !onClose) return;
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [onClose]);
+  }, [onClose, inline]);
 
   if (!parent) return null;
   const changes = diff(parent.genome, child.genome);
 
   return (
     <div
-      className="fixed inset-0 z-50 flex flex-col bg-ground"
-      onClick={onClose}
+      className={
+        inline ? 'flex flex-col' : 'fixed inset-0 z-50 flex flex-col bg-ground'
+      }
+      onClick={inline ? undefined : onClose}
     >
       <div
-        className="mx-auto flex h-full w-full max-w-[1200px] flex-col px-6 py-6"
+        className={`mx-auto flex w-full max-w-[1200px] flex-col ${inline ? '' : 'h-full px-6 py-6'}`}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-baseline justify-between">
@@ -197,12 +203,20 @@ export function Lineage({
             <span className="mx-2 text-amber">→</span>
             <span className="text-ink-dim">{child.name}</span>
           </div>
-          <button onClick={onClose} className="font-mono text-[11px] text-ink-faint hover:text-amber">
-            esc
-          </button>
+          {!inline && (
+            <button
+              onClick={onClose}
+              className="font-mono text-[11px] text-ink-faint hover:text-amber"
+            >
+              esc
+            </button>
+          )}
         </div>
 
-        <canvas ref={canvasRef} className="min-h-0 w-full flex-1" />
+        <canvas
+          ref={canvasRef}
+          className={inline ? 'h-[460px] w-full' : 'min-h-0 w-full flex-1'}
+        />
 
         {status === 'loading' && (
           <p className="text-center font-mono text-[11px] text-ink-faint">sampling outlines…</p>

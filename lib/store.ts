@@ -32,7 +32,7 @@ import {
   MixfontError,
   type Generation,
 } from './mixfont';
-import type { FontRecord, Lineage, Run } from './types';
+import type { FontRecord, GlyphSetName, Lineage, Run } from './types';
 
 const DATA = path.join(process.cwd(), '.data');
 const RUNS = path.join(DATA, 'runs');
@@ -97,13 +97,17 @@ export async function listRuns(): Promise<
     .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
 }
 
-export const fontPath = (fontId: string) => path.join(FONTS, `${fontId}.ttf`);
+export const fontPath = (fontId: string, set: GlyphSetName = 'standard') =>
+  path.join(FONTS, set === 'extended' ? `${fontId}-extended.ttf` : `${fontId}.ttf`);
 
-export async function readFontFile(fontId: string): Promise<Buffer | null> {
+export async function readFontFile(
+  fontId: string,
+  set: GlyphSetName = 'standard',
+): Promise<Buffer | null> {
   // Guard against traversal — fontId lands in a filesystem path.
   if (!/^[a-zA-Z0-9-]+$/.test(fontId)) return null;
   try {
-    return await fs.readFile(fontPath(fontId));
+    return await fs.readFile(fontPath(fontId, set));
   } catch {
     return null;
   }
@@ -199,47 +203,117 @@ export async function syncRun(id: string): Promise<Run | null> {
     const run = await readRun(id);
     if (!run) return null;
 
-    const inFlight = run.fonts.filter((f) => f.status === 'generating' && f.mixfontId);
-    if (!inFlight.length) return run;
+    /**
+     * Advance one in-flight job: poll it, and on success pull the TTF down to
+     * our own disk before the 24h expiry.
+     *
+     * `target` is the slice of state to write progress into — the font record
+     * itself for the standard cut, or its `extended` block for the promoted
+     * one. Both cuts have identical lifecycles, so they share this.
+     */
+    const advance = async (
+      mixfontId: string,
+      target: { status: FontRecord['status']; progress: number; error?: string },
+      onSuccess: (g: Generation) => Promise<void>,
+    ) => {
+      let g: Generation;
+      try {
+        g = await getGeneration(mixfontId);
+      } catch (err) {
+        // A transient poll failure shouldn't kill the job — leave it generating
+        // and try again on the next tick.
+        if (err instanceof MixfontError && err.status >= 500) return;
+        target.status = 'failed';
+        target.error = err instanceof MixfontError ? err.message : String(err);
+        return;
+      }
 
-    await Promise.all(
-      inFlight.map(async (f) => {
-        let g: Generation;
+      target.progress = g.progress_percent ?? target.progress;
+
+      if (g.status === 'succeeded' && g.ttf_url) {
         try {
-          g = await getGeneration(f.mixfontId!);
+          await onSuccess(g);
+          target.status = 'ready';
+          target.progress = 100;
         } catch (err) {
-          // A transient poll failure shouldn't kill the individual — leave it
-          // generating and try again on the next tick.
-          if (err instanceof MixfontError && err.status >= 500) return;
-          f.status = 'failed';
-          f.error = err instanceof MixfontError ? err.message : String(err);
-          return;
+          target.status = 'failed';
+          target.error = `Generated, but rehosting failed: ${String(err)}`;
         }
+      } else if (g.status === 'failed' || g.status === 'cancelled') {
+        target.status = 'failed';
+        target.error = g.error ?? `Generation ${g.status}`;
+      }
+    };
 
-        f.progress = g.progress_percent ?? f.progress;
+    const download = async (url: string, dest: string) => {
+      const res = await fetch(url, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`TTF download failed: ${res.status}`);
+      const buf = Buffer.from(await res.arrayBuffer());
+      await ensureDirs();
+      await fs.writeFile(dest, buf);
+    };
 
-        if (g.status === 'succeeded' && g.ttf_url) {
-          try {
-            const res = await fetch(g.ttf_url, { cache: 'no-store' });
-            if (!res.ok) throw new Error(`TTF download failed: ${res.status}`);
-            const buf = Buffer.from(await res.arrayBuffer());
-            await ensureDirs();
-            await fs.writeFile(fontPath(f.id), buf);
+    const jobs: Promise<void>[] = [];
+
+    for (const f of run.fonts) {
+      if (f.status === 'generating' && f.mixfontId) {
+        jobs.push(
+          advance(f.mixfontId, f, async (g) => {
+            await download(g.ttf_url!, fontPath(f.id));
             // Mixfont's own names are good ("Ferro Nocturne Grotesk"); prefer
             // them over our placeholder once we have one.
             if (g.name && g.name !== 'Mixfont Generation') f.name = g.name;
-            f.status = 'ready';
-            f.progress = 100;
-          } catch (err) {
-            f.status = 'failed';
-            f.error = `Generated, but rehosting failed: ${String(err)}`;
-          }
-        } else if (g.status === 'failed' || g.status === 'cancelled') {
-          f.status = 'failed';
-          f.error = g.error ?? `Generation ${g.status}`;
-        }
-      }),
-    );
+          }),
+        );
+      }
+      const extId = f.extended?.mixfontId;
+      if (f.extended && f.extended.status === 'generating' && extId) {
+        const ext = f.extended;
+        jobs.push(
+          advance(extId, ext, async (g) => {
+            await download(g.ttf_url!, fontPath(f.id, 'extended'));
+          }),
+        );
+      }
+    }
+
+    if (!jobs.length) return run;
+    await Promise.all(jobs);
+
+    await writeRun(run);
+    return run;
+  });
+}
+
+/**
+ * Re-mint a font at the 319-glyph extended set.
+ *
+ * Sends the same prompt, so this is a re-roll rather than a widening of the
+ * existing outlines — the extended cut is a sibling of the standard one, not
+ * a superset of it. Worth knowing before you promote something you love.
+ */
+export async function promoteFont(runId: string, fontId: string): Promise<Run | null> {
+  return withLock(runId, async () => {
+    const run = await readRun(runId);
+    if (!run) return null;
+
+    const font = run.fonts.find((f) => f.id === fontId);
+    if (!font) throw new Error('Font not found in this run.');
+    if (font.status !== 'ready') throw new Error('Font is not ready yet.');
+    if (font.extended && font.extended.status !== 'failed') return run;
+
+    try {
+      const g = await generateFromText(font.prompt, 'extended');
+      font.extended = { mixfontId: g.id, status: 'generating', progress: g.progress_percent ?? 0 };
+      run.creditsSpent += CREDITS.extended;
+    } catch (err) {
+      font.extended = {
+        mixfontId: null,
+        status: 'failed',
+        progress: 0,
+        error: err instanceof MixfontError ? err.message : String(err),
+      };
+    }
 
     await writeRun(run);
     return run;

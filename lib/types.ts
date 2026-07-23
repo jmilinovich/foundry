@@ -7,6 +7,21 @@ export type FontStatus = 'queued' | 'generating' | 'ready' | 'failed';
 /** How an individual came to exist. Drives the badge on each specimen card. */
 export type Lineage = 'seed' | 'elite' | 'child' | 'wildcard';
 
+/**
+ * A second, 319-glyph cut of the same font.
+ *
+ * Everything minted during exploration is the 72-glyph `standard` set — no
+ * accents, no curly quotes, no en/em dashes. Nothing shippable comes out of
+ * that, so a font you've settled on gets re-minted at `extended` and keeps
+ * both files.
+ */
+export type ExtendedCut = {
+  mixfontId: string | null;
+  status: FontStatus;
+  progress: number;
+  error?: string;
+};
+
 export type FontRecord = {
   id: string;
   name: string;
@@ -23,7 +38,10 @@ export type FontRecord = {
   /** True once picked as a parent — the record of your own taste. */
   survived: boolean;
   createdAt: string;
+  extended?: ExtendedCut;
 };
+
+export type GlyphSetName = 'standard' | 'extended';
 
 export type Run = {
   id: string;
