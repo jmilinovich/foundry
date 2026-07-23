@@ -42,6 +42,62 @@ The seed box is read literally, with no model in the loop: type `condensed bruta
 and those genes are pinned across generation 0 while everything else explores. Type nothing and
 the whole space is open.
 
+## The specimen page
+
+Clicking a card selects it for breeding, so looking at a font properly gets its own route —
+`/run/[id]/font/[fontId]`, linkable, not a modal.
+
+Waterfall, character grid, text sizes at 18/16/14, pangram, numerals, a tabular-figure column
+test, and live tracking/leading. `on paper` inverts the whole page, because a face reads
+differently as ink on paper than as paper on ink.
+
+The character grid reads the font's actual `cmap` rather than printing a hardcoded A–Z, which is
+how you find out that the "72-glyph standard set" is really 77 for these, and that it carries
+straight *and* curly quotes but no accents at all.
+
+**Promote to 319** re-mints a face at the extended glyph set and keeps both cuts side by side. Note
+it's a re-roll of the same prompt, not a widening of the existing outlines — the extended cut is a
+sibling of the standard one, not a superset.
+
+The **poster** is one editorial template with a single-font mode and a pair mode, exported as PNG
+at 2×. Its fonts are inlined as base64 data URIs rather than loaded through the FontFace API: a
+runtime FontFace never lands in `document.styleSheets`, which is exactly where html-to-image looks,
+so the obvious approach exports a poster set in a fallback face and you don't find out until you
+open the file.
+
+## Pairing
+
+A display face and a text face, hunted the same way — by selection.
+
+Pick **pair this** on any font and generation 0 is *derived* from that font's genome rather than
+sampled freely, under one of three stances:
+
+| stance | what it does |
+|---|---|
+| `classic` | contrast the skeleton (category, weight, stroke contrast), harmonize the voice (width, x-height, era, mood) |
+| `superfamily` | keep everything close — quiet and unified |
+| `tension` | push every axis apart but the x-height |
+
+From a locked `slab serif · light · condensed · high contrast · small x-ht · eroded`, the classic
+stance produces humanist and neo-grotesque *sans* at monoline-to-low contrast, narrow, normal
+x-height — it jumps the serif divide while keeping the width and voice.
+
+Candidates for the **text slot are held inside a legible subspace**: no eroded, stencil-cut or
+pixel-stepped surfaces, no hairlines or ultra-condensed widths, no extreme or reverse contrast.
+Those genes are gorgeous at 96px and unreadable at 16, so allowing them just wastes generations.
+The constraint applies to children and wildcards too, or it would leak away after generation 0.
+
+Each candidate renders as a **mini article block** — headline in the locked face, paragraph in the
+candidate — because that's the actual job the two fonts will do. The locked face is a dropdown you
+can re-point at any font in the project mid-session; it costs nothing, since the fonts are already
+on disk.
+
+Settling on a partner produces a **Pairing page** at its own URL: the pair at several sizes, both
+genotypes, the poster in pair mode, download both, and promote both to 319 glyphs.
+
+A pairing session is an ordinary `Run` with a `pairing` block, so polling, rehosting, elites,
+wildcards and breeding all apply unchanged.
+
 ## The lineage morph
 
 Click **⟲ lineage** on any child to watch it emerge from its parent.
@@ -66,15 +122,20 @@ npm run dev
 Get a key and credits at [mixfont.com/console/keys](https://www.mixfont.com/console/keys).
 
 **Cost.** A generation of 8 is $1.60; every generation after that is $1.40, because the elite is
-cloned from disk rather than regenerated. Five rounds of 8 is about $7.
+cloned from disk rather than regenerated. Five rounds of 8 is about $7. A pairing session of 6 is
+$1.20 a round. Promoting a pair to 319 glyphs is $1.00.
+
+Mixfont fails outright maybe one generation in ten with a bare "an error occurred" — failed cards
+carry a **retry** so the individual isn't simply dead with its 20 credits gone.
 
 ## Architecture
 
 ```
-lib/genome.ts    the axes, prompt rendering, crossover, mutation, naming
+lib/genome.ts    the axes, prompt rendering, crossover, mutation, pairing stances, naming
 lib/mixfont.ts   API client (server-only — the key never reaches the browser)
-lib/store.ts     run persistence, the generation lifecycle, TTF rehosting
+lib/store.ts     run persistence, the generation lifecycle, TTF rehosting, promotion
 lib/morph.ts     outline flattening + arc-length resampling for the lineage view
+lib/glyphs.ts    reads a font's real character set out of its cmap
 ```
 
 Two decisions worth knowing about:

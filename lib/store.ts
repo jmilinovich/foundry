@@ -18,12 +18,16 @@ import { randomUUID } from 'crypto';
 
 import {
   breed,
+  constrainForText,
   hashSeed,
   mulberry32,
   nameFor,
+  pairingGeneration,
   seedGeneration,
   toPrompt,
   type Genome,
+  type Slot,
+  type Stance,
 } from './genome';
 import {
   CREDITS,
@@ -32,7 +36,7 @@ import {
   MixfontError,
   type Generation,
 } from './mixfont';
-import type { FontRecord, GlyphSetName, Lineage, Run } from './types';
+import type { FontRecord, FontRef, GlyphSetName, Lineage, Run } from './types';
 
 const DATA = path.join(process.cwd(), '.data');
 const RUNS = path.join(DATA, 'runs');
@@ -80,7 +84,15 @@ async function writeRun(run: Run): Promise<void> {
 }
 
 export async function listRuns(): Promise<
-  { id: string; seedText: string; generation: number; createdAt: string; ready: number }[]
+  {
+    id: string;
+    seedText: string;
+    generation: number;
+    createdAt: string;
+    ready: number;
+    /** A pairing that's been settled links to its pair, not back to the hunt. */
+    settledPair: boolean;
+  }[]
 > {
   await ensureDirs();
   const files = (await fs.readdir(RUNS)).filter((f) => f.endsWith('.json'));
@@ -93,8 +105,35 @@ export async function listRuns(): Promise<
       generation: r.generation,
       createdAt: r.createdAt,
       ready: r.fonts.filter((f) => f.status === 'ready').length,
+      settledPair: !!r.pairing?.chosenFontId,
     }))
     .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+}
+
+/** Every ready font across every run — the pool the locked slot can point at. */
+export async function listAllFonts(): Promise<FontRef[]> {
+  await ensureDirs();
+  const files = (await fs.readdir(RUNS)).filter((f) => f.endsWith('.json'));
+  const runs = await Promise.all(files.map((f) => readRun(f.replace(/\.json$/, ''))));
+  return runs
+    .filter((r): r is Run => r !== null)
+    .flatMap((r) =>
+      r.fonts
+        .filter((f) => f.status === 'ready')
+        .map((f) => ({
+          id: f.id,
+          runId: r.id,
+          name: f.name,
+          generation: f.generation,
+          genome: f.genome,
+        })),
+    );
+}
+
+/** Resolve a font that may live in a different run than the one you're viewing. */
+export async function findFont(runId: string, fontId: string): Promise<FontRecord | null> {
+  const run = await readRun(runId);
+  return run?.fonts.find((f) => f.id === fontId) ?? null;
 }
 
 export const fontPath = (fontId: string, set: GlyphSetName = 'standard') =>
@@ -189,6 +228,121 @@ export async function createRun(input: {
   await submitQueued(run);
   await writeRun(run);
   return run;
+}
+
+/**
+ * Start a pairing session: lock one font, hunt for the other half.
+ *
+ * It's an ordinary Run with a `pairing` block, so the whole existing machine —
+ * polling, rehosting, elites, wildcards, breeding — applies unchanged. Only two
+ * things differ: generation 0 is derived from the locked genome under a stance
+ * rather than sampled freely, and if the candidates are filling the text slot
+ * they're held inside a legible subspace.
+ */
+export async function createPairingRun(input: {
+  lockedRunId: string;
+  lockedFontId: string;
+  slot: Slot;
+  stance: Stance;
+  specimenText: string;
+  populationSize: number;
+}): Promise<Run> {
+  const locked = await findFont(input.lockedRunId, input.lockedFontId);
+  if (!locked) throw new Error('Locked font not found.');
+  if (locked.status !== 'ready') throw new Error('Locked font is not ready yet.');
+
+  const seed = hashSeed(`${input.lockedFontId}:${input.stance}:${Date.now()}`);
+  const rng = mulberry32(seed);
+  const genomes = pairingGeneration(
+    locked.genome,
+    input.slot,
+    input.stance,
+    input.populationSize,
+    rng,
+  );
+
+  const run: Run = {
+    id: randomUUID(),
+    seedText: `${input.stance} partner for ${locked.name}`,
+    seed,
+    specimenText: input.specimenText,
+    populationSize: input.populationSize,
+    mutationRate: 0.22,
+    generation: 0,
+    createdAt: new Date().toISOString(),
+    fonts: genomes.map((g) => makeRecord(g, 0, 'seed', [])),
+    creditsSpent: 0,
+    pairing: {
+      slot: input.slot,
+      stance: input.stance,
+      lockedFontId: input.lockedFontId,
+      lockedRunId: input.lockedRunId,
+    },
+  };
+
+  await submitQueued(run);
+  await writeRun(run);
+  return run;
+}
+
+/**
+ * Resubmit a font that failed upstream.
+ *
+ * Mixfont does occasionally return a bare "an error occurred while generating
+ * this font" — observed in the wild, roughly one in ten. Without this the
+ * individual is simply dead and its 20 credits are gone, which leaves a hole in
+ * a generation you can't fill.
+ */
+export async function retryFont(runId: string, fontId: string): Promise<Run | null> {
+  return withLock(runId, async () => {
+    const run = await readRun(runId);
+    if (!run) return null;
+
+    const font = run.fonts.find((f) => f.id === fontId);
+    if (!font) throw new Error('Font not found in this run.');
+    if (font.status !== 'failed') return run;
+
+    font.status = 'queued';
+    font.progress = 0;
+    font.mixfontId = null;
+    delete font.error;
+
+    await submitQueued(run);
+    await writeRun(run);
+    return run;
+  });
+}
+
+/** Re-point the locked slot at a different font. Costs nothing — no new fonts. */
+export async function swapLocked(
+  runId: string,
+  lockedRunId: string,
+  lockedFontId: string,
+): Promise<Run | null> {
+  return withLock(runId, async () => {
+    const run = await readRun(runId);
+    if (!run?.pairing) return null;
+    const locked = await findFont(lockedRunId, lockedFontId);
+    if (!locked || locked.status !== 'ready') throw new Error('That font is not available.');
+    run.pairing.lockedFontId = lockedFontId;
+    run.pairing.lockedRunId = lockedRunId;
+    await writeRun(run);
+    return run;
+  });
+}
+
+/** Settle on a partner. This is what turns a session into a pair. */
+export async function choosePartner(runId: string, fontId: string): Promise<Run | null> {
+  return withLock(runId, async () => {
+    const run = await readRun(runId);
+    if (!run?.pairing) return null;
+    const font = run.fonts.find((f) => f.id === fontId);
+    if (!font || font.status !== 'ready') throw new Error('That font is not ready.');
+    run.pairing.chosenFontId = fontId;
+    font.survived = true;
+    await writeRun(run);
+    return run;
+  });
 }
 
 /**
@@ -348,10 +502,15 @@ export async function breedNext(id: string, survivorIds: string[]): Promise<Run 
       { mutationRate: run.mutationRate, elites: Math.min(1, survivors.length), wildcards: 1 },
     );
 
+    // A pairing run hunting for a body face keeps its whole population inside
+    // the legible subspace — including children and the wildcard, or the
+    // constraint would leak away after generation 0.
+    const constrain = run.pairing?.slot === 'text';
+
     const parentIds = survivors.map((s) => s.id);
     const records = offspring.map((o, i) =>
       makeRecord(
-        o.genome,
+        constrain ? constrainForText(o.genome) : o.genome,
         nextGen,
         o.kind,
         // An elite is literally its parent carried forward; a wildcard has none.

@@ -6,6 +6,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { CREDITS } from '@/lib/credits';
 import { dollars, type GlyphSetName, type Run } from '@/lib/types';
 import { Lineage } from './Lineage';
+import { PairLauncher } from './detail/PairLauncher';
 import { Poster } from './detail/Poster';
 import { SpecimenSheet } from './detail/SpecimenSheet';
 import { useFoundryFont } from './useFoundryFont';
@@ -21,6 +22,7 @@ export function FontDetail({ initialRun, fontId }: { initialRun: Run; fontId: st
   const [paper, setPaper] = useState(false);
   const [glyphSet, setGlyphSet] = useState<GlyphSetName>('standard');
   const [promoting, setPromoting] = useState(false);
+  const [pairing, setPairing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const font = useMemo(() => run.fonts.find((f) => f.id === fontId), [run, fontId]);
@@ -120,6 +122,16 @@ export function FontDetail({ initialRun, fontId }: { initialRun: Run; fontId: st
           : undefined
       }
     >
+      {pairing && (
+        <PairLauncher
+          runId={run.id}
+          fontId={fontId}
+          fontName={font.name}
+          specimenText={text || 'Handgloves'}
+          onClose={() => setPairing(false)}
+        />
+      )}
+
       <header className="sticky top-0 z-20 border-b border-line bg-ground/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-[1400px] flex-wrap items-center gap-x-6 gap-y-3 px-6 py-3.5">
           <Link
@@ -139,6 +151,13 @@ export function FontDetail({ initialRun, fontId }: { initialRun: Run; fontId: st
 
           <div className="ml-auto flex items-center gap-4">
             {error && <span className="font-mono text-[11px] text-red-400">{error}</span>}
+
+            <button
+              onClick={() => setPairing(true)}
+              className="rounded border border-line px-2.5 py-1 font-mono text-[11px] text-ink-dim transition hover:border-amber hover:text-amber"
+            >
+              pair this
+            </button>
 
             {extendedReady ? (
               <div className="flex overflow-hidden rounded border border-line font-mono text-[10.5px]">

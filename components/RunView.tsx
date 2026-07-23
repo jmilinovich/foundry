@@ -4,11 +4,20 @@ import Link from 'next/link';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { CREDITS } from '@/lib/credits';
-import { dollars, type FontRecord, type Run } from '@/lib/types';
+import { STANCES } from '@/lib/genome';
+import { dollars, type FontRecord, type FontRef, type Run } from '@/lib/types';
 import { Lineage } from './Lineage';
+import { PairCandidate } from './PairCandidate';
 import { Specimen } from './Specimen';
 
-export function RunView({ initialRun }: { initialRun: Run }) {
+export function RunView({
+  initialRun,
+  catalog = [],
+}: {
+  initialRun: Run;
+  /** Every ready font in the project — the pool the locked slot can point at. */
+  catalog?: FontRef[];
+}) {
   const [run, setRun] = useState(initialRun);
   const [viewGen, setViewGen] = useState(initialRun.generation);
   const [selected, setSelected] = useState<Set<string>>(new Set());
@@ -100,6 +109,57 @@ export function RunView({ initialRun }: { initialRun: Run }) {
     return () => window.removeEventListener('keydown', onKey);
   }, [generation, toggle, breedNext, selected.size]);
 
+  const retry = useCallback(
+    async (id: string) => {
+      setError(null);
+      try {
+        const res = await fetch(`/api/runs/${run.id}/fonts/${id}/retry`, { method: 'POST' });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error ?? 'Retry failed');
+        setRun(data.run);
+      } catch (err) {
+        setError((err as Error).message);
+      }
+    },
+    [run.id],
+  );
+
+  // --- pairing ------------------------------------------------------------
+  const pairing = run.pairing;
+  const locked = useMemo(
+    () => (pairing ? catalog.find((f) => f.id === pairing.lockedFontId) : undefined),
+    [pairing, catalog],
+  );
+  const stance = STANCES.find((s) => s.id === pairing?.stance);
+
+  const pairAction = useCallback(
+    async (body: Record<string, unknown>) => {
+      setError(null);
+      try {
+        const res = await fetch(`/api/runs/${run.id}/pairing`, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify(body),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error ?? 'Failed');
+        setRun(data.run);
+        return data.run as Run;
+      } catch (err) {
+        setError((err as Error).message);
+        return null;
+      }
+    },
+    [run.id],
+  );
+
+  const settle = useCallback(async () => {
+    const [only] = [...selected];
+    if (!only) return;
+    const next = await pairAction({ action: 'choose', fontId: only });
+    if (next) window.location.href = `/pairing/${run.id}`;
+  }, [selected, pairAction, run.id]);
+
   const readyCount = generation.filter((f) => f.status === 'ready').length;
   // One survivor is carried forward unchanged and cloned from disk, so it's free.
   const nextCost = (run.populationSize - 1) * CREDITS.standard;
@@ -149,6 +209,35 @@ export function RunView({ initialRun }: { initialRun: Run }) {
           </div>
         </div>
 
+        {pairing && (
+          <div className="mx-auto flex max-w-[1600px] flex-wrap items-center gap-3 px-6 pb-3">
+            <span className="font-mono text-[10px] uppercase tracking-widest text-ink-faint">
+              locked {pairing.slot === 'text' ? 'display' : 'text'} face
+            </span>
+            {/* Swapping costs nothing — the fonts are already on disk — so it's
+                a dropdown rather than a new session. */}
+            <select
+              value={locked ? `${locked.runId}:${locked.id}` : ''}
+              onChange={(e) => {
+                const [lockedRunId, lockedFontId] = e.target.value.split(':');
+                pairAction({ action: 'swap', lockedRunId, lockedFontId });
+              }}
+              className="max-w-[280px] rounded border border-line bg-panel px-2 py-1 font-mono text-[11px] text-ink-dim outline-none focus:border-amber"
+            >
+              {catalog.map((f) => (
+                <option key={f.id} value={`${f.runId}:${f.id}`}>
+                  {f.name}
+                </option>
+              ))}
+            </select>
+            {stance && (
+              <span className="font-mono text-[10.5px] text-ink-faint">
+                <span className="text-amber">{stance.label}</span> · {stance.blurb}
+              </span>
+            )}
+          </div>
+        )}
+
         {run.generation > 0 && (
           <div className="mx-auto flex max-w-[1600px] items-center gap-1.5 px-6 pb-3">
             {Array.from({ length: run.generation + 1 }, (_, g) => (
@@ -175,21 +264,42 @@ export function RunView({ initialRun }: { initialRun: Run }) {
       </header>
 
       <main className="mx-auto w-full max-w-[1600px] flex-1 px-6 py-8">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
-          {generation.map((f, i) => (
-            <Specimen
-              key={f.id}
-              font={f}
-              runId={run.id}
-              text={text || 'Handgloves'}
-              size={size}
-              selected={selected.has(f.id)}
-              dimmed={selected.size > 0}
-              index={i}
-              onToggle={toggle}
-              onLineage={setLineageOf}
-            />
-          ))}
+        <div
+          className={`grid gap-4 ${
+            pairing ? 'md:grid-cols-2 2xl:grid-cols-3' : 'sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4'
+          }`}
+        >
+          {generation.map((f, i) =>
+            pairing && locked ? (
+              <PairCandidate
+                key={f.id}
+                font={f}
+                lockedId={locked.id}
+                pairing={pairing}
+                runId={run.id}
+                headline={text || 'Handgloves'}
+                selected={selected.has(f.id)}
+                dimmed={selected.size > 0}
+                index={i}
+                onToggle={toggle}
+                onRetry={retry}
+              />
+            ) : (
+              <Specimen
+                key={f.id}
+                font={f}
+                runId={run.id}
+                text={text || 'Handgloves'}
+                size={size}
+                selected={selected.has(f.id)}
+                dimmed={selected.size > 0}
+                index={i}
+                onToggle={toggle}
+                onLineage={setLineageOf}
+                onRetry={retry}
+              />
+            ),
+          )}
         </div>
 
         {pending && (
@@ -223,6 +333,24 @@ export function RunView({ initialRun }: { initialRun: Run }) {
             {isLatest && selected.size > 0 && (
               <span className="font-mono text-[11px] text-ink-faint">{dollars(nextCost)}</span>
             )}
+
+            {/* In a pairing session you can keep evolving, or stop here and let
+                the pair become a thing with its own page. */}
+            {pairing && (
+              <button
+                onClick={settle}
+                disabled={selected.size !== 1 || !isLatest}
+                title={
+                  selected.size === 1
+                    ? 'Settle on this partner'
+                    : 'Select exactly one partner to settle on'
+                }
+                className="rounded border border-line px-3 py-2 text-sm text-ink-dim transition disabled:cursor-not-allowed disabled:opacity-40 hover:enabled:border-amber hover:enabled:text-amber"
+              >
+                settle on this pair
+              </button>
+            )}
+
             <button
               onClick={breedNext}
               disabled={!isLatest || !selected.size || breeding || pending}

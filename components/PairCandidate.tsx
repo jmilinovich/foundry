@@ -3,52 +3,61 @@
 import Link from 'next/link';
 
 import { toGenotype } from '@/lib/genome';
-import type { FontRecord } from '@/lib/types';
+import type { FontRecord, PairingMeta } from '@/lib/types';
 import { useFoundryFont } from './useFoundryFont';
 
-const BADGE: Record<FontRecord['lineage'], { label: string; className: string }> = {
-  seed: { label: 'seed', className: 'text-ink-faint border-line' },
-  elite: { label: 'kept', className: 'text-amber border-amber/40' },
-  child: { label: 'child', className: 'text-ink-dim border-line' },
-  wildcard: { label: 'wildcard', className: 'text-sky-300/70 border-sky-300/25' },
+/** Short enough to read at a glance across eight cards, long enough to judge. */
+const BODY =
+  'A typeface earns its keep in the places nobody looks at closely — the third ' +
+  'paragraph of a long column, at sixteen pixels, in bad light. That is where ' +
+  'taste stops and infrastructure begins.';
+
+const BADGE: Record<FontRecord['lineage'], string> = {
+  seed: 'seed',
+  elite: 'kept',
+  child: 'child',
+  wildcard: 'wildcard',
 };
 
-export function Specimen({
+export function PairCandidate({
   font,
+  lockedId,
+  pairing,
   runId,
-  text,
-  size,
+  headline,
   selected,
   dimmed,
   index,
   onToggle,
-  onLineage,
   onRetry,
 }: {
   font: FontRecord;
+  /** The fixed half of the pair. Always a ready font, so it just needs an id. */
+  lockedId: string;
+  pairing: PairingMeta;
   runId: string;
-  text: string;
-  size: number;
+  headline: string;
   selected: boolean;
   dimmed: boolean;
   index: number;
   onToggle: (id: string) => void;
-  onLineage: (font: FontRecord) => void;
   onRetry: (id: string) => void;
 }) {
   const ready = font.status === 'ready';
   const failed = font.status === 'failed';
-  const { family, isLoaded } = useFoundryFont(font.id, ready);
-  const genotype = toGenotype(font.genome);
+  const candidate = useFoundryFont(font.id, ready);
+  const lockedFace = useFoundryFont(lockedId, true);
 
-  // Every state shares one shell, so the grid never reflows as fonts land.
-  const bodyHeight = Math.round(size * 1.5);
+  // The candidate fills one slot; the locked face fills the other.
+  const displayFamily = pairing.slot === 'display' ? candidate.family : lockedFace.family;
+  const textFamily = pairing.slot === 'display' ? lockedFace.family : candidate.family;
+  const loaded = candidate.isLoaded && lockedFace.isLoaded;
 
   const shell = failed
     ? 'border-red-900/40 bg-red-950/[0.12]'
     : selected
       ? 'border-amber bg-amber/[0.04] shadow-[0_0_0_1px_var(--amber),0_10px_40px_-16px_rgba(255,138,61,0.5)]'
-      : 'border-line bg-panel' + (ready ? ' hover:border-ink-faint' : '');
+      : `border-line bg-panel${ready ? ' hover:border-ink-faint' : ''}`;
 
   return (
     <div
@@ -66,48 +75,29 @@ export function Specimen({
           : undefined
       }
       style={ready ? { animationDelay: `${Math.min(index, 12) * 45}ms` } : undefined}
-      className={`group relative flex flex-col overflow-hidden rounded-lg border p-5 text-left outline-none transition-all duration-300 focus-visible:border-amber/70 ${shell} ${
+      className={`group relative flex flex-col overflow-hidden rounded-lg border p-6 text-left outline-none transition-all duration-300 focus-visible:border-amber/70 ${shell} ${
         ready ? 'rise cursor-pointer' : ''
       } ${dimmed && !selected ? 'opacity-45 hover:opacity-90' : 'opacity-100'}`}
     >
       {!ready && !failed && <div className="shimmer pointer-events-none absolute inset-0" />}
 
       <div className="relative flex items-center justify-between">
-        <span
-          className={`rounded border px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-widest ${
-            failed ? 'border-red-900/40 text-red-400/70' : BADGE[font.lineage].className
-          }`}
-        >
-          {failed ? 'failed' : BADGE[font.lineage].label}
+        <span className="rounded border border-line px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-widest text-ink-faint">
+          {failed ? 'failed' : BADGE[font.lineage]}
         </span>
-
         {ready ? (
           <span className="flex items-center gap-3 opacity-0 transition group-hover:opacity-100">
             <Link
               href={`/run/${runId}/font/${font.id}`}
               onClick={(e) => e.stopPropagation()}
-              title="Open the full specimen"
               className="font-mono text-[11px] text-ink-faint hover:text-amber"
             >
               ↗ open
             </Link>
-            {font.parents.length > 0 && (
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onLineage(font);
-                }}
-                title="Watch this font emerge from its parent"
-                className="font-mono text-[11px] text-ink-faint hover:text-amber"
-              >
-                ⟲ lineage
-              </button>
-            )}
             <a
               href={`/api/fonts/${font.id}?download=${encodeURIComponent(font.name)}`}
               onClick={(e) => e.stopPropagation()}
               download
-              title="Download TTF"
               className="font-mono text-[11px] text-ink-faint hover:text-amber"
             >
               ↓ ttf
@@ -120,19 +110,9 @@ export function Specimen({
         )}
       </div>
 
-      <div
-        className="relative mt-5 flex items-center"
-        style={{ minHeight: `${bodyHeight}px` }}
-      >
-        {ready ? (
-          <div
-            className="specimen w-full break-words leading-[1.05]"
-            data-loaded={isLoaded}
-            style={{ fontFamily: `"${family}", serif`, fontSize: `${size}px` }}
-          >
-            {text}
-          </div>
-        ) : failed ? (
+      {/* The mini article block — the actual job these two faces will do. */}
+      <div className="relative mt-5 min-h-[190px]">
+        {failed ? (
           <div>
             <p className="text-sm leading-relaxed text-red-400/70">{font.error}</p>
             <button
@@ -145,37 +125,43 @@ export function Specimen({
               ↻ retry · $0.20
             </button>
           </div>
-        ) : (
-          <div className="w-full">
-            <div className="h-px w-full bg-line">
-              <div
-                className="h-px bg-amber/60 transition-all duration-700"
-                style={{ width: `${Math.max(2, font.progress)}%` }}
-              />
+        ) : ready ? (
+          <>
+            <div
+              className="specimen leading-[1.06]"
+              data-loaded={loaded}
+              style={{ fontFamily: `"${displayFamily}", serif`, fontSize: 34 }}
+            >
+              {headline}
             </div>
+            <p
+              className="specimen mt-3.5"
+              data-loaded={loaded}
+              style={{ fontFamily: `"${textFamily}", serif`, fontSize: 15, lineHeight: 1.62 }}
+            >
+              {BODY}
+            </p>
+          </>
+        ) : (
+          <div className="h-px w-full bg-line">
+            <div
+              className="h-px bg-amber/60 transition-all duration-700"
+              style={{ width: `${Math.max(2, font.progress)}%` }}
+            />
           </div>
         )}
       </div>
 
       <div className="relative mt-auto border-t border-line pt-3">
-        {ready ? (
-          <Link
-            href={`/run/${runId}/font/${font.id}`}
-            onClick={(e) => e.stopPropagation()}
-            className="specimen block text-[15px] text-ink-dim transition hover:text-amber"
-            data-loaded={isLoaded}
-            style={{ fontFamily: `"${family}", serif` }}
-          >
-            {font.name}
-          </Link>
-        ) : (
-          <div className="text-[15px] text-ink-faint">{font.name}</div>
-        )}
+        <div className="font-mono text-[10px] uppercase tracking-widest text-ink-faint">
+          {pairing.slot === 'text' ? 'text face' : 'display face'}
+        </div>
+        <div className="mt-1 text-[14px] text-ink-dim">{font.name}</div>
         <p
           className="mt-1.5 font-mono text-[10.5px] leading-relaxed text-ink-faint"
           title={font.prompt}
         >
-          {genotype}
+          {toGenotype(font.genome)}
         </p>
       </div>
     </div>

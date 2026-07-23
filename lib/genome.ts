@@ -430,6 +430,193 @@ export function breed(
 }
 
 // ---------------------------------------------------------------------------
+// Pairing
+// ---------------------------------------------------------------------------
+
+/** Which half of a pair the *candidates* are filling. */
+export type Slot = 'display' | 'text';
+
+/**
+ * How hard the partner should push away from the locked face.
+ *
+ * The received wisdom on pairing is "contrast the skeleton, harmonize the
+ * voice" — that's `classic`. The other two are deliberate departures: quieter
+ * and louder.
+ */
+export type Stance = 'classic' | 'superfamily' | 'tension';
+
+export const STANCES: { id: Stance; label: string; blurb: string }[] = [
+  {
+    id: 'classic',
+    label: 'classic',
+    blurb: 'contrast the skeleton, harmonize the voice',
+  },
+  {
+    id: 'superfamily',
+    label: 'superfamily',
+    blurb: 'same bones throughout — quiet and unified',
+  },
+  {
+    id: 'tension',
+    label: 'high tension',
+    blurb: 'push every axis apart but the x-height',
+  },
+];
+
+type Relation = 'harmonize' | 'contrast' | 'free';
+
+const STANCE_RULES: Record<Stance, Record<OrdinalKey | 'mood', Relation>> = {
+  classic: {
+    category: 'contrast',
+    weight: 'contrast',
+    contrast: 'contrast',
+    terminals: 'free',
+    width: 'harmonize',
+    xheight: 'harmonize',
+    corner: 'harmonize',
+    texture: 'harmonize',
+    era: 'harmonize',
+    useCase: 'harmonize',
+    mood: 'harmonize',
+  },
+  superfamily: {
+    category: 'harmonize',
+    weight: 'harmonize',
+    contrast: 'harmonize',
+    terminals: 'harmonize',
+    width: 'harmonize',
+    xheight: 'harmonize',
+    corner: 'harmonize',
+    texture: 'harmonize',
+    era: 'harmonize',
+    useCase: 'harmonize',
+    mood: 'harmonize',
+  },
+  tension: {
+    category: 'contrast',
+    weight: 'contrast',
+    contrast: 'contrast',
+    terminals: 'contrast',
+    width: 'contrast',
+    xheight: 'harmonize',
+    corner: 'contrast',
+    texture: 'contrast',
+    era: 'free',
+    useCase: 'harmonize',
+    mood: 'free',
+  },
+};
+
+/** Superfamily harmonizes everything, so it needs a wider jitter to vary at all. */
+const STANCE_JITTER: Record<Stance, number> = { classic: 1, superfamily: 2, tension: 1 };
+
+/** Pick a value from the far half of an axis from where the parent sits. */
+function contrasting<T extends string>(values: readonly T[], parent: T, rng: Rng): T {
+  const i = values.indexOf(parent);
+  const n = values.length;
+  if (i < 0) return pick(rng, values);
+  const lowHalf = i >= n / 2;
+  const lo = lowHalf ? 0 : Math.ceil(n * 0.55);
+  const hi = lowHalf ? Math.floor(n * 0.45) : n - 1;
+  return values[lo + Math.floor(rng() * Math.max(1, hi - lo + 1))];
+}
+
+function harmonizing<T extends string>(values: readonly T[], parent: T, rng: Rng, jitter: number): T {
+  const i = values.indexOf(parent);
+  if (i < 0) return pick(rng, values);
+  const delta = Math.round((rng() * 2 - 1) * jitter);
+  return values[Math.max(0, Math.min(values.length - 1, i + delta))];
+}
+
+/**
+ * Hard constraints on the text slot.
+ *
+ * These genes are gorgeous at 96px and unreadable at 16px. Allowing them into
+ * the body-face population means most of every generation is a font you would
+ * never set a paragraph in — 20 cents each, and a wasted round of your
+ * attention, which is the more expensive of the two.
+ */
+export function constrainForText(g: Genome): Genome {
+  const clamp = <T extends string>(values: readonly T[], v: T, lo: number, hi: number): T => {
+    const i = values.indexOf(v);
+    return values[Math.max(lo, Math.min(hi, i < 0 ? lo : i))];
+  };
+  return {
+    ...g,
+    weight: clamp(WEIGHT, g.weight, 2, 5), // light … semibold
+    width: clamp(WIDTH, g.width, 2, 4), // narrow … wide
+    contrast: clamp(CONTRAST, g.contrast, 0, 3), // monoline … moderate
+    xheight: clamp(XHEIGHT, g.xheight, 2, 4), // normal … very large
+    texture: clamp(TEXTURE, g.texture, 0, 1), // clean … lightly inked
+    mood: [...g.mood] as Genome['mood'],
+  };
+}
+
+/** Derive one partner for `locked` under a stance. */
+export function deriveCounterpart(
+  locked: Genome,
+  slot: Slot,
+  stance: Stance,
+  rng: Rng,
+): Genome {
+  const rules = STANCE_RULES[stance];
+  const jitter = STANCE_JITTER[stance];
+  const out = { ...locked, mood: [...locked.mood] as Genome['mood'] };
+
+  for (const key of ORDINAL_KEYS) {
+    const values = ORDINAL[key] as readonly string[];
+    const parent = locked[key] as string;
+    const rel = rules[key];
+    const next =
+      rel === 'contrast'
+        ? contrasting(values, parent, rng)
+        : rel === 'free'
+          ? pick(rng, values)
+          : harmonizing(values, parent, rng, jitter);
+    (out as Record<string, unknown>)[key] = next;
+  }
+
+  if (rules.mood === 'free') {
+    let a = pick(rng, MOOD);
+    let b = pick(rng, MOOD);
+    while (b === a) b = pick(rng, MOOD);
+    out.mood = [a, b];
+  } else if (rng() < 0.5) {
+    // Harmonized mood keeps one of the parent's tags and swaps the other, so
+    // the pair shares a voice without being a carbon copy.
+    const slotIdx = rng() < 0.5 ? 0 : 1;
+    let m = pick(rng, MOOD);
+    while (m === out.mood[1 - slotIdx]) m = pick(rng, MOOD);
+    out.mood[slotIdx] = m;
+  }
+
+  return slot === 'text' ? constrainForText(out) : out;
+}
+
+/** Generation 0 of a pairing session: a spread of partners for the locked face. */
+export function pairingGeneration(
+  locked: Genome,
+  slot: Slot,
+  stance: Stance,
+  size: number,
+  rng: Rng,
+): Genome[] {
+  const out: Genome[] = [];
+  for (let i = 0; i < size; i++) {
+    const g = deriveCounterpart(locked, slot, stance, rng);
+    // Stratify weight across the population so the opening screen isn't five
+    // partners at the same colour.
+    if (slot === 'text') {
+      g.weight = WEIGHT[2 + (i % 4)];
+    } else {
+      g.weight = WEIGHT[Math.floor(((i + rng() * 0.7) / size) * WEIGHT.length)] ?? g.weight;
+    }
+    out.push(slot === 'text' ? constrainForText(g) : g);
+  }
+  return out;
+}
+
+// ---------------------------------------------------------------------------
 // Naming
 // ---------------------------------------------------------------------------
 

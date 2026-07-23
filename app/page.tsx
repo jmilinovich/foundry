@@ -36,12 +36,12 @@ export default async function Home() {
             {runs.map((r) => (
               <li key={r.id}>
                 <Link
-                  href={`/run/${r.id}`}
+                  href={r.settledPair ? `/pairing/${r.id}` : `/run/${r.id}`}
                   className="flex items-baseline gap-4 py-3 transition hover:text-amber"
                 >
                   <span className="flex-1 truncate text-sm">{r.seedText || 'open search'}</span>
                   <span className="font-mono text-[11px] text-ink-faint">
-                    gen {r.generation} · {r.ready} fonts
+                    {r.settledPair ? 'pair ✓' : `gen ${r.generation} · ${r.ready} fonts`}
                   </span>
                   <span className="hidden font-mono text-[11px] text-ink-faint sm:inline">
                     {new Date(r.createdAt).toLocaleDateString()}
