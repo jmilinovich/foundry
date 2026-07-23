@@ -19,6 +19,7 @@ export function Specimen({
   dimmed,
   index,
   onToggle,
+  onLineage,
 }: {
   font: FontRecord;
   text: string;
@@ -27,6 +28,7 @@ export function Specimen({
   dimmed: boolean;
   index: number;
   onToggle: (id: string) => void;
+  onLineage: (font: FontRecord) => void;
 }) {
   const ready = font.status === 'ready';
   const failed = font.status === 'failed';
@@ -74,15 +76,29 @@ export function Specimen({
         </span>
 
         {ready ? (
-          <a
-            href={`/api/fonts/${font.id}?download=${encodeURIComponent(font.name)}`}
-            onClick={(e) => e.stopPropagation()}
-            download
-            title="Download TTF"
-            className="font-mono text-[11px] text-ink-faint opacity-0 transition group-hover:opacity-100 hover:text-amber"
-          >
-            ↓ ttf
-          </a>
+          <span className="flex items-center gap-3 opacity-0 transition group-hover:opacity-100">
+            {font.parents.length > 0 && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onLineage(font);
+                }}
+                title="Watch this font emerge from its parent"
+                className="font-mono text-[11px] text-ink-faint hover:text-amber"
+              >
+                ⟲ lineage
+              </button>
+            )}
+            <a
+              href={`/api/fonts/${font.id}?download=${encodeURIComponent(font.name)}`}
+              onClick={(e) => e.stopPropagation()}
+              download
+              title="Download TTF"
+              className="font-mono text-[11px] text-ink-faint hover:text-amber"
+            >
+              ↓ ttf
+            </a>
+          </span>
         ) : (
           <span className="font-mono text-[11px] tabular-nums text-ink-faint">
             {failed ? '' : font.progress > 0 ? `${Math.round(font.progress)}%` : 'queued'}

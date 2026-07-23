@@ -4,7 +4,8 @@ import Link from 'next/link';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { CREDITS } from '@/lib/credits';
-import { dollars, type Run } from '@/lib/types';
+import { dollars, type FontRecord, type Run } from '@/lib/types';
+import { Lineage } from './Lineage';
 import { Specimen } from './Specimen';
 
 export function RunView({ initialRun }: { initialRun: Run }) {
@@ -15,6 +16,7 @@ export function RunView({ initialRun }: { initialRun: Run }) {
   const [size, setSize] = useState(56);
   const [breeding, setBreeding] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [lineageOf, setLineageOf] = useState<FontRecord | null>(null);
 
   const generation = useMemo(
     () => run.fonts.filter((f) => f.generation === viewGen),
@@ -104,6 +106,14 @@ export function RunView({ initialRun }: { initialRun: Run }) {
 
   return (
     <div className="flex min-h-full flex-1 flex-col">
+      {lineageOf && (
+        <Lineage
+          child={lineageOf}
+          fonts={run.fonts}
+          text={text || 'Handgloves'}
+          onClose={() => setLineageOf(null)}
+        />
+      )}
       <header className="sticky top-0 z-20 border-b border-line bg-ground/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-[1600px] flex-wrap items-center gap-x-6 gap-y-3 px-6 py-3.5">
           <Link href="/" className="font-mono text-[11px] tracking-widest text-ink-dim hover:text-amber">
@@ -176,6 +186,7 @@ export function RunView({ initialRun }: { initialRun: Run }) {
               dimmed={selected.size > 0}
               index={i}
               onToggle={toggle}
+              onLineage={setLineageOf}
             />
           ))}
         </div>

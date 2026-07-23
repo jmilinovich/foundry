@@ -69,7 +69,7 @@ function apiKey(): string {
   const key = process.env.MIXFONT_API_KEY;
   if (!key) {
     throw new MixfontError(
-      'MIXFONT_API_KEY is not set. Add it to .env.local, or set FOUNDRY_MOCK=1 to run without credits.',
+      'MIXFONT_API_KEY is not set. Add it to .env.local — see .env.example.',
       500,
     );
   }
