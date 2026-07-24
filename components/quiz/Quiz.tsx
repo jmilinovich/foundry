@@ -4,6 +4,8 @@ import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { mulberry32 } from '@/lib/genome';
+import { apiFetch } from '@/lib/userKey';
+import { useEnsureKey } from '../KeyGateProvider';
 import {
   emptyProfile,
   nextDuel,
@@ -104,28 +106,31 @@ export function Quiz({ atlas }: { atlas: AtlasEntry[] }) {
 
   const done = profile.round >= QUIZ_LENGTH || (!duel && profile.round > 0);
 
-  const beginRun = useCallback(async () => {
-    setStarting(true);
-    const seed = profileToSeed(profile);
-    const summary = summarize(profile);
-    try {
-      const res = await fetch('/api/runs', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({
-          tasteSeed: seed,
-          tasteSummary: summary,
-          specimenText: SPECIMEN,
-          populationSize: 8,
-        }),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? 'Could not start');
-      router.push(`/run/${data.run.id}`);
-    } catch {
-      setStarting(false);
-    }
-  }, [profile, router]);
+  const ensureKey = useEnsureKey();
+  const beginRun = useCallback(() => {
+    ensureKey(async () => {
+      setStarting(true);
+      const seed = profileToSeed(profile);
+      const summary = summarize(profile);
+      try {
+        const res = await apiFetch('/api/runs', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            tasteSeed: seed,
+            tasteSummary: summary,
+            specimenText: SPECIMEN,
+            populationSize: 8,
+          }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error ?? 'Could not start');
+        router.push(`/run/${data.run.id}`);
+      } catch {
+        setStarting(false);
+      }
+    });
+  }, [profile, router, ensureKey]);
 
   const pct = Math.round((Math.min(profile.round, QUIZ_LENGTH) / QUIZ_LENGTH) * 100);
 

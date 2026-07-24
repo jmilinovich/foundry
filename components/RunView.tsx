@@ -7,6 +7,8 @@ import { CREDITS } from '@/lib/credits';
 import { STANCES } from '@/lib/genome';
 import { rememberRun } from '@/lib/localRuns';
 import { dollars, type FontRecord, type FontRef, type Run } from '@/lib/types';
+import { apiFetch } from '@/lib/userKey';
+import { useEnsureKey } from './KeyGateProvider';
 import { Lineage } from './Lineage';
 import { PairCandidate } from './PairCandidate';
 import { Specimen } from './Specimen';
@@ -46,7 +48,7 @@ export function RunView({
     let stop = false;
     const tick = async () => {
       try {
-        const res = await fetch(`/api/runs/${run.id}`, { cache: 'no-store' });
+        const res = await apiFetch(`/api/runs/${run.id}`, { cache: 'no-store' });
         const data = await res.json();
         if (!stop && data.run) setRun(data.run);
       } catch {
@@ -73,28 +75,31 @@ export function RunView({
     [isLatest],
   );
 
-  const breedNext = useCallback(async () => {
+  const ensureKey = useEnsureKey();
+  const breedNext = useCallback(() => {
     if (!selected.size || breeding) return;
-    setBreeding(true);
-    setError(null);
-    try {
-      const res = await fetch(`/api/runs/${run.id}/breed`, {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ survivorIds: [...selected] }),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? 'Breeding failed');
-      setRun(data.run);
-      setViewGen(data.run.generation);
-      setSelected(new Set());
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } catch (err) {
-      setError((err as Error).message);
-    } finally {
-      setBreeding(false);
-    }
-  }, [selected, breeding, run.id]);
+    ensureKey(async () => {
+      setBreeding(true);
+      setError(null);
+      try {
+        const res = await apiFetch(`/api/runs/${run.id}/breed`, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ survivorIds: [...selected] }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error ?? 'Breeding failed');
+        setRun(data.run);
+        setViewGen(data.run.generation);
+        setSelected(new Set());
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (err) {
+        setError((err as Error).message);
+      } finally {
+        setBreeding(false);
+      }
+    });
+  }, [selected, breeding, run.id, ensureKey]);
 
   // --- keyboard: 1-9 to pick, Enter to breed -----------------------------
   useEffect(() => {
@@ -116,18 +121,20 @@ export function RunView({
   }, [generation, toggle, breedNext, selected.size]);
 
   const retry = useCallback(
-    async (id: string) => {
-      setError(null);
-      try {
-        const res = await fetch(`/api/runs/${run.id}/fonts/${id}/retry`, { method: 'POST' });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error ?? 'Retry failed');
-        setRun(data.run);
-      } catch (err) {
-        setError((err as Error).message);
-      }
+    (id: string) => {
+      ensureKey(async () => {
+        setError(null);
+        try {
+          const res = await apiFetch(`/api/runs/${run.id}/fonts/${id}/retry`, { method: 'POST' });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error ?? 'Retry failed');
+          setRun(data.run);
+        } catch (err) {
+          setError((err as Error).message);
+        }
+      });
     },
-    [run.id],
+    [run.id, ensureKey],
   );
 
   // --- pairing ------------------------------------------------------------

@@ -7,6 +7,8 @@ import { CREDITS } from '@/lib/credits';
 import { STANCES } from '@/lib/genome';
 import { toGenotype } from '@/lib/genome';
 import { rememberRun } from '@/lib/localRuns';
+import { apiFetch } from '@/lib/userKey';
+import { useEnsureKey } from './KeyGateProvider';
 import { SAMPLE_PARAGRAPH } from '@/lib/glyphs';
 import { dollars, type FontRecord, type PairingMeta } from '@/lib/types';
 import { Poster } from './detail/Poster';
@@ -54,39 +56,42 @@ export function PairingView({
   const loaded = displayFace.isLoaded && textFace.isLoaded;
 
   const bothPromoted = promoted.display && promoted.text;
+  const ensureKey = useEnsureKey();
 
-  const promoteBoth = useCallback(async () => {
+  const promoteBoth = useCallback(() => {
     if (promoting || bothPromoted) return;
-    setPromoting(true);
-    setError(null);
-    try {
-      const targets: [string, string][] = [
-        [displayRunId, display.id],
-        [textRunId, text.id],
-      ];
-      await Promise.all(
-        targets.map(async ([rid, fid]) => {
-          const res = await fetch(`/api/runs/${rid}/fonts/${fid}/promote`, { method: 'POST' });
-          if (!res.ok) {
-            const d = await res.json().catch(() => ({}));
-            throw new Error(d.error ?? 'Promotion failed');
-          }
-        }),
-      );
-      setPromoted({ display: true, text: true });
-    } catch (err) {
-      setError((err as Error).message);
-    } finally {
-      setPromoting(false);
-    }
-  }, [promoting, bothPromoted, displayRunId, textRunId, display.id, text.id]);
+    ensureKey(async () => {
+      setPromoting(true);
+      setError(null);
+      try {
+        const targets: [string, string][] = [
+          [displayRunId, display.id],
+          [textRunId, text.id],
+        ];
+        await Promise.all(
+          targets.map(async ([rid, fid]) => {
+            const res = await apiFetch(`/api/runs/${rid}/fonts/${fid}/promote`, { method: 'POST' });
+            if (!res.ok) {
+              const d = await res.json().catch(() => ({}));
+              throw new Error(d.error ?? 'Promotion failed');
+            }
+          }),
+        );
+        setPromoted({ display: true, text: true });
+      } catch (err) {
+        setError((err as Error).message);
+      } finally {
+        setPromoting(false);
+      }
+    });
+  }, [promoting, bothPromoted, displayRunId, textRunId, display.id, text.id, ensureKey]);
 
   // Nudge the runs to sync so the 319-glyph cuts land.
   useEffect(() => {
     if (!promoting && !bothPromoted) return;
     const t = setInterval(() => {
-      fetch(`/api/runs/${runId}`, { cache: 'no-store' }).catch(() => {});
-      if (displayRunId !== runId) fetch(`/api/runs/${displayRunId}`, { cache: 'no-store' }).catch(() => {});
+      apiFetch(`/api/runs/${runId}`, { cache: 'no-store' }).catch(() => {});
+      if (displayRunId !== runId) apiFetch(`/api/runs/${displayRunId}`, { cache: 'no-store' }).catch(() => {});
     }, 6000);
     return () => clearInterval(t);
   }, [promoting, bothPromoted, runId, displayRunId]);

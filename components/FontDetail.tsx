@@ -5,6 +5,8 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { CREDITS } from '@/lib/credits';
 import { dollars, type GlyphSetName, type Run } from '@/lib/types';
+import { apiFetch } from '@/lib/userKey';
+import { useEnsureKey } from './KeyGateProvider';
 import { Lineage } from './Lineage';
 import { PairLauncher } from './detail/PairLauncher';
 import { Poster } from './detail/Poster';
@@ -24,6 +26,7 @@ export function FontDetail({ initialRun, fontId }: { initialRun: Run; fontId: st
   const [promoting, setPromoting] = useState(false);
   const [pairing, setPairing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const ensureKey = useEnsureKey();
 
   const font = useMemo(() => run.fonts.find((f) => f.id === fontId), [run, fontId]);
   const extended = font?.extended;
@@ -53,7 +56,7 @@ export function FontDetail({ initialRun, fontId }: { initialRun: Run; fontId: st
     if (!extendedPending) return;
     const t = setInterval(async () => {
       try {
-        const res = await fetch(`/api/runs/${run.id}`, { cache: 'no-store' });
+        const res = await apiFetch(`/api/runs/${run.id}`, { cache: 'no-store' });
         const data = await res.json();
         if (data.run) setRun(data.run);
       } catch {
@@ -63,21 +66,23 @@ export function FontDetail({ initialRun, fontId }: { initialRun: Run; fontId: st
     return () => clearInterval(t);
   }, [extendedPending, run.id]);
 
-  const promote = useCallback(async () => {
+  const promote = useCallback(() => {
     if (promoting) return;
-    setPromoting(true);
-    setError(null);
-    try {
-      const res = await fetch(`/api/runs/${run.id}/fonts/${fontId}/promote`, { method: 'POST' });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? 'Promotion failed');
-      setRun(data.run);
-    } catch (err) {
-      setError((err as Error).message);
-    } finally {
-      setPromoting(false);
-    }
-  }, [promoting, run.id, fontId]);
+    ensureKey(async () => {
+      setPromoting(true);
+      setError(null);
+      try {
+        const res = await apiFetch(`/api/runs/${run.id}/fonts/${fontId}/promote`, { method: 'POST' });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error ?? 'Promotion failed');
+        setRun(data.run);
+      } catch (err) {
+        setError((err as Error).message);
+      } finally {
+        setPromoting(false);
+      }
+    });
+  }, [promoting, run.id, fontId, ensureKey]);
 
   if (!font) {
     return (

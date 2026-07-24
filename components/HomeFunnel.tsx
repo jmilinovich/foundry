@@ -4,6 +4,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
+import { apiFetch } from '@/lib/userKey';
+import { useEnsureKey } from './KeyGateProvider';
+
 const SUGGESTIONS = [
   'condensed brutalist slab serif',
   'warm humanist sans, large x-height',
@@ -17,27 +20,30 @@ const SUGGESTIONS = [
  */
 export function HomeFunnel() {
   const router = useRouter();
+  const ensureKey = useEnsureKey();
   const [typed, setTyped] = useState(false);
   const [seedText, setSeedText] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  async function beginTyped() {
-    setBusy(true);
-    setError(null);
-    try {
-      const res = await fetch('/api/runs', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ seedText, specimenText: 'Handgloves', populationSize: 8 }),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? 'Could not start');
-      router.push(`/run/${data.run.id}`);
-    } catch (err) {
-      setError((err as Error).message);
-      setBusy(false);
-    }
+  function beginTyped() {
+    ensureKey(async () => {
+      setBusy(true);
+      setError(null);
+      try {
+        const res = await apiFetch('/api/runs', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ seedText, specimenText: 'Handgloves', populationSize: 8 }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error ?? 'Could not start');
+        router.push(`/run/${data.run.id}`);
+      } catch (err) {
+        setError((err as Error).message);
+        setBusy(false);
+      }
+    });
   }
 
   return (

@@ -6,6 +6,8 @@ import { useState } from 'react';
 import { CREDITS } from '@/lib/credits';
 import { STANCES, type Slot, type Stance } from '@/lib/genome';
 import { dollars } from '@/lib/types';
+import { apiFetch } from '@/lib/userKey';
+import { useEnsureKey } from '../KeyGateProvider';
 
 export function PairLauncher({
   runId,
@@ -21,6 +23,7 @@ export function PairLauncher({
   onClose: () => void;
 }) {
   const router = useRouter();
+  const ensureKey = useEnsureKey();
   // Default: this font is the display face, so we're hunting for body copy.
   const [slot, setSlot] = useState<Slot>('text');
   const [stance, setStance] = useState<Stance>('classic');
@@ -28,29 +31,31 @@ export function PairLauncher({
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  async function begin() {
-    setBusy(true);
-    setError(null);
-    try {
-      const res = await fetch('/api/pairings', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({
-          lockedRunId: runId,
-          lockedFontId: fontId,
-          slot,
-          stance,
-          specimenText,
-          populationSize: size,
-        }),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? 'Could not start pairing');
-      router.push(`/run/${data.run.id}`);
-    } catch (err) {
-      setError((err as Error).message);
-      setBusy(false);
-    }
+  function begin() {
+    ensureKey(async () => {
+      setBusy(true);
+      setError(null);
+      try {
+        const res = await apiFetch('/api/pairings', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            lockedRunId: runId,
+            lockedFontId: fontId,
+            slot,
+            stance,
+            specimenText,
+            populationSize: size,
+          }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error ?? 'Could not start pairing');
+        router.push(`/run/${data.run.id}`);
+      } catch (err) {
+        setError((err as Error).message);
+        setBusy(false);
+      }
+    });
   }
 
   return (

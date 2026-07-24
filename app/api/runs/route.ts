@@ -39,6 +39,8 @@ export async function POST(req: Request) {
       : undefined;
   const tasteSummary = typeof body.tasteSummary === 'string' ? body.tasteSummary.slice(0, 120) : undefined;
 
+  const key = req.headers.get('x-user-key') || undefined;
+
   try {
     const run = await createRun({
       seedText,
@@ -47,6 +49,7 @@ export async function POST(req: Request) {
       mutationRate,
       tasteSeed,
       tasteSummary,
+      key,
     });
     return NextResponse.json({ run }, { status: 201 });
   } catch (err) {

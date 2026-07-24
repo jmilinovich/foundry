@@ -24,6 +24,7 @@ export async function POST(req: Request) {
       ? body.specimenText.slice(0, 120)
       : 'Handgloves';
   const populationSize = Math.max(2, Math.min(12, Number(body.populationSize) || 6));
+  const key = req.headers.get('x-user-key') || undefined;
 
   try {
     const run = await createPairingRun({
@@ -33,6 +34,7 @@ export async function POST(req: Request) {
       stance,
       specimenText,
       populationSize,
+      key,
     });
     return NextResponse.json({ run }, { status: 201 });
   } catch (err) {

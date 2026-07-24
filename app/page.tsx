@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import { HomeFunnel } from '@/components/HomeFunnel';
+import { KeyStatus } from '@/components/KeyStatus';
 import { RecentRuns } from '@/components/RecentRuns';
 
 export const dynamic = 'force-dynamic';
@@ -35,6 +36,10 @@ export default function Home() {
         </Link>{' '}
         API. The taste quiz is free; generating uses your own Mixfont key, which stays in your
         browser and is never stored on our servers.
+        <br />
+        <span className="mt-2 inline-block">
+          <KeyStatus />
+        </span>
       </p>
     </div>
   );

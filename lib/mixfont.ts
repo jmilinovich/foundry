@@ -65,22 +65,27 @@ export class MixfontError extends Error {
   }
 }
 
-function apiKey(): string {
-  const key = process.env.MIXFONT_API_KEY;
+/**
+ * The Mixfont key for a call.
+ *
+ * Hosted, this is the visitor's own key, passed in per-request — it lives in
+ * their browser, transits our function in memory only, and is never persisted.
+ * Locally, an explicit key is absent and we fall back to MIXFONT_API_KEY so dev
+ * against a personal key keeps working.
+ */
+function apiKey(explicit?: string): string {
+  const key = explicit || process.env.MIXFONT_API_KEY;
   if (!key) {
-    throw new MixfontError(
-      'MIXFONT_API_KEY is not set. Add it to .env.local — see .env.example.',
-      500,
-    );
+    throw new MixfontError('No Mixfont API key. Add your key to generate fonts.', 401);
   }
   return key;
 }
 
-async function call<T>(path: string, init?: RequestInit): Promise<T> {
+async function call<T>(path: string, key: string | undefined, init?: RequestInit): Promise<T> {
   const res = await fetch(`${BASE}${path}`, {
     ...init,
     headers: {
-      'x-api-key': apiKey(),
+      'x-api-key': apiKey(key),
       'content-type': 'application/json',
       ...init?.headers,
     },
@@ -100,36 +105,38 @@ async function call<T>(path: string, init?: RequestInit): Promise<T> {
       body && typeof body === 'object' && 'error' in body
         ? String((body as { error: unknown }).error)
         : res.statusText;
-    // 402 is the one users hit in normal operation — surface it plainly.
+    // 401/402 are the ones a user hits in normal operation — surface them plainly.
     const message =
       res.status === 402
         ? 'Out of Mixfont credits. Top up at mixfont.com/console.'
-        : `Mixfont ${res.status}: ${detail}`;
+        : res.status === 401
+          ? 'Mixfont rejected the key. Check it at mixfont.com/console.'
+          : `Mixfont ${res.status}: ${detail}`;
     throw new MixfontError(message, res.status, body);
   }
   return body as T;
 }
 
-export function generateFromText(prompt: string, glyphSet: GlyphSet = 'standard') {
-  return call<Generation>('/v1/font-generations/text', {
+export function generateFromText(prompt: string, glyphSet: GlyphSet = 'standard', key?: string) {
+  return call<Generation>('/v1/font-generations/text', key, {
     method: 'POST',
     body: JSON.stringify({ prompt, glyph_set: glyphSet }),
   });
 }
 
-export function generateFromImage(imageUrl: string, glyphSet: GlyphSet = 'standard') {
-  return call<Generation>('/v1/font-generations/image', {
+export function generateFromImage(imageUrl: string, glyphSet: GlyphSet = 'standard', key?: string) {
+  return call<Generation>('/v1/font-generations/image', key, {
     method: 'POST',
     body: JSON.stringify({ image_url: imageUrl, glyph_set: glyphSet }),
   });
 }
 
-export function getGeneration(id: string) {
-  return call<Generation>(`/v1/font-generations/${id}`);
+export function getGeneration(id: string, key?: string) {
+  return call<Generation>(`/v1/font-generations/${id}`, key);
 }
 
-export function recognise(imageUrl: string, topK = 3) {
-  return call<LensResult>('/v1/api/lens', {
+export function recognise(imageUrl: string, topK = 3, key?: string) {
+  return call<LensResult>('/v1/api/lens', key, {
     method: 'POST',
     body: JSON.stringify({ image_url: imageUrl, top_k: topK }),
   });
@@ -145,13 +152,14 @@ export function recognise(imageUrl: string, topK = 3) {
 export async function waitForGeneration(
   id: string,
   opts: { timeoutMs?: number; onProgress?: (g: Generation) => void } = {},
+  key?: string,
 ): Promise<Generation> {
   const timeout = opts.timeoutMs ?? 5 * 60_000;
   const started = Date.now();
   let delay = 2_000;
 
   for (;;) {
-    const g = await getGeneration(id);
+    const g = await getGeneration(id, key);
     opts.onProgress?.(g);
     if (isTerminal(g.status)) return g;
     if (Date.now() - started > timeout) {

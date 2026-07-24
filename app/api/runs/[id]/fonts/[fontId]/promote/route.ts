@@ -5,10 +5,11 @@ import { MixfontError } from '@/lib/mixfont';
 export const dynamic = 'force-dynamic';
 
 /** Re-mint this font at the 319-glyph extended set (50 credits). */
-export async function POST(_req: Request, ctx: { params: Promise<{ id: string; fontId: string }> }) {
+export async function POST(req: Request, ctx: { params: Promise<{ id: string; fontId: string }> }) {
   const { id, fontId } = await ctx.params;
+  const key = req.headers.get('x-user-key') || undefined;
   try {
-    const run = await promoteFont(id, fontId);
+    const run = await promoteFont(id, fontId, key);
     if (!run) return NextResponse.json({ error: 'Run not found' }, { status: 404 });
     return NextResponse.json({ run });
   } catch (err) {

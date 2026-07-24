@@ -12,8 +12,6 @@
  */
 
 import 'server-only';
-import { promises as fs } from 'fs';
-import path from 'path';
 import { randomUUID } from 'crypto';
 
 import {
@@ -38,20 +36,14 @@ import {
   MixfontError,
   type Generation,
 } from './mixfont';
+import { storage } from './storage';
 import type { FontRecord, FontRef, GlyphSetName, Lineage, Run } from './types';
 
-const DATA = path.join(process.cwd(), '.data');
-const RUNS = path.join(DATA, 'runs');
-const FONTS = path.join(DATA, 'fonts');
-
-async function ensureDirs() {
-  await fs.mkdir(RUNS, { recursive: true });
-  await fs.mkdir(FONTS, { recursive: true });
-}
-
 // --- per-run mutex -------------------------------------------------------
-// The client polls while breeding may also be in flight. Without this, two
-// concurrent read-modify-writes will drop one of them.
+// The client polls while breeding may also be in flight. Within one process
+// this serialises read-modify-write so concurrent updates don't drop each
+// other. (On Blob across serverless instances it's last-write-wins — acceptable
+// for a single-player tool; the client serialises breed vs. poll anyway.)
 
 const locks = new Map<string, Promise<unknown>>();
 
@@ -67,22 +59,24 @@ function withLock<T>(key: string, fn: () => Promise<T>): Promise<T> {
 
 // --- io ------------------------------------------------------------------
 
-const runPath = (id: string) => path.join(RUNS, `${id}.json`);
-
 export async function readRun(id: string): Promise<Run | null> {
+  const raw = await storage().getRun(id);
+  if (!raw) return null;
   try {
-    return JSON.parse(await fs.readFile(runPath(id), 'utf8')) as Run;
+    return JSON.parse(raw) as Run;
   } catch {
     return null;
   }
 }
 
 async function writeRun(run: Run): Promise<void> {
-  await ensureDirs();
-  // Write-then-rename so a crash mid-write can't truncate a run.
-  const tmp = `${runPath(run.id)}.${process.pid}.tmp`;
-  await fs.writeFile(tmp, JSON.stringify(run, null, 2));
-  await fs.rename(tmp, runPath(run.id));
+  await storage().putRun(run.id, JSON.stringify(run, null, 2));
+}
+
+async function loadAllRuns(): Promise<Run[]> {
+  const ids = await storage().allRunIds();
+  const runs = await Promise.all(ids.map((id) => readRun(id)));
+  return runs.filter((r): r is Run => r !== null);
 }
 
 export async function listRuns(): Promise<
@@ -96,11 +90,8 @@ export async function listRuns(): Promise<
     settledPair: boolean;
   }[]
 > {
-  await ensureDirs();
-  const files = (await fs.readdir(RUNS)).filter((f) => f.endsWith('.json'));
-  const runs = await Promise.all(files.map((f) => readRun(f.replace(/\.json$/, ''))));
+  const runs = await loadAllRuns();
   return runs
-    .filter((r): r is Run => r !== null)
     .map((r) => ({
       id: r.id,
       seedText: r.seedText,
@@ -114,22 +105,18 @@ export async function listRuns(): Promise<
 
 /** Every ready font across every run — the pool the locked slot can point at. */
 export async function listAllFonts(): Promise<FontRef[]> {
-  await ensureDirs();
-  const files = (await fs.readdir(RUNS)).filter((f) => f.endsWith('.json'));
-  const runs = await Promise.all(files.map((f) => readRun(f.replace(/\.json$/, ''))));
-  return runs
-    .filter((r): r is Run => r !== null)
-    .flatMap((r) =>
-      r.fonts
-        .filter((f) => f.status === 'ready')
-        .map((f) => ({
-          id: f.id,
-          runId: r.id,
-          name: f.name,
-          generation: f.generation,
-          genome: f.genome,
-        })),
-    );
+  const runs = await loadAllRuns();
+  return runs.flatMap((r) =>
+    r.fonts
+      .filter((f) => f.status === 'ready')
+      .map((f) => ({
+        id: f.id,
+        runId: r.id,
+        name: f.name,
+        generation: f.generation,
+        genome: f.genome,
+      })),
+  );
 }
 
 /** Resolve a font that may live in a different run than the one you're viewing. */
@@ -138,20 +125,11 @@ export async function findFont(runId: string, fontId: string): Promise<FontRecor
   return run?.fonts.find((f) => f.id === fontId) ?? null;
 }
 
-export const fontPath = (fontId: string, set: GlyphSetName = 'standard') =>
-  path.join(FONTS, set === 'extended' ? `${fontId}-extended.ttf` : `${fontId}.ttf`);
-
 export async function readFontFile(
   fontId: string,
   set: GlyphSetName = 'standard',
 ): Promise<Buffer | null> {
-  // Guard against traversal — fontId lands in a filesystem path.
-  if (!/^[a-zA-Z0-9-]+$/.test(fontId)) return null;
-  try {
-    return await fs.readFile(fontPath(fontId, set));
-  } catch {
-    return null;
-  }
+  return storage().getFont(fontId, set);
 }
 
 // --- lifecycle -----------------------------------------------------------
@@ -182,14 +160,14 @@ function makeRecord(
 }
 
 /** Submit every queued individual to Mixfont, in parallel. */
-async function submitQueued(run: Run): Promise<Run> {
+async function submitQueued(run: Run, key?: string): Promise<Run> {
   const queued = run.fonts.filter((f) => f.status === 'queued');
   if (!queued.length) return run;
 
   await Promise.all(
     queued.map(async (f) => {
       try {
-        const g = await generateFromText(f.prompt, 'standard');
+        const g = await generateFromText(f.prompt, 'standard', key);
         f.mixfontId = g.id;
         f.status = 'generating';
         f.progress = g.progress_percent ?? 0;
@@ -213,6 +191,8 @@ export async function createRun(input: {
   tasteSeed?: TasteSeed;
   /** The plain-language read of the profile, shown as the run's label. */
   tasteSummary?: string;
+  /** The visitor's Mixfont key, if hosted. */
+  key?: string;
 }): Promise<Run> {
   const seed = input.seed ?? hashSeed((input.tasteSummary ?? input.seedText) + Date.now());
   const rng = mulberry32(seed);
@@ -233,7 +213,7 @@ export async function createRun(input: {
     creditsSpent: 0,
   };
 
-  await submitQueued(run);
+  await submitQueued(run, input.key);
   await writeRun(run);
   return run;
 }
@@ -254,6 +234,7 @@ export async function createPairingRun(input: {
   stance: Stance;
   specimenText: string;
   populationSize: number;
+  key?: string;
 }): Promise<Run> {
   const locked = await findFont(input.lockedRunId, input.lockedFontId);
   if (!locked) throw new Error('Locked font not found.');
@@ -288,7 +269,7 @@ export async function createPairingRun(input: {
     },
   };
 
-  await submitQueued(run);
+  await submitQueued(run, input.key);
   await writeRun(run);
   return run;
 }
@@ -301,7 +282,7 @@ export async function createPairingRun(input: {
  * individual is simply dead and its 20 credits are gone, which leaves a hole in
  * a generation you can't fill.
  */
-export async function retryFont(runId: string, fontId: string): Promise<Run | null> {
+export async function retryFont(runId: string, fontId: string, key?: string): Promise<Run | null> {
   return withLock(runId, async () => {
     const run = await readRun(runId);
     if (!run) return null;
@@ -315,7 +296,7 @@ export async function retryFont(runId: string, fontId: string): Promise<Run | nu
     font.mixfontId = null;
     delete font.error;
 
-    await submitQueued(run);
+    await submitQueued(run, key);
     await writeRun(run);
     return run;
   });
@@ -360,7 +341,7 @@ export async function choosePartner(runId: string, fontId: string): Promise<Run 
  * behaves identically in `next dev` and on a serverless deploy — no dangling
  * work that a function freeze can kill halfway through a download.
  */
-export async function syncRun(id: string): Promise<Run | null> {
+export async function syncRun(id: string, key?: string): Promise<Run | null> {
   return withLock(id, async () => {
     const run = await readRun(id);
     if (!run) return null;
@@ -380,11 +361,13 @@ export async function syncRun(id: string): Promise<Run | null> {
     ) => {
       let g: Generation;
       try {
-        g = await getGeneration(mixfontId);
+        g = await getGeneration(mixfontId, key);
       } catch (err) {
         // A transient poll failure shouldn't kill the job — leave it generating
-        // and try again on the next tick.
-        if (err instanceof MixfontError && err.status >= 500) return;
+        // and try again on the next tick. A missing/invalid key (401) is treated
+        // the same: someone viewing a shared run mid-generation without a key
+        // just doesn't advance it, rather than having their fonts marked failed.
+        if (err instanceof MixfontError && (err.status >= 500 || err.status === 401)) return;
         target.status = 'failed';
         target.error = err instanceof MixfontError ? err.message : String(err);
         return;
@@ -407,12 +390,10 @@ export async function syncRun(id: string): Promise<Run | null> {
       }
     };
 
-    const download = async (url: string, dest: string) => {
+    const rehost = async (url: string, fontId: string, set: GlyphSetName) => {
       const res = await fetch(url, { cache: 'no-store' });
       if (!res.ok) throw new Error(`TTF download failed: ${res.status}`);
-      const buf = Buffer.from(await res.arrayBuffer());
-      await ensureDirs();
-      await fs.writeFile(dest, buf);
+      await storage().putFont(fontId, set, Buffer.from(await res.arrayBuffer()));
     };
 
     const jobs: Promise<void>[] = [];
@@ -421,7 +402,7 @@ export async function syncRun(id: string): Promise<Run | null> {
       if (f.status === 'generating' && f.mixfontId) {
         jobs.push(
           advance(f.mixfontId, f, async (g) => {
-            await download(g.ttf_url!, fontPath(f.id));
+            await rehost(g.ttf_url!, f.id, 'standard');
             // Mixfont's own names are good ("Ferro Nocturne Grotesk"); prefer
             // them over our placeholder once we have one.
             if (g.name && g.name !== 'Mixfont Generation') f.name = g.name;
@@ -433,7 +414,7 @@ export async function syncRun(id: string): Promise<Run | null> {
         const ext = f.extended;
         jobs.push(
           advance(extId, ext, async (g) => {
-            await download(g.ttf_url!, fontPath(f.id, 'extended'));
+            await rehost(g.ttf_url!, f.id, 'extended');
           }),
         );
       }
@@ -454,7 +435,7 @@ export async function syncRun(id: string): Promise<Run | null> {
  * existing outlines — the extended cut is a sibling of the standard one, not
  * a superset of it. Worth knowing before you promote something you love.
  */
-export async function promoteFont(runId: string, fontId: string): Promise<Run | null> {
+export async function promoteFont(runId: string, fontId: string, key?: string): Promise<Run | null> {
   return withLock(runId, async () => {
     const run = await readRun(runId);
     if (!run) return null;
@@ -465,7 +446,7 @@ export async function promoteFont(runId: string, fontId: string): Promise<Run | 
     if (font.extended && font.extended.status !== 'failed') return run;
 
     try {
-      const g = await generateFromText(font.prompt, 'extended');
+      const g = await generateFromText(font.prompt, 'extended', key);
       font.extended = { mixfontId: g.id, status: 'generating', progress: g.progress_percent ?? 0 };
       run.creditsSpent += CREDITS.extended;
     } catch (err) {
@@ -483,7 +464,11 @@ export async function promoteFont(runId: string, fontId: string): Promise<Run | 
 }
 
 /** Take the picked survivors, breed the next generation, submit it. */
-export async function breedNext(id: string, survivorIds: string[]): Promise<Run | null> {
+export async function breedNext(
+  id: string,
+  survivorIds: string[],
+  key?: string,
+): Promise<Run | null> {
   return withLock(id, async () => {
     const run = await readRun(id);
     if (!run) return null;
@@ -533,7 +518,7 @@ export async function breedNext(id: string, survivorIds: string[]): Promise<Run 
       const parent = survivors[i];
       const buf = await readFontFile(parent.id);
       if (buf) {
-        await fs.writeFile(fontPath(records[i].id), buf);
+        await storage().putFont(records[i].id, 'standard', buf);
         records[i].status = 'ready';
         records[i].progress = 100;
         records[i].name = parent.name;
@@ -543,7 +528,7 @@ export async function breedNext(id: string, survivorIds: string[]): Promise<Run 
     run.fonts.push(...records);
     run.generation = nextGen;
 
-    await submitQueued(run);
+    await submitQueued(run, key);
     await writeRun(run);
     return run;
   });
