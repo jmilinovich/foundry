@@ -6,11 +6,13 @@ import { toGenotype } from '@/lib/genome';
 import type { FontRecord } from '@/lib/types';
 import { useFoundryFont } from './useFoundryFont';
 
+// Demoted from shouty pills to mono captions — a chip competes with the specimen
+// it labels. Only `kept` carries Proof Red, because it IS the Keep verb's residue.
 const BADGE: Record<FontRecord['lineage'], { label: string; className: string }> = {
-  seed: { label: 'seed', className: 'text-ink-faint border-line' },
-  elite: { label: 'kept', className: 'text-accent border-accent/40' },
-  child: { label: 'child', className: 'text-ink-dim border-line' },
-  wildcard: { label: 'wildcard', className: 'text-sky-300/70 border-sky-300/25' },
+  seed: { label: '· seed', className: 'text-ink-faint' },
+  elite: { label: '✳ kept', className: 'text-accent' },
+  child: { label: '→ child', className: 'text-ink-dim' },
+  wildcard: { label: '✳ wildcard', className: 'text-ink-faint' },
 };
 
 export function Specimen({
@@ -45,7 +47,7 @@ export function Specimen({
   const bodyHeight = Math.round(size * 1.5);
 
   const shell = failed
-    ? 'border-red-900/40 bg-red-950/[0.12]'
+    ? 'border-line bg-panel'
     : selected
       ? 'border-accent bg-accent/[0.05] shadow-[0_0_0_1px_var(--accent)]'
       : 'border-line bg-panel' + (ready ? ' hover:border-ink-faint' : '');
@@ -74,8 +76,8 @@ export function Specimen({
 
       <div className="relative flex items-center justify-between">
         <span
-          className={`rounded border px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-widest ${
-            failed ? 'border-red-900/40 text-red-400/70' : BADGE[font.lineage].className
+          className={`font-mono text-[10px] uppercase tracking-widest ${
+            failed ? 'text-ink-dim' : BADGE[font.lineage].className
           }`}
         >
           {failed ? 'failed' : BADGE[font.lineage].label}
@@ -134,7 +136,7 @@ export function Specimen({
           </div>
         ) : failed ? (
           <div>
-            <p className="text-sm leading-relaxed text-red-400/70">{font.error}</p>
+            <p className="text-sm leading-relaxed text-ink-dim">{font.error}</p>
             <button
               onClick={(e) => {
                 e.stopPropagation();

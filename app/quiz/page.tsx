@@ -23,7 +23,7 @@ export default async function QuizPage() {
   }
 
   return (
-    <div className="flex min-h-full flex-1 flex-col">
+    <div className="surface-judge flex min-h-full flex-1 flex-col">
       <header className="border-b border-line">
         <div className="mx-auto flex max-w-[1100px] items-center justify-between px-6 py-3.5">
           <Link href="/" className="font-mono text-[11px] tracking-widest text-ink-dim hover:text-ink">

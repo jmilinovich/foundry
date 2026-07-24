@@ -80,7 +80,7 @@ body {
 }
 
 input[type="range"] {
-  accent-color: var(--accent);
+  accent-color: var(--ink);  /* not the accent — a slider isn't a verb */
 }
 
 ::selection {

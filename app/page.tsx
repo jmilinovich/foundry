@@ -7,7 +7,11 @@ export const dynamic = 'force-dynamic';
 export default function Home() {
   return (
     <div className="mx-auto w-full max-w-[1100px] flex-1 px-6 py-16 sm:py-24">
-      <h1 className="text-[clamp(3rem,11vw,7rem)] font-medium leading-[0.9] tracking-[-0.045em]">
+      {/* The cold-start masthead — Fraunces carries the identity until a champion
+          font exists to supersede it. */}
+      <h1
+        className="font-[family-name:var(--font-display)] text-[clamp(3rem,11vw,7rem)] font-medium leading-[0.9] tracking-[-0.03em]"
+      >
         Foundry
       </h1>
       <p className="mt-6 max-w-lg text-lg leading-snug text-ink-dim">

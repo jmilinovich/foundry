@@ -178,7 +178,7 @@ export function RunView({
   const nextCost = (run.populationSize - 1) * CREDITS.standard;
 
   return (
-    <div className="flex min-h-full flex-1 flex-col">
+    <div className="surface-judge flex min-h-full flex-1 flex-col">
       {lineageOf && (
         <Lineage
           child={lineageOf}
@@ -340,7 +340,7 @@ export function RunView({
             )}
           </p>
 
-          {error && <p className="font-mono text-[11px] text-red-400">{error}</p>}
+          {error && <p className="font-mono text-[11px] text-ink-dim">{error}</p>}
 
           <div className="ml-auto flex items-center gap-4">
             {isLatest && selected.size > 0 && (

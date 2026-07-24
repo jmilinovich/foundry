@@ -108,7 +108,7 @@ export function PairingView({
           </span>
 
           <div className="ml-auto flex items-center gap-4">
-            {error && <span className="font-mono text-[11px] text-red-400">{error}</span>}
+            {error && <span className="font-mono text-[11px] text-ink-dim">{error}</span>}
 
             <button
               onClick={promoteBoth}

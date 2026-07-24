@@ -107,7 +107,7 @@ export function HomeFunnel() {
               back to the quiz
             </button>
           </div>
-          {error && <p className="mt-3 font-mono text-[11px] text-red-400">{error}</p>}
+          {error && <p className="mt-3 font-mono text-[11px] text-ink-dim">{error}</p>}
         </div>
       )}
     </div>

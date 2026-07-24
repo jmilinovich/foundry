@@ -54,7 +54,7 @@ export function PairCandidate({
   const loaded = candidate.isLoaded && lockedFace.isLoaded;
 
   const shell = failed
-    ? 'border-red-900/40 bg-red-950/[0.12]'
+    ? 'border-line bg-panel'
     : selected
       ? 'border-accent bg-accent/[0.05] shadow-[0_0_0_1px_var(--accent)]'
       : `border-line bg-panel${ready ? ' hover:border-ink-faint' : ''}`;
@@ -114,7 +114,7 @@ export function PairCandidate({
       <div className="relative mt-5 min-h-[190px]">
         {failed ? (
           <div>
-            <p className="text-sm leading-relaxed text-red-400/70">{font.error}</p>
+            <p className="text-sm leading-relaxed text-ink-dim">{font.error}</p>
             <button
               onClick={(e) => {
                 e.stopPropagation();
