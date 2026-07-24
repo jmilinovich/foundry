@@ -19,7 +19,7 @@ export function KeyGate({ onReady, onClose }: { onReady: () => void; onClose: ()
   }
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 p-6" onClick={onClose}>
+    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-ink/40 p-6" onClick={onClose}>
       <div
         className="w-full max-w-md rounded-lg border border-line bg-panel p-7"
         onClick={(e) => e.stopPropagation()}
@@ -27,7 +27,7 @@ export function KeyGate({ onReady, onClose }: { onReady: () => void; onClose: ()
         <h2 className="text-lg">Add your Mixfont key</h2>
         <p className="mt-3 text-sm leading-relaxed text-ink-dim">
           Generating fonts uses the{' '}
-          <a href="https://www.mixfont.com/console/keys" target="_blank" rel="noreferrer" className="text-amber hover:underline">
+          <a href="https://www.mixfont.com/console/keys" target="_blank" rel="noreferrer" className="text-ink hover:underline">
             Mixfont API
           </a>
           . Bring your own key — it&rsquo;s stored only in this browser and sent with each generate
@@ -41,14 +41,14 @@ export function KeyGate({ onReady, onClose }: { onReady: () => void; onClose: ()
           onKeyDown={(e) => e.key === 'Enter' && save()}
           placeholder="mix_live_…"
           spellCheck={false}
-          className="mt-5 w-full rounded border border-line bg-ground px-3 py-2.5 font-mono text-[13px] text-ink outline-none transition focus:border-amber"
+          className="mt-5 w-full rounded border border-line bg-ground px-3 py-2.5 font-mono text-[13px] text-ink outline-none transition focus:border-ink"
         />
 
         <div className="mt-5 flex items-center gap-4">
           <button
             onClick={save}
             disabled={!ok}
-            className="rounded bg-amber px-4 py-2 text-sm font-medium text-ground transition disabled:bg-line disabled:text-ink-faint hover:enabled:brightness-110"
+            className="rounded bg-accent px-4 py-2 text-sm font-medium text-paper transition disabled:bg-line disabled:text-ink-faint hover:enabled:brightness-110"
           >
             save & continue
           </button>

@@ -50,7 +50,7 @@ export function HomeFunnel() {
     <div className="max-w-xl">
       <Link
         href="/quiz"
-        className="group flex items-center justify-between rounded-xl bg-amber px-6 py-5 text-ground transition hover:brightness-110"
+        className="group flex items-center justify-between rounded-xl bg-accent px-6 py-5 text-paper transition hover:brightness-110"
       >
         <span>
           <span className="block text-lg font-medium">Find your type</span>
@@ -64,7 +64,7 @@ export function HomeFunnel() {
       {!typed ? (
         <button
           onClick={() => setTyped(true)}
-          className="mt-4 font-mono text-[12px] text-ink-faint transition hover:text-amber"
+          className="mt-4 font-mono text-[12px] text-ink-faint transition hover:text-ink"
         >
           or describe it yourself →
         </button>
@@ -79,7 +79,7 @@ export function HomeFunnel() {
             onChange={(e) => setSeedText(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && !busy && beginTyped()}
             placeholder="leave empty to search the whole space"
-            className="mt-2 w-full rounded border border-line bg-ground px-3 py-2.5 text-[15px] text-ink outline-none transition focus:border-amber"
+            className="mt-2 w-full rounded border border-line bg-ground px-3 py-2.5 text-[15px] text-ink outline-none transition focus:border-ink"
           />
           <div className="mt-3 flex flex-wrap gap-1.5">
             {SUGGESTIONS.map((s) => (
@@ -96,7 +96,7 @@ export function HomeFunnel() {
             <button
               onClick={beginTyped}
               disabled={busy}
-              className="rounded bg-amber px-4 py-2 text-sm font-medium text-ground transition disabled:bg-line disabled:text-ink-faint hover:enabled:brightness-110"
+              className="rounded bg-accent px-4 py-2 text-sm font-medium text-paper transition disabled:bg-line disabled:text-ink-faint hover:enabled:brightness-110"
             >
               {busy ? 'minting…' : 'generate · $1.60'}
             </button>
@@ -107,7 +107,7 @@ export function HomeFunnel() {
               back to the quiz
             </button>
           </div>
-          {error && <p className="mt-3 font-mono text-[11px] text-red-400">{error}</p>}
+          {error && <p className="mt-3 font-mono text-[11px] text-ink-dim">{error}</p>}
         </div>
       )}
     </div>

@@ -34,7 +34,7 @@ function Card({
   return (
     <button
       onClick={onPick}
-      className="group relative flex flex-1 flex-col items-center justify-center overflow-hidden rounded-xl border border-line bg-panel px-6 py-12 transition-all duration-200 hover:border-amber hover:bg-amber/[0.03] focus-visible:border-amber focus-visible:outline-none"
+      className="group relative flex flex-1 flex-col items-center justify-center overflow-hidden rounded-xl border border-line bg-panel px-6 py-12 transition-all duration-200 hover:border-ink-faint focus-visible:border-accent focus-visible:outline-none"
     >
       <div
         className="specimen text-center leading-[0.95] transition-transform duration-200 group-hover:scale-[1.03]"
@@ -43,7 +43,7 @@ function Card({
       >
         {SPECIMEN}
       </div>
-      <span className="mt-8 font-mono text-[11px] uppercase tracking-[0.25em] text-ink-faint transition group-hover:text-amber">
+      <span className="mt-8 font-mono text-[11px] uppercase tracking-[0.25em] text-ink-faint transition group-hover:text-ink">
         {side === 'left' ? '← this' : 'that →'}
       </span>
     </button>
@@ -144,12 +144,12 @@ export function Quiz({ atlas }: { atlas: AtlasEntry[] }) {
         <span className="font-mono text-[11px] tracking-widest text-ink-faint">
           {profile.round + 1} / {QUIZ_LENGTH}
         </span>
-        <button onClick={skip} className="font-mono text-[11px] text-ink-faint hover:text-amber">
+        <button onClick={skip} className="font-mono text-[11px] text-ink-faint hover:text-ink">
           no preference ↓
         </button>
       </div>
       <div className="mt-3 h-px w-full bg-line">
-        <div className="h-px bg-amber transition-all duration-500" style={{ width: `${pct}%` }} />
+        <div className="h-px bg-signal transition-all duration-500" style={{ width: `${pct}%` }} />
       </div>
 
       {duel && (
@@ -201,7 +201,7 @@ function Summary({
             {pins.map(([k, v]) => (
               <span
                 key={k}
-                className="rounded border border-amber/40 px-2 py-0.5 font-mono text-[11px] text-amber"
+                className="rounded border border-ink/40 px-2 py-0.5 font-mono text-[11px] text-ink"
               >
                 {String(v)}
               </span>
@@ -213,7 +213,7 @@ function Summary({
       <button
         onClick={onBegin}
         disabled={starting}
-        className="mt-10 rounded bg-amber px-5 py-3 text-sm font-medium text-ground transition disabled:bg-panel disabled:text-ink-faint hover:enabled:brightness-110"
+        className="mt-10 rounded bg-accent px-5 py-3 text-sm font-medium text-paper transition disabled:bg-panel disabled:text-ink-faint hover:enabled:brightness-110"
       >
         {starting ? 'minting generation 0…' : 'generate my fonts →'}
       </button>

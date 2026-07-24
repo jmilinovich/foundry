@@ -1,0 +1,117 @@
+{
+  "$schema": "https://mili.dev/design-tokens/v1",
+  "name": "Foundry — The Specimen",
+  "type": {
+    "display": {
+      "family": "Fraunces, Georgia, serif",
+      "role": "Cold-start masthead + section display, used with restraint; steps aside for the champion font on populated pages.",
+      "weights": [400, 500, 600],
+      "tracking": "-0.01em",
+      "opticalSizing": "auto"
+    },
+    "text": {
+      "family": "'Hanken Grotesk', system-ui, sans-serif",
+      "role": "Controls, labels, buttons, body/UI. Not Inter, not Söhne.",
+      "weights": [400, 500, 600]
+    },
+    "mono": {
+      "family": "'Spline Sans Mono', ui-monospace, monospace",
+      "role": "Instrument voice — genome credits, weight·px·tracking labels, run metadata.",
+      "weights": [400, 500],
+      "label": {
+        "size": "10px",
+        "transform": "uppercase",
+        "tracking": "0.16em",
+        "color": "faint"
+      }
+    },
+    "champion": {
+      "family": "'Champion', serif",
+      "role": "The user's current generated font. Sets specimen text and the single detail-page H1 ONLY — never nav/controls/buttons.",
+      "load": "gate on document.fonts.ready; server-computed size-adjust/ascent-override/descent-override at mint; metrics-matched fallback revealed by ~600ms",
+      "heroClamp": "clamp(4rem, 15vw, 12.5rem)"
+    },
+    "scale": {
+      "hero": "clamp(4rem, 15vw, 12.5rem)",
+      "waterfall": [128, 96, 72, 54, 40, 28],
+      "body": [18, 16, 14],
+      "label": 10
+    }
+  },
+  "palette": {
+    "ink": {
+      "value": "#1b1712",
+      "intent": "Warm near-black; reads as ink on both grounds."
+    },
+    "paper": {
+      "value": "#f2efe8",
+      "intent": "Warm publishing ground. A foundry catalogue is warm paper."
+    },
+    "muted": {
+      "value": "#5f584e",
+      "faint": "#948b7f",
+      "intent": "Dim and fainter ink for metadata, labels, whispered copy."
+    },
+    "accent": {
+      "value": "#b7302a",
+      "name": "Proof Red",
+      "intent": "Press-registration red. RESERVED to two jobs only: the Breed action and the Keep state. 1px ring or solid dot, never a glow.",
+      "reservedTo": ["breed", "keep"]
+    },
+    "signal": {
+      "value": "#8a8378",
+      "intent": "Warm graphite for the in-flight/minting instrument state (progress, generating). Kept distinct from accent so progress never borrows the Breed red."
+    }
+  },
+  "space": {
+    "wrapMax": "1180px",
+    "gutter": "40px",
+    "gutterMobile": "20px",
+    "density": {
+      "judging": "comparison-dense and fast — grid, not full-bleed; 1-9 keyboard picking intact",
+      "publishing": "spacious — the vertical rhythm of a printed catalogue"
+    },
+    "rules": {
+      "hairline": "1px",
+      "hairlineColor": "#d9d4c8",
+      "seam": "2px",
+      "seamColor": "#1b1712",
+      "seamRule": "one 2px rule only, reserved for the specimen-hero/metadata seam"
+    },
+    "radius": "0",
+    "scale": [4, 8, 10, 14, 16, 18, 22, 26, 30, 40, 52, 56, 64, 80]
+  },
+  "motion": {
+    "budget": "micro-states in the loop, one orchestrated moment",
+    "micro": {
+      "duration": "150-250ms",
+      "easing": "cubic-bezier(0.16, 1, 0.3, 1)",
+      "uses": ["hover", "pick tick", "fades"]
+    },
+    "signature": {
+      "name": "lineage morph",
+      "detail": "parent→child point-cloud interpolation; the one orchestrated moment",
+      "perf": "batch fillRects into Path2D, parse/resample in a Worker, pause rAF off-screen"
+    },
+    "rules": "compositor-only transforms (translate/opacity/clip-path); no viewport-wide filter/box-shadow; prefers-reduced-motion degrades the morph to a crossfade",
+    "reducedMotion": "respected"
+  },
+  "surface": {
+    "bench": {
+      "value": "#faf8f4",
+      "intent": "JUDGING ground — flat cool near-white, no warmth. The font is the only variable; keeps hairline/monoline faces legible while receding.",
+      "appliesTo": ["quiz", "population"]
+    },
+    "paper": {
+      "value": "#f2efe8",
+      "intent": "PUBLISHING ground — warm paper. Editorial richness where trust is earned.",
+      "appliesTo": ["font detail", "collection", "home", "about", "pairing"]
+    },
+    "line": {
+      "value": "#d9d4c8",
+      "intent": "Hairline rules — the structural motif is the rule, not the filled box."
+    },
+    "assignment": "structural per-surface via a `surface` prop; NEVER a user toggle",
+    "elevation": "none — hairline rules instead of shadows; no glows (glows read as gamer-UI)"
+  }
+}

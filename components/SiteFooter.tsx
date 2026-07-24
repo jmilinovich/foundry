@@ -9,17 +9,17 @@ export function SiteFooter() {
   return (
     <footer className="mt-24 border-t border-line pt-6 font-mono text-[11px] leading-relaxed text-ink-faint">
       <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-        <Link href="/about" className="text-ink-dim hover:text-amber">
+        <Link href="/about" className="text-ink-dim hover:text-ink">
           about
         </Link>
-        <a href={REPO_URL} target="_blank" rel="noreferrer" className="text-ink-dim hover:text-amber">
+        <a href={REPO_URL} target="_blank" rel="noreferrer" className="text-ink-dim hover:text-ink">
           source ↗
         </a>
         <a
           href="https://www.mixfont.com"
           target="_blank"
           rel="noreferrer"
-          className="text-ink-dim hover:text-amber"
+          className="text-ink-dim hover:text-ink"
         >
           mixfont ↗
         </a>

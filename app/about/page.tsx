@@ -18,7 +18,7 @@ function H({ children }: { children: React.ReactNode }) {
 export default function AboutPage() {
   return (
     <div className="mx-auto w-full max-w-2xl flex-1 px-6 py-16 sm:py-24">
-      <Link href="/" className="font-mono text-[11px] tracking-widest text-ink-dim hover:text-amber">
+      <Link href="/" className="font-mono text-[11px] tracking-widest text-ink-dim hover:text-ink">
         ← FOUNDRY
       </Link>
 
@@ -61,7 +61,7 @@ export default function AboutPage() {
         </p>
         <p>
           Generating fonts uses the{' '}
-          <a href="https://www.mixfont.com" target="_blank" rel="noreferrer" className="text-amber hover:underline">
+          <a href="https://www.mixfont.com" target="_blank" rel="noreferrer" className="text-ink hover:underline">
             Mixfont
           </a>{' '}
           API, which needs a key. You bring your own. It&rsquo;s stored only in your browser&rsquo;s
@@ -79,7 +79,7 @@ export default function AboutPage() {
         <p>
           You don&rsquo;t have to take any of that on faith. Foundry is open source — the code that
           handles your key is a few short files you can read.{' '}
-          <a href={REPO_URL} target="_blank" rel="noreferrer" className="text-amber hover:underline">
+          <a href={REPO_URL} target="_blank" rel="noreferrer" className="text-ink hover:underline">
             Read it on GitHub ↗
           </a>
         </p>
@@ -88,7 +88,7 @@ export default function AboutPage() {
       <div className="mt-14">
         <Link
           href="/quiz"
-          className="inline-flex items-center gap-2 rounded-lg bg-amber px-5 py-3 text-sm font-medium text-ground transition hover:brightness-110"
+          className="inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-3 text-sm font-medium text-paper transition hover:brightness-110"
         >
           Find your type →
         </Link>

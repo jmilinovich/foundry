@@ -15,7 +15,7 @@ export default async function QuizPage() {
         <p className="mt-2 font-mono text-[12px] text-ink-faint">
           Run <code>node --env-file=.env.local scripts/build-atlas.mjs</code>.
         </p>
-        <Link href="/" className="mt-4 inline-block text-amber">
+        <Link href="/" className="mt-4 inline-block text-ink">
           ← back
         </Link>
       </div>
@@ -23,10 +23,10 @@ export default async function QuizPage() {
   }
 
   return (
-    <div className="flex min-h-full flex-1 flex-col">
+    <div className="surface-judge flex min-h-full flex-1 flex-col">
       <header className="border-b border-line">
         <div className="mx-auto flex max-w-[1100px] items-center justify-between px-6 py-3.5">
-          <Link href="/" className="font-mono text-[11px] tracking-widest text-ink-dim hover:text-amber">
+          <Link href="/" className="font-mono text-[11px] tracking-widest text-ink-dim hover:text-ink">
             ← FOUNDRY
           </Link>
           <span className="font-mono text-[11px] text-ink-faint">find your type</span>
