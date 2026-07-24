@@ -88,7 +88,7 @@ export function FontDetail({ initialRun, fontId }: { initialRun: Run; fontId: st
     return (
       <div className="mx-auto max-w-2xl px-6 py-24">
         <p className="text-ink-dim">That font isn&rsquo;t in this run.</p>
-        <Link href={`/run/${run.id}`} className="mt-4 inline-block text-amber">
+        <Link href={`/run/${run.id}`} className="mt-4 inline-block text-ink">
           ← back to the run
         </Link>
       </div>
@@ -141,7 +141,7 @@ export function FontDetail({ initialRun, fontId }: { initialRun: Run; fontId: st
         <div className="mx-auto flex max-w-[1400px] flex-wrap items-center gap-x-6 gap-y-3 px-6 py-3.5">
           <Link
             href={`/run/${run.id}`}
-            className="font-mono text-[11px] tracking-widest text-ink-dim hover:text-amber"
+            className="font-mono text-[11px] tracking-widest text-ink-dim hover:text-ink"
           >
             ← GEN {font.generation}
           </Link>
@@ -159,7 +159,7 @@ export function FontDetail({ initialRun, fontId }: { initialRun: Run; fontId: st
 
             <button
               onClick={() => setPairing(true)}
-              className="rounded border border-line px-2.5 py-1 font-mono text-[11px] text-ink-dim transition hover:border-amber hover:text-amber"
+              className="rounded border border-line px-2.5 py-1 font-mono text-[11px] text-ink-dim transition hover:border-ink hover:text-ink"
             >
               pair this
             </button>
@@ -171,7 +171,7 @@ export function FontDetail({ initialRun, fontId }: { initialRun: Run; fontId: st
                     key={s}
                     onClick={() => setGlyphSet(s)}
                     className={`px-2 py-1 transition ${
-                      glyphSet === s ? 'bg-amber text-ground' : 'text-ink-faint hover:text-ink-dim'
+                      glyphSet === s ? 'bg-ink text-paper' : 'text-ink-faint hover:text-ink-dim'
                     }`}
                   >
                     {s === 'standard' ? '72' : '319'}
@@ -179,7 +179,7 @@ export function FontDetail({ initialRun, fontId }: { initialRun: Run; fontId: st
                 ))}
               </div>
             ) : extendedPending ? (
-              <span className="font-mono text-[11px] text-amber">
+              <span className="font-mono text-[11px] text-ink">
                 minting 319 glyphs · {Math.round(extended?.progress ?? 0)}%
               </span>
             ) : (
@@ -187,7 +187,7 @@ export function FontDetail({ initialRun, fontId }: { initialRun: Run; fontId: st
                 onClick={promote}
                 disabled={promoting}
                 title="Re-mint at 319 glyphs — accents, curly quotes, dashes"
-                className="rounded border border-line px-2.5 py-1 font-mono text-[11px] text-ink-dim transition hover:border-amber hover:text-amber disabled:opacity-50"
+                className="rounded border border-line px-2.5 py-1 font-mono text-[11px] text-ink-dim transition hover:border-ink hover:text-ink disabled:opacity-50"
               >
                 {promoting ? 'promoting…' : `promote to 319 · ${dollars(CREDITS.extended)}`}
               </button>
@@ -196,7 +196,7 @@ export function FontDetail({ initialRun, fontId }: { initialRun: Run; fontId: st
             <a
               href={downloadUrl}
               download
-              className="font-mono text-[11px] text-ink-faint hover:text-amber"
+              className="font-mono text-[11px] text-ink-faint hover:text-ink"
             >
               ↓ ttf
             </a>
@@ -209,7 +209,7 @@ export function FontDetail({ initialRun, fontId }: { initialRun: Run; fontId: st
               key={t.id}
               onClick={() => setTab(t.id)}
               className={`font-mono text-[11px] transition ${
-                tab === t.id ? 'text-amber' : 'text-ink-faint hover:text-ink-dim'
+                tab === t.id ? 'text-ink' : 'text-ink-faint hover:text-ink-dim'
               }`}
             >
               {t.label}
@@ -221,7 +221,7 @@ export function FontDetail({ initialRun, fontId }: { initialRun: Run; fontId: st
               <input
                 value={text}
                 onChange={(e) => setText(e.target.value)}
-                className="w-44 rounded border border-line bg-panel px-2.5 py-1 text-[13px] text-ink outline-none transition focus:border-amber"
+                className="w-44 rounded border border-line bg-panel px-2.5 py-1 text-[13px] text-ink outline-none transition focus:border-ink"
               />
               <label className="flex items-center gap-2 font-mono text-[10px] text-ink-faint">
                 tracking
@@ -251,7 +251,7 @@ export function FontDetail({ initialRun, fontId }: { initialRun: Run; fontId: st
               </label>
               <button
                 onClick={() => setPaper((p) => !p)}
-                className="rounded border border-line px-2 py-1 font-mono text-[10px] text-ink-faint transition hover:border-amber hover:text-amber"
+                className="rounded border border-line px-2 py-1 font-mono text-[10px] text-ink-faint transition hover:border-ink hover:text-ink"
               >
                 {paper ? 'on paper' : 'on ink'}
               </button>

@@ -65,7 +65,7 @@ export function PairLauncher({
         onClick={(e) => e.stopPropagation()}
       >
         <h2 className="text-lg">
-          Find a partner for <span className="text-amber">{fontName}</span>
+          Find a partner for <span className="text-ink">{fontName}</span>
         </h2>
 
         <div className="mt-7">
@@ -83,7 +83,7 @@ export function PairLauncher({
                 key={value}
                 onClick={() => setSlot(value)}
                 className={`flex-1 rounded border px-3 py-2.5 text-left transition ${
-                  slot === value ? 'border-amber bg-amber/[0.05]' : 'border-line hover:border-ink-faint'
+                  slot === value ? 'border-ink bg-ink/[0.04]' : 'border-line hover:border-ink-faint'
                 }`}
               >
                 <div className="text-[13px]">{label}</div>
@@ -105,7 +105,7 @@ export function PairLauncher({
                 key={s.id}
                 onClick={() => setStance(s.id)}
                 className={`flex w-full items-baseline gap-3 rounded border px-3 py-2 text-left transition ${
-                  stance === s.id ? 'border-amber bg-amber/[0.05]' : 'border-line hover:border-ink-faint'
+                  stance === s.id ? 'border-ink bg-ink/[0.04]' : 'border-line hover:border-ink-faint'
                 }`}
               >
                 <span className="text-[13px]">{s.label}</span>
@@ -141,7 +141,7 @@ export function PairLauncher({
           <button
             onClick={begin}
             disabled={busy}
-            className="flex-1 rounded bg-amber py-2.5 text-sm font-medium text-ground transition disabled:bg-line disabled:text-ink-faint hover:enabled:brightness-110"
+            className="flex-1 rounded bg-accent py-2.5 text-sm font-medium text-paper transition disabled:bg-line disabled:text-ink-faint hover:enabled:brightness-110"
           >
             {busy ? 'minting candidates…' : `begin · ${dollars(size * CREDITS.standard)}`}
           </button>

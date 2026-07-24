@@ -100,7 +100,7 @@ export function PairingView({
     <div className="flex min-h-full flex-1 flex-col">
       <header className="sticky top-0 z-20 border-b border-line bg-ground/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-[1400px] flex-wrap items-center gap-x-6 gap-y-3 px-6 py-3.5">
-          <Link href="/" className="font-mono text-[11px] tracking-widest text-ink-dim hover:text-amber">
+          <Link href="/" className="font-mono text-[11px] tracking-widest text-ink-dim hover:text-ink">
             ← FOUNDRY
           </Link>
           <span className="font-mono text-[11px] text-ink-faint">
@@ -114,7 +114,7 @@ export function PairingView({
               onClick={promoteBoth}
               disabled={promoting || bothPromoted}
               title="Re-mint both faces at 319 glyphs"
-              className="rounded border border-line px-2.5 py-1 font-mono text-[11px] text-ink-dim transition hover:border-amber hover:text-amber disabled:opacity-50"
+              className="rounded border border-line px-2.5 py-1 font-mono text-[11px] text-ink-dim transition hover:border-ink hover:text-ink disabled:opacity-50"
             >
               {bothPromoted
                 ? '319 glyphs ✓'
@@ -126,14 +126,14 @@ export function PairingView({
             <a
               href={`/api/fonts/${display.id}?download=${encodeURIComponent(display.name)}`}
               download
-              className="font-mono text-[11px] text-ink-faint hover:text-amber"
+              className="font-mono text-[11px] text-ink-faint hover:text-ink"
             >
               ↓ display
             </a>
             <a
               href={`/api/fonts/${text.id}?download=${encodeURIComponent(text.name)}`}
               download
-              className="font-mono text-[11px] text-ink-faint hover:text-amber"
+              className="font-mono text-[11px] text-ink-faint hover:text-ink"
             >
               ↓ text
             </a>
@@ -146,7 +146,7 @@ export function PairingView({
               key={t}
               onClick={() => setTab(t)}
               className={`font-mono text-[11px] transition ${
-                tab === t ? 'text-amber' : 'text-ink-faint hover:text-ink-dim'
+                tab === t ? 'text-ink' : 'text-ink-faint hover:text-ink-dim'
               }`}
             >
               {t}
@@ -157,12 +157,12 @@ export function PairingView({
               <input
                 value={headline}
                 onChange={(e) => setHeadline(e.target.value)}
-                className="w-56 rounded border border-line bg-panel px-2.5 py-1 text-[13px] text-ink outline-none transition focus:border-amber"
+                className="w-56 rounded border border-line bg-panel px-2.5 py-1 text-[13px] text-ink outline-none transition focus:border-ink"
               />
             )}
             <Link
               href={`/run/${runId}`}
-              className="font-mono text-[11px] text-ink-faint hover:text-amber"
+              className="font-mono text-[11px] text-ink-faint hover:text-ink"
             >
               back to the session
             </Link>
@@ -234,7 +234,7 @@ export function PairingView({
                   </div>
                   <Link
                     href={`/run/${rid}/font/${font.id}`}
-                    className="specimen mt-2 block text-[26px] leading-tight transition hover:text-amber"
+                    className="specimen mt-2 block text-[26px] leading-tight transition hover:text-ink"
                     data-loaded={loaded}
                     style={{ fontFamily: fam }}
                   >
@@ -244,10 +244,10 @@ export function PairingView({
                     {toGenotype(font.genome)}
                   </p>
                   {font.extended?.status === 'ready' && (
-                    <p className="mt-2 font-mono text-[10px] text-amber">319 glyphs available</p>
+                    <p className="mt-2 font-mono text-[10px] text-ink">319 glyphs available</p>
                   )}
                   {font.extended?.status === 'generating' && (
-                    <p className="mt-2 font-mono text-[10px] text-amber">
+                    <p className="mt-2 font-mono text-[10px] text-ink">
                       minting 319 glyphs · {Math.round(font.extended.progress)}%
                     </p>
                   )}

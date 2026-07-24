@@ -56,7 +56,7 @@ export function PairCandidate({
   const shell = failed
     ? 'border-red-900/40 bg-red-950/[0.12]'
     : selected
-      ? 'border-amber bg-amber/[0.04] shadow-[0_0_0_1px_var(--amber),0_10px_40px_-16px_rgba(255,138,61,0.5)]'
+      ? 'border-accent bg-accent/[0.05] shadow-[0_0_0_1px_var(--accent)]'
       : `border-line bg-panel${ready ? ' hover:border-ink-faint' : ''}`;
 
   return (
@@ -75,7 +75,7 @@ export function PairCandidate({
           : undefined
       }
       style={ready ? { animationDelay: `${Math.min(index, 12) * 45}ms` } : undefined}
-      className={`group relative flex flex-col overflow-hidden rounded-lg border p-6 text-left outline-none transition-all duration-300 focus-visible:border-amber/70 ${shell} ${
+      className={`group relative flex flex-col overflow-hidden rounded-lg border p-6 text-left outline-none transition-all duration-300 focus-visible:border-accent ${shell} ${
         ready ? 'rise cursor-pointer' : ''
       } ${dimmed && !selected ? 'opacity-45 hover:opacity-90' : 'opacity-100'}`}
     >
@@ -90,7 +90,7 @@ export function PairCandidate({
             <Link
               href={`/run/${runId}/font/${font.id}`}
               onClick={(e) => e.stopPropagation()}
-              className="font-mono text-[11px] text-ink-faint hover:text-amber"
+              className="font-mono text-[11px] text-ink-faint hover:text-ink"
             >
               ↗ open
             </Link>
@@ -98,7 +98,7 @@ export function PairCandidate({
               href={`/api/fonts/${font.id}?download=${encodeURIComponent(font.name)}`}
               onClick={(e) => e.stopPropagation()}
               download
-              className="font-mono text-[11px] text-ink-faint hover:text-amber"
+              className="font-mono text-[11px] text-ink-faint hover:text-ink"
             >
               ↓ ttf
             </a>
@@ -120,7 +120,7 @@ export function PairCandidate({
                 e.stopPropagation();
                 onRetry(font.id);
               }}
-              className="mt-3 rounded border border-line px-2 py-1 font-mono text-[11px] text-ink-dim transition hover:border-amber hover:text-amber"
+              className="mt-3 rounded border border-line px-2 py-1 font-mono text-[11px] text-ink-dim transition hover:border-ink hover:text-ink"
             >
               ↻ retry · $0.20
             </button>
@@ -145,7 +145,7 @@ export function PairCandidate({
         ) : (
           <div className="h-px w-full bg-line">
             <div
-              className="h-px bg-amber/60 transition-all duration-700"
+              className="h-px bg-signal transition-all duration-700"
               style={{ width: `${Math.max(2, font.progress)}%` }}
             />
           </div>

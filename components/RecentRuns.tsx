@@ -46,7 +46,7 @@ export function RecentRuns() {
             <li key={r.id} className="flex items-baseline gap-4 py-3">
               <Link
                 href={s?.settledPair ? `/pairing/${r.id}` : `/run/${r.id}`}
-                className="flex flex-1 items-baseline gap-4 truncate transition hover:text-amber"
+                className="flex flex-1 items-baseline gap-4 truncate transition hover:text-ink"
               >
                 <span className="flex-1 truncate text-sm">{s?.seedText || r.label}</span>
                 <span className="font-mono text-[11px] text-ink-faint">

@@ -1,10 +1,29 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Fraunces, Hanken_Grotesk, Spline_Sans_Mono } from 'next/font/google';
 import './globals.css';
 import { KeyGateProvider } from '@/components/KeyGateProvider';
 
-const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] });
-const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin'] });
+// The Specimen · see DESIGN.md. Fraunces = display (cold-start masthead, used
+// with restraint — the champion font supersedes it). Hanken = controls/body.
+// Spline Mono = the instrument voice. Geist is banned (it's Vercel's brand face).
+const fraunces = Fraunces({
+  variable: '--font-fraunces',
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  display: 'swap',
+});
+const hanken = Hanken_Grotesk({
+  variable: '--font-hanken',
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  display: 'swap',
+});
+const splineMono = Spline_Sans_Mono({
+  variable: '--font-spline-mono',
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Foundry — evolve a typeface',
@@ -14,8 +33,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">
+    <html
+      lang="en"
+      className={`${fraunces.variable} ${hanken.variable} ${splineMono.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col surface-publish">
         <KeyGateProvider>{children}</KeyGateProvider>
       </body>
     </html>

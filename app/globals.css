@@ -1,39 +1,55 @@
 @import "tailwindcss";
 
+/* ── The Specimen · see DESIGN.md ─────────────────────────────────────────
+   Two grounds by surface. --ground defaults to warm publishing paper; judging
+   surfaces (.surface-judge) override it to the flat cool bench. Components read
+   var(--ground)/bg-ground and pick up whichever surface they're inside. */
 :root {
-  --ink: #f2efe8;
-  --ink-dim: #8b877e;
-  --ink-faint: #4a4741;
-  --ground: #0b0b0c;
-  --panel: #121214;
-  --line: #232326;
-  --amber: #ff8a3d;
+  --paper: #f2efe8;   /* warm publishing ground */
+  --bench: #faf8f4;   /* flat cool judging ground */
+  --ground: var(--paper);
+
+  --ink: #1b1712;
+  --ink-dim: #5f584e;
+  --ink-faint: #948b7f;
+  --line: #d9d4c8;
+  --panel: #ece7dc;   /* faint fill for the few things that need one; prefer borders */
+
+  --accent: #b7302a;  /* Proof Red — reserved to Breed + Keep only */
+  --signal: #8a8378;  /* graphite — in-flight / minting instrument state */
 }
 
 @theme inline {
   --color-ground: var(--ground);
+  --color-paper: var(--paper);
+  --color-bench: var(--bench);
   --color-panel: var(--panel);
   --color-line: var(--line);
   --color-ink: var(--ink);
   --color-ink-dim: var(--ink-dim);
   --color-ink-faint: var(--ink-faint);
-  --color-amber: var(--amber);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-accent: var(--accent);
+  --color-signal: var(--signal);
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-hanken);
+  --font-mono: var(--font-spline-mono);
 }
+
+.surface-judge { --ground: var(--bench); background: var(--bench); }
+.surface-publish { --ground: var(--paper); background: var(--paper); }
 
 html,
 body {
   background: var(--ground);
   color: var(--ink);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-hanken), system-ui, sans-serif;
 }
 
 /* The specimen fades in only once its FontFace has actually loaded, so you
    never see the string flash in a fallback face and then snap. */
 .specimen {
   opacity: 0;
-  transition: opacity 420ms ease;
+  transition: opacity 300ms ease;
 }
 .specimen[data-loaded="true"] {
   opacity: 1;
@@ -43,11 +59,12 @@ body {
   0% { background-position: -280% 0; }
   100% { background-position: 280% 0; }
 }
+/* A faint ink wash, recalibrated for a light ground (was an amber wash on dark). */
 .shimmer {
   background: linear-gradient(
     100deg,
     transparent 42%,
-    rgba(255, 138, 61, 0.055) 50%,
+    rgba(27, 19, 15, 0.05) 50%,
     transparent 58%
   );
   background-size: 280% 100%;
@@ -63,10 +80,14 @@ body {
 }
 
 input[type="range"] {
-  accent-color: var(--amber);
+  accent-color: var(--accent);
 }
 
 ::selection {
-  background: var(--amber);
-  color: #0b0b0c;
+  background: var(--accent);
+  color: var(--paper);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise, .shimmer, .specimen { animation: none; transition: none; }
 }

@@ -200,13 +200,13 @@ export function Lineage({
         <div className="flex items-baseline justify-between">
           <div className="font-mono text-[11px] text-ink-faint">
             <span className="text-ink-dim">{parent.name}</span>
-            <span className="mx-2 text-amber">→</span>
+            <span className="mx-2 text-ink">→</span>
             <span className="text-ink-dim">{child.name}</span>
           </div>
           {!inline && (
             <button
               onClick={onClose}
-              className="font-mono text-[11px] text-ink-faint hover:text-amber"
+              className="font-mono text-[11px] text-ink-faint hover:text-ink"
             >
               esc
             </button>
@@ -235,7 +235,7 @@ export function Lineage({
                 onClick={() => setParentId(p.id)}
                 className={`rounded border px-2 py-1 font-mono text-[10.5px] transition ${
                   p.id === parent.id
-                    ? 'border-amber text-amber'
+                    ? 'border-ink text-ink'
                     : 'border-line text-ink-faint hover:text-ink-dim'
                 }`}
               >
@@ -254,7 +254,7 @@ export function Lineage({
               <span key={c.gene} className="font-mono text-[11px]">
                 <span className="text-ink-faint">{c.gene}</span>{' '}
                 <span className="text-ink-faint line-through decoration-ink-faint/50">{c.from}</span>{' '}
-                <span className="text-amber">{c.to}</span>
+                <span className="text-ink">{c.to}</span>
               </span>
             ))}
           </div>

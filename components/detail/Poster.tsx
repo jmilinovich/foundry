@@ -86,7 +86,7 @@ export function Poster({
           <button
             onClick={exportPng}
             disabled={busy || !ready}
-            className="rounded bg-amber px-3 py-1.5 font-mono text-[11px] text-ground transition disabled:bg-panel disabled:text-ink-faint hover:enabled:brightness-110"
+            className="rounded bg-accent px-3 py-1.5 font-mono text-[11px] text-paper transition disabled:bg-panel disabled:text-ink-faint hover:enabled:brightness-110"
           >
             {busy ? 'rendering…' : ready ? '↓ png' : 'embedding fonts…'}
           </button>

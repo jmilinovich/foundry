@@ -189,7 +189,7 @@ export function RunView({
       )}
       <header className="sticky top-0 z-20 border-b border-line bg-ground/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-[1600px] flex-wrap items-center gap-x-6 gap-y-3 px-6 py-3.5">
-          <Link href="/" className="font-mono text-[11px] tracking-widest text-ink-dim hover:text-amber">
+          <Link href="/" className="font-mono text-[11px] tracking-widest text-ink-dim hover:text-ink">
             ← FOUNDRY
           </Link>
 
@@ -206,7 +206,7 @@ export function RunView({
               value={text}
               onChange={(e) => setText(e.target.value)}
               placeholder="Type to re-set every specimen"
-              className="w-full min-w-0 rounded border border-line bg-panel px-3 py-1.5 text-sm text-ink outline-none transition focus:border-amber sm:w-72"
+              className="w-full min-w-0 rounded border border-line bg-panel px-3 py-1.5 text-sm text-ink outline-none transition focus:border-ink sm:w-72"
             />
             <label className="hidden items-center gap-2 font-mono text-[11px] text-ink-faint sm:flex">
               <input
@@ -235,7 +235,7 @@ export function RunView({
                 const [lockedRunId, lockedFontId] = e.target.value.split(':');
                 pairAction({ action: 'swap', lockedRunId, lockedFontId });
               }}
-              className="max-w-[280px] rounded border border-line bg-panel px-2 py-1 font-mono text-[11px] text-ink-dim outline-none focus:border-amber"
+              className="max-w-[280px] rounded border border-line bg-panel px-2 py-1 font-mono text-[11px] text-ink-dim outline-none focus:border-ink"
             >
               {catalog.map((f) => (
                 <option key={f.id} value={`${f.runId}:${f.id}`}>
@@ -245,7 +245,7 @@ export function RunView({
             </select>
             {stance && (
               <span className="font-mono text-[10.5px] text-ink-faint">
-                <span className="text-amber">{stance.label}</span> · {stance.blurb}
+                <span className="text-ink">{stance.label}</span> · {stance.blurb}
               </span>
             )}
           </div>
@@ -262,7 +262,7 @@ export function RunView({
                 }}
                 className={`rounded px-2 py-0.5 font-mono text-[11px] transition ${
                   g === viewGen
-                    ? 'bg-amber text-ground'
+                    ? 'bg-ink text-paper'
                     : 'text-ink-faint hover:bg-panel hover:text-ink-dim'
                 }`}
               >
@@ -329,7 +329,7 @@ export function RunView({
             {isLatest ? (
               selected.size ? (
                 <>
-                  <span className="text-amber">{selected.size} kept</span> · press 1–9 to pick,
+                  <span className="text-accent">{selected.size} kept</span> · press 1–9 to pick,
                   enter to breed
                 </>
               ) : (
@@ -358,7 +358,7 @@ export function RunView({
                     ? 'Settle on this partner'
                     : 'Select exactly one partner to settle on'
                 }
-                className="rounded border border-line px-3 py-2 text-sm text-ink-dim transition disabled:cursor-not-allowed disabled:opacity-40 hover:enabled:border-amber hover:enabled:text-amber"
+                className="rounded border border-line px-3 py-2 text-sm text-ink-dim transition disabled:cursor-not-allowed disabled:opacity-40 hover:enabled:border-ink hover:enabled:text-ink"
               >
                 settle on this pair
               </button>
@@ -367,7 +367,7 @@ export function RunView({
             <button
               onClick={breedNext}
               disabled={!isLatest || !selected.size || breeding || pending}
-              className="rounded bg-amber px-4 py-2 text-sm font-medium text-ground transition disabled:cursor-not-allowed disabled:bg-panel disabled:text-ink-faint hover:enabled:brightness-110"
+              className="rounded bg-accent px-4 py-2 text-sm font-medium text-paper transition disabled:cursor-not-allowed disabled:bg-panel disabled:text-ink-faint hover:enabled:brightness-110"
             >
               {breeding ? 'breeding…' : `breed generation ${run.generation + 1}`}
             </button>
