@@ -59,7 +59,7 @@ export function PairLauncher({
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-6" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-6" onClick={onClose}>
       <div
         className="w-full max-w-lg rounded-lg border border-line bg-panel p-7"
         onClick={(e) => e.stopPropagation()}

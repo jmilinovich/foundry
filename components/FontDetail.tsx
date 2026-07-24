@@ -21,7 +21,6 @@ export function FontDetail({ initialRun, fontId }: { initialRun: Run; fontId: st
   const [text, setText] = useState(initialRun.specimenText || 'Handgloves');
   const [tracking, setTracking] = useState(0);
   const [leading, setLeading] = useState(1.55);
-  const [paper, setPaper] = useState(false);
   const [glyphSet, setGlyphSet] = useState<GlyphSetName>('standard');
   const [promoting, setPromoting] = useState(false);
   const [pairing, setPairing] = useState(false);
@@ -104,29 +103,10 @@ export function FontDetail({ initialRun, fontId }: { initialRun: Run; fontId: st
     { id: 'lineage', label: 'lineage', hidden: font.parents.length === 0 },
   ];
 
-  // Paper mode overrides the theme variables on the container rather than
-  // repainting one region, so the header, rules and metadata all flip with the
-  // specimen instead of leaving a dark bar floating over a white page.
-  const paperVars = {
-    '--ground': '#f2efe8',
-    '--panel': '#e8e4da',
-    '--line': '#d5d0c4',
-    '--ink': '#0b0b0c',
-    '--ink-dim': '#57534a',
-    '--ink-faint': '#8f8a7e',
-  } as React.CSSProperties;
-
-  const inPaper = paper && tab === 'specimen';
-
+  // The detail page is a publishing surface — permanently warm paper (see
+  // DESIGN.md). The old opt-in paper/ink toggle is gone; the whole app is paper now.
   return (
-    <div
-      className="flex min-h-full flex-1 flex-col transition-colors duration-300"
-      style={
-        inPaper
-          ? { ...paperVars, background: 'var(--ground)', color: 'var(--ink)' }
-          : undefined
-      }
-    >
+    <div className="surface-publish flex min-h-full flex-1 flex-col">
       {pairing && (
         <PairLauncher
           runId={run.id}
@@ -249,12 +229,6 @@ export function FontDetail({ initialRun, fontId }: { initialRun: Run; fontId: st
                 />
                 <span className="w-7 tabular-nums">{leading.toFixed(2)}</span>
               </label>
-              <button
-                onClick={() => setPaper((p) => !p)}
-                className="rounded border border-line px-2 py-1 font-mono text-[10px] text-ink-faint transition hover:border-ink hover:text-ink"
-              >
-                {paper ? 'on paper' : 'on ink'}
-              </button>
             </div>
           )}
         </div>
