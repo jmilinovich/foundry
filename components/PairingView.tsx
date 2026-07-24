@@ -9,8 +9,8 @@ import { toGenotype } from '@/lib/genome';
 import { rememberRun } from '@/lib/localRuns';
 import { apiFetch } from '@/lib/userKey';
 import { useEnsureKey } from './KeyGateProvider';
-import { SAMPLE_PARAGRAPH } from '@/lib/glyphs';
 import { dollars, type FontRecord, type PairingMeta } from '@/lib/types';
+import { PairLookbook } from './detail/PairLookbook';
 import { Poster } from './detail/Poster';
 import { useFoundryFont } from './useFoundryFont';
 
@@ -187,51 +187,8 @@ export function PairingView({
           <Poster display={display} text={text} specimen={headline} glyphSet="standard" />
         ) : (
           <div className="grid gap-14 lg:grid-cols-[minmax(0,1fr)_300px]">
-            <div>
-              {/* The pair doing its job, at the sizes it will actually run at. */}
-              <div
-                className="specimen leading-[1.02]"
-                data-loaded={loaded}
-                style={{ fontFamily: dFam, fontSize: 'clamp(2.5rem, 7vw, 5.5rem)' }}
-              >
-                {headline}
-              </div>
-
-              <p
-                className="specimen mt-6 max-w-2xl"
-                data-loaded={loaded}
-                style={{ fontFamily: tFam, fontSize: 21, lineHeight: 1.5 }}
-              >
-                {SAMPLE_PARAGRAPH}
-              </p>
-
-              <div className="mt-14 grid gap-10 sm:grid-cols-2">
-                {[
-                  { h: 36, b: 17 },
-                  { h: 26, b: 15 },
-                ].map(({ h, b }) => (
-                  <div key={h}>
-                    <div className="mb-3 font-mono text-[10px] tabular-nums text-ink-faint">
-                      {h} / {b}
-                    </div>
-                    <div
-                      className="specimen leading-[1.1]"
-                      data-loaded={loaded}
-                      style={{ fontFamily: dFam, fontSize: h }}
-                    >
-                      {headline}
-                    </div>
-                    <p
-                      className="specimen mt-2.5"
-                      data-loaded={loaded}
-                      style={{ fontFamily: tFam, fontSize: b, lineHeight: 1.62 }}
-                    >
-                      {SAMPLE_PARAGRAPH}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
+            {/* The pair seen doing its job — applied, and exportable as a PNG. */}
+            <PairLookbook display={display} text={text} headline={headline} />
 
             <aside className="space-y-8">
               {(
