@@ -193,6 +193,14 @@ export function FontDetail({ initialRun, fontId }: { initialRun: Run; fontId: st
             )}
 
             <a
+              href={`/api/runs/${run.id}/fonts/${fontId}/kit`}
+              download
+              title="TTF + @font-face CSS + a README specimen, zipped"
+              className="font-mono text-[11px] text-ink-dim hover:text-ink"
+            >
+              ↓ kit
+            </a>
+            <a
               href={downloadUrl}
               download
               className="font-mono text-[11px] text-ink-faint hover:text-ink"

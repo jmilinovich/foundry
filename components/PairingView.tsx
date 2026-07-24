@@ -123,20 +123,32 @@ export function PairingView({
                   : `promote pair · ${dollars(CREDITS.extended * 2)}`}
             </button>
 
+            {/* The whole pair as one kit — both fonts + wired CSS + specimen. */}
             <a
-              href={`/api/fonts/${display.id}?download=${encodeURIComponent(display.name)}`}
+              href={`/api/pairings/${runId}/kit`}
               download
-              className="font-mono text-[11px] text-ink-faint hover:text-ink"
+              title="Both fonts + @font-face CSS + a README specimen, zipped"
+              className="rounded border border-line px-2.5 py-1 font-mono text-[11px] text-ink-dim transition hover:border-ink hover:text-ink"
             >
-              ↓ display
+              ↓ download pair
             </a>
-            <a
-              href={`/api/fonts/${text.id}?download=${encodeURIComponent(text.name)}`}
-              download
-              className="font-mono text-[11px] text-ink-faint hover:text-ink"
-            >
-              ↓ text
-            </a>
+            <span className="font-mono text-[11px] text-ink-faint">
+              <a
+                href={`/api/fonts/${display.id}?download=${encodeURIComponent(display.name)}`}
+                download
+                className="hover:text-ink"
+              >
+                ttf: display
+              </a>
+              {' · '}
+              <a
+                href={`/api/fonts/${text.id}?download=${encodeURIComponent(text.name)}`}
+                download
+                className="hover:text-ink"
+              >
+                text
+              </a>
+            </span>
           </div>
         </div>
 
