@@ -26,6 +26,8 @@ export function SpecimenSheet({
   tracking,
   leading,
   glyphSet,
+  weightLabel,
+  genome,
 }: {
   fontId: string;
   family: string;
@@ -33,6 +35,10 @@ export function SpecimenSheet({
   tracking: number;
   leading: number;
   glyphSet: GlyphSetName;
+  /** For the waterfall's weight·px·tracking grammar. */
+  weightLabel: string;
+  /** Foundry technical credits: label/value pairs. */
+  genome: [string, string][];
 }) {
   const [chars, setChars] = useState<string[]>([]);
 
@@ -61,18 +67,38 @@ export function SpecimenSheet({
         {text}
       </div>
 
+      {/* Genome as foundry technical credits. */}
+      <Section label="Genome">
+        <dl className="grid max-w-2xl grid-cols-2 gap-x-12 sm:grid-cols-3">
+          {genome.map(([k, v]) => (
+            <div
+              key={k}
+              className="flex items-baseline justify-between border-b border-line py-1.5"
+            >
+              <dt className="font-mono text-[10px] uppercase tracking-[0.12em] text-ink-faint">
+                {k}
+              </dt>
+              <dd className="font-mono text-[11px] text-ink">{v}</dd>
+            </div>
+          ))}
+        </dl>
+      </Section>
+
       <Section label="Waterfall">
-        <div className="space-y-4">
+        <div className="space-y-5">
           {WATERFALL.map((size) => (
             <div key={size} className="flex items-baseline gap-6">
               <span className="w-8 shrink-0 text-right font-mono text-[10px] tabular-nums text-ink-faint">
                 {size}
               </span>
-              <div
-                className="min-w-0 flex-1 truncate leading-[1.1]"
-                style={{ ...face, fontSize: `${size}px` }}
-              >
-                {text}
+              <div className="min-w-0 flex-1">
+                <div className="truncate leading-[1.1]" style={{ ...face, fontSize: `${size}px` }}>
+                  {text}
+                </div>
+                {/* the Klim label grammar — tracking value live-linked to the slider */}
+                <div className="mt-1.5 font-mono text-[9.5px] uppercase tracking-[0.08em] text-ink-faint">
+                  {weightLabel} · {size}PX · {tracking.toFixed(3)}EM
+                </div>
               </div>
             </div>
           ))}

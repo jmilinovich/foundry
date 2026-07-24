@@ -4,7 +4,26 @@ import Link from 'next/link';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { CREDITS } from '@/lib/credits';
-import { dollars, type GlyphSetName, type Run } from '@/lib/types';
+import { dollars, type FontRecord, type GlyphSetName, type Run } from '@/lib/types';
+
+/** The genome as foundry technical credits — label/value pairs for the sheet. */
+function genomeCredits(font: FontRecord): [string, string][] {
+  const g = font.genome;
+  return [
+    ['Category', g.category],
+    ['Weight', g.weight],
+    ['Width', g.width],
+    ['Contrast', g.contrast],
+    ['Terminals', g.terminals],
+    ['x-height', g.xheight],
+    ['Corner', g.corner],
+    ['Texture', g.texture],
+    ['Era', g.era],
+    ['Mood', g.mood.join(' · ')],
+    ['Generation', String(font.generation)],
+    ['Lineage', font.lineage],
+  ];
+}
 import { apiFetch } from '@/lib/userKey';
 import { useEnsureKey } from './KeyGateProvider';
 import { Lineage } from './Lineage';
@@ -244,6 +263,8 @@ export function FontDetail({ initialRun, fontId }: { initialRun: Run; fontId: st
               tracking={tracking}
               leading={leading}
               glyphSet={glyphSet === 'extended' && extFamily ? 'extended' : 'standard'}
+              weightLabel={font.genome.weight.toUpperCase()}
+              genome={genomeCredits(font)}
             />
           )}
 
