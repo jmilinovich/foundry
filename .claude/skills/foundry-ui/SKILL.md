@@ -58,9 +58,17 @@ copy · champion font in chrome · a warm ground on a judging surface.
 
 ## Reference implementation
 
-`/design-proof` (`app/design-proof/page.tsx`) is the built proof of the publishing/specimen
-surface — real fonts, real generated champion. Read it for the concrete treatment of the hero,
-waterfall grammar, genome rail, and Proof Red discipline before restyling the real detail page.
+The direction is implemented in the real app. Read these for the concrete treatment:
+
+- `app/globals.css` — the two grounds, tokens, and `.surface-judge` / `.surface-publish` classes.
+- `components/FontDetail.tsx` + `components/detail/SpecimenSheet.tsx` — the publishing/specimen
+  surface (warm paper, champion hero, waterfall, Proof Red discipline).
+- `components/RunView.tsx` + `components/Specimen.tsx` — the judging surface (cool bench,
+  demoted mono badges, comparison grid).
+
+The original standalone proof lived at `app/design-proof/page.tsx` — see git commit
+`Design direction: The Specimen` for the exact hero / waterfall-grammar / genome-rail code if you
+need it while extending the detail page.
 
 ## Audit
 
