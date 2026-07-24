@@ -1,0 +1,722 @@
+[
+  {
+    "slug": "bauhaus-geo",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "blunt cut",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "1920s Bauhaus",
+      "useCase": "a brand identity",
+      "category": "geometric sans",
+      "weight": "regular",
+      "contrast": "monoline",
+      "mood": [
+        "clinical",
+        "futuristic"
+      ]
+    },
+    "name": "Ionic Void Grotesk"
+  },
+  {
+    "slug": "botanical-humanist",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "flared",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a brand identity",
+      "category": "humanist sans",
+      "weight": "medium",
+      "contrast": "low contrast",
+      "mood": [
+        "botanical",
+        "warm"
+      ]
+    },
+    "name": "Tessellated Nocturne"
+  },
+  {
+    "slug": "clarendon",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "spurred",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "19th-century industrial",
+      "useCase": "a brand identity",
+      "category": "slab serif",
+      "weight": "medium",
+      "contrast": "low contrast",
+      "mood": [
+        "industrial",
+        "nostalgic"
+      ]
+    },
+    "name": "Ypsilon Bastion"
+  },
+  {
+    "slug": "compressed-grot",
+    "genome": {
+      "width": "ultra-condensed",
+      "terminals": "blunt cut",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a brand identity",
+      "category": "grotesque sans",
+      "weight": "bold",
+      "contrast": "low contrast",
+      "mood": [
+        "brutalist",
+        "industrial"
+      ]
+    },
+    "name": "Vanta Monolith Grotesk"
+  },
+  {
+    "slug": "condensed-geo",
+    "genome": {
+      "width": "condensed",
+      "terminals": "blunt cut",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a brand identity",
+      "category": "geometric sans",
+      "weight": "regular",
+      "contrast": "monoline",
+      "mood": [
+        "utilitarian",
+        "industrial"
+      ]
+    },
+    "name": "Monolith Veil"
+  },
+  {
+    "slug": "didone-classic",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "ball",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "18th-century enlightenment",
+      "useCase": "a brand identity",
+      "category": "didone serif",
+      "weight": "regular",
+      "contrast": "extreme contrast",
+      "mood": [
+        "elegant",
+        "editorial"
+      ]
+    },
+    "name": "Velvet Oracle"
+  },
+  {
+    "slug": "didone-light",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "ball",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a brand identity",
+      "category": "didone serif",
+      "weight": "light",
+      "contrast": "high contrast",
+      "mood": [
+        "elegant",
+        "severe"
+      ]
+    },
+    "name": "Dusk Obsidian Didot"
+  },
+  {
+    "slug": "editorial-neo",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "sheared",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a brand identity",
+      "category": "neo-grotesque sans",
+      "weight": "medium",
+      "contrast": "low contrast",
+      "mood": [
+        "editorial",
+        "clinical"
+      ]
+    },
+    "name": "Ypsilon Vector"
+  },
+  {
+    "slug": "elegant-geo",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "blunt cut",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "1920s Bauhaus",
+      "useCase": "a brand identity",
+      "category": "geometric sans",
+      "weight": "light",
+      "contrast": "monoline",
+      "mood": [
+        "elegant",
+        "futuristic"
+      ]
+    },
+    "name": "Ion Veil"
+  },
+  {
+    "slug": "engraved-didone",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "ball",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "engraved",
+      "era": "contemporary",
+      "useCase": "a brand identity",
+      "category": "didone serif",
+      "weight": "light",
+      "contrast": "extreme contrast",
+      "mood": [
+        "elegant",
+        "ecclesiastical"
+      ]
+    },
+    "name": "Dusk Vellum Didone"
+  },
+  {
+    "slug": "eroded-heavy",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "blunt cut",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "eroded",
+      "era": "contemporary",
+      "useCase": "a brand identity",
+      "category": "grotesque sans",
+      "weight": "black",
+      "contrast": "low contrast",
+      "mood": [
+        "brutalist",
+        "industrial"
+      ]
+    },
+    "name": "Tectonic Noir Grotesk"
+  },
+  {
+    "slug": "extended-neo",
+    "genome": {
+      "width": "extended",
+      "terminals": "blunt cut",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a brand identity",
+      "category": "neo-grotesque sans",
+      "weight": "regular",
+      "contrast": "low contrast",
+      "mood": [
+        "futuristic",
+        "clinical"
+      ]
+    },
+    "name": "Helix Nova"
+  },
+  {
+    "slug": "flared-editorial",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "flared",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a brand identity",
+      "category": "flared sans",
+      "weight": "medium",
+      "contrast": "low contrast",
+      "mood": [
+        "warm",
+        "editorial"
+      ]
+    },
+    "name": "Cathedral Velvet Serif"
+  },
+  {
+    "slug": "flared-literary",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "flared",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a brand identity",
+      "category": "flared sans",
+      "weight": "regular",
+      "contrast": "low contrast",
+      "mood": [
+        "literary",
+        "elegant"
+      ]
+    },
+    "name": "Jasper Nocturne"
+  },
+  {
+    "slug": "garalde-book",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "tapered",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "15th-century humanist",
+      "useCase": "a brand identity",
+      "category": "old-style serif",
+      "weight": "regular",
+      "contrast": "moderate contrast",
+      "mood": [
+        "literary",
+        "warm"
+      ]
+    },
+    "name": "Pale Oracle Serif"
+  },
+  {
+    "slug": "geo-slab",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "blunt cut",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "19th-century industrial",
+      "useCase": "a brand identity",
+      "category": "slab serif",
+      "weight": "bold",
+      "contrast": "monoline",
+      "mood": [
+        "industrial",
+        "utilitarian"
+      ]
+    },
+    "name": "Ebon Bastion"
+  },
+  {
+    "slug": "hairline-neo",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "blunt cut",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a brand identity",
+      "category": "neo-grotesque sans",
+      "weight": "hairline",
+      "contrast": "monoline",
+      "mood": [
+        "elegant",
+        "clinical"
+      ]
+    },
+    "name": "Xenon Veil Sans"
+  },
+  {
+    "slug": "heavy-grot",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "blunt cut",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a brand identity",
+      "category": "grotesque sans",
+      "weight": "black",
+      "contrast": "low contrast",
+      "mood": [
+        "brutalist",
+        "severe"
+      ]
+    },
+    "name": "Lacuna Monolith"
+  },
+  {
+    "slug": "humanist-light",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "tapered",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a brand identity",
+      "category": "humanist sans",
+      "weight": "light",
+      "contrast": "very low contrast",
+      "mood": [
+        "warm",
+        "elegant"
+      ]
+    },
+    "name": "Vanta Grotesk"
+  },
+  {
+    "slug": "humanist-serif",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "tapered",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "15th-century humanist",
+      "useCase": "a brand identity",
+      "category": "humanist serif",
+      "weight": "regular",
+      "contrast": "moderate contrast",
+      "mood": [
+        "literary",
+        "elegant"
+      ]
+    },
+    "name": "Kairo Nocturne Serif"
+  },
+  {
+    "slug": "humanist-warm",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "flared",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a brand identity",
+      "category": "humanist sans",
+      "weight": "regular",
+      "contrast": "low contrast",
+      "mood": [
+        "warm",
+        "literary"
+      ]
+    },
+    "name": "Cinder Lyric"
+  },
+  {
+    "slug": "industrial-grot",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "blunt cut",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "19th-century industrial",
+      "useCase": "a brand identity",
+      "category": "grotesque sans",
+      "weight": "bold",
+      "contrast": "low contrast",
+      "mood": [
+        "industrial",
+        "severe"
+      ]
+    },
+    "name": "Gorgon Grotesk"
+  },
+  {
+    "slug": "inky-book",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "tapered",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "lightly inked",
+      "era": "15th-century humanist",
+      "useCase": "a brand identity",
+      "category": "old-style serif",
+      "weight": "regular",
+      "contrast": "moderate contrast",
+      "mood": [
+        "literary",
+        "nostalgic"
+      ]
+    },
+    "name": "Riven Didone"
+  },
+  {
+    "slug": "mechanical-wedge",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "spurred",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a brand identity",
+      "category": "wedge serif",
+      "weight": "medium",
+      "contrast": "moderate contrast",
+      "mood": [
+        "mechanical",
+        "industrial"
+      ]
+    },
+    "name": "Xyloid Meridian"
+  },
+  {
+    "slug": "nostalgic-serif",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "tapered",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "1970s phototypesetting",
+      "useCase": "a brand identity",
+      "category": "humanist serif",
+      "weight": "medium",
+      "contrast": "moderate contrast",
+      "mood": [
+        "nostalgic",
+        "warm"
+      ]
+    },
+    "name": "Nocturne Ivory Serif"
+  },
+  {
+    "slug": "pixel-geo",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "blunt cut",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "pixel-stepped",
+      "era": "speculative near-future",
+      "useCase": "a brand identity",
+      "category": "geometric sans",
+      "weight": "bold",
+      "contrast": "monoline",
+      "mood": [
+        "futuristic",
+        "mechanical"
+      ]
+    },
+    "name": "Obsidian Vector"
+  },
+  {
+    "slug": "reverse-contrast",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "blunt cut",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "19th-century industrial",
+      "useCase": "a brand identity",
+      "category": "slab serif",
+      "weight": "regular",
+      "contrast": "reverse contrast",
+      "mood": [
+        "playful",
+        "nostalgic"
+      ]
+    },
+    "name": "Liminal Bastion"
+  },
+  {
+    "slug": "rounded-geo",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "rounded",
+      "xheight": "normal",
+      "corner": "rounded",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a brand identity",
+      "category": "geometric sans",
+      "weight": "bold",
+      "contrast": "monoline",
+      "mood": [
+        "playful",
+        "warm"
+      ]
+    },
+    "name": "Zephyr Gumtype"
+  },
+  {
+    "slug": "rounded-slab",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "rounded",
+      "xheight": "normal",
+      "corner": "rounded",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a brand identity",
+      "category": "slab serif",
+      "weight": "regular",
+      "contrast": "monoline",
+      "mood": [
+        "playful",
+        "warm"
+      ]
+    },
+    "name": "Bastion Velvet Slab"
+  },
+  {
+    "slug": "seventies-serif",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "ball",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "1970s phototypesetting",
+      "useCase": "a brand identity",
+      "category": "transitional serif",
+      "weight": "bold",
+      "contrast": "high contrast",
+      "mood": [
+        "editorial",
+        "psychedelic"
+      ]
+    },
+    "name": "Abyssal Velvet Didone"
+  },
+  {
+    "slug": "severe-neo",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "blunt cut",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a brand identity",
+      "category": "neo-grotesque sans",
+      "weight": "bold",
+      "contrast": "low contrast",
+      "mood": [
+        "severe",
+        "utilitarian"
+      ]
+    },
+    "name": "Nadir Grotesk"
+  },
+  {
+    "slug": "stencil-slab",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "blunt cut",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "stencil-cut",
+      "era": "contemporary",
+      "useCase": "a brand identity",
+      "category": "slab serif",
+      "weight": "bold",
+      "contrast": "monoline",
+      "mood": [
+        "industrial",
+        "brutalist"
+      ]
+    },
+    "name": "Orphic Iron Slab"
+  },
+  {
+    "slug": "swiss-neo",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "blunt cut",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "1950s Swiss",
+      "useCase": "a brand identity",
+      "category": "neo-grotesque sans",
+      "weight": "regular",
+      "contrast": "very low contrast",
+      "mood": [
+        "clinical",
+        "utilitarian"
+      ]
+    },
+    "name": "Rift Obsidian Grotesk"
+  },
+  {
+    "slug": "transitional",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "tapered",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "18th-century enlightenment",
+      "useCase": "a brand identity",
+      "category": "transitional serif",
+      "weight": "regular",
+      "contrast": "high contrast",
+      "mood": [
+        "editorial",
+        "elegant"
+      ]
+    },
+    "name": "Dorian Veil"
+  },
+  {
+    "slug": "wedge-news",
+    "genome": {
+      "width": "normal-width",
+      "terminals": "spurred",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a brand identity",
+      "category": "wedge serif",
+      "weight": "regular",
+      "contrast": "moderate contrast",
+      "mood": [
+        "editorial",
+        "industrial"
+      ]
+    },
+    "name": "Palladium Vesper Serif"
+  },
+  {
+    "slug": "wide-rounded",
+    "genome": {
+      "width": "wide",
+      "terminals": "rounded",
+      "xheight": "normal",
+      "corner": "rounded",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a brand identity",
+      "category": "geometric sans",
+      "weight": "medium",
+      "contrast": "monoline",
+      "mood": [
+        "playful",
+        "warm"
+      ]
+    },
+    "name": "Nebula Velvet Grotesk"
+  }
+]

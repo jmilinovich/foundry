@@ -6,6 +6,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { CREDITS } from '@/lib/credits';
 import { STANCES } from '@/lib/genome';
 import { toGenotype } from '@/lib/genome';
+import { rememberRun } from '@/lib/localRuns';
 import { SAMPLE_PARAGRAPH } from '@/lib/glyphs';
 import { dollars, type FontRecord, type PairingMeta } from '@/lib/types';
 import { Poster } from './detail/Poster';
@@ -43,6 +44,10 @@ export function PairingView({
   const displayFace = useFoundryFont(display.id, true);
   const textFace = useFoundryFont(text.id, true);
   const stance = STANCES.find((s) => s.id === pairing.stance);
+
+  useEffect(() => {
+    rememberRun(runId, `${display.name} + ${text.name}`, 'pair');
+  }, [runId, display.name, text.name]);
 
   const dFam = `"${displayFace.family}", serif`;
   const tFam = `"${textFace.family}", serif`;

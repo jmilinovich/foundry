@@ -24,11 +24,13 @@ import {
   nameFor,
   pairingGeneration,
   seedGeneration,
+  seedGenerationFromProfile,
   toPrompt,
   type Genome,
   type Slot,
   type Stance,
 } from './genome';
+import type { TasteSeed } from './taste';
 import {
   CREDITS,
   generateFromText,
@@ -207,14 +209,20 @@ export async function createRun(input: {
   populationSize: number;
   mutationRate?: number;
   seed?: number;
+  /** From the taste quiz — biases + pins that override the typed-seed path. */
+  tasteSeed?: TasteSeed;
+  /** The plain-language read of the profile, shown as the run's label. */
+  tasteSummary?: string;
 }): Promise<Run> {
-  const seed = input.seed ?? hashSeed(input.seedText + Date.now());
+  const seed = input.seed ?? hashSeed((input.tasteSummary ?? input.seedText) + Date.now());
   const rng = mulberry32(seed);
-  const genomes = seedGeneration(input.seedText, input.populationSize, rng);
+  const genomes = input.tasteSeed
+    ? seedGenerationFromProfile(input.tasteSeed, input.populationSize, rng)
+    : seedGeneration(input.seedText, input.populationSize, rng);
 
   const run: Run = {
     id: randomUUID(),
-    seedText: input.seedText,
+    seedText: input.tasteSummary || input.seedText,
     seed,
     specimenText: input.specimenText,
     populationSize: input.populationSize,

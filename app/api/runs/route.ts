@@ -4,8 +4,16 @@ import { MixfontError } from '@/lib/mixfont';
 
 export const dynamic = 'force-dynamic';
 
-export async function GET() {
-  return NextResponse.json({ runs: await listRuns() });
+export async function GET(req: Request) {
+  const ids = new URL(req.url).searchParams.get('ids');
+  const all = await listRuns();
+  // The home page passes the ids it holds in localStorage; scope to those so a
+  // capability-URL run is never listed for a browser that didn't create it.
+  if (ids !== null) {
+    const set = new Set(ids.split(',').filter(Boolean));
+    return NextResponse.json({ runs: all.filter((r) => set.has(r.id)) });
+  }
+  return NextResponse.json({ runs: all });
 }
 
 export async function POST(req: Request) {
@@ -19,8 +27,27 @@ export async function POST(req: Request) {
   const populationSize = Math.max(2, Math.min(12, Number(body.populationSize) || 8));
   const mutationRate = Math.max(0, Math.min(1, Number(body.mutationRate) || 0.25));
 
+  // The quiz posts a pre-computed seed; trust its shape loosely and let the
+  // sampler fall back to uniform on anything malformed.
+  const tasteSeed =
+    body.tasteSeed && typeof body.tasteSeed === 'object'
+      ? {
+          weights: body.tasteSeed.weights ?? {},
+          pinned: body.tasteSeed.pinned ?? {},
+          moods: Array.isArray(body.tasteSeed.moods) ? body.tasteSeed.moods : ['editorial', 'warm'],
+        }
+      : undefined;
+  const tasteSummary = typeof body.tasteSummary === 'string' ? body.tasteSummary.slice(0, 120) : undefined;
+
   try {
-    const run = await createRun({ seedText, specimenText, populationSize, mutationRate });
+    const run = await createRun({
+      seedText,
+      specimenText,
+      populationSize,
+      mutationRate,
+      tasteSeed,
+      tasteSummary,
+    });
     return NextResponse.json({ run }, { status: 201 });
   } catch (err) {
     const status = err instanceof MixfontError ? err.status : 500;

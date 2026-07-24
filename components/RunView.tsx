@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { CREDITS } from '@/lib/credits';
 import { STANCES } from '@/lib/genome';
+import { rememberRun } from '@/lib/localRuns';
 import { dollars, type FontRecord, type FontRef, type Run } from '@/lib/types';
 import { Lineage } from './Lineage';
 import { PairCandidate } from './PairCandidate';
@@ -33,6 +34,11 @@ export function RunView({
   );
   const pending = generation.some((f) => f.status === 'queued' || f.status === 'generating');
   const isLatest = viewGen === run.generation;
+
+  // Record this run in the browser so it shows up under "your runs" at home.
+  useEffect(() => {
+    rememberRun(run.id, run.seedText || 'open search', run.pairing ? 'pair' : 'run');
+  }, [run.id, run.seedText, run.pairing]);
 
   // --- poll while anything is in flight ---------------------------------
   useEffect(() => {

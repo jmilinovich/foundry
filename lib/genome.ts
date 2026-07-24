@@ -312,6 +312,58 @@ export function seedGeneration(seedText: string, size: number, rng: Rng): Genome
 }
 
 /**
+ * Draw one value from a weighted distribution, falling back to uniform.
+ * (Kept local so genome.ts has no dependency on the taste module.)
+ */
+function weightedPick<T extends string>(
+  values: readonly T[],
+  weights: Record<string, number> | undefined,
+  rng: Rng,
+): T {
+  if (!weights) return pick(rng, values);
+  const total = values.reduce((s, v) => s + (weights[v] ?? 0), 0);
+  if (total <= 0) return pick(rng, values);
+  let r = rng() * total;
+  for (const v of values) {
+    r -= weights[v] ?? 0;
+    if (r <= 0) return v;
+  }
+  return values[values.length - 1];
+}
+
+/**
+ * Generation 0 from a taste profile.
+ *
+ * The quiz's soft per-axis weights bias each draw; the pins hold the axes you
+ * were consistent about; everything the quiz never probed (corner, x-height,
+ * texture, era) is sampled freely, so the seed is a *region* the GA can explore,
+ * not a single point. Structurally the twin of `seedGeneration`, just biased.
+ */
+export function seedGenerationFromProfile(
+  seed: {
+    weights: Partial<Record<'category' | 'weight' | 'width' | 'contrast' | 'terminals', Record<string, number>>>;
+    pinned: Partial<Genome>;
+    moods: [string, string];
+  },
+  size: number,
+  rng: Rng,
+): Genome[] {
+  return Array.from({ length: size }, () => {
+    const g = randomGenome(rng);
+    g.category = weightedPick(CATEGORY, seed.weights.category, rng);
+    g.weight = weightedPick(WEIGHT, seed.weights.weight, rng);
+    g.width = weightedPick(WIDTH, seed.weights.width, rng);
+    g.contrast = weightedPick(CONTRAST, seed.weights.contrast, rng);
+    g.terminals = weightedPick(TERMINALS, seed.weights.terminals, rng);
+    // Keep one preferred mood, let the other roam, so the voice is consistent
+    // without every font carrying the identical pair.
+    g.mood = [seed.moods[0] as Genome['mood'][0], rng() < 0.5 ? (seed.moods[1] as Genome['mood'][1]) : pick(rng, MOOD)];
+    if (g.mood[1] === g.mood[0]) g.mood[1] = pick(rng, MOOD);
+    return { ...g, ...seed.pinned, mood: g.mood };
+  });
+}
+
+/**
  * Read a free-text seed for gene values it names outright.
  *
  * Deliberately literal — no model in the loop. If you type "condensed brutalist

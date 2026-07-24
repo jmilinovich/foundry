@@ -1,13 +1,11 @@
 import Link from 'next/link';
 
-import { NewRun } from '@/components/NewRun';
-import { listRuns } from '@/lib/store';
+import { HomeFunnel } from '@/components/HomeFunnel';
+import { RecentRuns } from '@/components/RecentRuns';
 
 export const dynamic = 'force-dynamic';
 
-export default async function Home() {
-  const runs = await listRuns();
-
+export default function Home() {
   return (
     <div className="mx-auto w-full max-w-[1100px] flex-1 px-6 py-16 sm:py-24">
       <h1 className="text-[clamp(3rem,11vw,7rem)] font-medium leading-[0.9] tracking-[-0.045em]">
@@ -18,40 +16,26 @@ export default async function Home() {
         better.
       </p>
       <p className="mt-4 max-w-lg text-sm leading-relaxed text-ink-faint">
-        Each round mints a population of real typefaces. Keep the ones you like; their genes cross,
-        mutate a step along each axis, and the next generation is drawn from what survived. Five
-        rounds gets you somewhere you could not have described up front.
+        Answer a dozen this-or-that pairs and Foundry reads your taste, then mints a population of
+        real typefaces from it. Keep the ones you like; their genes cross and mutate, and the next
+        generation is drawn from what survived.
       </p>
 
-      <div className="mt-14">
-        <NewRun />
+      <div className="mt-12">
+        <HomeFunnel />
       </div>
 
-      {runs.length > 0 && (
-        <section className="mt-24 border-t border-line pt-8">
-          <h2 className="font-mono text-[11px] uppercase tracking-widest text-ink-faint">
-            Earlier runs
-          </h2>
-          <ul className="mt-4 divide-y divide-line">
-            {runs.map((r) => (
-              <li key={r.id}>
-                <Link
-                  href={r.settledPair ? `/pairing/${r.id}` : `/run/${r.id}`}
-                  className="flex items-baseline gap-4 py-3 transition hover:text-amber"
-                >
-                  <span className="flex-1 truncate text-sm">{r.seedText || 'open search'}</span>
-                  <span className="font-mono text-[11px] text-ink-faint">
-                    {r.settledPair ? 'pair ✓' : `gen ${r.generation} · ${r.ready} fonts`}
-                  </span>
-                  <span className="hidden font-mono text-[11px] text-ink-faint sm:inline">
-                    {new Date(r.createdAt).toLocaleDateString()}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
+      {/* Recent runs are scoped to this browser — a capability-URL model, no accounts. */}
+      <RecentRuns />
+
+      <p className="mt-24 border-t border-line pt-6 font-mono text-[11px] leading-relaxed text-ink-faint">
+        Foundry generates fonts with the{' '}
+        <Link href="https://www.mixfont.com" className="text-ink-dim hover:text-amber">
+          Mixfont
+        </Link>{' '}
+        API. The taste quiz is free; generating uses your own Mixfont key, which stays in your
+        browser and is never stored on our servers.
+      </p>
     </div>
   );
 }
