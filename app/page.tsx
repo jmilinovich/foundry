@@ -1,8 +1,6 @@
-import Link from 'next/link';
-
 import { HomeFunnel } from '@/components/HomeFunnel';
-import { KeyStatus } from '@/components/KeyStatus';
 import { RecentRuns } from '@/components/RecentRuns';
+import { SiteFooter } from '@/components/SiteFooter';
 
 export const dynamic = 'force-dynamic';
 
@@ -29,18 +27,7 @@ export default function Home() {
       {/* Recent runs are scoped to this browser — a capability-URL model, no accounts. */}
       <RecentRuns />
 
-      <p className="mt-24 border-t border-line pt-6 font-mono text-[11px] leading-relaxed text-ink-faint">
-        Foundry generates fonts with the{' '}
-        <Link href="https://www.mixfont.com" className="text-ink-dim hover:text-amber">
-          Mixfont
-        </Link>{' '}
-        API. The taste quiz is free; generating uses your own Mixfont key, which stays in your
-        browser and is never stored on our servers.
-        <br />
-        <span className="mt-2 inline-block">
-          <KeyStatus />
-        </span>
-      </p>
+      <SiteFooter />
     </div>
   );
 }

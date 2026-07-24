@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 
 import { STANCES, type Slot, type Stance } from '@/lib/genome';
 import { MixfontError } from '@/lib/mixfont';
+import { resolveKey } from '@/lib/serverKey';
 import { createPairingRun } from '@/lib/store';
 
 export const dynamic = 'force-dynamic';
@@ -24,7 +25,10 @@ export async function POST(req: Request) {
       ? body.specimenText.slice(0, 120)
       : 'Handgloves';
   const populationSize = Math.max(2, Math.min(12, Number(body.populationSize) || 6));
-  const key = req.headers.get('x-user-key') || undefined;
+  const { key, missing } = resolveKey(req);
+  if (missing) {
+    return NextResponse.json({ error: 'Add your Mixfont key to generate.' }, { status: 401 });
+  }
 
   try {
     const run = await createPairingRun({

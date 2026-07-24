@@ -3,11 +3,16 @@
 Evolve a typeface by selection instead of by prompting.
 
 Nobody can write the prompt for the font they want. Everybody can point at the one they like
-better. So the interface is a selection loop: each round mints a population of real typefaces,
-you keep the ones you like, and the next generation is bred from what survived.
+better. So the front door is a short **this-or-that taste quiz**, and the tool is a selection loop:
+each round mints a population of real typefaces, you keep the ones you like, and the next generation
+is bred from what survived.
 
 Built on the [Mixfont API](https://www.mixfont.com/docs), which returns a genuine TTF — outlines,
 `cmap`, kerning — for 20 credits ($0.20) in about 25 seconds.
+
+**Bring your own key.** The hosted app has no accounts and no key of its own — you supply a Mixfont
+key, it's stored only in your browser and sent per-request, never persisted server-side. The taste
+quiz is free and runs with no key at all. See [`/about`](app/about/page.tsx) for the trust model.
 
 ---
 

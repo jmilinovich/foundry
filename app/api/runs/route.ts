@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createRun, listRuns } from '@/lib/store';
 import { MixfontError } from '@/lib/mixfont';
+import { resolveKey } from '@/lib/serverKey';
 
 export const dynamic = 'force-dynamic';
 
@@ -39,7 +40,10 @@ export async function POST(req: Request) {
       : undefined;
   const tasteSummary = typeof body.tasteSummary === 'string' ? body.tasteSummary.slice(0, 120) : undefined;
 
-  const key = req.headers.get('x-user-key') || undefined;
+  const { key, missing } = resolveKey(req);
+  if (missing) {
+    return NextResponse.json({ error: 'Add your Mixfont key to generate.' }, { status: 401 });
+  }
 
   try {
     const run = await createRun({
