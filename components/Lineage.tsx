@@ -98,7 +98,7 @@ export function Lineage({
 
         const drawFill = (clouds: GlyphCloud[], alpha: number) => {
           if (alpha <= 0.01) return;
-          ctx.fillStyle = `rgba(242, 239, 232, ${alpha})`;
+          ctx.fillStyle = `rgba(27, 19, 15, ${alpha})`; // ink on paper
           // One path per glyph. Condensed faces have tight sidebearings, so
           // filling the whole string as a single evenodd path lets adjacent
           // glyphs cancel each other's winding and eat their own strokes.
@@ -140,7 +140,11 @@ export function Lineage({
 
           const swarm = 1 - Math.max(fromFill, toFill);
           if (swarm > 0.01) {
+            // Batch every point into one Path2D and fill once, instead of ~2600
+            // fillStyle+fillRect calls a frame. The colour is frame-constant
+            // (bloom depends only on t), so one fill is correct.
             const bloom = Math.sin(Math.PI * t);
+            const path = new Path2D();
             let i = 0;
             pairs.forEach((glyph, gi) => {
               // Stagger the glyphs so the change reads as a wave across the word.
@@ -153,13 +157,13 @@ export function Lineage({
                 const s = scatter(i);
                 const x = a.x + (b.x - a.x) * gt + s.dx * gBloom * 0.5 + pad.x;
                 const y = a.y + (b.y - a.y) * gt + s.dy * gBloom * 0.5 + pad.y;
-                ctx.fillStyle =
-                  bloom > 0.6
-                    ? `rgba(255, 138, 61, ${swarm * 0.85})`
-                    : `rgba(242, 239, 232, ${swarm * 0.8})`;
-                ctx.fillRect(x, y, 1.4, 1.4);
+                path.rect(x, y, 1.4, 1.4);
               }
             });
+            // Proof Red at the peak of the bloom, ink otherwise.
+            ctx.fillStyle =
+              bloom > 0.6 ? `rgba(183, 48, 42, ${swarm * 0.9})` : `rgba(27, 19, 15, ${swarm * 0.8})`;
+            ctx.fill(path);
           }
 
           raf = requestAnimationFrame(frame);
