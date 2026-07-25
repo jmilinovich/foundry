@@ -11,7 +11,10 @@
 
   --ink: #1b1712;
   --ink-dim: #5f584e;
-  --ink-faint: #948b7f;
+  /* Darkened from #948b7f, which measured 2.92:1 on paper — below AA and below
+     even the 3.0 large-text floor, while carrying the only instruction on the
+     quiz screen. Still unmistakably the third tier below --ink-dim. */
+  --ink-faint: #6f675c;
   --line: #d9d4c8;
   --panel: #ece7dc;   /* faint fill for the few things that need one; prefer borders */
 
@@ -67,21 +70,23 @@ body {
 }
 
 /* The duel specimen.
-   Both panes must share ONE point size. Width is one of the axes being judged,
-   so fitting each face to its own pane would scale away the very difference the
-   round is asking about — an ultra-extended face has to *look* extended.
-   The size is therefore set by the widest face in the atlas: "Handgloves"
-   measures 6.37em in slab-14 against 1.21em in neo-14, and 6.4 is that worst
-   case plus a hair. Divide the available width by it and nothing can ever clip,
-   while every face is as large as the narrowest pane allows.
-   Re-measure if the specimen word or the atlas changes; a test pins the ratio. */
+   Both panes share ONE point size. Width is an axis being judged, so fitting
+   each face to its own pane would scale away the very difference the round is
+   asking about — an ultra-extended face has to *look* extended.
+
+   That size comes from the WIDER OF THE TWO FACES ON SCREEN, not from the
+   widest in the library. "Handgloves" spans 1.21em to 6.37em across the atlas,
+   so sizing every round for the worst case rendered a pair of condensed faces
+   at a fifth of the size the bench could hold. The duel sets --duel-em from the
+   measured widths in the manifest (see scripts/measure-atlas.mjs); the fallback
+   is the global worst case, so a missing measurement can only ever be safe. */
 .duel-specimen {
-  font-size: clamp(1.75rem, calc((100vw - 64px) / 6.4), 4.5rem);
+  font-size: clamp(1.75rem, calc((100vw - 64px) / var(--duel-em, 6.4)), 5.5rem);
 }
 @media (min-width: 640px) {
   /* Two panes inside the 1100px wrap: gutters 48, gap 16, pane padding 96. */
   .duel-specimen {
-    font-size: clamp(1.75rem, calc((min(100vw, 1100px) - 160px) / 12.8), 4.5rem);
+    font-size: clamp(1.75rem, calc((min(100vw, 1100px) - 160px) / (var(--duel-em, 6.4) * 2)), 5.5rem);
   }
 }
 

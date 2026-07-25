@@ -105,7 +105,11 @@ Named by **intent**, never `primary`/`secondary`. One accent, load-bearing, rese
 - `--paper` `#f2efe8` — warm publishing ground. *A foundry catalogue is warm paper.*
 - `--bench` `#faf8f4` — flat cool judging ground. *No warmth: the font is the only variable.*
 - `--line` `#d9d4c8` — hairline rules (1px). The structural motif is the rule, not the box.
-- `--muted` `#5f584e` / `--faint` `#948b7f` — dim and fainter ink for metadata and labels.
+- `--muted` `#5f584e` / `--faint` `#6f675c` — dim and fainter ink for metadata and labels.
+  *`--faint` was `#948b7f` until it was measured: 2.92:1 on paper, below AA and below even the
+  3.0 large-text floor, on copy that includes the only instruction the quiz screen carries.
+  It is still the faintest tier and still recedes; it is now legible. 4.85:1 on paper,
+  5.25:1 on the bench.*
 - `--accent` **`#b7302a` Proof Red** — press-registration / correction-pencil red from the
   galley-proof world. *Reason:* on paper it reads as an ink stamp, not a UI alert, and sits clear
   of error-red so it's never confused for a validation state. **Reserved to exactly two jobs: the

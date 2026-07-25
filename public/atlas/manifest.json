@@ -17,7 +17,8 @@
         "futuristic"
       ]
     },
-    "name": "Ionic Void Grotesk"
+    "name": "Ionic Void Grotesk",
+    "w": 5.43
   },
   {
     "slug": "botanical-humanist",
@@ -37,7 +38,8 @@
         "warm"
       ]
     },
-    "name": "Tessellated Nocturne"
+    "name": "Tessellated Nocturne",
+    "w": 4.65
   },
   {
     "slug": "clarendon",
@@ -57,7 +59,8 @@
         "nostalgic"
       ]
     },
-    "name": "Ypsilon Bastion"
+    "name": "Ypsilon Bastion",
+    "w": 3.17
   },
   {
     "slug": "compressed-grot",
@@ -77,7 +80,8 @@
         "industrial"
       ]
     },
-    "name": "Vanta Monolith Grotesk"
+    "name": "Vanta Monolith Grotesk",
+    "w": 1.81
   },
   {
     "slug": "condensed-geo",
@@ -97,7 +101,8 @@
         "industrial"
       ]
     },
-    "name": "Monolith Veil"
+    "name": "Monolith Veil",
+    "w": 2.26
   },
   {
     "slug": "didone-01",
@@ -117,7 +122,8 @@
         "nostalgic"
       ]
     },
-    "name": "Razor Cathedral Didone"
+    "name": "Razor Cathedral Didone",
+    "w": 1.45
   },
   {
     "slug": "didone-02",
@@ -137,7 +143,8 @@
         "severe"
       ]
     },
-    "name": "Wraith Didone"
+    "name": "Wraith Didone",
+    "w": 2.13
   },
   {
     "slug": "didone-03",
@@ -157,7 +164,8 @@
         "elegant"
       ]
     },
-    "name": "Fathom Didone"
+    "name": "Fathom Didone",
+    "w": 2.94
   },
   {
     "slug": "didone-04",
@@ -177,7 +185,8 @@
         "ecclesiastical"
       ]
     },
-    "name": "Tallis Nocturne Serif"
+    "name": "Tallis Nocturne Serif",
+    "w": 2.4
   },
   {
     "slug": "didone-05",
@@ -197,7 +206,8 @@
         "severe"
       ]
     },
-    "name": "Yvaine Didone"
+    "name": "Yvaine Didone",
+    "w": 3.36
   },
   {
     "slug": "didone-06",
@@ -217,7 +227,8 @@
         "nostalgic"
       ]
     },
-    "name": "Abyssal Didone"
+    "name": "Abyssal Didone",
+    "w": 1.54
   },
   {
     "slug": "didone-07",
@@ -237,7 +248,8 @@
         "severe"
       ]
     },
-    "name": "Abyssal Velvet Didone"
+    "name": "Abyssal Velvet Didone",
+    "w": 2.49
   },
   {
     "slug": "didone-08",
@@ -257,7 +269,8 @@
         "elegant"
       ]
     },
-    "name": "Feral Glass Didone"
+    "name": "Feral Glass Didone",
+    "w": 1.89
   },
   {
     "slug": "didone-09",
@@ -277,7 +290,8 @@
         "ecclesiastical"
       ]
     },
-    "name": "Spectral Needle Didone"
+    "name": "Spectral Needle Didone",
+    "w": 2.66
   },
   {
     "slug": "didone-10",
@@ -297,7 +311,8 @@
         "severe"
       ]
     },
-    "name": "Cathedral Veil Serif"
+    "name": "Cathedral Veil Serif",
+    "w": 1.63
   },
   {
     "slug": "didone-11",
@@ -317,7 +332,8 @@
         "nostalgic"
       ]
     },
-    "name": "Juno Nocturne"
+    "name": "Juno Nocturne",
+    "w": 2.36
   },
   {
     "slug": "didone-12",
@@ -337,7 +353,8 @@
         "severe"
       ]
     },
-    "name": "Dolmen Nocturne"
+    "name": "Dolmen Nocturne",
+    "w": 3.04
   },
   {
     "slug": "didone-13",
@@ -357,7 +374,8 @@
         "elegant"
       ]
     },
-    "name": "Prismatic Veil Didone"
+    "name": "Prismatic Veil Didone",
+    "w": 1.48
   },
   {
     "slug": "didone-14",
@@ -377,7 +395,8 @@
         "ecclesiastical"
       ]
     },
-    "name": "Marble Nocturne Display"
+    "name": "Marble Nocturne Display",
+    "w": 4.22
   },
   {
     "slug": "didone-15",
@@ -397,7 +416,8 @@
         "severe"
       ]
     },
-    "name": "Cathedral Vapor Serif"
+    "name": "Cathedral Vapor Serif",
+    "w": 1.48
   },
   {
     "slug": "didone-classic",
@@ -417,7 +437,8 @@
         "editorial"
       ]
     },
-    "name": "Velvet Oracle"
+    "name": "Velvet Oracle",
+    "w": 4.03
   },
   {
     "slug": "didone-light",
@@ -437,7 +458,8 @@
         "severe"
       ]
     },
-    "name": "Dusk Obsidian Didot"
+    "name": "Dusk Obsidian Didot",
+    "w": 5.39
   },
   {
     "slug": "editorial-neo",
@@ -457,7 +479,8 @@
         "clinical"
       ]
     },
-    "name": "Ypsilon Vector"
+    "name": "Ypsilon Vector",
+    "w": 5.05
   },
   {
     "slug": "elegant-geo",
@@ -477,7 +500,8 @@
         "futuristic"
       ]
     },
-    "name": "Ion Veil"
+    "name": "Ion Veil",
+    "w": 4.92
   },
   {
     "slug": "engraved-didone",
@@ -497,7 +521,8 @@
         "ecclesiastical"
       ]
     },
-    "name": "Dusk Vellum Didone"
+    "name": "Dusk Vellum Didone",
+    "w": 3.21
   },
   {
     "slug": "eroded-heavy",
@@ -517,7 +542,8 @@
         "industrial"
       ]
     },
-    "name": "Tectonic Noir Grotesk"
+    "name": "Tectonic Noir Grotesk",
+    "w": 3.44
   },
   {
     "slug": "extended-neo",
@@ -537,7 +563,8 @@
         "clinical"
       ]
     },
-    "name": "Helix Nova"
+    "name": "Helix Nova",
+    "w": 5.81
   },
   {
     "slug": "flared-01",
@@ -557,7 +584,8 @@
         "editorial"
       ]
     },
-    "name": "Pale Vesper Serif"
+    "name": "Pale Vesper Serif",
+    "w": 5.08
   },
   {
     "slug": "flared-02",
@@ -577,7 +605,8 @@
         "elegant"
       ]
     },
-    "name": "Vesper Obelisk Didone"
+    "name": "Vesper Obelisk Didone",
+    "w": 2.15
   },
   {
     "slug": "flared-03",
@@ -597,7 +626,8 @@
         "warm"
       ]
     },
-    "name": "Prism Vapor Grotesk"
+    "name": "Prism Vapor Grotesk",
+    "w": 4.96
   },
   {
     "slug": "flared-04",
@@ -617,7 +647,8 @@
         "ecclesiastical"
       ]
     },
-    "name": "Lacuna Obelisk"
+    "name": "Lacuna Obelisk",
+    "w": 1.91
   },
   {
     "slug": "flared-05",
@@ -637,7 +668,8 @@
         "elegant"
       ]
     },
-    "name": "Dorian Veil"
+    "name": "Dorian Veil",
+    "w": 5.06
   },
   {
     "slug": "flared-06",
@@ -657,7 +689,8 @@
         "editorial"
       ]
     },
-    "name": "Liminal Spire"
+    "name": "Liminal Spire",
+    "w": 5.41
   },
   {
     "slug": "flared-07",
@@ -677,7 +710,8 @@
         "elegant"
       ]
     },
-    "name": "Riven Nocturne"
+    "name": "Riven Nocturne",
+    "w": 2.87
   },
   {
     "slug": "flared-08",
@@ -697,7 +731,8 @@
         "warm"
       ]
     },
-    "name": "Umbral Didone"
+    "name": "Umbral Didone",
+    "w": 4.78
   },
   {
     "slug": "flared-09",
@@ -717,7 +752,8 @@
         "ecclesiastical"
       ]
     },
-    "name": "Ferrous Monolith"
+    "name": "Ferrous Monolith",
+    "w": 2.36
   },
   {
     "slug": "flared-10",
@@ -737,7 +773,8 @@
         "elegant"
       ]
     },
-    "name": "Umbral Vesper Serif"
+    "name": "Umbral Vesper Serif",
+    "w": 6.02
   },
   {
     "slug": "flared-11",
@@ -757,7 +794,8 @@
         "editorial"
       ]
     },
-    "name": "Ypsilon Noir Display"
+    "name": "Ypsilon Noir Display",
+    "w": 1.62
   },
   {
     "slug": "flared-12",
@@ -777,7 +815,8 @@
         "elegant"
       ]
     },
-    "name": "Quasar Vellum"
+    "name": "Quasar Vellum",
+    "w": 4.17
   },
   {
     "slug": "flared-13",
@@ -797,7 +836,8 @@
         "warm"
       ]
     },
-    "name": "Rift Nocturne Serif"
+    "name": "Rift Nocturne Serif",
+    "w": 3.54
   },
   {
     "slug": "flared-14",
@@ -817,7 +857,8 @@
         "ecclesiastical"
       ]
     },
-    "name": "Wraith Didone"
+    "name": "Wraith Didone",
+    "w": 1.76
   },
   {
     "slug": "flared-15",
@@ -837,7 +878,8 @@
         "elegant"
       ]
     },
-    "name": "Dissonant Grotesk"
+    "name": "Dissonant Grotesk",
+    "w": 4.04
   },
   {
     "slug": "flared-editorial",
@@ -857,7 +899,8 @@
         "editorial"
       ]
     },
-    "name": "Cathedral Velvet Serif"
+    "name": "Cathedral Velvet Serif",
+    "w": 5.14
   },
   {
     "slug": "flared-literary",
@@ -877,7 +920,8 @@
         "elegant"
       ]
     },
-    "name": "Jasper Nocturne"
+    "name": "Jasper Nocturne",
+    "w": 5.21
   },
   {
     "slug": "garalde-book",
@@ -897,7 +941,8 @@
         "warm"
       ]
     },
-    "name": "Pale Oracle Serif"
+    "name": "Pale Oracle Serif",
+    "w": 4.8
   },
   {
     "slug": "geo-01",
@@ -917,7 +962,8 @@
         "playful"
       ]
     },
-    "name": "Aether Reed Moderne"
+    "name": "Aether Reed Moderne",
+    "w": 1.49
   },
   {
     "slug": "geo-02",
@@ -937,7 +983,8 @@
         "mechanical"
       ]
     },
-    "name": "Halo Nocturne Sans"
+    "name": "Halo Nocturne Sans",
+    "w": 4.52
   },
   {
     "slug": "geo-03",
@@ -957,7 +1004,8 @@
         "utilitarian"
       ]
     },
-    "name": "Kairo Obsidian"
+    "name": "Kairo Obsidian",
+    "w": 4.79
   },
   {
     "slug": "geo-04",
@@ -977,7 +1025,8 @@
         "mechanical"
       ]
     },
-    "name": "Javelin Void Grotesk"
+    "name": "Javelin Void Grotesk",
+    "w": 2.86
   },
   {
     "slug": "geo-05",
@@ -997,7 +1046,8 @@
         "playful"
       ]
     },
-    "name": "Yonder Molten Grotesk"
+    "name": "Yonder Molten Grotesk",
+    "w": 4.54
   },
   {
     "slug": "geo-06",
@@ -1017,7 +1067,8 @@
         "futuristic"
       ]
     },
-    "name": "Velvet Monolith Sans"
+    "name": "Velvet Monolith Sans",
+    "w": 2.59
   },
   {
     "slug": "geo-07",
@@ -1037,7 +1088,8 @@
         "playful"
       ]
     },
-    "name": "Flux Obsidian Grotesk"
+    "name": "Flux Obsidian Grotesk",
+    "w": 5.04
   },
   {
     "slug": "geo-08",
@@ -1057,7 +1109,8 @@
         "mechanical"
       ]
     },
-    "name": "Helix Nocturne"
+    "name": "Helix Nocturne",
+    "w": 1.49
   },
   {
     "slug": "geo-09",
@@ -1077,7 +1130,8 @@
         "utilitarian"
       ]
     },
-    "name": "Warden Obsidian Grotesque"
+    "name": "Warden Obsidian Grotesque",
+    "w": 5.71
   },
   {
     "slug": "geo-10",
@@ -1097,7 +1151,8 @@
         "mechanical"
       ]
     },
-    "name": "Junction Aether Grotesk"
+    "name": "Junction Aether Grotesk",
+    "w": 1.68
   },
   {
     "slug": "geo-11",
@@ -1117,7 +1172,8 @@
         "playful"
       ]
     },
-    "name": "Nebula Grotesk"
+    "name": "Nebula Grotesk",
+    "w": 3.57
   },
   {
     "slug": "geo-12",
@@ -1137,7 +1193,8 @@
         "futuristic"
       ]
     },
-    "name": "Aurex Grotesk"
+    "name": "Aurex Grotesk",
+    "w": 3.67
   },
   {
     "slug": "geo-13",
@@ -1157,7 +1214,8 @@
         "playful"
       ]
     },
-    "name": "Tesserae Nocturne"
+    "name": "Tesserae Nocturne",
+    "w": 2.1
   },
   {
     "slug": "geo-14",
@@ -1177,7 +1235,8 @@
         "mechanical"
       ]
     },
-    "name": "Upsilon Grotesk"
+    "name": "Upsilon Grotesk",
+    "w": 5.66
   },
   {
     "slug": "geo-15",
@@ -1197,7 +1256,8 @@
         "utilitarian"
       ]
     },
-    "name": "Obsidian Aperture"
+    "name": "Obsidian Aperture",
+    "w": 1.94
   },
   {
     "slug": "geo-slab",
@@ -1217,7 +1277,8 @@
         "utilitarian"
       ]
     },
-    "name": "Ebon Bastion"
+    "name": "Ebon Bastion",
+    "w": 3.83
   },
   {
     "slug": "grot-01",
@@ -1237,7 +1298,8 @@
         "severe"
       ]
     },
-    "name": "Rift Obsidian Grotesk"
+    "name": "Rift Obsidian Grotesk",
+    "w": 5.17
   },
   {
     "slug": "grot-02",
@@ -1257,7 +1319,8 @@
         "nostalgic"
       ]
     },
-    "name": "Monolith Veil"
+    "name": "Monolith Veil",
+    "w": 1.94
   },
   {
     "slug": "grot-03",
@@ -1277,7 +1340,8 @@
         "utilitarian"
       ]
     },
-    "name": "Mordant Grotesk"
+    "name": "Mordant Grotesk",
+    "w": 1.95
   },
   {
     "slug": "grot-04",
@@ -1297,7 +1361,8 @@
         "nostalgic"
       ]
     },
-    "name": "Liminal Spire Grotesk"
+    "name": "Liminal Spire Grotesk",
+    "w": 1.45
   },
   {
     "slug": "grot-05",
@@ -1317,7 +1382,8 @@
         "severe"
       ]
     },
-    "name": "Icarus Grotesk"
+    "name": "Icarus Grotesk",
+    "w": 3.52
   },
   {
     "slug": "grot-06",
@@ -1337,7 +1403,8 @@
         "industrial"
       ]
     },
-    "name": "Iron Veil"
+    "name": "Iron Veil",
+    "w": 2.03
   },
   {
     "slug": "grot-07",
@@ -1357,7 +1424,8 @@
         "severe"
       ]
     },
-    "name": "Dreadnought Grotesk"
+    "name": "Dreadnought Grotesk",
+    "w": 3.76
   },
   {
     "slug": "grot-08",
@@ -1377,7 +1445,8 @@
         "nostalgic"
       ]
     },
-    "name": "Havoc Obsidian Grotesk"
+    "name": "Havoc Obsidian Grotesk",
+    "w": 4.93
   },
   {
     "slug": "grot-09",
@@ -1397,7 +1466,8 @@
         "utilitarian"
       ]
     },
-    "name": "Eclipse Monolith Grotesk"
+    "name": "Eclipse Monolith Grotesk",
+    "w": 1.69
   },
   {
     "slug": "grot-10",
@@ -1417,7 +1487,8 @@
         "nostalgic"
       ]
     },
-    "name": "Black Vortex Grotesk"
+    "name": "Black Vortex Grotesk",
+    "w": 3.85
   },
   {
     "slug": "grot-11",
@@ -1437,7 +1508,8 @@
         "severe"
       ]
     },
-    "name": "Yonder Spectral Grotesk"
+    "name": "Yonder Spectral Grotesk",
+    "w": 1.6
   },
   {
     "slug": "grot-12",
@@ -1457,7 +1529,8 @@
         "industrial"
       ]
     },
-    "name": "Feral Grotesk"
+    "name": "Feral Grotesk",
+    "w": 4.33
   },
   {
     "slug": "grot-13",
@@ -1477,7 +1550,8 @@
         "severe"
       ]
     },
-    "name": "Umbra Filament Grotesque"
+    "name": "Umbra Filament Grotesque",
+    "w": 1.22
   },
   {
     "slug": "grot-14",
@@ -1497,7 +1571,8 @@
         "nostalgic"
       ]
     },
-    "name": "Xenolith Bastion"
+    "name": "Xenolith Bastion",
+    "w": 3.96
   },
   {
     "slug": "grot-15",
@@ -1517,7 +1592,8 @@
         "utilitarian"
       ]
     },
-    "name": "Axiom Grotesk"
+    "name": "Axiom Grotesk",
+    "w": 2.41
   },
   {
     "slug": "hairline-neo",
@@ -1537,7 +1613,8 @@
         "clinical"
       ]
     },
-    "name": "Xenon Veil Sans"
+    "name": "Xenon Veil Sans",
+    "w": 4.74
   },
   {
     "slug": "heavy-grot",
@@ -1557,7 +1634,8 @@
         "severe"
       ]
     },
-    "name": "Lacuna Monolith"
+    "name": "Lacuna Monolith",
+    "w": 3.05
   },
   {
     "slug": "humanist-light",
@@ -1577,7 +1655,8 @@
         "elegant"
       ]
     },
-    "name": "Vanta Grotesk"
+    "name": "Vanta Grotesk",
+    "w": 5.19
   },
   {
     "slug": "humanist-serif",
@@ -1597,7 +1676,8 @@
         "elegant"
       ]
     },
-    "name": "Kairo Nocturne Serif"
+    "name": "Kairo Nocturne Serif",
+    "w": 5.19
   },
   {
     "slug": "humanist-warm",
@@ -1617,7 +1697,8 @@
         "literary"
       ]
     },
-    "name": "Cinder Lyric"
+    "name": "Cinder Lyric",
+    "w": 5.05
   },
   {
     "slug": "humsans-01",
@@ -1637,7 +1718,8 @@
         "literary"
       ]
     },
-    "name": "Ypsilon Veil"
+    "name": "Ypsilon Veil",
+    "w": 2.39
   },
   {
     "slug": "humsans-02",
@@ -1657,7 +1739,8 @@
         "editorial"
       ]
     },
-    "name": "Umbra Velocity"
+    "name": "Umbra Velocity",
+    "w": 4.95
   },
   {
     "slug": "humsans-03",
@@ -1677,7 +1760,8 @@
         "botanical"
       ]
     },
-    "name": "Wraith Grotesk"
+    "name": "Wraith Grotesk",
+    "w": 2.36
   },
   {
     "slug": "humsans-04",
@@ -1697,7 +1781,8 @@
         "warm"
       ]
     },
-    "name": "Obsidian Lyric Serif"
+    "name": "Obsidian Lyric Serif",
+    "w": 5.78
   },
   {
     "slug": "humsans-05",
@@ -1717,7 +1802,8 @@
         "editorial"
       ]
     },
-    "name": "Obsidian Pneuma"
+    "name": "Obsidian Pneuma",
+    "w": 1.46
   },
   {
     "slug": "humsans-06",
@@ -1737,7 +1823,8 @@
         "literary"
       ]
     },
-    "name": "Aether Grotesk"
+    "name": "Aether Grotesk",
+    "w": 4.92
   },
   {
     "slug": "humsans-07",
@@ -1757,7 +1844,8 @@
         "editorial"
       ]
     },
-    "name": "Eclipse Grotesk"
+    "name": "Eclipse Grotesk",
+    "w": 3.83
   },
   {
     "slug": "humsans-08",
@@ -1777,7 +1865,8 @@
         "botanical"
       ]
     },
-    "name": "Eidolon Mono"
+    "name": "Eidolon Mono",
+    "w": 2.23
   },
   {
     "slug": "humsans-09",
@@ -1797,7 +1886,8 @@
         "warm"
       ]
     },
-    "name": "Eclipse Velvet Serif"
+    "name": "Eclipse Velvet Serif",
+    "w": 4.78
   },
   {
     "slug": "humsans-10",
@@ -1817,7 +1907,8 @@
         "editorial"
       ]
     },
-    "name": "Ypsilon Aether Grotesk"
+    "name": "Ypsilon Aether Grotesk",
+    "w": 1.85
   },
   {
     "slug": "humsans-11",
@@ -1837,7 +1928,8 @@
         "literary"
       ]
     },
-    "name": "Cipher Halo Grotesk"
+    "name": "Cipher Halo Grotesk",
+    "w": 4.58
   },
   {
     "slug": "humsans-12",
@@ -1857,7 +1949,8 @@
         "editorial"
       ]
     },
-    "name": "Kronos Monolith"
+    "name": "Kronos Monolith",
+    "w": 1.95
   },
   {
     "slug": "humsans-13",
@@ -1877,7 +1970,8 @@
         "botanical"
       ]
     },
-    "name": "Xyric Hollow Grotesque"
+    "name": "Xyric Hollow Grotesque",
+    "w": 4.67
   },
   {
     "slug": "humsans-14",
@@ -1897,7 +1991,8 @@
         "warm"
       ]
     },
-    "name": "Eclipse Vector Grotesk"
+    "name": "Eclipse Vector Grotesk",
+    "w": 5.19
   },
   {
     "slug": "humsans-15",
@@ -1917,7 +2012,8 @@
         "editorial"
       ]
     },
-    "name": "Quasar Veil Didone"
+    "name": "Quasar Veil Didone",
+    "w": 1.99
   },
   {
     "slug": "humserif-01",
@@ -1937,7 +2033,8 @@
         "literary"
       ]
     },
-    "name": "Liminal Didone"
+    "name": "Liminal Didone",
+    "w": 5.07
   },
   {
     "slug": "humserif-02",
@@ -1957,7 +2054,8 @@
         "ecclesiastical"
       ]
     },
-    "name": "Liminal Spire Didone"
+    "name": "Liminal Spire Didone",
+    "w": 1.8
   },
   {
     "slug": "humserif-03",
@@ -1977,7 +2075,8 @@
         "warm"
       ]
     },
-    "name": "Kairo Obsidian Didone"
+    "name": "Kairo Obsidian Didone",
+    "w": 5.48
   },
   {
     "slug": "humserif-04",
@@ -1997,7 +2096,8 @@
         "editorial"
       ]
     },
-    "name": "Ivory Eclipse Didone"
+    "name": "Ivory Eclipse Didone",
+    "w": 2.38
   },
   {
     "slug": "humserif-05",
@@ -2017,7 +2117,8 @@
         "ecclesiastical"
       ]
     },
-    "name": "Umbral Didone"
+    "name": "Umbral Didone",
+    "w": 2.54
   },
   {
     "slug": "humserif-06",
@@ -2037,7 +2138,8 @@
         "literary"
       ]
     },
-    "name": "Opaline Didone"
+    "name": "Opaline Didone",
+    "w": 4.6
   },
   {
     "slug": "humserif-07",
@@ -2057,7 +2159,8 @@
         "ecclesiastical"
       ]
     },
-    "name": "Obsidian Vertigo Serif"
+    "name": "Obsidian Vertigo Serif",
+    "w": 2.63
   },
   {
     "slug": "humserif-08",
@@ -2077,7 +2180,8 @@
         "warm"
       ]
     },
-    "name": "Xylaria Veil Display"
+    "name": "Xylaria Veil Display",
+    "w": 4.43
   },
   {
     "slug": "humserif-09",
@@ -2097,7 +2201,8 @@
         "editorial"
       ]
     },
-    "name": "Fathom Spire"
+    "name": "Fathom Spire",
+    "w": 1.87
   },
   {
     "slug": "humserif-10",
@@ -2117,7 +2222,8 @@
         "ecclesiastical"
       ]
     },
-    "name": "Talisman Didone"
+    "name": "Talisman Didone",
+    "w": 4.4
   },
   {
     "slug": "humserif-11",
@@ -2137,7 +2243,8 @@
         "literary"
       ]
     },
-    "name": "Xyra Nocturne Didot"
+    "name": "Xyra Nocturne Didot",
+    "w": 2.24
   },
   {
     "slug": "humserif-12",
@@ -2157,7 +2264,8 @@
         "ecclesiastical"
       ]
     },
-    "name": "Tensile Obsidian Didone"
+    "name": "Tensile Obsidian Didone",
+    "w": 2.5
   },
   {
     "slug": "humserif-13",
@@ -2177,7 +2285,8 @@
         "warm"
       ]
     },
-    "name": "Liminal Ivory Serif"
+    "name": "Liminal Ivory Serif",
+    "w": 4.97
   },
   {
     "slug": "humserif-14",
@@ -2197,7 +2306,8 @@
         "editorial"
       ]
     },
-    "name": "Xyric Obelisk Serif"
+    "name": "Xyric Obelisk Serif",
+    "w": 2
   },
   {
     "slug": "humserif-15",
@@ -2217,7 +2327,8 @@
         "ecclesiastical"
       ]
     },
-    "name": "Palladium Veil"
+    "name": "Palladium Veil",
+    "w": 5.07
   },
   {
     "slug": "industrial-grot",
@@ -2237,7 +2348,8 @@
         "severe"
       ]
     },
-    "name": "Gorgon Grotesk"
+    "name": "Gorgon Grotesk",
+    "w": 3.46
   },
   {
     "slug": "inky-book",
@@ -2257,7 +2369,8 @@
         "nostalgic"
       ]
     },
-    "name": "Riven Didone"
+    "name": "Riven Didone",
+    "w": 5
   },
   {
     "slug": "mechanical-wedge",
@@ -2277,7 +2390,8 @@
         "industrial"
       ]
     },
-    "name": "Xyloid Meridian"
+    "name": "Xyloid Meridian",
+    "w": 5.61
   },
   {
     "slug": "neo-01",
@@ -2297,7 +2411,8 @@
         "futuristic"
       ]
     },
-    "name": "Xenon Axiom"
+    "name": "Xenon Axiom",
+    "w": 4.96
   },
   {
     "slug": "neo-02",
@@ -2317,7 +2432,8 @@
         "severe"
       ]
     },
-    "name": "Bastion Grotesk"
+    "name": "Bastion Grotesk",
+    "w": 3.47
   },
   {
     "slug": "neo-03",
@@ -2337,7 +2453,8 @@
         "clinical"
       ]
     },
-    "name": "Glyphic Meridian Mono"
+    "name": "Glyphic Meridian Mono",
+    "w": 2.58
   },
   {
     "slug": "neo-04",
@@ -2357,7 +2474,8 @@
         "severe"
       ]
     },
-    "name": "Parallax Grotesk"
+    "name": "Parallax Grotesk",
+    "w": 3.39
   },
   {
     "slug": "neo-05",
@@ -2377,7 +2495,8 @@
         "futuristic"
       ]
     },
-    "name": "Spectral Meridian Grotesque"
+    "name": "Spectral Meridian Grotesque",
+    "w": 1.67
   },
   {
     "slug": "neo-06",
@@ -2397,7 +2516,8 @@
         "editorial"
       ]
     },
-    "name": "Eidolon Grotesk"
+    "name": "Eidolon Grotesk",
+    "w": 4.75
   },
   {
     "slug": "neo-07",
@@ -2417,7 +2537,8 @@
         "futuristic"
       ]
     },
-    "name": "Obsidian Tension Grotesque"
+    "name": "Obsidian Tension Grotesque",
+    "w": 1.37
   },
   {
     "slug": "neo-08",
@@ -2437,7 +2558,8 @@
         "severe"
       ]
     },
-    "name": "Fathom Grotesk"
+    "name": "Fathom Grotesk",
+    "w": 5.4
   },
   {
     "slug": "neo-09",
@@ -2457,7 +2579,8 @@
         "clinical"
       ]
     },
-    "name": "Zeroth Monolith Grotesk"
+    "name": "Zeroth Monolith Grotesk",
+    "w": 2.75
   },
   {
     "slug": "neo-10",
@@ -2477,7 +2600,8 @@
         "severe"
       ]
     },
-    "name": "Raven Obelisk"
+    "name": "Raven Obelisk",
+    "w": 1.83
   },
   {
     "slug": "neo-11",
@@ -2497,7 +2621,8 @@
         "futuristic"
       ]
     },
-    "name": "Titanium Monolith"
+    "name": "Titanium Monolith",
+    "w": 4.61
   },
   {
     "slug": "neo-12",
@@ -2517,7 +2642,8 @@
         "editorial"
       ]
     },
-    "name": "Jet Obsidian Grotesk"
+    "name": "Jet Obsidian Grotesk",
+    "w": 1.82
   },
   {
     "slug": "neo-13",
@@ -2537,7 +2663,8 @@
         "futuristic"
       ]
     },
-    "name": "Spectral Forge Sans"
+    "name": "Spectral Forge Sans",
+    "w": 3.8
   },
   {
     "slug": "neo-14",
@@ -2557,7 +2684,8 @@
         "severe"
       ]
     },
-    "name": "Xyloid Spire Grotesk"
+    "name": "Xyloid Spire Grotesk",
+    "w": 1.21
   },
   {
     "slug": "neo-15",
@@ -2577,7 +2705,8 @@
         "clinical"
       ]
     },
-    "name": "Umbra Cut Grotesk"
+    "name": "Umbra Cut Grotesk",
+    "w": 4.05
   },
   {
     "slug": "nostalgic-serif",
@@ -2597,7 +2726,8 @@
         "warm"
       ]
     },
-    "name": "Nocturne Ivory Serif"
+    "name": "Nocturne Ivory Serif",
+    "w": 5.27
   },
   {
     "slug": "oldstyle-01",
@@ -2617,7 +2747,8 @@
         "nostalgic"
       ]
     },
-    "name": "Liminal Obsidian Antiqua"
+    "name": "Liminal Obsidian Antiqua",
+    "w": 5.59
   },
   {
     "slug": "oldstyle-02",
@@ -2637,7 +2768,8 @@
         "nostalgic"
       ]
     },
-    "name": "Ysolde Nocturne"
+    "name": "Ysolde Nocturne",
+    "w": 1.76
   },
   {
     "slug": "oldstyle-03",
@@ -2657,7 +2789,8 @@
         "literary"
       ]
     },
-    "name": "Blackthorn Echo Serif"
+    "name": "Blackthorn Echo Serif",
+    "w": 3.46
   },
   {
     "slug": "oldstyle-04",
@@ -2677,7 +2810,8 @@
         "literary"
       ]
     },
-    "name": "Mirage Ivory Display"
+    "name": "Mirage Ivory Display",
+    "w": 3.1
   },
   {
     "slug": "oldstyle-05",
@@ -2697,7 +2831,8 @@
         "nostalgic"
       ]
     },
-    "name": "Gloam Spire"
+    "name": "Gloam Spire",
+    "w": 2.52
   },
   {
     "slug": "oldstyle-06",
@@ -2717,7 +2852,8 @@
         "nostalgic"
       ]
     },
-    "name": "Ravine Didone"
+    "name": "Ravine Didone",
+    "w": 4.53
   },
   {
     "slug": "oldstyle-07",
@@ -2737,7 +2873,8 @@
         "literary"
       ]
     },
-    "name": "Dread Meridian Serif"
+    "name": "Dread Meridian Serif",
+    "w": 1.77
   },
   {
     "slug": "oldstyle-08",
@@ -2757,7 +2894,8 @@
         "literary"
       ]
     },
-    "name": "Tesseract Serif"
+    "name": "Tesseract Serif",
+    "w": 5.51
   },
   {
     "slug": "oldstyle-09",
@@ -2777,7 +2915,8 @@
         "nostalgic"
       ]
     },
-    "name": "Pale Meridian Didone"
+    "name": "Pale Meridian Didone",
+    "w": 2.41
   },
   {
     "slug": "oldstyle-10",
@@ -2797,7 +2936,8 @@
         "nostalgic"
       ]
     },
-    "name": "Gloaming Spire Didone"
+    "name": "Gloaming Spire Didone",
+    "w": 2.99
   },
   {
     "slug": "oldstyle-11",
@@ -2817,7 +2957,8 @@
         "literary"
       ]
     },
-    "name": "Kithara Veil Serif"
+    "name": "Kithara Veil Serif",
+    "w": 4.43
   },
   {
     "slug": "oldstyle-12",
@@ -2837,7 +2978,8 @@
         "literary"
       ]
     },
-    "name": "Helix Mourning Didone"
+    "name": "Helix Mourning Didone",
+    "w": 2.63
   },
   {
     "slug": "oldstyle-13",
@@ -2857,7 +2999,8 @@
         "nostalgic"
       ]
     },
-    "name": "Marrow Aster Serif"
+    "name": "Marrow Aster Serif",
+    "w": 5.22
   },
   {
     "slug": "oldstyle-14",
@@ -2877,7 +3020,8 @@
         "nostalgic"
       ]
     },
-    "name": "Basilica Phantom Didone"
+    "name": "Basilica Phantom Didone",
+    "w": 1.94
   },
   {
     "slug": "oldstyle-15",
@@ -2897,7 +3041,8 @@
         "literary"
       ]
     },
-    "name": "Bramble Oratorio"
+    "name": "Bramble Oratorio",
+    "w": 4.58
   },
   {
     "slug": "pixel-geo",
@@ -2917,7 +3062,8 @@
         "mechanical"
       ]
     },
-    "name": "Obsidian Vector"
+    "name": "Obsidian Vector",
+    "w": 4.87
   },
   {
     "slug": "reverse-contrast",
@@ -2937,7 +3083,8 @@
         "nostalgic"
       ]
     },
-    "name": "Liminal Bastion"
+    "name": "Liminal Bastion",
+    "w": 3.25
   },
   {
     "slug": "rounded-geo",
@@ -2957,7 +3104,8 @@
         "warm"
       ]
     },
-    "name": "Zephyr Gumtype"
+    "name": "Zephyr Gumtype",
+    "w": 5.31
   },
   {
     "slug": "rounded-slab",
@@ -2977,7 +3125,8 @@
         "warm"
       ]
     },
-    "name": "Bastion Velvet Slab"
+    "name": "Bastion Velvet Slab",
+    "w": 5.05
   },
   {
     "slug": "seventies-serif",
@@ -2997,7 +3146,8 @@
         "psychedelic"
       ]
     },
-    "name": "Abyssal Velvet Didone"
+    "name": "Abyssal Velvet Didone",
+    "w": 3.96
   },
   {
     "slug": "severe-neo",
@@ -3017,7 +3167,8 @@
         "utilitarian"
       ]
     },
-    "name": "Nadir Grotesk"
+    "name": "Nadir Grotesk",
+    "w": 2.82
   },
   {
     "slug": "slab-01",
@@ -3037,7 +3188,8 @@
         "nostalgic"
       ]
     },
-    "name": "Morrow Spire"
+    "name": "Morrow Spire",
+    "w": 2.08
   },
   {
     "slug": "slab-02",
@@ -3057,7 +3209,8 @@
         "mechanical"
       ]
     },
-    "name": "Abyssal Carnival Slab"
+    "name": "Abyssal Carnival Slab",
+    "w": 3.4
   },
   {
     "slug": "slab-03",
@@ -3077,7 +3230,8 @@
         "playful"
       ]
     },
-    "name": "Pale Cathedral Serif"
+    "name": "Pale Cathedral Serif",
+    "w": 2.26
   },
   {
     "slug": "slab-04",
@@ -3097,7 +3251,8 @@
         "mechanical"
       ]
     },
-    "name": "Wraith Velvet Slab"
+    "name": "Wraith Velvet Slab",
+    "w": 4.56
   },
   {
     "slug": "slab-05",
@@ -3117,7 +3272,8 @@
         "nostalgic"
       ]
     },
-    "name": "Dusk Monolith Grotesk"
+    "name": "Dusk Monolith Grotesk",
+    "w": 1.58
   },
   {
     "slug": "slab-06",
@@ -3137,7 +3293,8 @@
         "industrial"
       ]
     },
-    "name": "Raven Citadel"
+    "name": "Raven Citadel",
+    "w": 3.83
   },
   {
     "slug": "slab-07",
@@ -3157,7 +3314,8 @@
         "nostalgic"
       ]
     },
-    "name": "Ivory Spire Grotesk"
+    "name": "Ivory Spire Grotesk",
+    "w": 1.31
   },
   {
     "slug": "slab-08",
@@ -3177,7 +3335,8 @@
         "mechanical"
       ]
     },
-    "name": "Sable Meridian"
+    "name": "Sable Meridian",
+    "w": 3.26
   },
   {
     "slug": "slab-09",
@@ -3197,7 +3356,8 @@
         "playful"
       ]
     },
-    "name": "Dreadnought Obsidian Slab"
+    "name": "Dreadnought Obsidian Slab",
+    "w": 4.22
   },
   {
     "slug": "slab-10",
@@ -3217,7 +3377,8 @@
         "mechanical"
       ]
     },
-    "name": "Dolmen Spur"
+    "name": "Dolmen Spur",
+    "w": 2.71
   },
   {
     "slug": "slab-11",
@@ -3237,7 +3398,8 @@
         "nostalgic"
       ]
     },
-    "name": "Xyloid Bastion Slab"
+    "name": "Xyloid Bastion Slab",
+    "w": 4.93
   },
   {
     "slug": "slab-12",
@@ -3257,7 +3419,8 @@
         "industrial"
       ]
     },
-    "name": "Umbral Monolith Gothic"
+    "name": "Umbral Monolith Gothic",
+    "w": 1.45
   },
   {
     "slug": "slab-13",
@@ -3277,7 +3440,8 @@
         "nostalgic"
       ]
     },
-    "name": "Sable Citadel"
+    "name": "Sable Citadel",
+    "w": 3.91
   },
   {
     "slug": "slab-14",
@@ -3297,7 +3461,8 @@
         "mechanical"
       ]
     },
-    "name": "Ferro Mirage"
+    "name": "Ferro Mirage",
+    "w": 6.37
   },
   {
     "slug": "slab-15",
@@ -3317,7 +3482,8 @@
         "playful"
       ]
     },
-    "name": "Harmonic Obsidian Serif"
+    "name": "Harmonic Obsidian Serif",
+    "w": 2.72
   },
   {
     "slug": "stencil-slab",
@@ -3337,7 +3503,8 @@
         "brutalist"
       ]
     },
-    "name": "Orphic Iron Slab"
+    "name": "Orphic Iron Slab",
+    "w": 4.14
   },
   {
     "slug": "swiss-neo",
@@ -3357,7 +3524,8 @@
         "utilitarian"
       ]
     },
-    "name": "Rift Obsidian Grotesk"
+    "name": "Rift Obsidian Grotesk",
+    "w": 5.26
   },
   {
     "slug": "trans-01",
@@ -3377,7 +3545,8 @@
         "severe"
       ]
     },
-    "name": "Razor Cathedral Display"
+    "name": "Razor Cathedral Display",
+    "w": 1.65
   },
   {
     "slug": "trans-02",
@@ -3397,7 +3566,8 @@
         "severe"
       ]
     },
-    "name": "Ebon Vesper Serif"
+    "name": "Ebon Vesper Serif",
+    "w": 5.45
   },
   {
     "slug": "trans-03",
@@ -3417,7 +3587,8 @@
         "elegant"
       ]
     },
-    "name": "Helix Didone"
+    "name": "Helix Didone",
+    "w": 1.52
   },
   {
     "slug": "trans-04",
@@ -3437,7 +3608,8 @@
         "elegant"
       ]
     },
-    "name": "Jade Vertigo Didone"
+    "name": "Jade Vertigo Didone",
+    "w": 3.03
   },
   {
     "slug": "trans-05",
@@ -3457,7 +3629,8 @@
         "severe"
       ]
     },
-    "name": "Hesper Serif"
+    "name": "Hesper Serif",
+    "w": 2.47
   },
   {
     "slug": "trans-06",
@@ -3477,7 +3650,8 @@
         "severe"
       ]
     },
-    "name": "Nocturne Didone"
+    "name": "Nocturne Didone",
+    "w": 2.59
   },
   {
     "slug": "trans-07",
@@ -3497,7 +3671,8 @@
         "elegant"
       ]
     },
-    "name": "Liminal Didot"
+    "name": "Liminal Didot",
+    "w": 3.7
   },
   {
     "slug": "trans-08",
@@ -3517,7 +3692,8 @@
         "elegant"
       ]
     },
-    "name": "Basilisk Vertigo Display"
+    "name": "Basilisk Vertigo Display",
+    "w": 1.65
   },
   {
     "slug": "trans-09",
@@ -3537,7 +3713,8 @@
         "severe"
       ]
     },
-    "name": "Wraith Velvet Didone"
+    "name": "Wraith Velvet Didone",
+    "w": 4.43
   },
   {
     "slug": "trans-10",
@@ -3557,7 +3734,8 @@
         "severe"
       ]
     },
-    "name": "Ravine Nocturne Serif"
+    "name": "Ravine Nocturne Serif",
+    "w": 2.08
   },
   {
     "slug": "trans-11",
@@ -3577,7 +3755,8 @@
         "elegant"
       ]
     },
-    "name": "Nocturne Didone"
+    "name": "Nocturne Didone",
+    "w": 2.41
   },
   {
     "slug": "trans-12",
@@ -3597,7 +3776,8 @@
         "elegant"
       ]
     },
-    "name": "Boreal Veil Didone"
+    "name": "Boreal Veil Didone",
+    "w": 4.1
   },
   {
     "slug": "trans-13",
@@ -3617,7 +3797,8 @@
         "severe"
       ]
     },
-    "name": "Fathom Vogue"
+    "name": "Fathom Vogue",
+    "w": 2.36
   },
   {
     "slug": "trans-14",
@@ -3637,7 +3818,8 @@
         "severe"
       ]
     },
-    "name": "Eclipse Didone"
+    "name": "Eclipse Didone",
+    "w": 4.75
   },
   {
     "slug": "trans-15",
@@ -3657,7 +3839,8 @@
         "elegant"
       ]
     },
-    "name": "Nocturne Vellum Display"
+    "name": "Nocturne Vellum Display",
+    "w": 1.55
   },
   {
     "slug": "transitional",
@@ -3677,7 +3860,8 @@
         "elegant"
       ]
     },
-    "name": "Dorian Veil"
+    "name": "Dorian Veil",
+    "w": 5.18
   },
   {
     "slug": "wedge-01",
@@ -3697,7 +3881,8 @@
         "mechanical"
       ]
     },
-    "name": "Gallows Velvet Gothic"
+    "name": "Gallows Velvet Gothic",
+    "w": 3.25
   },
   {
     "slug": "wedge-02",
@@ -3717,7 +3902,8 @@
         "editorial"
       ]
     },
-    "name": "Obsidian Veil Didone"
+    "name": "Obsidian Veil Didone",
+    "w": 4.38
   },
   {
     "slug": "wedge-03",
@@ -3737,7 +3923,8 @@
         "severe"
       ]
     },
-    "name": "Raven Obsidian Condensed"
+    "name": "Raven Obsidian Condensed",
+    "w": 1.51
   },
   {
     "slug": "wedge-04",
@@ -3757,7 +3944,8 @@
         "industrial"
       ]
     },
-    "name": "Jade Obelisk Serif"
+    "name": "Jade Obelisk Serif",
+    "w": 2.33
   },
   {
     "slug": "wedge-05",
@@ -3777,7 +3965,8 @@
         "editorial"
       ]
     },
-    "name": "Eclipse Bastion"
+    "name": "Eclipse Bastion",
+    "w": 1.78
   },
   {
     "slug": "wedge-06",
@@ -3797,7 +3986,8 @@
         "mechanical"
       ]
     },
-    "name": "Javelin Noir Display"
+    "name": "Javelin Noir Display",
+    "w": 2.51
   },
   {
     "slug": "wedge-07",
@@ -3817,7 +4007,8 @@
         "editorial"
       ]
     },
-    "name": "Rook Obsidian"
+    "name": "Rook Obsidian",
+    "w": 2.46
   },
   {
     "slug": "wedge-08",
@@ -3837,7 +4028,8 @@
         "severe"
       ]
     },
-    "name": "Fathom Gothic"
+    "name": "Fathom Gothic",
+    "w": 2.17
   },
   {
     "slug": "wedge-09",
@@ -3857,7 +4049,8 @@
         "industrial"
       ]
     },
-    "name": "Fathom Vogue"
+    "name": "Fathom Vogue",
+    "w": 3.09
   },
   {
     "slug": "wedge-10",
@@ -3877,7 +4070,8 @@
         "editorial"
       ]
     },
-    "name": "Xyloid Obsidian Grotesk"
+    "name": "Xyloid Obsidian Grotesk",
+    "w": 1.97
   },
   {
     "slug": "wedge-11",
@@ -3897,7 +4091,8 @@
         "mechanical"
       ]
     },
-    "name": "Kairo Nocturne Display"
+    "name": "Kairo Nocturne Display",
+    "w": 3.59
   },
   {
     "slug": "wedge-12",
@@ -3917,7 +4112,8 @@
         "editorial"
       ]
     },
-    "name": "Quasar Obelisk"
+    "name": "Quasar Obelisk",
+    "w": 1.96
   },
   {
     "slug": "wedge-13",
@@ -3937,7 +4133,8 @@
         "severe"
       ]
     },
-    "name": "Krypte Gothic"
+    "name": "Krypte Gothic",
+    "w": 1.79
   },
   {
     "slug": "wedge-14",
@@ -3957,7 +4154,8 @@
         "industrial"
       ]
     },
-    "name": "Xenolith Didone"
+    "name": "Xenolith Didone",
+    "w": 3.09
   },
   {
     "slug": "wedge-15",
@@ -3977,7 +4175,8 @@
         "editorial"
       ]
     },
-    "name": "Dusk Vesper Didone"
+    "name": "Dusk Vesper Didone",
+    "w": 2.36
   },
   {
     "slug": "wedge-news",
@@ -3997,7 +4196,8 @@
         "industrial"
       ]
     },
-    "name": "Palladium Vesper Serif"
+    "name": "Palladium Vesper Serif",
+    "w": 5.33
   },
   {
     "slug": "wide-rounded",
@@ -4017,6 +4217,7 @@
         "warm"
       ]
     },
-    "name": "Nebula Velvet Grotesk"
+    "name": "Nebula Velvet Grotesk",
+    "w": 5.14
   }
 ]

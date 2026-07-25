@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Fraunces, Hanken_Grotesk, Spline_Sans_Mono } from 'next/font/google';
 import './globals.css';
 import { KeyGateProvider } from '@/components/KeyGateProvider';
@@ -24,6 +24,20 @@ const splineMono = Spline_Sans_Mono({
   weight: ['400', '500'],
   display: 'swap',
 });
+
+/**
+ * The browser chrome should match the page it is framing.
+ *
+ * Without a themeColor the address bar sits at the UA default against a warm
+ * paper ground, which reads as a seam across the top of every screen on a
+ * phone. `maximumScale` is deliberately absent: capping zoom locks out anyone
+ * who needs to enlarge the type, which on a typography site would be a
+ * particular kind of rude.
+ */
+export const viewport: Viewport = {
+  themeColor: '#f2efe8',
+  colorScheme: 'light',
+};
 
 export const metadata: Metadata = {
   title: 'Foundry — evolve a typeface',

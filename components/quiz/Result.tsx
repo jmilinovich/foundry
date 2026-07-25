@@ -7,13 +7,14 @@ import { useCallback, useMemo, useState, useSyncExternalStore } from 'react';
 import { encodeProfile } from '@/lib/profileCode';
 import { apiFetch } from '@/lib/userKey';
 import { useEnsureKey } from '../KeyGateProvider';
-import { composeRead, axisChips, labelFor } from '@/lib/read';
+import { composeRead, axisChips, labelFor, matchReason } from '@/lib/read';
 import {
   googleCssUrl,
   googleSpecimenUrl,
   profileToVector,
   recommend,
   type GoogleFont,
+  type MatchDetail,
 } from '@/lib/recommend';
 import { profileToSeed, summarize, type AtlasEntry, type TasteProfile } from '@/lib/taste';
 import { useAtlasFullFont } from './useAtlasFont';
@@ -52,7 +53,8 @@ function Rule({ label, note }: { label: string; note?: string }) {
   );
 }
 
-function GoogleRow({ font, why }: { font: GoogleFont; why: string }) {
+function GoogleRow({ font, why, strengths }: { font: GoogleFont; why: string; strengths: MatchDetail[] }) {
+  const matched = matchReason(strengths);
   const weight = font.staticWeights.includes(400) ? 400 : (font.staticWeights[0] ?? 400);
   return (
     <li className="border-b border-line py-6">
@@ -65,7 +67,10 @@ function GoogleRow({ font, why }: { font: GoogleFont; why: string }) {
       >
         {font.family}
       </div>
-      <p className="mt-3 text-[15px] leading-relaxed text-ink-dim">{why}</p>
+      <p className="mt-3 text-[15px] leading-relaxed text-ink-dim">
+        {matched && <span className="text-ink">Closest to you on {matched.axes}. </span>}
+        {why}
+      </p>
       <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-1">
         <span className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-faint">
           {font.genome.category} · {font.genome.contrast} · {font.genome.weight}
@@ -86,9 +91,20 @@ function GoogleRow({ font, why }: { font: GoogleFont; why: string }) {
   );
 }
 
-function AtlasRow({ entry }: { entry: AtlasEntry }) {
+/**
+ * A house face, given the same three-part shape as a Google row.
+ *
+ * The differentiated half of the payoff used to be the unexplained half: a
+ * Google row got a name, a specimen, a human clause, a link and a pairing, while
+ * a Foundry row — the fonts that are the whole reason the site exists — got a
+ * name and a line of genome jargon. The reason is composed from data that
+ * already existed: the matcher's per-axis closeness, and the authored "reads"
+ * clause for the winning value.
+ */
+function AtlasRow({ entry, strengths }: { entry: AtlasEntry; strengths: MatchDetail[] }) {
   const { family, loaded } = useAtlasFullFont(entry.slug);
   const g = entry.genome;
+  const why = matchReason(strengths);
   return (
     <li className="border-b border-line py-6">
       <div
@@ -98,6 +114,12 @@ function AtlasRow({ entry }: { entry: AtlasEntry }) {
       >
         {entry.name}
       </div>
+      {why && (
+        <p className="mt-3 text-[15px] leading-relaxed text-ink-dim">
+          <span className="text-ink">Closest to you on {why.axes}.</span>
+          {why.reads && ` ${why.reads}.`}
+        </p>
+      )}
       <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-1">
         <span className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-faint">
           {g.category} · {g.contrast} · {g.weight} · {g.terminals}
@@ -309,7 +331,7 @@ export function Result({
         <Rule label="off the shelf" note="Free from Google Fonts, and installed in about a minute. Not one of them is ours." />
         <ul className="mt-2">
           {googleMatches.map((m) => (
-            <GoogleRow key={m.item.family} font={m.item} why={m.item.why} />
+            <GoogleRow key={m.item.family} font={m.item} why={m.item.why} strengths={m.strengths} />
           ))}
         </ul>
 
@@ -317,7 +339,7 @@ export function Result({
         <Rule label="the house library" note="The house cut 201 faces and froze the lot long before you arrived. These six landed nearest your votes, and they are on no type site but this one." />
         <ul className="mt-2">
           {atlasMatches.map((m) => (
-            <AtlasRow key={m.item.slug} entry={m.item} />
+            <AtlasRow key={m.item.slug} entry={m.item} strengths={m.strengths} />
           ))}
         </ul>
         {/* The free path used to stop here at a $1.60 wall behind a third-party

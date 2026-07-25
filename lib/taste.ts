@@ -28,7 +28,19 @@ import {
   type WorldImage,
 } from './world';
 
-export type AtlasEntry = { slug: string; genome: Genome; name: string };
+export type AtlasEntry = {
+  slug: string;
+  genome: Genome;
+  name: string;
+  /**
+   * Width of the specimen word in ems, measured off the real outlines by
+   * scripts/measure-atlas.mjs. The duel sizes itself from the wider of its two
+   * faces so a pair of condensed cuts fills the bench instead of being sized
+   * for the widest slab in the library. Optional: a manifest without it falls
+   * back to the global worst case, which is safe, just small.
+   */
+  w?: number;
+};
 
 /**
  * The axes the quiz actually probes. Deliberately not all ten — the duel has a

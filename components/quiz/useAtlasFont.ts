@@ -129,6 +129,46 @@ export function useAtlasFont(slug: string | null) {
 }
 
 /**
+ * Warm the photographs the same way the specimens are warmed.
+ *
+ * The type rounds are instant because every face is fetched up front, but a
+ * world round waited on a cold request for two full-size photographs — and the
+ * first world round is round 2. The heaviest pair in the bank is about a
+ * megabyte, so on a phone that is a visibly empty pane at the exact moment the
+ * quiz is trying to feel effortless.
+ *
+ * Only a handful are needed (four world rounds, two images each), so this warms
+ * a bounded slice rather than all 66, two at a time, after the fonts are away.
+ */
+export function useWorldPreload(files: string[], count = 14) {
+  useEffect(() => {
+    if (typeof window === 'undefined' || files.length === 0) return;
+    let cancelled = false;
+    const queue = files.slice(0, count);
+    let cursor = 0;
+
+    const worker = () => {
+      if (cancelled || cursor >= queue.length) return;
+      const img = new Image();
+      img.onload = img.onerror = worker;
+      img.src = `/world/${queue[cursor++]}`;
+    };
+    // Behind the font sweep: a specimen you are about to judge outranks a
+    // photograph you will not see for another round.
+    const id = window.setTimeout(() => {
+      worker();
+      worker();
+    }, 600);
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(id);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [files.length, count]);
+}
+
+/**
  * The full-alphabet cut, for the results page — a recommendation sets its own
  * name and a specimen line, which the quiz subset has no glyphs for.
  */

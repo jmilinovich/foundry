@@ -5,19 +5,30 @@
     "display": {
       "family": "Fraunces, Georgia, serif",
       "role": "Cold-start masthead + section display, used with restraint; steps aside for the champion font on populated pages.",
-      "weights": [400, 500, 600],
+      "weights": [
+        400,
+        500,
+        600
+      ],
       "tracking": "-0.01em",
       "opticalSizing": "auto"
     },
     "text": {
       "family": "'Hanken Grotesk', system-ui, sans-serif",
       "role": "Controls, labels, buttons, body/UI. Not Inter, not Söhne.",
-      "weights": [400, 500, 600]
+      "weights": [
+        400,
+        500,
+        600
+      ]
     },
     "mono": {
       "family": "'Spline Sans Mono', ui-monospace, monospace",
       "role": "Instrument voice — genome credits, weight·px·tracking labels, run metadata.",
-      "weights": [400, 500],
+      "weights": [
+        400,
+        500
+      ],
       "label": {
         "size": "10px",
         "transform": "uppercase",
@@ -33,8 +44,19 @@
     },
     "scale": {
       "hero": "clamp(4rem, 15vw, 12.5rem)",
-      "waterfall": [128, 96, 72, 54, 40, 28],
-      "body": [18, 16, 14],
+      "waterfall": [
+        128,
+        96,
+        72,
+        54,
+        40,
+        28
+      ],
+      "body": [
+        18,
+        16,
+        14
+      ],
       "label": 10
     }
   },
@@ -49,14 +71,17 @@
     },
     "muted": {
       "value": "#5f584e",
-      "faint": "#948b7f",
-      "intent": "Dim and fainter ink for metadata, labels, whispered copy."
+      "faint": "#6f675c",
+      "intent": "Dim and fainter ink for metadata, labels, whispered copy. --faint darkened from #948b7f to clear AA (4.85:1 on paper); it still recedes, it is just legible."
     },
     "accent": {
       "value": "#b7302a",
       "name": "Proof Red",
       "intent": "Press-registration red. RESERVED to two jobs only: the Breed action and the Keep state. 1px ring or solid dot, never a glow.",
-      "reservedTo": ["breed", "keep"]
+      "reservedTo": [
+        "breed",
+        "keep"
+      ]
     },
     "signal": {
       "value": "#8a8378",
@@ -79,14 +104,33 @@
       "seamRule": "one 2px rule only, reserved for the specimen-hero/metadata seam"
     },
     "radius": "0",
-    "scale": [4, 8, 10, 14, 16, 18, 22, 26, 30, 40, 52, 56, 64, 80]
+    "scale": [
+      4,
+      8,
+      10,
+      14,
+      16,
+      18,
+      22,
+      26,
+      30,
+      40,
+      52,
+      56,
+      64,
+      80
+    ]
   },
   "motion": {
     "budget": "micro-states in the loop, one orchestrated moment",
     "micro": {
       "duration": "150-250ms",
       "easing": "cubic-bezier(0.16, 1, 0.3, 1)",
-      "uses": ["hover", "pick tick", "fades"]
+      "uses": [
+        "hover",
+        "pick tick",
+        "fades"
+      ]
     },
     "signature": {
       "name": "lineage morph",
@@ -100,12 +144,21 @@
     "bench": {
       "value": "#faf8f4",
       "intent": "JUDGING ground — flat cool near-white, no warmth. The font is the only variable; keeps hairline/monoline faces legible while receding.",
-      "appliesTo": ["quiz", "population"]
+      "appliesTo": [
+        "quiz",
+        "population"
+      ]
     },
     "paper": {
       "value": "#f2efe8",
       "intent": "PUBLISHING ground — warm paper. Editorial richness where trust is earned.",
-      "appliesTo": ["font detail", "collection", "home", "about", "pairing"]
+      "appliesTo": [
+        "font detail",
+        "collection",
+        "home",
+        "about",
+        "pairing"
+      ]
     },
     "line": {
       "value": "#d9d4c8",

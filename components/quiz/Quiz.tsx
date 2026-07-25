@@ -17,7 +17,7 @@ import {
   type Duel,
   type TasteProfile,
 } from '@/lib/taste';
-import { useAtlasFont, useAtlasPreload } from './useAtlasFont';
+import { useAtlasFont, useAtlasPreload, useWorldPreload } from './useAtlasFont';
 
 /**
  * The specimen word. Must stay within the glyphs subset by
@@ -90,6 +90,21 @@ function loadSaved(): TasteProfile | null {
  */
 type PickState = 'idle' | 'chosen' | 'passed';
 
+/**
+ * The em-width the round has to accommodate.
+ *
+ * The wider of the two faces on screen, so the shared point size is as large as
+ * this pair allows without the broader one clipping. A world duel shows no type
+ * and needs no value. Unmeasured faces fall back to the atlas-wide worst case —
+ * safe, just conservative.
+ */
+const WIDEST_EM = 6.4;
+
+function duelEm(duel: Duel): number {
+  if (duel.kind !== 'type') return WIDEST_EM;
+  return Math.min(WIDEST_EM, Math.max(duel.a.w ?? WIDEST_EM, duel.b.w ?? WIDEST_EM));
+}
+
 const paneState: Record<PickState, string> = {
   idle: 'border-line',
   chosen: 'border-ink',
@@ -111,9 +126,11 @@ function SpecimenPane({
   return (
     <button
       onClick={onPick}
+      aria-label={`Option ${side === 'left' ? 1 : 2} of 2: ${entry.name}, ${entry.genome.category}, ${entry.genome.weight}, ${entry.genome.width}`}
       className={`pane group relative flex h-full min-h-0 select-none flex-col items-center justify-center overflow-hidden border px-3 py-4 transition-all duration-200 focus-visible:border-ink focus-visible:outline-none sm:h-[42vh] sm:max-h-[430px] sm:min-h-[160px] sm:px-6 sm:py-10 ${paneState[state]} ${state === 'idle' ? 'hover:border-ink-faint' : ''}`}
     >
       <div
+        aria-hidden="true"
         className="specimen duel-specimen max-w-full text-center leading-[0.95] transition-transform duration-200 group-hover:scale-[1.02]"
         data-loaded={loaded}
         style={{ fontFamily: `"${family}", serif` }}
@@ -143,6 +160,7 @@ function WorldPane({
   return (
     <button
       onClick={onPick}
+      aria-label={`Option ${side === 'left' ? 1 : 2} of 2: ${image.caption}`}
       className={`pane group relative flex h-full min-h-0 select-none flex-col overflow-hidden border text-left transition-all duration-200 focus-visible:border-ink focus-visible:outline-none sm:h-auto ${paneState[state]} ${state === 'idle' ? 'hover:border-ink-faint' : ''}`}
     >
       {/* `contain`, not `cover`. The lettering is the thing being judged, and a
@@ -226,6 +244,11 @@ export function Quiz({
   // which is exactly the duel we want prioritised.
   const slugs = useMemo(() => atlas.map((a) => a.slug), [atlas]);
   useAtlasPreload(slugs, duel?.kind === 'type' ? [duel.a.slug, duel.b.slug] : []);
+
+  // The photographs get the same treatment, a beat later. A world round used to
+  // wait on a cold fetch of two full-size images, and round 2 is a world round.
+  const worldFiles = useMemo(() => world.map((w) => w.file), [world]);
+  useWorldPreload(worldFiles);
 
   /**
    * Hand off to the verdict's own URL rather than swapping it in.
@@ -459,14 +482,28 @@ export function Quiz({
           </button>
         </div>
       </div>
-      <div className="mt-3 h-px w-full shrink-0 bg-line">
+      <div
+        role="progressbar"
+        aria-valuenow={profile.round}
+        aria-valuemin={0}
+        aria-valuemax={QUIZ_LENGTH}
+        aria-label={`Round ${profile.round + 1} of ${QUIZ_LENGTH}`}
+        className="mt-3 h-px w-full shrink-0 bg-line"
+      >
         <div className="h-px bg-signal transition-all duration-500" style={{ width: `${pct}%` }} />
       </div>
 
       {duel && (
         // Mobile: two rows sharing the leftover height, so the pair always fits.
         // Desktop: two columns at their own fixed height, centred.
-        <div className="mt-4 grid min-h-0 flex-1 grid-cols-1 grid-rows-2 gap-3 sm:mt-6 sm:flex-none sm:grid-cols-2 sm:grid-rows-1 sm:gap-4">
+        //
+        // --duel-em is the wider of the two faces on screen. Both panes read the
+        // same value, so the comparison stays honest while the pair is set as
+        // large as this particular round allows.
+        <div
+          className="mt-4 grid min-h-0 flex-1 grid-cols-1 grid-rows-2 gap-3 sm:mt-6 sm:flex-none sm:grid-cols-2 sm:grid-rows-1 sm:gap-4"
+          style={{ '--duel-em': duelEm(duel) } as React.CSSProperties}
+        >
           {/* The keys are load-bearing, not hygiene. Without them React reuses
               the same specimen node across duels: one commit swaps fontFamily to
               the incoming face *and* flips data-loaded to false, so the .specimen

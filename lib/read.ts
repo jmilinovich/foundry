@@ -306,6 +306,46 @@ export function labelFor(axis: string, value: string): string {
   return BANK.clauses?.[axis]?.[value]?.label ?? value;
 }
 
+/** What a value actually looks like, in plain language. */
+export function readsAs(axis: string, value: string): string {
+  return BANK.clauses?.[axis]?.[value]?.reads ?? '';
+}
+
+/**
+ * Why a font was recommended, in a sentence.
+ *
+ * The matcher already computes a per-axis closeness for every result and sorts
+ * it best-first; nothing had ever read it, so a recommendation arrived with no
+ * account of itself. This names the axes it genuinely matched on and says what
+ * the strongest one looks like — a recommendation that explains itself is the
+ * difference between a result and a list.
+ *
+ * Only axes above the floor are cited. A six-font set is thinned for diversity,
+ * so the last row may be close on nothing much, and "closest to you on
+ * terminals" at 0.3 would be a boast rather than a reason.
+ */
+export function matchReason(
+  strengths: { axis: string; closeness: number; value: string }[],
+  floor = 0.78,
+): { axes: string; reads: string } | null {
+  const strong = strengths.filter((s) => s.closeness >= floor).slice(0, 2);
+  if (strong.length === 0) return null;
+  const names = strong.map((s) => AXIS_NOUN[s.axis] ?? s.axis);
+  return {
+    axes: names.length === 2 ? `${names[0]} and ${names[1]}` : names[0],
+    reads: readsAs(strong[0].axis, strong[0].value),
+  };
+}
+
+/** Axis names as a person would say them, not as the genome spells them. */
+const AXIS_NOUN: Record<string, string> = {
+  category: 'the class of letter',
+  weight: 'weight',
+  width: 'width',
+  contrast: 'stroke contrast',
+  terminals: 'the terminals',
+};
+
 /** Plain-language chips for the axes the person was most consistent about. */
 export function axisChips(profile: TasteProfile): { axis: QuizAxis; label: string; reads: string }[] {
   const out: { axis: QuizAxis; label: string; reads: string }[] = [];

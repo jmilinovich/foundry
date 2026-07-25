@@ -122,7 +122,12 @@ async function run() {
   await fs.writeFile(STAMP, charsetKey());
 }
 
-run().catch((e) => {
-  console.error(e);
-  process.exit(1);
-});
+// Only subset when invoked directly. measure-atlas.mjs imports QUIZ_TEXT from
+// here so the two can never disagree about the specimen word, and importing a
+// module should not rebuild 201 fonts as a side effect.
+if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
+  run().catch((e) => {
+    console.error(e);
+    process.exit(1);
+  });
+}
