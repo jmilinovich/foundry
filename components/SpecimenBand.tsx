@@ -24,20 +24,23 @@ const SPECIMEN = 'Handgloves';
 function Line({ entry }: { entry: AtlasEntry }) {
   const { family, loaded } = useAtlasFont(entry.slug);
   return (
-    <div className="flex items-baseline justify-between gap-4 border-t border-line py-3">
+    // The name sits under the specimen on a phone and beside it from sm up.
+    // Sharing the line meant the two competed for ~320px and the specimen lost:
+    // it truncated to "Hand…", which is not a face anyone can judge.
+    <div className="flex flex-col gap-x-4 border-t border-line py-3 sm:flex-row sm:items-baseline sm:justify-between">
       <span
-        className="specimen truncate leading-[1.1]"
+        className="specimen block leading-[1.1]"
         data-loaded={loaded}
-        // Sized off the face's own measured width so a wide slab and a narrow
-        // grotesque both sit on the line without one of them clipping.
+        // Sized off this face's own measured width, so a wide slab and a narrow
+        // grotesque both fit the line rather than one of them overflowing.
         style={{
           fontFamily: `"${family}", Georgia, serif`,
-          fontSize: `clamp(1.5rem, calc((min(100vw, 1100px) - 120px) / ${entry.w ?? 6.4}), 3.4rem)`,
+          fontSize: `clamp(1.4rem, calc((min(100vw, 1100px) - 72px) / ${entry.w ?? 6.4}), 3.4rem)`,
         }}
       >
         {SPECIMEN}
       </span>
-      <span className="shrink-0 font-mono text-[10px] uppercase tracking-[0.14em] text-ink-faint">
+      <span className="mt-1 shrink-0 font-mono text-[10px] uppercase tracking-[0.14em] text-ink-faint sm:mt-0">
         {entry.name}
       </span>
     </div>
