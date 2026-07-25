@@ -66,6 +66,45 @@ describe('house font bytes are served through the font route', () => {
   });
 });
 
+/**
+ * The locked face of a pairing is resolved on the server and handed to RunView,
+ * because the catalog it used to be looked up in cannot contain a house font.
+ * That bug shipped: "pair this" on a house face took $1.20 and then rendered no
+ * pair at all. These pin the resolution the page depends on.
+ */
+describe('a pairing can lock onto a house font', () => {
+  it('resolves the locked side for a house font exactly as for a run font', async () => {
+    const rec = await findFont(ATLAS_RUN, sample.slug);
+    expect(rec).not.toBeNull();
+    // app/run/[id]/page.tsx builds a FontRef from these four fields.
+    expect(rec!.id).toBeTruthy();
+    expect(rec!.name).toBeTruthy();
+    expect(rec!.genome).toBeTruthy();
+    expect(typeof rec!.generation).toBe('number');
+  });
+
+  it('gives the locked font a run id that identifies it as the house library', () => {
+    // RunView prepends the locked face to the picker when it is not in the
+    // catalog and labels it by this id; PairingView uses it to hide a promote
+    // button that can never succeed.
+    expect(ATLAS_RUN).toBe('atlas');
+  });
+
+  it('cannot collide with a real run id', async () => {
+    // Run ids are UUIDs. If one could ever be the string "atlas", findFont
+    // would resolve a stranger's run as a house font.
+    expect(ATLAS_RUN).not.toMatch(
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
+    );
+  });
+
+  it('offers no extended cut, which is why promote is withheld for it', async () => {
+    // PairingView hides "promote pair" when either half is a house face. If an
+    // extended cut ever existed this test should fail and that guard be lifted.
+    expect(await readFontFile(sample.slug, 'extended')).toBeNull();
+  });
+});
+
 describe('breeding from one face', () => {
   const g = sample.genome;
 

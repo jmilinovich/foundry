@@ -5,16 +5,29 @@ import { resolveKey } from '@/lib/serverKey';
 
 export const dynamic = 'force-dynamic';
 
+/**
+ * Summaries for runs the caller already knows the ids of.
+ *
+ * A run id IS the capability: there are no accounts, so `/run/<id>` renders the
+ * population, `/api/fonts/<fontId>` serves the TTFs, and breed/retry/promote
+ * carry no ownership check beyond knowing the id. Listing every run therefore
+ * hands out every capability in the system, which this route used to do for any
+ * request that simply omitted `?ids=`.
+ *
+ * Scoping is now enforced here rather than left to the client to opt into. The
+ * only caller (RecentRuns) always passes the ids it holds in localStorage.
+ */
 export async function GET(req: Request) {
   const ids = new URL(req.url).searchParams.get('ids');
-  const all = await listRuns();
-  // The home page passes the ids it holds in localStorage; scope to those so a
-  // capability-URL run is never listed for a browser that didn't create it.
-  if (ids !== null) {
-    const set = new Set(ids.split(',').filter(Boolean));
-    return NextResponse.json({ runs: all.filter((r) => set.has(r.id)) });
+  if (ids === null) {
+    return NextResponse.json({ error: 'Pass ?ids= the runs you already hold.' }, { status: 400 });
   }
-  return NextResponse.json({ runs: all });
+
+  const set = new Set(ids.split(',').filter(Boolean));
+  if (set.size === 0) return NextResponse.json({ runs: [] });
+
+  const all = await listRuns();
+  return NextResponse.json({ runs: all.filter((r) => set.has(r.id)) });
 }
 
 export async function POST(req: Request) {

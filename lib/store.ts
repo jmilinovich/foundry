@@ -40,7 +40,14 @@ import {
   type Generation,
 } from './mixfont';
 import { storage } from './storage';
-import type { FontRecord, FontRef, GlyphSetName, Lineage, Run } from './types';
+import {
+  ATLAS_RUN,
+  type FontRecord,
+  type FontRef,
+  type GlyphSetName,
+  type Lineage,
+  type Run,
+} from './types';
 
 // --- per-run mutex -------------------------------------------------------
 // The client polls while breeding may also be in flight. Within one process
@@ -123,16 +130,7 @@ export async function listAllFonts(): Promise<FontRef[]> {
 }
 
 /** Resolve a font that may live in a different run than the one you're viewing. */
-/**
- * The house library, addressed as if it were a run.
- *
- * An atlas face has no run and no font record, but everything downstream of a
- * pairing resolves its locked side through `findFont(runId, fontId)` — the
- * lookbook, the kit zip, the locked-slot picker in RunView. Reserving one run
- * id for the atlas lets a house font be locked into a pairing without a second
- * code path through any of them.
- */
-export const ATLAS_RUN = 'atlas';
+export { ATLAS_RUN };
 
 /** Slugs are filenames. Anything outside this shape never reaches the disk. */
 const SLUG = /^[a-z0-9][a-z0-9-]*$/;

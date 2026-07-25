@@ -45,6 +45,9 @@ export function KeyGate({ onReady, onClose }: { onReady: () => void; onClose: ()
         />
 
         <div className="mt-5 flex items-center gap-4">
+          {/* Red is correct here even though DESIGN.md reserves it to Breed and
+              Keep: this modal only ever opens as the confirmation step of Breed
+              or Pair, so it is that verb, not a third one. */}
           <button
             onClick={save}
             disabled={!ok}

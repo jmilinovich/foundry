@@ -86,7 +86,10 @@ export function Poster({
           <button
             onClick={exportPng}
             disabled={busy || !ready}
-            className="rounded bg-accent px-3 py-1.5 font-mono text-[11px] text-paper transition disabled:bg-panel disabled:text-ink-faint hover:enabled:brightness-110"
+            /* Exporting a PNG is neither Breed nor Keep, and it spends nothing.
+               Demoted to ink per DESIGN.md so the accent keeps meaning "this
+               costs money". */
+            className="rounded border border-ink bg-ink px-3 py-1.5 font-mono text-[11px] text-paper transition disabled:border-line disabled:bg-panel disabled:text-ink-faint hover:enabled:bg-transparent hover:enabled:text-ink"
           >
             {busy ? 'rendering…' : ready ? '↓ png' : 'embedding fonts…'}
           </button>

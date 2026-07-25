@@ -2,6 +2,17 @@
 
 import type { Genome, Slot, Stance } from './genome';
 
+/**
+ * The run id reserved for the frozen house library.
+ *
+ * A house face has no run, but pairing resolves its locked side through
+ * `findFont(runId, fontId)`, so the atlas is addressed as one. Both halves of
+ * the app need to recognise it — the server to resolve it, the client to know a
+ * face it cannot re-mint — so it lives here rather than in the server-only
+ * store.
+ */
+export const ATLAS_RUN = 'atlas';
+
 export type FontStatus = 'queued' | 'generating' | 'ready' | 'failed';
 
 /** How an individual came to exist. Drives the badge on each specimen card. */

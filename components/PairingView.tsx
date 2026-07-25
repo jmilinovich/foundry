@@ -9,7 +9,7 @@ import { toGenotype } from '@/lib/genome';
 import { rememberRun } from '@/lib/localRuns';
 import { apiFetch } from '@/lib/userKey';
 import { useEnsureKey } from './KeyGateProvider';
-import { dollars, type FontRecord, type PairingMeta } from '@/lib/types';
+import { ATLAS_RUN, dollars, type FontRecord, type PairingMeta } from '@/lib/types';
 import { PairLookbook } from './detail/PairLookbook';
 import { Poster } from './detail/Poster';
 import { useFoundryFont } from './useFoundryFont';
@@ -56,10 +56,12 @@ export function PairingView({
   const loaded = displayFace.isLoaded && textFace.isLoaded;
 
   const bothPromoted = promoted.display && promoted.text;
+  /** Either half coming from the frozen house library rules out a re-mint. */
+  const housePaired = displayRunId === ATLAS_RUN || textRunId === ATLAS_RUN;
   const ensureKey = useEnsureKey();
 
   const promoteBoth = useCallback(() => {
-    if (promoting || bothPromoted) return;
+    if (promoting || bothPromoted || housePaired) return;
     ensureKey(async () => {
       setPromoting(true);
       setError(null);
@@ -84,7 +86,7 @@ export function PairingView({
         setPromoting(false);
       }
     });
-  }, [promoting, bothPromoted, displayRunId, textRunId, display.id, text.id, ensureKey]);
+  }, [promoting, bothPromoted, housePaired, displayRunId, textRunId, display.id, text.id, ensureKey]);
 
   // Nudge the runs to sync so the 319-glyph cuts land.
   useEffect(() => {
@@ -110,18 +112,35 @@ export function PairingView({
           <div className="ml-auto flex items-center gap-4">
             {error && <span className="font-mono text-[11px] text-ink-dim">{error}</span>}
 
-            <button
-              onClick={promoteBoth}
-              disabled={promoting || bothPromoted}
-              title="Re-mint both faces at 319 glyphs"
-              className="rounded border border-line px-2.5 py-1 font-mono text-[11px] text-ink-dim transition hover:border-ink hover:text-ink disabled:opacity-50"
-            >
-              {bothPromoted
-                ? '319 glyphs ✓'
-                : promoting
-                  ? 'promoting both…'
-                  : `promote pair · ${dollars(CREDITS.extended * 2)}`}
-            </button>
+            {/*
+              A house face has no 319-glyph cut and no way to mint one: the
+              library is frozen, and readFontFile serves only its standard set.
+              Offering the button anyway charged for the half that CAN be
+              promoted and then 404'd on the half that can't, leaving the
+              visitor billed $0.50 with the button still lit at $1.00. It is
+              unreachable by construction, so it isn't offered.
+            */}
+            {housePaired ? (
+              <span
+                className="font-mono text-[11px] text-ink-faint"
+                title="The house library is frozen at its 78-glyph cut"
+              >
+                house face · 78 glyphs
+              </span>
+            ) : (
+              <button
+                onClick={promoteBoth}
+                disabled={promoting || bothPromoted}
+                title="Re-mint both faces at 319 glyphs"
+                className="rounded border border-line px-2.5 py-1 font-mono text-[11px] text-ink-dim transition hover:border-ink hover:text-ink disabled:opacity-50"
+              >
+                {bothPromoted
+                  ? '319 glyphs ✓'
+                  : promoting
+                    ? 'promoting both…'
+                    : `promote pair · ${dollars(CREDITS.extended * 2)}`}
+              </button>
+            )}
 
             {/* The whole pair as one kit — both fonts + wired CSS + specimen. */}
             <a

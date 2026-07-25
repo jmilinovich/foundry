@@ -16,10 +16,17 @@ import { Specimen } from './Specimen';
 export function RunView({
   initialRun,
   catalog = [],
+  locked: lockedProp = null,
 }: {
   initialRun: Run;
   /** Every ready font in the project — the pool the locked slot can point at. */
   catalog?: FontRef[];
+  /**
+   * The locked face, resolved on the server. A house font locked from the
+   * collection is not in `catalog` and cannot be found there, so this is the
+   * only reliable source.
+   */
+  locked?: FontRef | null;
 }) {
   const [run, setRun] = useState(initialRun);
   const [viewGen, setViewGen] = useState(initialRun.generation);
@@ -139,10 +146,32 @@ export function RunView({
 
   // --- pairing ------------------------------------------------------------
   const pairing = run.pairing;
-  const locked = useMemo(
-    () => (pairing ? catalog.find((f) => f.id === pairing.lockedFontId) : undefined),
-    [pairing, catalog],
-  );
+  /**
+   * Prefer the server-resolved face. After a swap the run reloads and the prop
+   * catches up, but until it does, matching on BOTH ids in the catalog keeps
+   * the picker honest — the old code matched on font id alone and would happily
+   * return a same-id font from a different run.
+   */
+  const locked = useMemo(() => {
+    if (!pairing) return undefined;
+    if (lockedProp && lockedProp.id === pairing.lockedFontId) return lockedProp;
+    return catalog.find(
+      (f) => f.id === pairing.lockedFontId && f.runId === pairing.lockedRunId,
+    );
+  }, [pairing, catalog, lockedProp]);
+
+  /**
+   * A house font is not in the catalog, so without this the picker renders a
+   * <select> whose value matches no option; browsers then display the first
+   * option as though it were the locked face, and touching the control swaps
+   * the face the visitor actually paid to pair against.
+   */
+  const lockOptions = useMemo(() => {
+    if (!locked) return catalog;
+    return catalog.some((f) => f.id === locked.id && f.runId === locked.runId)
+      ? catalog
+      : [locked, ...catalog];
+  }, [catalog, locked]);
   const stance = STANCES.find((s) => s.id === pairing?.stance);
 
   const pairAction = useCallback(
@@ -237,9 +266,10 @@ export function RunView({
               }}
               className="max-w-[280px] border border-line bg-panel px-2 py-1 font-mono text-[11px] text-ink-dim outline-none focus:border-ink"
             >
-              {catalog.map((f) => (
-                <option key={f.id} value={`${f.runId}:${f.id}`}>
+              {lockOptions.map((f) => (
+                <option key={`${f.runId}:${f.id}`} value={`${f.runId}:${f.id}`}>
                   {f.name}
+                  {f.runId === 'atlas' ? ' · house' : ''}
                 </option>
               ))}
             </select>

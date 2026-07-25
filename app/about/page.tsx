@@ -86,9 +86,15 @@ export default function AboutPage() {
       </div>
 
       <div className="mt-14">
+        {/* Matches the home page deliberately. DESIGN.md reserves Proof Red for
+            Breed and Keep, and this goes to the free quiz — painting it red here
+            while the identical action is ink on the home page and on the result
+            screen taught the same verb two different colours, so by the time a
+            visitor met the real Breed button the accent meant nothing. Weight,
+            not colour: the one 2px ink rule the system allows. */}
         <Link
           href="/quiz"
-          className="inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-3 text-sm font-medium text-paper transition hover:brightness-110"
+          className="group inline-flex items-center gap-2 border-2 border-ink px-6 py-4 text-sm font-medium transition hover:bg-ink hover:text-paper"
         >
           Find your type →
         </Link>

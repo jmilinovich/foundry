@@ -174,8 +174,21 @@ export function SpecimenSheet({
 
       <Section label="Numerals & punctuation">
         <div className="space-y-6">
-          <div style={{ ...face, fontSize: '64px' }}>0123456789</div>
-          <div style={{ ...face, fontSize: '40px', lineHeight: 1.4 }}>
+          {/*
+            A digit run has no soft-wrap opportunity, so at 64px it is as wide
+            as the widest face demands — measured, 10.72em, or 686px for the
+            extended half of the library. In a 342px phone column that pushed
+            the whole document sideways and dragged the sticky header off the
+            left edge with it. It scrolls inside its own box instead, which is
+            also the honest way to show a wide face: shrinking it to fit would
+            hide the very proportion the page is about.
+          */}
+          <div className="-mx-1 overflow-x-auto px-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div className="w-max" style={{ ...face, fontSize: '64px' }}>
+              0123456789
+            </div>
+          </div>
+          <div className="break-words" style={{ ...face, fontSize: '40px', lineHeight: 1.4 }}>
             {punctuation.join(' ')}
           </div>
           {/* Tabular figures decide whether a face can hold a table or a dashboard. */}

@@ -12,7 +12,7 @@ import { apiFetch } from '@/lib/userKey';
 import { useEnsureKey } from './KeyGateProvider';
 import { PairLauncher } from './detail/PairLauncher';
 import { SpecimenSheet } from './detail/SpecimenSheet';
-import { useAtlasFullFont } from './quiz/useAtlasFont';
+import { useAtlasSheetFont } from './quiz/useAtlasFont';
 
 /** The genome as foundry technical credits, in the order a spec sheet reads. */
 function genomeCredits(g: Genome): [string, string][] {
@@ -47,7 +47,10 @@ export function AtlasSpecimen({
 }) {
   const router = useRouter();
   const ensureKey = useEnsureKey();
-  const { family, loaded } = useAtlasFullFont(slug);
+  // The complete TTF, which is also the file SpecimenSheet parses for the
+  // character grid — one fetch, and the grid can never show a glyph the page
+  // then renders in a fallback.
+  const { family, loaded } = useAtlasSheetFont(slug);
 
   const [text, setText] = useState('Handgloves');
   const [tracking, setTracking] = useState(0);
@@ -104,8 +107,13 @@ export function AtlasSpecimen({
     }
   }, [genome, name]);
 
+  /**
+   * `py-2.5` on a phone puts these at ~44px, the documented minimum thumb
+   * target; they measured 27px, which is a coin-flip to hit. Desktop keeps the
+   * tighter setting, where a pointer is exact and the chrome should stay quiet.
+   */
   const action =
-    'rounded border border-line px-2.5 py-1 font-mono text-[11px] text-ink-dim transition hover:border-ink hover:text-ink disabled:opacity-50';
+    'flex items-center rounded border border-line px-3 py-2.5 font-mono text-[11px] text-ink-dim transition hover:border-ink hover:text-ink disabled:opacity-50 sm:px-2.5 sm:py-1';
 
   return (
     <div className="surface-publish flex min-h-full flex-1 flex-col">
@@ -123,7 +131,7 @@ export function AtlasSpecimen({
         <div className="mx-auto flex max-w-[1400px] flex-wrap items-center gap-x-6 gap-y-3 px-6 py-3.5">
           <Link
             href="/collection"
-            className="font-mono text-[11px] tracking-widest text-ink-dim hover:text-ink"
+            className="-my-2 flex items-center py-2 font-mono text-[11px] tracking-widest text-ink-dim hover:text-ink"
           >
             ← COLLECTION
           </Link>
@@ -185,7 +193,7 @@ export function AtlasSpecimen({
             onClick={breed}
             disabled={starting}
             title="Start a run from this font's genes"
-            className="whitespace-nowrap rounded border border-accent px-2.5 py-1 font-mono text-[11px] text-accent transition hover:bg-accent hover:text-paper disabled:opacity-50"
+            className="flex items-center whitespace-nowrap rounded border border-accent px-3 py-2.5 font-mono text-[11px] text-accent transition hover:bg-accent hover:text-paper disabled:opacity-50 sm:px-2.5 sm:py-1"
           >
             {starting ? 'starting…' : `breed · ${dollars(CREDITS.standard * POPULATION)}`}
           </button>
@@ -227,7 +235,13 @@ export function AtlasSpecimen({
         </div>
       </header>
 
-      <main className="flex-1">
+      {/*
+        The sheet fades in with its face rather than painting first in Times.
+        Gating only the 17px header name while the 176px hero rendered ungated
+        had it exactly backwards: the largest type on the page was the part that
+        flashed a stand-in and then reflowed.
+      */}
+      <main className="specimen flex-1" data-loaded={loaded}>
         <div className="mx-auto max-w-[1400px] px-6 py-8">
           <SpecimenSheet
             fontUrl={`/atlas/${slug}.ttf`}

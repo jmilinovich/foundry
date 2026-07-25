@@ -132,6 +132,31 @@ input[type="range"] {
   accent-color: var(--ink);  /* not the accent — a slider isn't a verb */
 }
 
+/* iOS Safari zooms the whole page when a focused field is set below 16px, and
+   it does not zoom back out when the field blurs. Every input in the app is
+   smaller than that by design — the controls are annotation, not content — so
+   focusing any of them left a phone visitor pinching their way back. Worst on
+   the key modal, which autofocuses the moment a paid action is confirmed.
+   The floor applies only where the zoom happens; the designed sizes stand from
+   the `sm` breakpoint up. */
+@media (max-width: 639px) {
+  input:not([type]),
+  input[type="text"],
+  input[type="search"],
+  input[type="email"],
+  input[type="url"],
+  input[type="password"],
+  textarea,
+  select {
+    font-size: 16px;
+  }
+
+  /* A 16px thumb is not a touch target. Apple asks for 44px, Google 48dp. */
+  input[type="range"] {
+    height: 44px;
+  }
+}
+
 ::selection {
   background: var(--accent);
   color: var(--paper);

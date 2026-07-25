@@ -177,39 +177,76 @@ const fullDone = new Set<string>();
 
 export const atlasFullFamily = (slug: string) => `atlasfull-${slug}`;
 
-export function useAtlasFullFont(slug: string | null) {
-  const family = slug ? atlasFullFamily(slug) : '';
-  const [loadedSlug, setLoadedSlug] = useState<string | null>(() =>
-    slug && fullDone.has(slug) ? slug : null,
+/** The complete face, for the specimen sheet. */
+export const atlasSheetFamily = (slug: string) => `atlassheet-${slug}`;
+
+/**
+ * @param cut  'subset' is the w/ woff2 built from FULL_TEXT — small, and all a
+ *             recommendation card needs. 'complete' is the TTF itself, which is
+ *             what the specimen sheet must use: the sheet prints the character
+ *             grid straight from the font's cmap, and the subset does not carry
+ *             every codepoint the cmap declares, so curly quotes rendered in
+ *             Georgia inside a page whose whole job is to show the typeface.
+ *             The sheet parses that same TTF for the grid, so it is one fetch.
+ */
+function useAtlasFace(slug: string | null, cut: 'subset' | 'complete') {
+  const familyOf = cut === 'subset' ? atlasFullFamily : atlasSheetFamily;
+  const key = slug ? `${cut}:${slug}` : '';
+  const family = slug ? familyOf(slug) : '';
+  const [loadedKey, setLoadedKey] = useState<string | null>(() =>
+    key && fullDone.has(key) ? key : null,
   );
 
   useEffect(() => {
     if (!slug || typeof window === 'undefined' || !('FontFace' in window)) return;
     let cancelled = false;
 
-    if (!fullRegistry.has(slug)) {
-      const face = new FontFace(atlasFullFamily(slug), `url(/atlas/w/${slug}.woff2) format("woff2")`);
+    if (!fullRegistry.has(key)) {
+      const src =
+        cut === 'subset'
+          ? `url(/atlas/w/${slug}.woff2) format("woff2")`
+          : `url(/atlas/${slug}.ttf) format("truetype")`;
       fullRegistry.set(
-        slug,
-        face
+        key,
+        new FontFace(familyOf(slug), src)
           .load()
           .then((f) => {
             document.fonts.add(f);
-            fullDone.add(slug);
+            fullDone.add(key);
           })
           .catch(() => {
-            fullRegistry.delete(slug);
+            // Allow a later mount to retry, but still settle: the old code
+            // dropped the registry entry and never marked the key done, so the
+            // `.then` guard below stayed false forever and the name it gates
+            // sat at opacity 0 permanently. One dropped woff2 — an ordinary
+            // mobile event on a network handover — left a blank row.
+            fullRegistry.delete(key);
           }),
       );
     }
-    void fullRegistry.get(slug)!.then(() => {
-      if (!cancelled && fullDone.has(slug)) setLoadedSlug(slug);
+    void fullRegistry.get(key)!.then(() => {
+      if (!cancelled) setLoadedKey(key);
     });
 
     return () => {
       cancelled = true;
     };
-  }, [slug]);
+  }, [slug, key, cut, familyOf]);
 
-  return { family, loaded: !!slug && loadedSlug === slug };
+  /**
+   * `loaded` means settled, not succeeded: a face that failed to fetch resolves
+   * true so whatever it gates reveals in the fallback. Blank is the worse
+   * failure — the caller is showing a name, and no name at all reads as a
+   * broken page rather than as an unstyled one.
+   */
+  return { family, loaded: !!slug && loadedKey === key };
+}
+
+export function useAtlasFullFont(slug: string | null) {
+  return useAtlasFace(slug, 'subset');
+}
+
+/** The face for a specimen sheet: the whole TTF, matching the cmap it prints. */
+export function useAtlasSheetFont(slug: string | null) {
+  return useAtlasFace(slug, 'complete');
 }
