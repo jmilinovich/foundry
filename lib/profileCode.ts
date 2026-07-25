@@ -20,9 +20,28 @@
 import { CATEGORY, CONTRAST, ERA, MOOD, TERMINALS, WEIGHT, WIDTH } from './genome';
 import { emptyProfile, QUIZ_AXES, type QuizAxis, type TasteProfile } from './taste';
 
-const VERSION = 1;
+const VERSION = 2;
 /** Vote weights are exact multiples of 1/20; see the note above. */
 const Q = 20;
+
+/**
+ * Two trailing checksum bytes.
+ *
+ * Without them a *truncated* code still decodes: the unpacker reads past the
+ * end, gets undefined, skips those entries and returns a profile that is
+ * partial but entirely plausible. That is the worst possible failure for a
+ * share link — a chat client clips the URL and the recipient is shown a
+ * confident verdict that isn't the one you sent, with nothing to indicate it.
+ * A checksum turns that silent corruption into the honest "didn't decode" page.
+ */
+function checksum(bytes: number[] | Uint8Array): [number, number] {
+  let h = 0x811c9dc5;
+  for (const b of bytes) {
+    h ^= b;
+    h = Math.imul(h, 0x01000193) >>> 0;
+  }
+  return [(h >>> 8) & 0xff, h & 0xff];
+}
 
 const AXIS_VALUES: Record<QuizAxis, readonly string[]> = {
   category: CATEGORY,
@@ -86,6 +105,7 @@ export function encodeProfile(profile: TasteProfile): string {
   packTally(out, profile.moods, MOOD);
   for (const ax of QUIZ_AXES) out.push(Math.min(255, profile.seen[ax] ?? 0));
 
+  out.push(...checksum(out));
   return b64url.encode(Uint8Array.from(out));
 }
 
@@ -99,7 +119,13 @@ export function encodeProfile(profile: TasteProfile): string {
 export function decodeProfile(code: string): TasteProfile | null {
   try {
     const bytes = b64url.decode(code);
-    if (bytes.length < 2 || bytes[0] !== VERSION) return null;
+    if (bytes.length < 5 || bytes[0] !== VERSION) return null;
+
+    // Verify before trusting a single field.
+    const payload = bytes.subarray(0, bytes.length - 2);
+    const [c1, c2] = checksum(payload);
+    if (bytes[bytes.length - 2] !== c1 || bytes[bytes.length - 1] !== c2) return null;
+
     const cursor = { i: 1 };
     const profile = emptyProfile();
     profile.round = bytes[cursor.i++];
@@ -110,8 +136,9 @@ export function decodeProfile(code: string): TasteProfile | null {
     profile.moods = unpackTally(bytes, cursor, MOOD);
     for (const ax of QUIZ_AXES) profile.seen[ax] = bytes[cursor.i++] ?? 0;
 
-    // A truncated code decodes to garbage silently; catch it here.
-    if (cursor.i > bytes.length) return null;
+    // The payload must have been consumed exactly — no short read, no trailing
+    // bytes. Together with the checksum this makes a mangled link fail loudly.
+    if (cursor.i !== payload.length) return null;
     return profile;
   } catch {
     return null;

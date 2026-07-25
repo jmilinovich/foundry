@@ -165,18 +165,29 @@ export function Quiz({
     advance(next);
   }, [profile, duel, advance]);
 
+  const done = profile.round >= QUIZ_LENGTH || (!duel && profile.round > 0);
+
   // Keyboard: ← / → to pick, ↓ to skip.
+  //
+  // Detached the moment the quiz is over. The result screen renders in place of
+  // the duels but this effect would otherwise keep running, and ↓ there still
+  // advanced profile.round — which feeds profileSeed, which chooses the
+  // wording of the read and encodes into the share URL. Pressing an arrow key
+  // while reading your own result would quietly rewrite it, and change the link
+  // you were about to send.
   useEffect(() => {
+    if (done) return;
     const onKey = (e: KeyboardEvent) => {
+      // Don't steal arrow keys from the share field or any other input.
+      const el = e.target as HTMLElement | null;
+      if (el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.isContentEditable)) return;
       if (e.key === 'ArrowLeft') pick('a');
       else if (e.key === 'ArrowRight') pick('b');
       else if (e.key === 'ArrowDown') skip();
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [pick, skip]);
-
-  const done = profile.round >= QUIZ_LENGTH || (!duel && profile.round > 0);
+  }, [pick, skip, done]);
 
   const ensureKey = useEnsureKey();
   const beginRun = useCallback(() => {

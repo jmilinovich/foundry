@@ -122,15 +122,42 @@ describe('profile codes', () => {
     expect(decodeProfile('')).toBeNull();
   });
 
-  it('rejects a truncated code instead of decoding it to garbage', () => {
-    const code = encodeProfile(playThrough(9));
-    // Lop off the tail; the cursor should run past the buffer and bail.
-    const truncated = code.slice(0, Math.floor(code.length * 0.6));
-    const back = decodeProfile(truncated);
-    if (back !== null) {
-      // If it did decode, it must not claim seen-counts it has no bytes for.
-      for (const ax of QUIZ_AXES) expect(Number.isFinite(back.seen[ax])).toBe(true);
+  /**
+   * A truncated link is the realistic corruption: chat clients clip URLs. The
+   * dangerous outcome isn't an error, it's a *plausible* profile — the
+   * recipient reading a confident verdict that isn't the one that was sent.
+   */
+  it('rejects every truncation of a real code', () => {
+    for (const seed of [3, 9, 17]) {
+      const code = encodeProfile(playThrough(seed));
+      for (let cut = 1; cut < code.length; cut++) {
+        expect(decodeProfile(code.slice(0, cut)), `truncation at ${cut} decoded`).toBeNull();
+      }
     }
+  });
+
+  it('never decodes a corrupted character into a different profile', () => {
+    // The honest property is not "always null": the final base64 character
+    // carries spare bits, so some substitutions there decode to the identical
+    // byte string and are not corruption at all. What must never happen is a
+    // mangled code yielding a *different*, plausible profile.
+    const original = playThrough(6);
+    const code = encodeProfile(original);
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
+
+    for (let i = 0; i < code.length; i++) {
+      for (const shift of [1, 7, 31]) {
+        const swap = alphabet[(alphabet.indexOf(code[i]) + shift) % alphabet.length];
+        if (swap === code[i]) continue;
+        const back = decodeProfile(code.slice(0, i) + swap + code.slice(i + 1));
+        if (back !== null) expect(encodeProfile(back)).toBe(code);
+      }
+    }
+  });
+
+  it('rejects codes with extra bytes appended', () => {
+    const code = encodeProfile(playThrough(12));
+    expect(decodeProfile(`${code}AAAA`)).toBeNull();
   });
 
   it('rejects a code with an unknown version byte', () => {
