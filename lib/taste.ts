@@ -355,6 +355,39 @@ export function profileToSeed(profile: TasteProfile): TasteSeed {
 }
 
 /**
+ * Start a run from one existing face.
+ *
+ * Pinning all eleven axes would mint eight copies of the font you were already
+ * looking at, which is $1.60 for nothing. So only the two axes that carry a
+ * face's identity are pinned, and the rest are weighted to peak on this font's
+ * values with some spill onto their neighbours. What comes back reads as a
+ * family around the face rather than a reproduction of it.
+ */
+const NEIGHBOUR_SPILL = 0.4;
+
+export function seedFromGenome(g: Genome): TasteSeed {
+  const weights: TasteSeed['weights'] = {};
+
+  for (const ax of QUIZ_AXES) {
+    const values = VALUES[ax];
+    const i = values.indexOf(g[ax] as string);
+    if (i < 0) continue;
+    const w: Record<string, number> = { [values[i]]: 1 };
+    if (i > 0) w[values[i - 1]] = NEIGHBOUR_SPILL;
+    if (i < values.length - 1) w[values[i + 1]] = NEIGHBOUR_SPILL;
+    weights[ax] = w;
+  }
+
+  return {
+    weights,
+    // Category and era are what make a face recognisably itself; let everything
+    // else move.
+    pinned: { category: g.category, era: g.era },
+    moods: [g.mood[0], g.mood[1]],
+  };
+}
+
+/**
  * A plain-language read of a profile, derived deterministically. No model in
  * the loop — the same picks always yield the same sentence.
  */

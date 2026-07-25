@@ -3,7 +3,7 @@ import { promises as fs } from 'fs';
 import path from 'path';
 
 import { loadAtlas } from '@/lib/atlas';
-import { toGenotype } from '@/lib/genome';
+import { toGenotype, toPrompt } from '@/lib/genome';
 import { decodeProfile } from '@/lib/profileCode';
 import { profileToVector, recommend } from '@/lib/recommend';
 
@@ -30,8 +30,76 @@ const HOW_MANY = 6;
 const safeName = (s: string) =>
   s.replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '').toLowerCase() || 'font';
 
+/** One house face as a kit: the TTF, a ready @font-face rule, and its genome. */
+async function singleKit(slug: string) {
+  const entry = (await loadAtlas()).find((e) => e.slug === slug);
+  if (!entry) return new Response('no such font', { status: 404 });
+
+  let ttf: Buffer;
+  try {
+    ttf = await fs.readFile(path.join(process.cwd(), 'public', 'atlas', `${slug}.ttf`));
+  } catch {
+    return new Response('font unavailable', { status: 503 });
+  }
+
+  const file = safeName(entry.name);
+  const zip = new JSZip();
+  zip.file(`${file}.ttf`, ttf);
+  zip.file(
+    `${file}.css`,
+    [
+      `@font-face {`,
+      `  font-family: "${entry.name}";`,
+      `  src: url("${file}.ttf") format("truetype");`,
+      `  font-weight: normal;`,
+      `  font-style: normal;`,
+      `  font-display: swap;`,
+      `}`,
+      '',
+    ].join('\n'),
+  );
+  zip.file(
+    'README.txt',
+    [
+      entry.name.toUpperCase(),
+      '',
+      toGenotype(entry.genome),
+      '',
+      'Drawn for ' + entry.genome.useCase + '.',
+      '',
+      'One of the 201 faces in the Foundry house library, cut once and frozen.',
+      'Yours to use. Generated through the Mixfont API and not derived from',
+      'anyone else’s typeface.',
+      '',
+      'The prompt it was cut from:',
+      '',
+      toPrompt(entry.genome),
+      '',
+      'foundry — fonts.mili.dev',
+      '',
+    ].join('\n'),
+  );
+
+  const body = await zip.generateAsync({ type: 'nodebuffer' });
+  return new Response(new Uint8Array(body), {
+    headers: {
+      'content-type': 'application/zip',
+      'content-disposition': `attachment; filename="${file}.zip"`,
+      'cache-control': 'public, max-age=31536000, immutable',
+    },
+  });
+}
+
 export async function GET(req: Request) {
-  const code = new URL(req.url).searchParams.get('p');
+  const params = new URL(req.url).searchParams;
+
+  const slug = params.get('slug');
+  if (slug) {
+    if (!/^[a-z0-9][a-z0-9-]*$/.test(slug)) return new Response('bad slug', { status: 400 });
+    return singleKit(slug);
+  }
+
+  const code = params.get('p');
   if (!code) return new Response('missing profile', { status: 400 });
 
   const profile = decodeProfile(code);

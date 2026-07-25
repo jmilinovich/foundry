@@ -265,12 +265,13 @@ export function FontDetail({ initialRun, fontId }: { initialRun: Run; fontId: st
         <div className="mx-auto max-w-[1400px] px-6 py-8">
           {tab === 'specimen' && (
             <SpecimenSheet
-              fontId={fontId}
+              fontUrl={`/api/fonts/${fontId}${
+                glyphSet === 'extended' && extFamily ? '?set=extended' : ''
+              }`}
               family={activeFamily}
               text={text || 'Handgloves'}
               tracking={tracking}
               leading={leading}
-              glyphSet={glyphSet === 'extended' && extFamily ? 'extended' : 'standard'}
               weightLabel={font.genome.weight.toUpperCase()}
               genome={genomeCredits(font)}
             />

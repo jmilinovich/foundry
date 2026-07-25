@@ -13,7 +13,10 @@
 
 import 'server-only';
 import { randomUUID } from 'crypto';
+import { promises as fs } from 'fs';
+import path from 'path';
 
+import { loadAtlas } from './atlas';
 import {
   breed,
   constrainForText,
@@ -120,7 +123,52 @@ export async function listAllFonts(): Promise<FontRef[]> {
 }
 
 /** Resolve a font that may live in a different run than the one you're viewing. */
+/**
+ * The house library, addressed as if it were a run.
+ *
+ * An atlas face has no run and no font record, but everything downstream of a
+ * pairing resolves its locked side through `findFont(runId, fontId)` — the
+ * lookbook, the kit zip, the locked-slot picker in RunView. Reserving one run
+ * id for the atlas lets a house font be locked into a pairing without a second
+ * code path through any of them.
+ */
+export const ATLAS_RUN = 'atlas';
+
+/** Slugs are filenames. Anything outside this shape never reaches the disk. */
+const SLUG = /^[a-z0-9][a-z0-9-]*$/;
+
+/**
+ * A house font as a FontRecord.
+ *
+ * `createdAt` is a constant rather than the current time: the library was cut
+ * once and frozen, and a value that moves every request would make an
+ * otherwise-static page differ between two renders of the same thing.
+ */
+async function atlasRecord(slug: string): Promise<FontRecord | null> {
+  if (!SLUG.test(slug)) return null;
+  const entry = (await loadAtlas()).find((e) => e.slug === slug);
+  if (!entry) return null;
+
+  return {
+    id: slug,
+    name: entry.name,
+    genome: entry.genome,
+    prompt: toPrompt(entry.genome),
+    generation: 0,
+    lineage: 'seed',
+    parents: [],
+    mixfontId: null,
+    status: 'ready',
+    progress: 100,
+    survived: true,
+    createdAt: ATLAS_CUT_AT,
+  };
+}
+
+const ATLAS_CUT_AT = '2026-07-20T00:00:00.000Z';
+
 export async function findFont(runId: string, fontId: string): Promise<FontRecord | null> {
+  if (runId === ATLAS_RUN) return atlasRecord(fontId);
   const run = await readRun(runId);
   return run?.fonts.find((f) => f.id === fontId) ?? null;
 }
@@ -129,7 +177,19 @@ export async function readFontFile(
   fontId: string,
   set: GlyphSetName = 'standard',
 ): Promise<Buffer | null> {
-  return storage().getFont(fontId, set);
+  const stored = await storage().getFont(fontId, set);
+  if (stored) return stored;
+
+  // House faces are static files rather than run storage. Serving them through
+  // the same route is what lets a locked house font need no special case in the
+  // consumers — @font-face, poster capture and kit zips all address a font by
+  // id and get bytes back. There is no extended cut of the atlas to serve.
+  if (set !== 'standard' || !SLUG.test(fontId)) return null;
+  try {
+    return await fs.readFile(path.join(process.cwd(), 'public', 'atlas', `${fontId}.ttf`));
+  } catch {
+    return null;
+  }
 }
 
 // --- lifecycle -----------------------------------------------------------

@@ -3,10 +3,18 @@
 import { useEffect, useState } from 'react';
 
 import { PANGRAM, SAMPLE_PARAGRAPH, supportedChars } from '@/lib/glyphs';
-import type { GlyphSetName } from '@/lib/types';
 
 const WATERFALL = [128, 96, 72, 54, 40, 30, 22, 16];
 const TEXT_SIZES = [18, 16, 14];
+
+/**
+ * Everything the punctuation row would like to show, in the order it should
+ * appear. It gets filtered against the font's real cmap before rendering:
+ * the standard cut carries none of `()[]{}&@#$%` and printing them anyway
+ * silently swaps in the fallback serif, which shows the visitor a character
+ * the font they are judging does not contain.
+ */
+const PUNCTUATION = '.,:;!?‘’“”()[]{}/\\&@#$%*+−=<>';
 
 function Section({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -20,21 +28,20 @@ function Section({ label, children }: { label: string; children: React.ReactNode
 }
 
 export function SpecimenSheet({
-  fontId,
+  fontUrl,
   family,
   text,
   tracking,
   leading,
-  glyphSet,
   weightLabel,
   genome,
 }: {
-  fontId: string;
+  /** Where the actual font bytes are, so the sheet can read its own cmap. */
+  fontUrl: string;
   family: string;
   text: string;
   tracking: number;
   leading: number;
-  glyphSet: GlyphSetName;
   /** For the waterfall's weight·px·tracking grammar. */
   weightLabel: string;
   /** Foundry technical credits: label/value pairs. */
@@ -44,14 +51,20 @@ export function SpecimenSheet({
 
   useEffect(() => {
     let cancelled = false;
-    const url = `/api/fonts/${fontId}${glyphSet === 'extended' ? '?set=extended' : ''}`;
-    supportedChars(url)
+    supportedChars(fontUrl)
       .then((cs) => !cancelled && setChars(cs))
       .catch(() => !cancelled && setChars([]));
     return () => {
       cancelled = true;
     };
-  }, [fontId, glyphSet]);
+  }, [fontUrl]);
+
+  const have = new Set(chars);
+  // Before the cmap has been read there is nothing to filter against, so show
+  // the full row rather than an empty one that pops into place.
+  const punctuation = chars.length
+    ? [...PUNCTUATION].filter((c) => have.has(c))
+    : [...PUNCTUATION];
 
   const face = { fontFamily: `"${family}", serif`, letterSpacing: `${tracking}em` };
   // Follows the container's theme variables, which paper mode overrides.
@@ -69,7 +82,9 @@ export function SpecimenSheet({
 
       {/* Genome as foundry technical credits. */}
       <Section label="Genome">
-        <dl className="grid max-w-2xl grid-cols-2 gap-x-12 sm:grid-cols-3">
+        {/* One column on a phone: at two, "drawn for / a brand identity" has
+            about 150px to hold a label and its value and collides. */}
+        <dl className="grid max-w-2xl grid-cols-1 gap-x-12 sm:grid-cols-2 md:grid-cols-3">
           {genome.map(([k, v]) => (
             <div
               key={k}
@@ -105,7 +120,11 @@ export function SpecimenSheet({
         </div>
       </Section>
 
-      <Section label={chars.length ? `Character set — ${chars.length} glyphs` : 'Character set'}>
+      {/* "characters", not "glyphs" — this counts what the cmap maps, and
+          several codepoints share a drawing. */}
+      <Section
+        label={chars.length ? `Character set — ${chars.length} characters` : 'Character set'}
+      >
         {chars.length ? (
           <div
             className="grid grid-cols-[repeat(auto-fill,minmax(56px,1fr))]"
@@ -157,8 +176,7 @@ export function SpecimenSheet({
         <div className="space-y-6">
           <div style={{ ...face, fontSize: '64px' }}>0123456789</div>
           <div style={{ ...face, fontSize: '40px', lineHeight: 1.4 }}>
-            . , : ; ! ? &ldquo; &rdquo; &lsquo; &rsquo; ( ) [ ] &#123; &#125; / \ &amp; @ # $ % *
-            + &minus; = &lt; &gt;
+            {punctuation.join(' ')}
           </div>
           {/* Tabular figures decide whether a face can hold a table or a dashboard. */}
           <div className="max-w-md">

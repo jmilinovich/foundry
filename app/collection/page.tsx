@@ -22,7 +22,7 @@ export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
   title: 'The house library — Foundry',
   description:
-    'All 201 typefaces Foundry has cut, frozen the day they were drawn. Every one downloads as a TTF.',
+    'All 201 typefaces Foundry has cut, frozen the day they were drawn. Every one has a full specimen sheet and downloads as a TTF.',
 };
 
 export default async function CollectionPage() {

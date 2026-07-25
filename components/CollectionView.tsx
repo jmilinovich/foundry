@@ -39,20 +39,31 @@ function Row({ entry }: { entry: AtlasEntry }) {
   return (
     <li className="border-b border-line py-5">
       <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-        <span
+        {/* The name is the way in to the full sheet; the download stays its own
+            target so a click on one is never a click on the other. */}
+        <Link
+          href={`/collection/${entry.slug}`}
           className="specimen text-[clamp(1.6rem,4.5vw,2.4rem)] leading-[1.15]"
           data-loaded={loaded}
           style={{ fontFamily: `"${family}", Georgia, serif` }}
         >
           {entry.name}
-        </span>
-        <a
-          href={`/atlas/${entry.slug}.ttf`}
-          download={`${entry.name}.ttf`}
-          className="font-mono text-[11px] text-ink-faint transition hover:text-ink"
-        >
-          ↓ ttf
-        </a>
+        </Link>
+        <div className="flex items-center gap-4">
+          <Link
+            href={`/collection/${entry.slug}`}
+            className="font-mono text-[11px] text-ink-dim transition hover:text-ink"
+          >
+            specimen →
+          </Link>
+          <a
+            href={`/atlas/${entry.slug}.ttf`}
+            download={`${entry.name}.ttf`}
+            className="font-mono text-[11px] text-ink-faint transition hover:text-ink"
+          >
+            ↓ ttf
+          </a>
+        </div>
       </div>
       <p className="mt-2 font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-faint">
         {g.category} · {g.weight} · {g.width} · {g.contrast} · {g.era}
@@ -108,8 +119,8 @@ export function CollectionView({ atlas }: { atlas: AtlasEntry[] }) {
         </h1>
         <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-ink-dim">
           All {atlas.length} faces the house has cut, frozen the day they were drawn. Every type
-          pair in the quiz comes out of this list, and so do the six the read hands back. Each one
-          downloads as a TTF.
+          pair in the quiz comes out of this list, and so do the six the read hands back. Open any
+          name for its full specimen, or take the TTF straight from here.
         </p>
 
         {/* ── filters ──────────────────────────────────────────────────── */}
