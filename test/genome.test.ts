@@ -4,8 +4,6 @@ import { describe, expect, it } from 'vitest';
 import {
   CATEGORY,
   CONTRAST,
-  TERMINALS,
-  WEIGHT,
   WIDTH,
   toPrompt,
   type Genome,
