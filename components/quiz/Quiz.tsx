@@ -6,7 +6,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { mulberry32 } from '@/lib/genome';
 import { encodeProfile } from '@/lib/profileCode';
-import type { WorldImage } from '@/lib/world';
+import { worldFallback, worldPreloadUrl, worldSrcSet, type WorldImage } from '@/lib/world';
 import {
   emptyProfile,
   nextDuel,
@@ -168,13 +168,30 @@ function WorldPane({
           sign — which would make the vote a verdict on our cropping. Letterboxed
           on the panel ground it reads as a plate in a catalogue. */}
       <div className="relative flex min-h-0 flex-1 items-center justify-center overflow-hidden p-1 sm:h-[42vh] sm:max-h-[430px] sm:min-h-[160px] sm:flex-none sm:p-0">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={`/world/${image.file}`}
-          alt={image.caption}
-          className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-[1.02]"
-          loading="eager"
-        />
+        {/* The pane is ~350 CSS px wide, so the ~1000px JPEG masters were
+            shipping roughly four times the bytes needed. `sizes` tells the
+            browser the real display width before it picks; without it the
+            default of 100vw makes it choose the largest cut every time. */}
+        {/* `contents` so the img is laid out by the pane, not by the picture,
+            and then pinned to the pane's box. Constraining with max-h-full
+            instead needs a definite parent height, which a flex child does not
+            have: once the img carried real intrinsic dimensions, a portrait
+            photograph computed 334px tall inside a 276px pane and was clipped.
+            inset-0 plus object-contain cannot overflow whatever the shape. */}
+        <picture className="contents">
+          <source type="image/avif" srcSet={worldSrcSet(image, 'avif')} sizes="(min-width: 640px) 50vw, 92vw" />
+          <source type="image/jpeg" srcSet={worldSrcSet(image, 'jpg')} sizes="(min-width: 640px) 50vw, 92vw" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={worldFallback(image)}
+            alt={image.caption}
+            width={image.pxW}
+            height={image.pxH}
+            className="absolute inset-1 h-[calc(100%-0.5rem)] w-[calc(100%-0.5rem)] object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+            loading="eager"
+            decoding="async"
+          />
+        </picture>
       </div>
       <div className="shrink-0 border-t border-line px-3 py-2 sm:px-4 sm:py-3">
         <p className="text-[13px] leading-snug text-ink sm:text-[14px]">{image.caption}</p>
@@ -247,7 +264,7 @@ export function Quiz({
 
   // The photographs get the same treatment, a beat later. A world round used to
   // wait on a cold fetch of two full-size images, and round 2 is a world round.
-  const worldFiles = useMemo(() => world.map((w) => w.file), [world]);
+  const worldFiles = useMemo(() => world.map(worldPreloadUrl), [world]);
   useWorldPreload(worldFiles);
 
   /**

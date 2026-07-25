@@ -26,6 +26,34 @@ describe('the world image bank', () => {
     }
   });
 
+  /**
+   * The pane renders a <picture> with an AVIF srcset, a JPEG srcset and a JPEG
+   * fallback src. Every one of those URLs is derived from the master filename,
+   * so a missing cut is a broken image with nothing in the code to catch it —
+   * and the fallback is the one that breaks silently for the browsers least
+   * able to recover.
+   */
+  it('ships every display cut the pane asks for', () => {
+    const stem = (f: string) => f.replace(/\.(jpe?g|png)$/i, '');
+    const missing: string[] = [];
+    for (const w of WORLD) {
+      for (const size of [480, 900]) {
+        for (const ext of ['avif', 'jpg']) {
+          const p = `public/world/${stem(w.file)}-${size}.${ext}`;
+          if (!existsSync(p)) missing.push(p);
+        }
+      }
+    }
+    expect(missing.slice(0, 5)).toEqual([]);
+  });
+
+  it('records intrinsic dimensions so panes reserve their box', () => {
+    for (const w of WORLD) {
+      expect(w.pxW, `${w.id}`).toBeGreaterThan(0);
+      expect(w.pxH, `${w.id}`).toBeGreaterThan(0);
+    }
+  });
+
   it('names a file extension that matches how it will be served', () => {
     for (const w of WORLD) expect(w.file).toMatch(/\.(jpg|jpeg|png)$/i);
   });

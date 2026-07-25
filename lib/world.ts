@@ -26,7 +26,15 @@ export type WorldCredit = {
 
 export type WorldImage = {
   id: string;
+  /** The licensed master. Variants are derived from it; see scripts/variants-world.mjs. */
   file: string;
+  /**
+   * Intrinsic pixel size of the master, so a pane reserves its box before the
+   * bytes land. Named pxW/pxH because `width` on this type is already the
+   * genome axis — the string one, "condensed".
+   */
+  pxW?: number;
+  pxH?: number;
   theme: string;
   /** What a viewer is actually reading off the picture. */
   caption: string;
@@ -57,4 +65,35 @@ export const WORLD_ROUNDS = [2, 5, 8, 11] as const;
 
 export function isWorldRound(round0: number): boolean {
   return (WORLD_ROUNDS as readonly number[]).includes(round0 + 1);
+}
+
+/**
+ * The display cuts of a photograph.
+ *
+ * The masters are ~1000px JPEGs and a duel pane is about 350 CSS px, so the
+ * bank was 85% of everything the quiz downloaded — against 393 KB for all 201
+ * typefaces. Two wastes compounding: resolution, and format. Across the images
+ * one session preloads, this takes 2888 KB to 1051 KB.
+ *
+ * 480 covers a 1x phone; 900 covers 2x and desktop. AVIF for the ~95% that
+ * support it, JPEG for the rest — `<picture>` picks, and neither the srcset nor
+ * the fallback can serve something that does not exist, because the variants
+ * are generated for every entry and a test asserts it.
+ */
+const VARIANT_WIDTHS = [480, 900] as const;
+
+const stem = (file: string) => file.replace(/\.(jpe?g|png)$/i, '');
+
+export function worldSrcSet(image: WorldImage, ext: 'avif' | 'jpg'): string {
+  return VARIANT_WIDTHS.map((w) => `/world/${stem(image.file)}-${w}.${ext} ${w}w`).join(', ');
+}
+
+/** The `src` a non-srcset browser falls back to. */
+export function worldFallback(image: WorldImage): string {
+  return `/world/${stem(image.file)}-900.jpg`;
+}
+
+/** What the preloader should warm: the cut a phone will actually request. */
+export function worldPreloadUrl(image: WorldImage): string {
+  return `/world/${stem(image.file)}-900.avif`;
 }

@@ -11,14 +11,16 @@
   "era": "19th-century industrial",
   "category": "transitional serif",
   "weight": "regular",
-  "width": "normal-width",
   "contrast": "moderate contrast",
   "credit": {
    "artist": "Gustave Peignot",
    "licence": "CC BY-SA 3.0",
    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
    "source": "https://commons.wikimedia.org/wiki/File:1883-g-peignot-fonderie-publicite.png"
-  }
+  },
+  "pxW": 1280,
+  "pxH": 433,
+  "width": "normal-width"
  },
  {
   "id": "1911-04-20-illustrirte-zeitung-s-0008-s-viii-hannoverscher-c",
@@ -32,14 +34,16 @@
   "era": "19th-century industrial",
   "category": "flared sans",
   "weight": "regular",
-  "width": "normal-width",
   "contrast": "low contrast",
   "credit": {
    "artist": "Wikimedia Commons",
    "licence": "Public domain",
    "licenceUrl": null,
    "source": "https://commons.wikimedia.org/wiki/File:1911-04-20_Illustrirte_Zeitung_S._0008_S._VIII_Hannoverscher_Curier_Gebr%C3%BCder_J%C3%A4necke,_K%C3%BCnstlersignatur_AS.jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 1562,
+  "width": "normal-width"
  },
  {
   "id": "1911-04-20-illustrirte-zeitung-s-0014-s-xiv-oberes-teil-nne-",
@@ -53,14 +57,16 @@
   "era": "19th-century industrial",
   "category": "grotesque sans",
   "weight": "bold",
-  "width": "condensed",
   "contrast": "low contrast",
   "credit": {
    "artist": "Änne Koken",
    "licence": "Public domain",
    "licenceUrl": null,
    "source": "https://commons.wikimedia.org/wiki/File:1911-04-20_Illustrirte_Zeitung_S._0014_S._XIV_oberes_Teil,_%C3%84nne_Koken_Appels_Mayonnaise_Delikatessen_Hummer.jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 809,
+  "width": "condensed"
  },
  {
   "id": "1911-04-20-illustrirte-zeitung-s-0100-s-066hannoversche-gumm",
@@ -74,14 +80,16 @@
   "era": "19th-century industrial",
   "category": "grotesque sans",
   "weight": "bold",
-  "width": "normal-width",
   "contrast": "low contrast",
   "credit": {
    "artist": "Änne Koken ; Illustrirte Zeitung , August Madsack",
    "licence": "Public domain",
    "licenceUrl": null,
    "source": "https://commons.wikimedia.org/wiki/File:1911-04-20_Illustrirte_Zeitung_S._0100_S._066Hannoversche_Gummi-Kamm_Co._AG_Hannover-Limmer_%C3%84nne_Koken.jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 1654,
+  "width": "normal-width"
  },
  {
   "id": "1960s-book-spine-lettering-8622331028",
@@ -95,14 +103,16 @@
   "era": "15th-century humanist",
   "category": "flared sans",
   "weight": "regular",
-  "width": "normal-width",
   "contrast": "low contrast",
   "credit": {
    "artist": "Nina Stössinger from Den Haag, Netherlands",
    "licence": "CC BY-SA 2.0",
    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
    "source": "https://commons.wikimedia.org/wiki/File:1960s_book_spine_lettering_(8622331028).jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 1090,
+  "width": "normal-width"
  },
  {
   "id": "1968-colonial-theater-19-jun-mc-allentown-pa",
@@ -116,14 +126,16 @@
   "era": "1970s phototypesetting",
   "category": "old-style serif",
   "weight": "black",
-  "width": "normal-width",
   "contrast": "low contrast",
   "credit": {
    "artist": "Wikimedia Commons",
    "licence": "Public domain",
    "licenceUrl": null,
    "source": "https://commons.wikimedia.org/wiki/File:1968_-_Colonial_Theater_-_19_Jun_MC_-_Allentown_PA.jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 1769,
+  "width": "normal-width"
  },
  {
   "id": "20030315-11-pennsylvania-railroad-poster-5624496835",
@@ -137,14 +149,16 @@
   "era": "1920s Bauhaus",
   "category": "grotesque sans",
   "weight": "bold",
-  "width": "normal-width",
   "contrast": "low contrast",
   "credit": {
    "artist": "David Wilson from Oak Park, Illinois, USA",
    "licence": "CC BY 2.0",
    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
    "source": "https://commons.wikimedia.org/wiki/File:20030315_11_Pennsylvania_Railroad_poster._(5624496835).jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 1780,
+  "width": "normal-width"
  },
  {
   "id": "24-5-sign",
@@ -158,14 +172,16 @@
   "era": "contemporary",
   "category": "geometric sans",
   "weight": "bold",
-  "width": "normal-width",
   "contrast": "monoline",
   "credit": {
    "artist": "Nbarth",
    "licence": "CC0",
    "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
    "source": "https://commons.wikimedia.org/wiki/File:24-5_sign.jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 1054,
+  "width": "normal-width"
  },
  {
   "id": "500px-photo-29726199",
@@ -179,14 +195,16 @@
   "era": "19th-century industrial",
   "category": "grotesque sans",
   "weight": "bold",
-  "width": "condensed",
   "contrast": "low contrast",
   "credit": {
    "artist": "B Konti",
    "licence": "CC BY 3.0",
    "licenceUrl": "https://creativecommons.org/licenses/by/3.0",
    "source": "https://commons.wikimedia.org/wiki/File:500px_photo_(29726199).jpeg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 932,
+  "width": "condensed"
  },
  {
   "id": "a-g-dreyer-hannover-chemische-w-scherei-amerikanische-feinw-",
@@ -200,14 +218,16 @@
   "era": "19th-century industrial",
   "category": "grotesque sans",
   "weight": "bold",
-  "width": "normal-width",
   "contrast": "low contrast",
   "credit": {
    "artist": "Bernd Schwabe in Hannover",
    "licence": "CC BY-SA 3.0",
    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
    "source": "https://commons.wikimedia.org/wiki/File:A._%26_G._Dreyer_Hannover_Chemische_W%C3%A4scherei_Amerikanische_Feinw%C3%A4scherei_Annahme_hier_Frankfurter_Emaillirwerke,_NeuIsenburg,_Historisches_Museum_Hannover.jpg"
-  }
+  },
+  "pxW": 800,
+  "pxH": 1454,
+  "width": "normal-width"
  },
  {
   "id": "a-history-of-the-theories-of-aether-and-electricity-whittack",
@@ -221,14 +241,16 @@
   "era": "19th-century industrial",
   "category": "didone serif",
   "weight": "regular",
-  "width": "condensed",
   "contrast": "high contrast",
   "credit": {
    "artist": "Hodges, Figgis & Co. Ltd. Dublin",
    "licence": "Public domain",
    "licenceUrl": null,
    "source": "https://commons.wikimedia.org/wiki/File:A_history_of_the_theories_of_aether_and_electricity._Whittacker_E.T._(1910)_-_Page7_(title_page)-693px.jpg"
-  }
+  },
+  "pxW": 693,
+  "pxH": 1173,
+  "width": "condensed"
  },
  {
   "id": "a-short-history-of-wales-title-page",
@@ -242,14 +264,16 @@
   "era": "19th-century industrial",
   "category": "old-style serif",
   "weight": "regular",
-  "width": "normal-width",
   "contrast": "moderate contrast",
   "credit": {
    "artist": "Owen Morgan Edwards",
    "licence": "Public domain",
    "licenceUrl": null,
    "source": "https://commons.wikimedia.org/wiki/File:A_Short_History_of_Wales_-_Title_Page.jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 1607,
+  "width": "normal-width"
  },
  {
   "id": "a-son-of-the-people-title-page",
@@ -263,14 +287,16 @@
   "era": "19th-century industrial",
   "category": "flared sans",
   "weight": "light",
-  "width": "normal-width",
   "contrast": "low contrast",
   "credit": {
    "artist": "Wikimedia Commons",
    "licence": "Public domain",
    "licenceUrl": null,
    "source": "https://commons.wikimedia.org/wiki/File:A_son_of_the_People--title_page.jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 1852,
+  "width": "normal-width"
  },
  {
   "id": "a-specimen-by-william-caslon",
@@ -284,14 +310,16 @@
   "era": "18th-century enlightenment",
   "category": "old-style serif",
   "weight": "regular",
-  "width": "normal-width",
   "contrast": "moderate contrast",
   "credit": {
    "artist": "William Caslon",
    "licence": "Public domain",
    "licenceUrl": null,
    "source": "https://commons.wikimedia.org/wiki/File:A_Specimen_by_William_Caslon.jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 1445,
+  "width": "normal-width"
  },
  {
   "id": "a-woman-bundled-in-winter-wear-stands-at-an-unidentified-str",
@@ -305,14 +333,16 @@
   "era": "19th-century industrial",
   "category": "grotesque sans",
   "weight": "bold",
-  "width": "condensed",
   "contrast": "low contrast",
   "credit": {
    "artist": "Wikimedia Commons",
    "licence": "Public domain",
    "licenceUrl": null,
    "source": "https://commons.wikimedia.org/wiki/File:A_woman_bundled_in_winter_wear_stands_at_an_unidentified_street_corner_in_front_of_advertisements_for_the_movies_%22The_Round_Up%22_at_the_Olympic_Theater_and_%22The_Girl_from_Rector%27s%22_showing_at_the_Century_Theater.jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 1357,
+  "width": "condensed"
  },
  {
   "id": "adi-margarine",
@@ -326,14 +356,16 @@
   "era": "1920s Bauhaus",
   "category": "geometric sans",
   "weight": "bold",
-  "width": "normal-width",
   "contrast": "low contrast",
   "credit": {
    "artist": "Schilderjagd",
    "licence": "CC BY-SA 3.0",
    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
    "source": "https://commons.wikimedia.org/wiki/File:ADI_Margarine.JPG"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 1369,
+  "width": "normal-width"
  },
  {
   "id": "advertising-sign-belfast-2-geograph-org-uk-1216810",
@@ -347,14 +379,16 @@
   "era": "19th-century industrial",
   "category": "grotesque sans",
   "weight": "bold",
-  "width": "condensed",
   "contrast": "low contrast",
   "credit": {
    "artist": "Albert Bridge",
    "licence": "CC BY-SA 2.0",
    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
    "source": "https://commons.wikimedia.org/wiki/File:Advertising_sign,_Belfast_(2)_-_geograph.org.uk_-_1216810.jpg"
-  }
+  },
+  "pxW": 640,
+  "pxH": 587,
+  "width": "condensed"
  },
  {
   "id": "affiche-par-c-h-dufau",
@@ -368,14 +402,16 @@
   "era": "19th-century industrial",
   "category": "flared sans",
   "weight": "regular",
-  "width": "condensed",
   "contrast": "low contrast",
   "credit": {
    "artist": "Clémentine Hélène Dufau",
    "licence": "Public domain",
    "licenceUrl": null,
    "source": "https://commons.wikimedia.org/wiki/File:Affiche_par_C.-H._Dufau.jpg"
-  }
+  },
+  "pxW": 946,
+  "pxH": 1331,
+  "width": "condensed"
  },
  {
   "id": "airpoort-rhodes-26",
@@ -389,14 +425,16 @@
   "era": "contemporary",
   "category": "neo-grotesque sans",
   "weight": "bold",
-  "width": "normal-width",
   "contrast": "monoline",
   "credit": {
    "artist": "Piotrus",
    "licence": "CC BY-SA 3.0",
    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
    "source": "https://commons.wikimedia.org/wiki/File:Airpoort_rhodes_26.JPG"
-  }
+  },
+  "pxW": 1280,
+  "pxH": 960,
+  "width": "normal-width"
  },
  {
   "id": "algemeene-brandwaarborg-maatschappij-te-amsterdam",
@@ -410,14 +448,16 @@
   "era": "19th-century industrial",
   "category": "grotesque sans",
   "weight": "bold",
-  "width": "normal-width",
   "contrast": "low contrast",
   "credit": {
    "artist": "Johann Georg van Caspel (1870 - 1928)",
    "licence": "Public domain",
    "licenceUrl": null,
    "source": "https://commons.wikimedia.org/wiki/File:Algemeene_Brandwaarborg_Maatschappij_te_Amsterdam.jpeg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 824,
+  "width": "normal-width"
  },
  {
   "id": "amica-mascagni-1905",
@@ -431,14 +471,16 @@
   "era": "19th-century industrial",
   "category": "geometric sans",
   "weight": "medium",
-  "width": "wide",
   "contrast": "low contrast",
   "credit": {
    "artist": "G. Ricordi E. C. (Milan), éditeur",
    "licence": "Public domain",
    "licenceUrl": null,
    "source": "https://commons.wikimedia.org/wiki/File:Amica-Mascagni-1905.jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 1635,
+  "width": "wide"
  },
  {
   "id": "arnaud-de-gramont-2003-10",
@@ -456,7 +498,9 @@
    "licence": "CC BY-SA 3.0",
    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
    "source": "https://commons.wikimedia.org/wiki/File:Arnaud_de_Gramont_2003-10.jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 820
  },
  {
   "id": "articoli-per-fumatori-moli-sign-6nnn-copia-2",
@@ -473,7 +517,9 @@
    "licence": "CC BY-SA 4.0",
    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
    "source": "https://commons.wikimedia.org/wiki/File:Articoli_per_fumatori_Moli_sign_-_6nnn_copia_2.jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 1760
  },
  {
   "id": "at-paraty-brazil-2018-050",
@@ -487,14 +533,16 @@
   "era": "1970s phototypesetting",
   "category": "geometric sans",
   "weight": "regular",
-  "width": "normal-width",
   "contrast": "monoline",
   "credit": {
    "artist": "Mike Peel",
    "licence": "CC BY-SA 4.0",
    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
    "source": "https://commons.wikimedia.org/wiki/File:At_Paraty,_Brazil_2018_050.jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 1650,
+  "width": "normal-width"
  },
  {
   "id": "axa-skylt",
@@ -508,14 +556,16 @@
   "era": "19th-century industrial",
   "category": "slab serif",
   "weight": "black",
-  "width": "wide",
   "contrast": "moderate contrast",
   "credit": {
    "artist": "Holger.Ellgaard",
    "licence": "CC BY-SA 3.0",
    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
    "source": "https://commons.wikimedia.org/wiki/File:AXA_skylt.jpg"
-  }
+  },
+  "pxW": 648,
+  "pxH": 978,
+  "width": "wide"
  },
  {
   "id": "baltimore-and-ohio-railroad-advertising-poster",
@@ -529,14 +579,16 @@
   "era": "19th-century industrial",
   "category": "transitional serif",
   "weight": "bold",
-  "width": "normal-width",
   "contrast": "high contrast",
   "credit": {
    "artist": "Wikimedia Commons",
    "licence": "Public domain",
    "licenceUrl": null,
    "source": "https://commons.wikimedia.org/wiki/File:Baltimore_and_Ohio_Railroad_advertising_poster.jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 838,
+  "width": "normal-width"
  },
  {
   "id": "bar-neon-sign-11291208084hn6",
@@ -554,7 +606,9 @@
    "licence": "CC0",
    "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
    "source": "https://commons.wikimedia.org/wiki/File:Bar-neon-sign-11291208084Hn6.jpg"
-  }
+  },
+  "pxW": 1280,
+  "pxH": 853
  },
  {
   "id": "barnum-bailey-coney-island-water-carnival-3g10497u",
@@ -568,14 +622,16 @@
   "era": "19th-century industrial",
   "category": "slab serif",
   "weight": "black",
-  "width": "normal-width",
   "contrast": "moderate contrast",
   "credit": {
    "artist": "Wikimedia Commons",
    "licence": "Public domain",
    "licenceUrl": null,
    "source": "https://commons.wikimedia.org/wiki/File:Barnum_%26_Bailey_Coney_Island_Water_Carnival_3g10497u.jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 1482,
+  "width": "normal-width"
  },
  {
   "id": "bi-res-swan-van-mieghem-exaerde-rev-tements-josz-st-ame-koek",
@@ -589,14 +645,16 @@
   "era": "19th-century industrial",
   "category": "flared sans",
   "weight": "bold",
-  "width": "normal-width",
   "contrast": "low contrast",
   "credit": {
    "artist": "Alf van Beem",
    "licence": "CC0",
    "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
    "source": "https://commons.wikimedia.org/wiki/File:Bi%C3%A8res_Swan,_van_Mieghem-Exaerde,_Rev%C3%AAtements_JOSZ_-_St%C3%A9_Ame_Koekelberg-Bruxelles,_old_metal_advertising_sign.JPG"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 531,
+  "width": "normal-width"
  },
  {
   "id": "big-top-the-wrington-suite",
@@ -610,14 +668,16 @@
   "era": "contemporary",
   "category": "grotesque sans",
   "weight": "black",
-  "width": "wide",
   "contrast": "monoline",
   "credit": {
    "artist": "TTWKennington",
    "licence": "CC BY-SA 4.0",
    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
    "source": "https://commons.wikimedia.org/wiki/File:Big_Top,_The_Wrington_Suite.jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 824,
+  "width": "wide"
  },
  {
   "id": "bishops-lydeard-gwr-platform-barrow",
@@ -631,14 +691,16 @@
   "era": "19th-century industrial",
   "category": "grotesque sans",
   "weight": "bold",
-  "width": "normal-width",
   "contrast": "low contrast",
   "credit": {
    "artist": "Geof Sheppard",
    "licence": "CC BY-SA 4.0",
    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
    "source": "https://commons.wikimedia.org/wiki/File:Bishops_Lydeard_GWR_platform_barrow.jpg"
-  }
+  },
+  "pxW": 1024,
+  "pxH": 768,
+  "width": "normal-width"
  },
  {
   "id": "bitter-oriental",
@@ -655,7 +717,9 @@
    "licence": "Public domain",
    "licenceUrl": null,
    "source": "https://commons.wikimedia.org/wiki/File:Bitter_Oriental.jpg"
-  }
+  },
+  "pxW": 1000,
+  "pxH": 1383
  },
  {
   "id": "borough-market-billboard",
@@ -669,14 +733,16 @@
   "era": "contemporary",
   "category": "grotesque sans",
   "weight": "black",
-  "width": "condensed",
   "contrast": "monoline",
   "credit": {
    "artist": "TTWKennington",
    "licence": "CC BY-SA 4.0",
    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
    "source": "https://commons.wikimedia.org/wiki/File:Borough_Market_Billboard.jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 780,
+  "width": "condensed"
  },
  {
   "id": "buchstabenmuseum-1",
@@ -690,14 +756,16 @@
   "era": "1970s phototypesetting",
   "category": "neo-grotesque sans",
   "weight": "bold",
-  "width": "normal-width",
   "contrast": "low contrast",
   "credit": {
    "artist": "Manfred Brückels",
    "licence": "CC BY-SA 3.0",
    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
    "source": "https://commons.wikimedia.org/wiki/File:Buchstabenmuseum_1.jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 1467,
+  "width": "normal-width"
  },
  {
   "id": "candy-cane-william-b-steenberge-bangor-ny-1844-1922",
@@ -711,14 +779,16 @@
   "era": "19th-century industrial",
   "category": "grotesque sans",
   "weight": "bold",
-  "width": "normal-width",
   "contrast": "low contrast",
   "credit": {
    "artist": "Sunshine Pub.Co.Phila",
    "licence": "Public domain",
    "licenceUrl": null,
    "source": "https://commons.wikimedia.org/wiki/File:Candy_cane_William_B_Steenberge_Bangor_NY_1844-1922.jpg"
-  }
+  },
+  "pxW": 631,
+  "pxH": 949,
+  "width": "normal-width"
  },
  {
   "id": "caratteri-mobili-tipografici-tipografia",
@@ -732,14 +802,16 @@
   "era": "19th-century industrial",
   "category": "grotesque sans",
   "weight": "black",
-  "width": "normal-width",
   "contrast": "monoline",
   "credit": {
    "artist": "Andrea.C.Fi",
    "licence": "CC BY-SA 4.0",
    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
    "source": "https://commons.wikimedia.org/wiki/File:Caratteri-mobili-tipografici-tipografia.jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 672,
+  "width": "normal-width"
  },
  {
   "id": "cherokee-type-36-pt",
@@ -757,7 +829,9 @@
    "licence": "CC BY-SA 3.0",
    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
    "source": "https://commons.wikimedia.org/wiki/File:Cherokee_Type_-_36_pt.jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 825
  },
  {
   "id": "cl-ssic",
@@ -776,7 +850,9 @@
    "licence": "Public domain",
    "licenceUrl": null,
    "source": "https://commons.wikimedia.org/wiki/File:Cl%C3%A0ssic.jpg"
-  }
+  },
+  "pxW": 604,
+  "pxH": 453
  },
  {
   "id": "composing-stick-winkelhaken-2311727423",
@@ -796,7 +872,9 @@
    "licence": "CC BY 2.0",
    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
    "source": "https://commons.wikimedia.org/wiki/File:Composing-stick_-_Winkelhaken_(2311727423).jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 1082
  },
  {
   "id": "d-bw-kressbronn-ab-genossenschaftsbank-hemigkofen-nonnenbach",
@@ -809,14 +887,16 @@
   ],
   "era": "19th-century industrial",
   "weight": "bold",
-  "width": "condensed",
   "contrast": "moderate contrast",
   "credit": {
    "artist": "ANKAWÜ",
    "licence": "CC BY-SA 3.0",
    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
    "source": "https://commons.wikimedia.org/wiki/File:D-BW-Kressbronn_aB_-_Genossenschaftsbank_Hemigkofen-Nonnenbach.JPG"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 1467,
+  "width": "condensed"
  },
  {
   "id": "delhi-t3-direction-to-gates",
@@ -830,14 +910,16 @@
   "era": "contemporary",
   "category": "humanist sans",
   "weight": "medium",
-  "width": "normal-width",
   "contrast": "low contrast",
   "credit": {
    "artist": "Ramesh NG",
    "licence": "CC BY-SA 2.0",
    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
    "source": "https://commons.wikimedia.org/wiki/File:Delhi_T3_direction_to_gates.jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 825,
+  "width": "normal-width"
  },
  {
   "id": "deutscher-honig",
@@ -851,14 +933,16 @@
   "era": "1920s Bauhaus",
   "category": "grotesque sans",
   "weight": "bold",
-  "width": "normal-width",
   "contrast": "low contrast",
   "credit": {
    "artist": "Alf van Beem",
    "licence": "CC0",
    "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
    "source": "https://commons.wikimedia.org/wiki/File:Deutscher_Honig.jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 1425,
+  "width": "normal-width"
  },
  {
   "id": "diamond-oil-huile-autos-enamel-advertising-sign",
@@ -872,14 +956,16 @@
   "era": "1920s Bauhaus",
   "category": "grotesque sans",
   "weight": "bold",
-  "width": "condensed",
   "contrast": "low contrast",
   "credit": {
    "artist": "Alf van Beem",
    "licence": "CC0",
    "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
    "source": "https://commons.wikimedia.org/wiki/File:Diamond_Oil,_Huile_Autos,_enamel_advertising_sign.JPG"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 758,
+  "width": "condensed"
  },
  {
   "id": "die-schweiz-nebst-den-angrenzenden-teilen-von-oberitalien-sa",
@@ -893,14 +979,16 @@
   "era": "19th-century industrial",
   "category": "didone serif",
   "weight": "regular",
-  "width": "normal-width",
   "contrast": "high contrast",
   "credit": {
    "artist": "Baedeker, Karl",
    "licence": "Public domain",
    "licenceUrl": null,
    "source": "https://commons.wikimedia.org/wiki/File:Die_Schweiz,_nebst_den_angrenzenden_Teilen_von_Oberitalien,_Savoyen_und_Tirol._Handbuch_f%C3%BCr_Reisende_von_Karl_Baedeker._33._Auflage,_1909,_cover.jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 1654,
+  "width": "normal-width"
  },
  {
   "id": "dorfmuseum-m-nchhof-1241",
@@ -914,14 +1002,16 @@
   "era": "19th-century industrial",
   "category": "grotesque sans",
   "weight": "bold",
-  "width": "normal-width",
   "contrast": "low contrast",
   "credit": {
    "artist": "Karl Gruber",
    "licence": "CC BY-SA 4.0",
    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
    "source": "https://commons.wikimedia.org/wiki/File:Dorfmuseum_M%C3%B6nchhof_1241.JPG"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 733,
+  "width": "normal-width"
  },
  {
   "id": "droogwasserij-ververij-clairette",
@@ -935,14 +1025,16 @@
   "era": "1950s Swiss",
   "category": "grotesque sans",
   "weight": "bold",
-  "width": "normal-width",
   "contrast": "low contrast",
   "credit": {
    "artist": "Alf van Beem",
    "licence": "CC0",
    "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
    "source": "https://commons.wikimedia.org/wiki/File:Droogwasserij_Ververij_Clairette.JPG"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 637,
+  "width": "normal-width"
  },
  {
   "id": "earlestown-34932877072",
@@ -956,14 +1048,16 @@
   "era": "19th-century industrial",
   "category": "transitional serif",
   "weight": "light",
-  "width": "normal-width",
   "contrast": "moderate contrast",
   "credit": {
    "artist": "Alex Liivet from Chester, United Kingdom",
    "licence": "CC0",
    "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
    "source": "https://commons.wikimedia.org/wiki/File:Earlestown_(34932877072).jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 825,
+  "width": "normal-width"
  },
  {
   "id": "f-r-the-people-26570132254",
@@ -977,14 +1071,16 @@
   "era": "contemporary",
   "category": "slab serif",
   "weight": "bold",
-  "width": "normal-width",
   "contrast": "low contrast",
   "credit": {
    "artist": "Tim Green from Bradford",
    "licence": "CC BY 2.0",
    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
    "source": "https://commons.wikimedia.org/wiki/File:F_r_the_People_(26570132254).jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 1631,
+  "width": "normal-width"
  },
  {
   "id": "ferry-at-sunset-unsplash",
@@ -998,14 +1094,16 @@
   "era": "1950s Swiss",
   "category": "grotesque sans",
   "weight": "bold",
-  "width": "condensed",
   "contrast": "monoline",
   "credit": {
    "artist": "Charlie Hang envisual",
    "licence": "CC0",
    "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
    "source": "https://commons.wikimedia.org/wiki/File:Ferry_At_Sunset_(Unsplash).jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 750,
+  "width": "condensed"
  },
  {
   "id": "fort-delaware-old-poster",
@@ -1019,14 +1117,16 @@
   "era": "19th-century industrial",
   "category": "slab serif",
   "weight": "black",
-  "width": "normal-width",
   "contrast": "moderate contrast",
   "credit": {
    "artist": "Shun Ho",
    "licence": "CC BY-SA 4.0",
    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
    "source": "https://commons.wikimedia.org/wiki/File:Fort_Delaware_Old_Poster.jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 1650,
+  "width": "normal-width"
  },
  {
   "id": "g-ta-canal-sweden-s-scenic-waterway-3531544426",
@@ -1040,14 +1140,16 @@
   "era": "1920s Bauhaus",
   "category": "geometric sans",
   "weight": "light",
-  "width": "wide",
   "contrast": "monoline",
   "credit": {
    "artist": "Wikimedia Commons",
    "licence": "Public domain",
    "licenceUrl": null,
    "source": "https://commons.wikimedia.org/wiki/File:G%C3%B6ta_Canal,_Sweden%27s_scenic_waterway_(3531544426).jpg"
-  }
+  },
+  "pxW": 650,
+  "pxH": 1024,
+  "width": "wide"
  },
  {
   "id": "heineken-2013-06-22-09-21",
@@ -1061,14 +1163,16 @@
   "era": "1970s phototypesetting",
   "category": "geometric sans",
   "weight": "medium",
-  "width": "normal-width",
   "contrast": "monoline",
   "credit": {
    "artist": "Pandamonium0123",
    "licence": "CC BY-SA 3.0",
    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
    "source": "https://commons.wikimedia.org/wiki/File:Heineken_2013-06-22_09-21.jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 625,
+  "width": "normal-width"
  },
  {
   "id": "jungfrau-railway-bernese-oberland-3531536304",
@@ -1082,14 +1186,16 @@
   "era": "1920s Bauhaus",
   "category": "grotesque sans",
   "weight": "bold",
-  "width": "normal-width",
   "contrast": "low contrast",
   "credit": {
    "artist": "Emil Cardineaux (1877-1936)",
    "licence": "Public domain",
    "licenceUrl": null,
    "source": "https://commons.wikimedia.org/wiki/File:Jungfrau-Railway._Bernese_Oberland_(3531536304).jpg"
-  }
+  },
+  "pxW": 652,
+  "pxH": 1024,
+  "width": "normal-width"
  },
  {
   "id": "kaiser-special-1954-37146346573",
@@ -1108,7 +1214,9 @@
    "licence": "CC BY 2.0",
    "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
    "source": "https://commons.wikimedia.org/wiki/File:Kaiser_Special_(1954)_(37146346573).jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 825
  },
  {
   "id": "kashmir-3531494596",
@@ -1122,14 +1230,16 @@
   "era": "1920s Bauhaus",
   "category": "geometric sans",
   "weight": "bold",
-  "width": "normal-width",
   "contrast": "low contrast",
   "credit": {
    "artist": "G. Tait",
    "licence": "Public domain",
    "licenceUrl": null,
    "source": "https://commons.wikimedia.org/wiki/File:Kashmir_(3531494596).jpg"
-  }
+  },
+  "pxW": 641,
+  "pxH": 1024,
+  "width": "normal-width"
  },
  {
   "id": "lisboa-patio-junqueira-200-30918850163",
@@ -1143,14 +1253,16 @@
   "era": "contemporary",
   "category": "grotesque sans",
   "weight": "black",
-  "width": "condensed",
   "contrast": "low contrast",
   "credit": {
    "artist": "Anicius Olybrius",
    "licence": "CC BY-SA 2.0",
    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
    "source": "https://commons.wikimedia.org/wiki/File:Lisboa_-_Patio_Junqueira_200_(30918850163).jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 1100,
+  "width": "condensed"
  },
  {
   "id": "manuscript-calligraphy-english-russian",
@@ -1169,7 +1281,9 @@
    "licence": "CC BY-SA 4.0",
    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
    "source": "https://commons.wikimedia.org/wiki/File:Manuscript-calligraphy-english-russian.png"
-  }
+  },
+  "pxW": 700,
+  "pxH": 467
  },
  {
   "id": "marseille-alexandrie-la-route-d-egypte-4505509584",
@@ -1183,14 +1297,16 @@
   "era": "1920s Bauhaus",
   "category": "grotesque sans",
   "weight": "bold",
-  "width": "normal-width",
   "contrast": "low contrast",
   "credit": {
    "artist": "Joseph de La Nézière",
    "licence": "Public domain",
    "licenceUrl": null,
    "source": "https://commons.wikimedia.org/wiki/File:Marseille-Alexandrie_La_Route_D%27Egypte_(4505509584).jpg"
-  }
+  },
+  "pxW": 750,
+  "pxH": 1024,
+  "width": "normal-width"
  },
  {
   "id": "muralmexico",
@@ -1204,14 +1320,16 @@
   "era": "1970s phototypesetting",
   "category": "grotesque sans",
   "weight": "bold",
-  "width": "normal-width",
   "contrast": "low contrast",
   "credit": {
    "artist": "Erwan Corre",
    "licence": "CC BY-SA 4.0",
    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
    "source": "https://commons.wikimedia.org/wiki/File:MuralMexico.jpg"
-  }
+  },
+  "pxW": 600,
+  "pxH": 400,
+  "width": "normal-width"
  },
  {
   "id": "nestle-milk-ghost-sign-geograph-8288573",
@@ -1225,14 +1343,16 @@
   "era": "19th-century industrial",
   "category": "grotesque sans",
   "weight": "bold",
-  "width": "normal-width",
   "contrast": "low contrast",
   "credit": {
    "artist": "Dan MacLeod",
    "licence": "CC BY-SA 2.0",
    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
    "source": "https://commons.wikimedia.org/wiki/File:Nestle_Milk_ghost_sign_(geograph_8288573).jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 731,
+  "width": "normal-width"
  },
  {
   "id": "peru-of-the-incas-4505509946",
@@ -1246,14 +1366,16 @@
   "era": "1950s Swiss",
   "category": "grotesque sans",
   "weight": "bold",
-  "width": "normal-width",
   "contrast": "low contrast",
   "credit": {
    "artist": "Paul George Lawler",
    "licence": "Public domain",
    "licenceUrl": null,
    "source": "https://commons.wikimedia.org/wiki/File:Peru_of_the_Incas_(4505509946).jpg"
-  }
+  },
+  "pxW": 968,
+  "pxH": 1500,
+  "width": "normal-width"
  },
  {
   "id": "print-works-product-beamish-museum-25-january-2014-1",
@@ -1267,14 +1389,16 @@
   "era": "19th-century industrial",
   "category": "slab serif",
   "weight": "bold",
-  "width": "normal-width",
   "contrast": "moderate contrast",
   "credit": {
    "artist": "Cory Doctorow from London, UK",
    "licence": "CC BY-SA 2.0",
    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
    "source": "https://commons.wikimedia.org/wiki/File:Print_works_product,_Beamish_Museum,_25_January_2014_(1).jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 825,
+  "width": "normal-width"
  },
  {
   "id": "see-europe-next-3530712031",
@@ -1288,14 +1412,16 @@
   "era": "1950s Swiss",
   "category": "geometric sans",
   "weight": "bold",
-  "width": "normal-width",
   "contrast": "very low contrast",
   "credit": {
    "artist": "Eugene Zion (1913 - 1975)",
    "licence": "Public domain",
    "licenceUrl": null,
    "source": "https://commons.wikimedia.org/wiki/File:See_Europe_next_(3530712031).jpg"
-  }
+  },
+  "pxW": 679,
+  "pxH": 1024,
+  "width": "normal-width"
  },
  {
   "id": "southern-pacific-shasta-daylight-poster-1950",
@@ -1309,14 +1435,16 @@
   "era": "1950s Swiss",
   "category": "grotesque sans",
   "weight": "bold",
-  "width": "normal-width",
   "contrast": "low contrast",
   "credit": {
    "artist": "Wikimedia Commons",
    "licence": "Public domain",
    "licenceUrl": null,
    "source": "https://commons.wikimedia.org/wiki/File:Southern_Pacific_Shasta_Daylight_poster,_1950.jpg"
-  }
+  },
+  "pxW": 724,
+  "pxH": 1024,
+  "width": "normal-width"
  },
  {
   "id": "tasmania-the-anglers-paradise-3531482146",
@@ -1330,14 +1458,16 @@
   "era": "1920s Bauhaus",
   "category": "grotesque sans",
   "weight": "black",
-  "width": "normal-width",
   "contrast": "low contrast",
   "credit": {
    "artist": "Wikimedia Commons",
    "licence": "Public domain",
    "licenceUrl": null,
    "source": "https://commons.wikimedia.org/wiki/File:Tasmania._The_anglers%27_paradise_(3531482146).jpg"
-  }
+  },
+  "pxW": 635,
+  "pxH": 1024,
+  "width": "normal-width"
  },
  {
   "id": "washington-the-city-beautiful-pennsylvania-railroad-poster-a",
@@ -1351,13 +1481,15 @@
   "era": "1920s Bauhaus",
   "category": "geometric sans",
   "weight": "bold",
-  "width": "normal-width",
   "contrast": "low contrast",
   "credit": {
    "artist": "Edward Mason Eggleston (1882-1941)",
    "licence": "Public domain",
    "licenceUrl": null,
    "source": "https://commons.wikimedia.org/wiki/File:Washington%E2%80%94The_City_Beautiful,_Pennsylvania_Railroad_poster,_artwork_by_Edward_Mason_Eggleston.jpg"
-  }
+  },
+  "pxW": 1100,
+  "pxH": 1768,
+  "width": "normal-width"
  }
 ]

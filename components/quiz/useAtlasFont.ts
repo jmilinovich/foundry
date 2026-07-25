@@ -140,18 +140,18 @@ export function useAtlasFont(slug: string | null) {
  * Only a handful are needed (four world rounds, two images each), so this warms
  * a bounded slice rather than all 66, two at a time, after the fonts are away.
  */
-export function useWorldPreload(files: string[], count = 14) {
+export function useWorldPreload(urls: string[], count = 14) {
   useEffect(() => {
-    if (typeof window === 'undefined' || files.length === 0) return;
+    if (typeof window === 'undefined' || urls.length === 0) return;
     let cancelled = false;
-    const queue = files.slice(0, count);
+    const queue = urls.slice(0, count);
     let cursor = 0;
 
     const worker = () => {
       if (cancelled || cursor >= queue.length) return;
       const img = new Image();
       img.onload = img.onerror = worker;
-      img.src = `/world/${queue[cursor++]}`;
+      img.src = queue[cursor++];
     };
     // Behind the font sweep: a specimen you are about to judge outranks a
     // photograph you will not see for another round.
@@ -165,7 +165,7 @@ export function useWorldPreload(files: string[], count = 14) {
       window.clearTimeout(id);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [files.length, count]);
+  }, [urls.length, count]);
 }
 
 /**
