@@ -66,6 +66,24 @@ export function HomeFunnel() {
         <span className="text-2xl transition group-hover:translate-x-1">→</span>
       </Link>
 
+      {/*
+        The second door, deliberately quieter than the first.
+
+        Not everyone arriving here wants to be read. A designer with a live
+        project wants type, and until the specimen sheets existed there was
+        nothing here for them but a quiz — the library was a footnote under the
+        band. It stays subordinate: one weighted CTA, and this is a plain line
+        of text, so the funnel is not split so much as widened.
+      */}
+      <div className="mt-4 flex flex-wrap items-baseline gap-x-5 gap-y-2">
+        <Link
+          href="/collection"
+          className="font-mono text-[12px] text-ink-dim underline underline-offset-4 transition hover:text-ink"
+        >
+          browse all 201 and their pairings →
+        </Link>
+      </div>
+
       {!typed ? (
         <button
           onClick={() => setTyped(true)}

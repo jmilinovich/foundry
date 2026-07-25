@@ -10,7 +10,6 @@ import { seedFromGenome } from '@/lib/taste';
 import { dollars } from '@/lib/types';
 import { apiFetch } from '@/lib/userKey';
 import { useEnsureKey } from './KeyGateProvider';
-import { PairLauncher } from './detail/PairLauncher';
 import { SpecimenSheet } from './detail/SpecimenSheet';
 import { useAtlasSheetFont } from './quiz/useAtlasFont';
 
@@ -55,7 +54,6 @@ export function AtlasSpecimen({
   const [text, setText] = useState('Handgloves');
   const [tracking, setTracking] = useState(0);
   const [leading, setLeading] = useState(1.55);
-  const [pairing, setPairing] = useState(false);
   const [starting, setStarting] = useState(false);
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -117,15 +115,6 @@ export function AtlasSpecimen({
 
   return (
     <div className="surface-publish flex min-h-full flex-1 flex-col">
-      {pairing && (
-        <PairLauncher
-          runId="atlas"
-          fontId={slug}
-          fontName={name}
-          specimenText={text || 'Handgloves'}
-          onClose={() => setPairing(false)}
-        />
-      )}
 
       <header className="sticky top-0 z-20 border-b border-line bg-ground/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-[1400px] flex-wrap items-center gap-x-6 gap-y-3 px-6 py-3.5">
@@ -184,9 +173,11 @@ export function AtlasSpecimen({
             ↓ kit
           </a>
 
-          <button onClick={() => setPairing(true)} className={`${action} whitespace-nowrap`}>
+          {/* Free, and the default. Breeding a partner is one click further in,
+              on the page that shows what 350 existing faces already offer. */}
+          <Link href={`/collection/${slug}/pair`} className={`${action} whitespace-nowrap`}>
             pair this
-          </button>
+          </Link>
 
           {/* Proof Red is reserved to Breed and Keep — see DESIGN.md. */}
           <button

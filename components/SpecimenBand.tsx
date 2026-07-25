@@ -27,7 +27,14 @@ function Line({ entry }: { entry: AtlasEntry }) {
     // The name sits under the specimen on a phone and beside it from sm up.
     // Sharing the line meant the two competed for ~320px and the specimen lost:
     // it truncated to "Hand…", which is not a face anyone can judge.
-    <div className="flex flex-col gap-x-4 border-t border-line py-3 sm:flex-row sm:items-baseline sm:justify-between">
+    //
+    // The whole line is the link. These four are the first generated letterforms
+    // a stranger sees, and until the specimen sheets existed they could only go
+    // to the list — you could fall for a face on the front page and then have to
+    // hunt for it among 201 rows.
+    <Link
+      href={`/collection/${entry.slug}`}
+      className="group flex flex-col gap-x-4 border-t border-line py-3 sm:flex-row sm:items-baseline sm:justify-between">
       <span
         className="specimen block leading-[1.1]"
         data-loaded={loaded}
@@ -40,10 +47,10 @@ function Line({ entry }: { entry: AtlasEntry }) {
       >
         {SPECIMEN}
       </span>
-      <span className="mt-1 shrink-0 font-mono text-[10px] uppercase tracking-[0.14em] text-ink-faint sm:mt-0">
+      <span className="mt-1 shrink-0 font-mono text-[10px] uppercase tracking-[0.14em] text-ink-faint transition group-hover:text-ink sm:mt-0">
         {entry.name}
       </span>
-    </div>
+    </Link>
   );
 }
 
@@ -56,14 +63,8 @@ export function SpecimenBand({ faces }: { faces: AtlasEntry[] }) {
       ))}
       <div className="flex items-baseline justify-between border-t border-line pt-3">
         <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-faint">
-          four of 201
+          four of 201 · open any for its specimen
         </span>
-        <Link
-          href="/collection"
-          className="font-mono text-[11px] text-ink-dim transition hover:text-ink"
-        >
-          the whole library →
-        </Link>
       </div>
     </div>
   );
