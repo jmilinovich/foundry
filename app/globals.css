@@ -38,8 +38,11 @@
 .surface-judge { --ground: var(--bench); background: var(--bench); }
 .surface-publish { --ground: var(--paper); background: var(--paper); }
 
+/* A pull-to-refresh mid-quiz throws the run away and starts a different one.
+   Containing the overscroll chain is the whole fix. */
 html,
 body {
+  overscroll-behavior-y: contain;
   background: var(--ground);
   color: var(--ink);
   font-family: var(--font-hanken), system-ui, sans-serif;

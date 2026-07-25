@@ -2,26 +2,22 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { mulberry32 } from '@/lib/genome';
+import { encodeProfile } from '@/lib/profileCode';
 import type { GoogleFont } from '@/lib/recommend';
-import { apiFetch } from '@/lib/userKey';
 import type { WorldImage } from '@/lib/world';
-import { useEnsureKey } from '../KeyGateProvider';
 import {
   emptyProfile,
   nextDuel,
-  profileToSeed,
   QUIZ_LENGTH,
   recordPick,
   recordSkip,
-  summarize,
   type AtlasEntry,
   type Duel,
   type TasteProfile,
 } from '@/lib/taste';
-import { Result } from './Result';
 import { useAtlasFont, useAtlasPreload } from './useAtlasFont';
 
 /**
@@ -31,24 +27,92 @@ import { useAtlasFont, useAtlasPreload } from './useAtlasFont';
  */
 const SPECIMEN = 'Handgloves';
 
+/**
+ * How long the chosen pane is held before the next pair arrives.
+ *
+ * It does two jobs at once: it acknowledges the tap on a device where we
+ * suppressed the OS's own feedback, and it is the window during which a second
+ * tap is ignored. Long enough to read as deliberate, short enough that twelve
+ * of them do not feel like waiting.
+ */
+const PICK_HOLD_MS = 140;
+
+/**
+ * Mid-run state, kept for the length of the tab.
+ *
+ * A phone can drop a backgrounded tab at any time, and people reload by
+ * accident. Losing eleven answers to that is the kind of thing you only forgive
+ * once. The whole profile goes in — including `shown`, which the URL code omits
+ * — so a resumed run still never repeats a specimen.
+ */
+const SAVE_KEY = 'foundry.quiz.v1';
+
+function save(profile: TasteProfile) {
+  try {
+    sessionStorage.setItem(SAVE_KEY, JSON.stringify(profile));
+  } catch {
+    /* private mode, quota, or no storage at all — the quiz still works */
+  }
+}
+
+function clearSaved() {
+  try {
+    sessionStorage.removeItem(SAVE_KEY);
+  } catch {
+    /* ignore */
+  }
+}
+
+function loadSaved(): TasteProfile | null {
+  try {
+    const raw = sessionStorage.getItem(SAVE_KEY);
+    if (!raw) return null;
+    const p = JSON.parse(raw) as TasteProfile;
+    // Only resume a run that is genuinely mid-flight.
+    return p && p.round > 0 && p.round < QUIZ_LENGTH ? p : null;
+  } catch {
+    return null;
+  }
+}
+
 // ---------------------------------------------------------------------------
 // Panes
 // ---------------------------------------------------------------------------
 
+/**
+ * How a pane is behaving during the brief hold after a tap.
+ *
+ * The loop used to give no response at all: you tapped and two different words
+ * appeared, with nothing confirming which one you had chosen or that the tap
+ * had even registered. On touch that is worse than flat, because we deliberately
+ * suppressed the browser's own tap highlight. `chosen` firms the border to ink;
+ * `passed` steps the other pane back. Compositor-only properties, inside the
+ * micro-state budget DESIGN.md allows for the loop.
+ */
+type PickState = 'idle' | 'chosen' | 'passed';
+
+const paneState: Record<PickState, string> = {
+  idle: 'border-line',
+  chosen: 'border-ink',
+  passed: 'border-line opacity-35',
+};
+
 function SpecimenPane({
   entry,
   side,
+  state,
   onPick,
 }: {
   entry: AtlasEntry;
   side: 'left' | 'right';
+  state: PickState;
   onPick: () => void;
 }) {
   const { family, loaded } = useAtlasFont(entry.slug);
   return (
     <button
       onClick={onPick}
-      className="pane group relative flex h-full min-h-0 select-none flex-col items-center justify-center overflow-hidden border border-line bg-panel px-3 py-4 transition-colors duration-200 hover:border-ink-faint focus-visible:border-ink focus-visible:outline-none sm:h-[42vh] sm:max-h-[430px] sm:min-h-[160px] sm:px-6 sm:py-10"
+      className={`pane group relative flex h-full min-h-0 select-none flex-col items-center justify-center overflow-hidden border px-3 py-4 transition-all duration-200 focus-visible:border-ink focus-visible:outline-none sm:h-[42vh] sm:max-h-[430px] sm:min-h-[160px] sm:px-6 sm:py-10 ${paneState[state]} ${state === 'idle' ? 'hover:border-ink-faint' : ''}`}
     >
       <div
         className="specimen duel-specimen max-w-full text-center leading-[0.95] transition-transform duration-200 group-hover:scale-[1.02]"
@@ -69,16 +133,18 @@ function SpecimenPane({
 function WorldPane({
   image,
   side,
+  state,
   onPick,
 }: {
   image: WorldImage;
   side: 'left' | 'right';
+  state: PickState;
   onPick: () => void;
 }) {
   return (
     <button
       onClick={onPick}
-      className="pane group relative flex h-full min-h-0 select-none flex-col overflow-hidden border border-line bg-panel text-left transition-colors duration-200 hover:border-ink-faint focus-visible:border-ink focus-visible:outline-none sm:h-auto"
+      className={`pane group relative flex h-full min-h-0 select-none flex-col overflow-hidden border text-left transition-all duration-200 focus-visible:border-ink focus-visible:outline-none sm:h-auto ${paneState[state]} ${state === 'idle' ? 'hover:border-ink-faint' : ''}`}
     >
       {/* `contain`, not `cover`. The lettering is the thing being judged, and a
           cover crop routinely slices the top off a poster or the end off a shop
@@ -126,7 +192,21 @@ export function Quiz({
 }) {
   const router = useRouter();
   const [profile, setProfile] = useState<TasteProfile>(emptyProfile);
-  const [starting, setStarting] = useState(false);
+  /** Which pane was just chosen, held briefly so the tap is acknowledged. */
+  const [chosen, setChosen] = useState<'a' | 'b' | null>(null);
+  /** True once the twelfth answer is in and we are navigating to the verdict. */
+  const [finishing, setFinishing] = useState(false);
+  /** Every previous (profile, duel) so a mis-tap can be taken back. */
+  const [past, setPast] = useState<{ profile: TasteProfile; duel: Duel }[]>([]);
+  /**
+   * Closed for the length of the pick animation.
+   *
+   * Without it a double-tap casts two votes: the handler swaps in the next pair
+   * synchronously, so the second tap of a double lands on a *different* duel at
+   * the identical screen coordinates. Suppressing the OS double-tap-to-zoom
+   * made that easier to do by accident, not harder.
+   */
+  const lockRef = useRef(false);
 
   // One RNG for the whole run, seeded from the server's per-request number, so
   // every visitor gets a different twelve rounds while a single run stays
@@ -150,32 +230,134 @@ export function Quiz({
   const slugs = useMemo(() => atlas.map((a) => a.slug), [atlas]);
   useAtlasPreload(slugs, duel?.kind === 'type' ? [duel.a.slug, duel.b.slug] : []);
 
+  /**
+   * Hand off to the verdict's own URL rather than swapping it in.
+   *
+   * The result used to render inline while the address bar still said /quiz, so
+   * it was React state and nothing else: a refresh, a back gesture or a phone
+   * dropping the tab lost ninety seconds of work with no way back. Replacing
+   * the history entry means the verdict has an address the moment it exists,
+   * and the profile survives everything. `?r=1` marks it as your own run rather
+   * than a link someone sent you; the share URL never carries it.
+   */
+  const finish = useCallback(
+    (p: TasteProfile) => {
+      setFinishing(true);
+      clearSaved();
+      router.replace(`/type/${encodeProfile(p)}?r=1`);
+    },
+    [router],
+  );
+
   const advance = useCallback(
     (p: TasteProfile) => {
       if (p.round >= QUIZ_LENGTH) {
-        setDuel(null);
+        finish(p);
         return;
       }
       setDuel(nextDuel(p, atlas, rng, world));
     },
-    [atlas, rng, world],
+    [atlas, rng, world, finish],
   );
 
-  const pick = useCallback(
-    (winner: 'a' | 'b') => {
-      if (!duel) return;
-      const next = recordPick(profile, duel, winner);
-      setProfile(next);
-      advance(next);
+  /**
+   * The live profile and duel, readable without closing over them.
+   *
+   * `commit` used to capture both, which made it a new function on every render
+   * and meant the keydown listener was torn down and re-added constantly. Worse,
+   * a handler could still be holding the previous round's profile: an answer
+   * would be recorded against stale state and the round counter would not move,
+   * so every second keypress was silently swallowed. Reading through a ref keeps
+   * the callback identity stable and the data always current.
+   */
+  const live = useRef<{ profile: TasteProfile; duel: Duel | null }>({ profile, duel });
+
+  /** Record a vote (or a skip), hold the acknowledgement, then move on. */
+  const commit = useCallback(
+    (winner: 'a' | 'b' | null) => {
+      const { profile: p, duel: d } = live.current;
+      if (!d || lockRef.current) return;
+      lockRef.current = true;
+
+      const next = winner === null ? recordSkip(p, d) : recordPick(p, d, winner);
+
+      // Advance the ref NOW, not on the next render. React commits the new
+      // profile a frame or more later, and the lock lifts on a fixed timer, so
+      // a quick second answer could arrive in between and be recorded against
+      // the round that had already been answered — the counter would not move
+      // and the vote would be lost. Clearing `duel` here also means no pick is
+      // accepted until the next pair has genuinely been rendered.
+      live.current = { profile: next, duel: null };
+
+      setChosen(winner);
+      setPast((stack) => [...stack, { profile: p, duel: d }]);
+
+      // The lock is NOT lifted here. It lifts when the next pair has actually
+      // rendered (see the effect below), because a timer only knows how long
+      // the animation lasts, not when React has caught up. Releasing on the
+      // timer left a window in which an answer was accepted but the state
+      // behind it was still the previous round's, and the vote vanished.
+      window.setTimeout(() => {
+        setProfile(next);
+        save(next);
+        advance(next);
+        setChosen(null);
+      }, PICK_HOLD_MS);
     },
-    [duel, profile, advance],
+    [advance],
   );
 
-  const skip = useCallback(() => {
-    const next = recordSkip(profile, duel);
-    setProfile(next);
-    advance(next);
-  }, [profile, duel, advance]);
+  /**
+   * Publish the new round and open for answers, in that order.
+   *
+   * Both happen here, after the pair is genuinely on screen. Tying it to the
+   * render rather than to a timer is what makes fast answering safe: until this
+   * runs, `live.current.duel` is null and every pick is refused, so there is no
+   * moment where an answer is accepted against a round already counted. Doing
+   * it in one effect also keeps the two in step — releasing the lock while the
+   * ref still held the previous pair is exactly the bug this replaced.
+   */
+  useEffect(() => {
+    if (!duel) return;
+    live.current = { profile, duel };
+    lockRef.current = false;
+  }, [duel, profile]);
+
+  const pick = useCallback((winner: 'a' | 'b') => commit(winner), [commit]);
+  const skip = useCallback(() => commit(null), [commit]);
+
+  /**
+   * Take back the last answer, specimens and all.
+   *
+   * The pair you get if you answer again is not the pair you just saw — the
+   * generator has moved on and is not rewound. That is deliberate: what needs
+   * undoing is the vote, and re-running the selector off a restored profile is
+   * both simpler and impossible to desynchronise.
+   */
+  const undo = useCallback(() => {
+    if (lockRef.current || past.length === 0) return;
+    const prev = past[past.length - 1];
+    setProfile(prev.profile);
+    setDuel(prev.duel);
+    setPast(past.slice(0, -1));
+    save(prev.profile);
+  }, [past]);
+
+  /**
+   * Pick up an interrupted run.
+   *
+   * Restoring in an effect rather than during render keeps the server and
+   * client markup identical; the cost is one frame of round 1 before the real
+   * round appears, on the rare path where there is anything to resume at all.
+   */
+  useEffect(() => {
+    const saved = loadSaved();
+    if (!saved) return;
+    setProfile(saved);
+    setDuel(nextDuel(saved, atlas, rng, world));
+    // Mount only: a later run of this would fight the live profile.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const done = profile.round >= QUIZ_LENGTH || (!duel && profile.round > 0);
 
@@ -201,43 +383,28 @@ export function Quiz({
     return () => window.removeEventListener('keydown', onKey);
   }, [pick, skip, done]);
 
-  const ensureKey = useEnsureKey();
-  const beginRun = useCallback(() => {
-    ensureKey(async () => {
-      setStarting(true);
-      const seed = profileToSeed(profile);
-      const summary = summarize(profile);
-      try {
-        const res = await apiFetch('/api/runs', {
-          method: 'POST',
-          headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({
-            tasteSeed: seed,
-            tasteSummary: summary,
-            specimenText: SPECIMEN,
-            populationSize: 8,
-          }),
-        });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error ?? 'Could not start');
-        router.push(`/run/${data.run.id}`);
-      } catch {
-        setStarting(false);
-      }
-    });
-  }, [profile, router, ensureKey]);
-
   const pct = Math.round((Math.min(profile.round, QUIZ_LENGTH) / QUIZ_LENGTH) * 100);
+  const stateFor = (side: 'a' | 'b'): PickState =>
+    chosen === null ? 'idle' : chosen === side ? 'chosen' : 'passed';
 
-  if (done) {
+  /**
+   * The beat between the last pick and the verdict.
+   *
+   * The read used to appear in the same commit as the twelfth tap: cool bench
+   * with two words on it, then instantly a warm page carrying a 30-word
+   * judgement and twelve typefaces. This holds the bench for the length of the
+   * navigation, which is real work rather than an invented pause.
+   */
+  if (finishing || done) {
     return (
-      <Result
-        profile={profile}
-        atlas={atlas}
-        google={google}
-        onBegin={beginRun}
-        starting={starting}
-      />
+      <div className="quiz-viewport surface-judge flex flex-col items-center justify-center px-6">
+        <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-faint">
+          twelve rounds
+        </p>
+        <p className="mt-4 font-display text-[clamp(1.4rem,5vw,2rem)] leading-tight">
+          Reading them back.
+        </p>
+      </div>
     );
   }
 
@@ -268,16 +435,29 @@ export function Quiz({
 
       <div className="mx-auto flex w-full min-h-0 max-w-[1100px] flex-1 flex-col justify-center px-5 py-4 sm:px-6 sm:py-6">
       <div className="flex shrink-0 items-center justify-between">
-        <span className="font-mono text-[11px] tracking-widest text-ink-faint">
+        <span className="font-mono text-[11px] tracking-widest text-ink-dim">
           {profile.round + 1} / {QUIZ_LENGTH}
         </span>
-        {/* Padded well past the text so it's a real 44px target on a phone. */}
-        <button
-          onClick={skip}
-          className="-m-2 p-2 font-mono text-[11px] text-ink-faint transition hover:text-ink"
-        >
-          no preference ↓
-        </button>
+        {/* Real 44px targets. The previous -m-2 p-2 gave about 30px, which is
+            below every platform's minimum and this is a twelve-tap loop. */}
+        <div className="-mr-3 flex items-center">
+          {past.length > 0 && (
+            <button
+              onClick={undo}
+              aria-label="Undo the last answer"
+              className="-my-3 inline-flex min-h-[44px] items-center px-3 font-mono text-[11px] text-ink-faint transition hover:text-ink"
+            >
+              ↶ undo
+            </button>
+          )}
+          <button
+            onClick={skip}
+            className="-my-3 inline-flex min-h-[44px] items-center px-3 font-mono text-[11px] text-ink-faint transition hover:text-ink"
+          >
+            <span className="sm:hidden">neither</span>
+            <span className="hidden sm:inline">neither ↓</span>
+          </button>
+        </div>
       </div>
       <div className="mt-3 h-px w-full shrink-0 bg-line">
         <div className="h-px bg-signal transition-all duration-500" style={{ width: `${pct}%` }} />
@@ -297,13 +477,13 @@ export function Quiz({
               A fresh node starts at opacity 0 and only ever fades in. */}
           {duel.kind === 'world' ? (
             <>
-              <WorldPane key={duel.a.id} image={duel.a} side="left" onPick={() => pick('a')} />
-              <WorldPane key={duel.b.id} image={duel.b} side="right" onPick={() => pick('b')} />
+              <WorldPane key={duel.a.id} image={duel.a} side="left" state={stateFor('a')} onPick={() => pick('a')} />
+              <WorldPane key={duel.b.id} image={duel.b} side="right" state={stateFor('b')} onPick={() => pick('b')} />
             </>
           ) : (
             <>
-              <SpecimenPane key={duel.a.slug} entry={duel.a} side="left" onPick={() => pick('a')} />
-              <SpecimenPane key={duel.b.slug} entry={duel.b} side="right" onPick={() => pick('b')} />
+              <SpecimenPane key={duel.a.slug} entry={duel.a} side="left" state={stateFor('a')} onPick={() => pick('a')} />
+              <SpecimenPane key={duel.b.slug} entry={duel.b} side="right" state={stateFor('b')} onPick={() => pick('b')} />
             </>
           )}
         </div>

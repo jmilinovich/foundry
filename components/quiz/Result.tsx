@@ -1,9 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { useCallback, useMemo, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useCallback, useMemo, useState, useSyncExternalStore } from 'react';
 
 import { encodeProfile } from '@/lib/profileCode';
+import { apiFetch } from '@/lib/userKey';
+import { useEnsureKey } from '../KeyGateProvider';
 import { composeRead, axisChips, labelFor } from '@/lib/read';
 import {
   googleCssUrl,
@@ -115,20 +118,19 @@ export function Result({
   profile,
   atlas,
   google,
-  onBegin,
-  starting,
   shared = false,
 }: {
   profile: TasteProfile;
   atlas: AtlasEntry[];
   google: GoogleFont[];
-  onBegin?: () => void;
-  starting?: boolean;
-  /** True when rendered from a shared link rather than a just-finished quiz. */
+  /** True when rendered from a shared link rather than your own finished run. */
   shared?: boolean;
 }) {
+  const router = useRouter();
+  const ensureKey = useEnsureKey();
   const [copied, setCopied] = useState(false);
   const [failed, setFailed] = useState(false);
+  const [starting, setStarting] = useState(false);
 
   const { read, chips, googleMatches, atlasMatches, pins, code } = useMemo(() => {
     const seed = profileToSeed(profile);
@@ -147,6 +149,39 @@ export function Result({
   const path = `/type/${code}`;
 
   /**
+   * Minting lives here rather than in the quiz.
+   *
+   * A finished run now redirects to its own /type/<code> URL, so the result is
+   * reached two ways: straight off the twelfth pick, and by reloading or
+   * revisiting that URL later. Both have to offer the same thing. Keeping the
+   * breed action inside Result is what makes the page complete on its own,
+   * instead of only working while the quiz component happens to still be
+   * mounted.
+   */
+  const beginRun = useCallback(() => {
+    ensureKey(async () => {
+      setStarting(true);
+      try {
+        const res = await apiFetch('/api/runs', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            tasteSeed: profileToSeed(profile),
+            tasteSummary: summarize(profile),
+            specimenText: 'Handgloves',
+            populationSize: 8,
+          }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error ?? 'Could not start');
+        router.push(`/run/${data.run.id}`);
+      } catch {
+        setStarting(false);
+      }
+    });
+  }, [profile, router, ensureKey]);
+
+  /**
    * Copy, but never silently.
    *
    * `navigator.clipboard` rejects on an insecure origin, when the document
@@ -157,6 +192,20 @@ export function Result({
    */
   const share = useCallback(async () => {
     const url = `${window.location.origin}${path}`;
+
+    // On a phone the share sheet is the idiom — it reaches Messages, Mail and
+    // every app the person actually uses, which a clipboard copy does not.
+    if (typeof navigator !== 'undefined' && navigator.share) {
+      try {
+        await navigator.share({ title: 'A type profile', url });
+        return;
+      } catch (err) {
+        // Cancelling the sheet is a normal thing to do, not a failure to fall
+        // back from. Anything else, drop through to the clipboard.
+        if ((err as Error)?.name === 'AbortError') return;
+      }
+    }
+
     try {
       await navigator.clipboard.writeText(url);
       setCopied(true);
@@ -168,6 +217,20 @@ export function Result({
       el?.select();
     }
   }, [path]);
+
+  /**
+   * The visible field has to hold a link that works when pasted.
+   *
+   * It used to render `path` — a bare "/type/AgwICh…", which is not a URL and
+   * does nothing in someone else's message window. The origin only exists in
+   * the browser, so it is filled in after mount; until then the field shows the
+   * path, which keeps the server and client markup identical.
+   */
+  const origin = useSyncExternalStore(
+    () => () => {},
+    () => window.location.origin,
+    () => '',
+  );
 
   return (
     <div className="surface-publish flex min-h-full flex-1 flex-col">
@@ -259,9 +322,9 @@ export function Result({
             doesn&rsquo;t: eight typefaces bred from this profile, then bred again from whichever
             you keep.
           </p>
-          {onBegin ? (
+          {!shared ? (
             <button
-              onClick={onBegin}
+              onClick={beginRun}
               disabled={starting}
               className="mt-6 border border-accent px-5 py-3 text-[15px] font-medium text-accent transition hover:bg-accent hover:text-paper disabled:border-line disabled:text-ink-faint disabled:hover:bg-transparent"
             >
@@ -279,7 +342,7 @@ export function Result({
             </Link>
           )}
           <p className="mt-3 font-mono text-[11px] text-ink-faint">
-            {onBegin
+            {!shared
               ? 'eight fonts, about $1.60 · you’ll add your Mixfont key next'
               : 'twelve rounds, no key, free'}
           </p>
@@ -316,7 +379,7 @@ export function Result({
           <input
             id="share-url"
             readOnly
-            value={path}
+            value={origin ? origin + path : path}
             onFocus={(e) => e.currentTarget.select()}
             className="mt-3 w-full border border-line bg-transparent px-3 py-2 font-mono text-[11px] text-ink-dim outline-none transition focus:border-ink focus:text-ink"
           />

@@ -40,9 +40,24 @@ export async function generateMetadata({
   };
 }
 
-export default async function TypePage({ params }: { params: Promise<{ code: string }> }) {
-  const { code } = await params;
+export default async function TypePage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ code: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const [{ code }, query] = await Promise.all([params, searchParams]);
   const profile = decodeProfile(code);
+
+  /**
+   * `?r=1` means you just finished this run yourself, rather than opening a
+   * link somebody sent you. It decides whether the page offers to breed from
+   * the profile and whether the closer — which is operating advice for someone
+   * about to mint — is shown at all. It is deliberately absent from the share
+   * URL, so passing the link on hands over the read and nothing else.
+   */
+  const mine = query.r === '1';
 
   if (!profile) {
     return (
@@ -68,5 +83,5 @@ export default async function TypePage({ params }: { params: Promise<{ code: str
   }
 
   const atlas = await loadAtlas();
-  return <Result profile={profile} atlas={atlas} google={GOOGLE} shared />;
+  return <Result profile={profile} atlas={atlas} google={GOOGLE} shared={!mine} />;
 }
