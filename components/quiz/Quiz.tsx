@@ -181,7 +181,6 @@ function WorldPane({
         <picture className="contents">
           <source type="image/avif" srcSet={worldSrcSet(image, 'avif')} sizes="(min-width: 640px) 50vw, 92vw" />
           <source type="image/jpeg" srcSet={worldSrcSet(image, 'jpg')} sizes="(min-width: 640px) 50vw, 92vw" />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={worldFallback(image)}
             alt={image.caption}

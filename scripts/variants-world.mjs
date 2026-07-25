@@ -93,7 +93,9 @@ async function run() {
   // and it destroyed 57 tagged width values once by doing exactly that.
   const original = JSON.parse(await fs.readFile(DATA, 'utf8'));
   const shape = (e) => {
-    const { pxW, pxH, ...rest } = e;
+    const rest = { ...e };
+    delete rest.pxW;
+    delete rest.pxH;
     return JSON.stringify(Object.keys(rest).sort().map((k) => [k, rest[k]]));
   };
   const touched = original.filter((o, i) => shape(o) !== shape(world[i]));
