@@ -47,6 +47,24 @@ async function newerThan(a, b) {
   }
 }
 
+/**
+ * The charsets are part of the output, so they have to be part of the staleness
+ * check. Comparing mtimes alone means editing QUIZ_TEXT rebuilds nothing: the
+ * script reports "skipped 201" and every subset still carries the old glyphs, so
+ * the new specimen word renders as .notdef with no error anywhere. The stamp
+ * records what the subsets on disk were actually cut for.
+ */
+const STAMP = path.join(ATLAS, '.subset-stamp');
+const charsetKey = () => `${QUIZ_TEXT} ${FULL_TEXT}`;
+
+async function stampIsCurrent() {
+  try {
+    return (await fs.readFile(STAMP, 'utf8')) === charsetKey();
+  } catch {
+    return false;
+  }
+}
+
 async function run() {
   const qDir = path.join(ATLAS, 'q');
   const wDir = path.join(ATLAS, 'w');
@@ -54,6 +72,8 @@ async function run() {
   await fs.mkdir(wDir, { recursive: true });
 
   const files = (await fs.readdir(ATLAS)).filter((f) => f.endsWith('.ttf'));
+  const charsetsUnchanged = await stampIsCurrent();
+  if (!charsetsUnchanged) console.log('charset changed — rebuilding every subset');
   let built = 0;
   let skipped = 0;
   let qBytes = 0;
@@ -66,7 +86,7 @@ async function run() {
     const qOut = path.join(qDir, `${slug}.woff2`);
     const wOut = path.join(wDir, `${slug}.woff2`);
 
-    if ((await newerThan(qOut, src)) && (await newerThan(wOut, src))) {
+    if (charsetsUnchanged && (await newerThan(qOut, src)) && (await newerThan(wOut, src))) {
       qBytes += (await fs.stat(qOut)).size;
       wBytes += (await fs.stat(wOut)).size;
       skipped++;
@@ -92,7 +112,14 @@ async function run() {
   console.log(`quiz set:    ${kb(qBytes)} across ${built + skipped} fonts (preloaded whole)`);
   console.log(`full set:    ${kb(wBytes)} (fetched on demand)`);
   for (const f of failed) console.error(`  FAIL ${f}`);
-  if (failed.length) process.exitCode = 1;
+
+  if (failed.length) {
+    // Don't stamp a partial build as current, or the next run skips the very
+    // fonts that failed and the quiz serves a 404 for them.
+    process.exitCode = 1;
+    return;
+  }
+  await fs.writeFile(STAMP, charsetKey());
 }
 
 run().catch((e) => {

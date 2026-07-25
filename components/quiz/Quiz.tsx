@@ -135,8 +135,14 @@ export function Quiz({
 
   // Warm the whole atlas from the first paint. Each duel still waits for its
   // own two faces, but after round one that wait is already over.
+  //
+  // Round one's two faces jump the queue. Without that they sit wherever they
+  // fall in manifest order, possibly behind 190 fonts nobody needs yet, and the
+  // only gate a visitor ever actually sees gets longer. The preloader keys its
+  // effect on the manifest length, so it reads this on the first render only —
+  // which is exactly the duel we want prioritised.
   const slugs = useMemo(() => atlas.map((a) => a.slug), [atlas]);
-  useAtlasPreload(slugs);
+  useAtlasPreload(slugs, duel?.kind === 'type' ? [duel.a.slug, duel.b.slug] : []);
 
   const advance = useCallback(
     (p: TasteProfile) => {
@@ -263,15 +269,23 @@ export function Quiz({
 
       {duel && (
         <div className="mt-6 grid grid-cols-1 items-start gap-4 sm:grid-cols-2">
+          {/* The keys are load-bearing, not hygiene. Without them React reuses
+              the same specimen node across duels: one commit swaps fontFamily to
+              the incoming face *and* flips data-loaded to false, so the .specimen
+              rule fades the new word out from opacity 1 over 300ms — rendering it
+              in the fallback serif the whole way down. That is precisely the
+              flash this feature exists to remove, and it appears exactly when the
+              preload sweep hasn't landed yet (slow connection, first rounds).
+              A fresh node starts at opacity 0 and only ever fades in. */}
           {duel.kind === 'world' ? (
             <>
-              <WorldPane image={duel.a} side="left" onPick={() => pick('a')} />
-              <WorldPane image={duel.b} side="right" onPick={() => pick('b')} />
+              <WorldPane key={duel.a.id} image={duel.a} side="left" onPick={() => pick('a')} />
+              <WorldPane key={duel.b.id} image={duel.b} side="right" onPick={() => pick('b')} />
             </>
           ) : (
             <>
-              <SpecimenPane entry={duel.a} side="left" onPick={() => pick('a')} />
-              <SpecimenPane entry={duel.b} side="right" onPick={() => pick('b')} />
+              <SpecimenPane key={duel.a.slug} entry={duel.a} side="left" onPick={() => pick('a')} />
+              <SpecimenPane key={duel.b.slug} entry={duel.b} side="right" onPick={() => pick('b')} />
             </>
           )}
         </div>

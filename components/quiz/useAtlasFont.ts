@@ -23,6 +23,7 @@ import { useEffect, useState } from 'react';
 
 const registry = new Map<string, Promise<void>>();
 const done = new Set<string>();
+const failed = new Set<string>();
 
 export const atlasFamily = (slug: string) => `atlas-${slug}`;
 
@@ -35,12 +36,18 @@ function load(slug: string): Promise<void> {
     .load()
     .then((f) => {
       document.fonts.add(f);
+      failed.delete(slug);
       done.add(slug);
     })
     .catch(() => {
-      // A face that won't parse must not wedge the quiz: forget it so a later
-      // round can retry, and let the caller fall back to its placeholder.
+      // A face that won't load must not leave an unanswerable duel on screen.
+      // The specimen stays hidden until its font arrives, so "hidden forever"
+      // is a blank pane the person is being asked to judge. Record the failure
+      // so the pane reveals itself in the fallback instead — DESIGN.md: the
+      // fallback is revealed, never invisible forever. Forget the promise so a
+      // later round retries the fetch.
       registry.delete(slug);
+      failed.add(slug);
     });
 
   registry.set(slug, p);
@@ -96,22 +103,29 @@ export function useAtlasPreload(slugs: string[], priority: string[] = []) {
  */
 export function useAtlasFont(slug: string | null) {
   const family = slug ? atlasFamily(slug) : '';
-  const [loadedSlug, setLoadedSlug] = useState<string | null>(() =>
-    slug && done.has(slug) ? slug : null,
+  const [settled, setSettled] = useState<string | null>(() =>
+    slug && (done.has(slug) || failed.has(slug)) ? slug : null,
   );
 
   useEffect(() => {
     if (!slug || typeof window === 'undefined' || !('FontFace' in window)) return;
     let cancelled = false;
     void load(slug).then(() => {
-      if (!cancelled && done.has(slug)) setLoadedSlug(slug);
+      if (!cancelled) setSettled(slug);
     });
     return () => {
       cancelled = true;
     };
   }, [slug]);
 
-  return { family, loaded: !!slug && loadedSlug === slug };
+  const isSettled = !!slug && settled === slug;
+  return {
+    family,
+    /** Show the specimen: either the real face arrived, or it never will. */
+    loaded: isSettled,
+    /** True when we're showing the fallback because the face wouldn't load. */
+    fallback: isSettled && !!slug && failed.has(slug),
+  };
 }
 
 /**

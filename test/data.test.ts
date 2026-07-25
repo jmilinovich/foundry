@@ -1,4 +1,4 @@
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 
 import googleFonts from '@/lib/data/google-fonts.json';
@@ -78,6 +78,35 @@ describe('the world image bank', () => {
   it('has unique ids and files', () => {
     expect(new Set(WORLD.map((w) => w.id)).size).toBe(WORLD.length);
     expect(new Set(WORLD.map((w) => w.file)).size).toBe(WORLD.length);
+  });
+});
+
+describe('the atlas ships what it advertises', () => {
+  const manifest = JSON.parse(readFileSync('public/atlas/manifest.json', 'utf8')) as {
+    slug: string;
+    name: string;
+  }[];
+
+  it('has a quiz subset and a full cut for every entry', () => {
+    // build-atlas.mjs admits an entry to the manifest on the strength of its
+    // .ttf alone, and subset-atlas.mjs can fail on an individual font. Nothing
+    // else connects the two, so a font can be offered to the quiz while its
+    // woff2 404s — which renders as a blank pane the person is asked to judge.
+    const missing = manifest.filter(
+      (e) =>
+        !existsSync(`public/atlas/q/${e.slug}.woff2`) ||
+        !existsSync(`public/atlas/w/${e.slug}.woff2`),
+    );
+    expect(missing.map((e) => e.slug)).toEqual([]);
+  });
+
+  it('is large enough that a 12-round quiz never runs out of specimens', () => {
+    expect(manifest.length).toBeGreaterThanOrEqual(24);
+  });
+
+  it('has unique slugs and a name for every font', () => {
+    expect(new Set(manifest.map((e) => e.slug)).size).toBe(manifest.length);
+    for (const e of manifest) expect(e.name?.length ?? 0).toBeGreaterThan(0);
   });
 });
 

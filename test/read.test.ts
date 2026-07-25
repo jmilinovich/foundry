@@ -9,6 +9,7 @@ import {
   composeRead,
   detectTension,
   evidenceSentence,
+  labelFor,
   moodCluster,
   readToParagraph,
 } from '@/lib/read';
@@ -113,6 +114,37 @@ describe('the authored bank', () => {
     ];
     const offenders = lines.filter((l) => banned.test(l));
     expect(offenders, offenders.slice(0, 3).join(' | ')).toHaveLength(0);
+  });
+
+  /**
+   * A closer is chosen by decisiveness bucket, and 'decisive' fires at 3, 4 or 5
+   * pinned axes — so a line naming a specific number is wrong two thirds of the
+   * time. Same for any authored line asserting a count the trigger can't promise.
+   */
+  it('never asserts a count the trigger cannot guarantee', () => {
+    const NUM = 'one|two|three|four|five|six|seven|eight|nine|ten';
+    const counting = new RegExp(`\\b(${NUM}|both|all (?:${NUM})) (axes|axis|of them|genes)\\b`, 'i');
+    // A hedged range is fine when it spans the whole bucket: 'leaning' fires at
+    // exactly 1 or 2 pins, so "one or two axes are settled" is simply true.
+    const hedged = new RegExp(`\\b(${NUM}) or (${NUM})\\b`, 'i');
+
+    const lines = [
+      ...Object.values(BANK.openers).flat(),
+      ...Object.values(BANK.tensions).flat(),
+      ...Object.values(BANK.closers).flat(),
+    ];
+    const offenders = lines.filter((l) => counting.test(l) && !hedged.test(l));
+    expect(offenders, offenders.join(' | ')).toHaveLength(0);
+  });
+
+  it('punctuates consistently — one apostrophe character, not two', () => {
+    const lines = [
+      ...Object.values(BANK.openers).flat(),
+      ...Object.values(BANK.tensions).flat(),
+      ...Object.values(BANK.closers).flat(),
+    ];
+    const curly = lines.filter((l) => /’/.test(l));
+    expect(curly, curly.slice(0, 2).join(' | ')).toHaveLength(0);
   });
 
   it('does not lean on em-dashes as default punctuation', () => {
@@ -243,6 +275,19 @@ describe('composeRead', () => {
     expect(composeRead(p, 0).keys.decisiveness).toBe('open');
     expect(composeRead(p, 2).keys.decisiveness).toBe('leaning');
     expect(composeRead(p, 4).keys.decisiveness).toBe('decisive');
+  });
+});
+
+describe('labelFor', () => {
+  it('translates gene slugs into something speakable', () => {
+    // These read fine inside a Mixfont prompt and wrong in an English sentence.
+    expect(labelFor('width', 'normal-width')).not.toBe('normal-width');
+    expect(labelFor('contrast', 'very low contrast')).not.toBe('very low contrast');
+  });
+
+  it('falls back to the raw value rather than to nothing', () => {
+    expect(labelFor('width', 'not a real value')).toBe('not a real value');
+    expect(labelFor('nonsense-axis', 'x')).toBe('x');
   });
 });
 

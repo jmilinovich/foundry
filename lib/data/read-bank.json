@@ -50,7 +50,7 @@
   ],
   "grotesque:loud": [
    "You want Schmalfette on a poster in a doorway, the kind of grotesque cut for prices and boxing matches rather than for identity systems.",
-   "Your picks come from the wood type end of the nineteenth century, where letters were sold by the pound and subtlety cost extra."
+   "Your picks come from the wood type end of the nineteenth century, where letters got big precisely because metal that size was unaffordable, and subtlety cost extra."
   ],
   "grotesque:refined": [
    "You are the art director who takes Benton's Franklin Gothic for a masthead and then sets the rest of the page in something that will never argue with it.",
@@ -86,7 +86,7 @@
   ],
   "flared:warm": [
    "You are living inside Optima, which Zapf sketched from grave slabs in Santa Croce onto a banknote, stems breathing outward, letters carved rather than assembled.",
-   "Your picks want Wolpe's Albertus, the face on every London street sign and the one people photograph constantly without ever learning its name."
+   "Your picks want Wolpe's Albertus, cut for the City of London's street signs and photographed constantly by people who never learn its name."
   ],
   "flared:loud": [
    "You want Albertus doing the work it does on horror paperbacks and Portmeirion village signs, incised warmth turned into something faintly threatening.",
@@ -233,7 +233,7 @@
    "The face that solved this is Optima, and Zapf solved it by smuggling broad-nib proportions in under a sans exterior. Your picks have no flare in them, so the literary quality has to come out of the spacing and the spacing alone."
   ],
   "heavy-fine": [
-   "Heavy and high-contrast at once is a fat didone, which is where display type goes to become unreadable below 60px. Bodoni’s heirs have been fighting that for two centuries.",
+   "Heavy and high-contrast at once is a fat didone, which is where display type goes to become unreadable below 60px. Bodoni's heirs have been fighting that for two centuries.",
    "You asked for mass and then asked for hairlines inside it. The thin strokes go first at small sizes, and you will blame the printer when they do.",
    "Poster Bodoni takes this trade honestly: below a certain size the hairlines stop pretending to be hairlines and get thickened until they survive the press. Your picks have not made that concession, so the genome will draw the thin strokes at full nerve and let them break."
   ],
@@ -253,7 +253,7 @@
    "Bell Gothic was condensed so a phone book would fit, and nobody in eighty years has described it as welcoming. Compression is a decision about cost, and you have asked the genome to make it read as generosity."
   ],
   "soft-cold": [
-   "Ball terminals come out of the eighteenth-century writing master’s hand, which is not a clinical instrument. You picked the softest endings on offer and then asked for a laboratory.",
+   "Ball terminals come out of the eighteenth-century writing master's hand, which is not a clinical instrument. You picked the softest endings on offer and then asked for a laboratory.",
    "Rounded ends stay friendly at every size, so the severity would have to be carried by the skeleton instead, in flat sidewalls and tight spacing. Nothing in your picks asked for either.",
    "Cooper Black is the far end of this: the softness becomes the entire personality, and no amount of discipline elsewhere in the drawing pulls it back toward cold. Your terminal votes sit closer to that end than to anything with a laboratory in it."
   ],
@@ -269,18 +269,18 @@
   ],
   "split-category": [
    "Half your votes went to serifs and half went away from them, which is either open-mindedness or a refusal to decide. The genome cannot tell those apart.",
-   "You split the category axis straight down the middle. Sitting between the options on that axis produces a flared sans, which almost nobody chooses on purpose.",
+   "You split the category axis straight down the middle. Half your picks want the serif to do the talking and half want it out of the way, and no single face resolves that argument.",
    "You voted for both sides of the oldest argument in type and left the genome to arbitrate. It arbitrates by averaging, and the average of a serif and a sans is a face neither camp asked for and neither will defend."
   ],
   "extreme-taste": [
-   "You went to the end of every axis available. Type drawn entirely from extremes works at one size in one word, and stops being type the moment it has to hold a sentence.",
+   "You went looking for the end of most axes rather than the middle of any. Type drawn from extremes works at one size in one word, and stops being type the moment it has to hold a sentence.",
    "Nothing you chose sits anywhere near the middle of its range. That is a display face, and it will be an awkward afternoon when somebody asks you for body copy.",
    "Every axis pushed to its limit is how display foundries have always made a living, and also why their catalogues run one weight deep. The drawing has no room left to give you a second style."
   ],
   "middle-taste": [
    "Every pick landed near the centre of its axis, which is roughly how Times New Roman happened. Moderate is a real position; it just has a lot of prior occupants.",
    "You avoided every extreme on offer. The result will be eminently usable and will be mistaken for a system font by anyone who is not looking hard.",
-   "Centrist votes on all five axes produce the faces that ship with operating systems and get approved by committees. It will set anything you hand it, and you will not pick it out of a lineup a week later."
+   "Centrist votes, axis after axis, produce the faces that ship with operating systems and get approved by committees. It will set anything you hand it, and you will not pick it out of a lineup a week later."
   ],
   "no-tension": [
    "There is no contradiction to point at. You picked a consistent set, which means either you knew what you wanted or the quiz never found the axis you would fight over.",
@@ -290,7 +290,7 @@
  },
  "closers": {
   "decisive": [
-   "Three axes are pinned, so the population will not wander far. Breed twice before you judge anything, because the first generation mostly repeats what you already told it.",
+   "Enough axes are pinned that the population will not wander far. Breed twice before you judge anything, because the first generation mostly repeats what you already told it.",
    "You have given the genome enough constraints that it can stop guessing. Spend the wildcard slot generously; it is the only thing keeping the next four generations from looking alike.",
    "Take the pinned axes into the pairing view and set the specimen text to something you actually have to publish. Constraints this firm flatter a headline and show their limits in a paragraph."
   ],

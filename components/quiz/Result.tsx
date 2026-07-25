@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useCallback, useMemo, useState } from 'react';
 
 import { encodeProfile } from '@/lib/profileCode';
-import { composeRead, axisChips } from '@/lib/read';
+import { composeRead, axisChips, labelFor } from '@/lib/read';
 import {
   googleCssUrl,
   googleSpecimenUrl,
@@ -190,10 +190,15 @@ export function Result({
         <h1 className="mt-5 font-display text-[clamp(1.6rem,4.4vw,2.35rem)] font-normal leading-[1.28] tracking-[-0.01em]">
           {read.opener}
         </h1>
+        {/* The closers are advice to somebody about to run a generation ("spend
+            the wildcard slot generously"). A visitor arriving on a shared link
+            has no run, no key and no wildcard slot, so the instruction reads as
+            nonsense addressed to someone else. They get the verdict; the
+            operating advice belongs to the person who earned it. */}
         <div className="mt-5 space-y-3 text-[17px] leading-[1.65] text-ink-dim">
           {read.tension && <p>{read.tension}</p>}
           {read.evidence && <p className="text-ink">{read.evidence}</p>}
-          {read.closer && <p>{read.closer}</p>}
+          {!shared && read.closer && <p>{read.closer}</p>}
         </div>
 
         <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.16em] text-ink-faint">
@@ -217,10 +222,17 @@ export function Result({
           </ul>
         )}
 
+        {/* "You never wavered" was a lie: an axis pins at a 55% share with a
+            1.6x margin, so a 4-2 split pins. Say what is actually true, and say
+            it with the authored labels rather than the raw gene slugs the chips
+            above already translate. */}
         {pins.length > 0 && (
           <p className="mt-6 text-[15px] leading-relaxed text-ink-dim">
-            You never wavered on{' '}
-            <span className="text-ink">{pins.map(([, v]) => String(v)).join(', ')}</span>.
+            You kept coming back to{' '}
+            <span className="text-ink">
+              {pins.map(([axis, v]) => labelFor(axis, String(v))).join(', ')}
+            </span>
+            .
           </p>
         )}
 
@@ -256,9 +268,12 @@ export function Result({
               {starting ? 'minting generation 0…' : 'breed your own →'}
             </button>
           ) : (
+            // Not Proof Red. On a shared page there is no Breed action, so the
+            // accent would teach a first-time visitor that red means "take the
+            // quiz" — and DESIGN.md reserves it to Breed and Keep.
             <Link
               href="/quiz"
-              className="mt-6 inline-block border border-accent px-5 py-3 text-[15px] font-medium text-accent transition hover:bg-accent hover:text-paper"
+              className="mt-6 inline-block border-2 border-ink px-5 py-3 text-[15px] font-medium transition hover:bg-ink hover:text-paper"
             >
               take it yourself →
             </Link>

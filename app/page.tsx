@@ -19,9 +19,10 @@ export default function Home() {
         better.
       </p>
       <p className="mt-4 max-w-lg text-sm leading-relaxed text-ink-faint">
-        Answer a dozen this-or-that pairs and Foundry reads your taste, then mints a population of
-        real typefaces from it. Keep the ones you like; their genes cross and mutate, and the next
-        generation is drawn from what survived.
+        Answer a dozen this-or-that pairs and Foundry reads your taste back to you, then names the
+        typefaces that fit it — the ones you can install this afternoon, and the ones that exist
+        only here. If none of them is quite right, mint a population and breed your own: keep what
+        you like, and the next generation is drawn from what survived.
       </p>
 
       <div className="mt-12">

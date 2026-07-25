@@ -48,14 +48,19 @@ export function HomeFunnel() {
 
   return (
     <div className="max-w-xl">
+      {/* Not Proof Red. DESIGN.md reserves the accent for Breed and Keep, and
+          the quiz is now free and ends in a result of its own — the Breed verb
+          lives on that result screen. Two reds in one flow would make neither
+          mean anything. This is still the primary path, so it carries weight
+          instead: a 2px ink rule, the one heavier line the system allows. */}
       <Link
         href="/quiz"
-        className="group flex items-center justify-between rounded-xl bg-accent px-6 py-5 text-paper transition hover:brightness-110"
+        className="group flex items-center justify-between border-2 border-ink px-6 py-5 transition hover:bg-ink hover:text-paper"
       >
         <span>
           <span className="block text-lg font-medium">Find your type</span>
-          <span className="block text-[13px] opacity-80">
-            a dozen this-or-that pairs · no key needed · ~30 seconds
+          <span className="block text-[13px] text-ink-dim transition group-hover:text-paper/80">
+            a dozen this-or-that pairs · no key needed · free
           </span>
         </span>
         <span className="text-2xl transition group-hover:translate-x-1">→</span>

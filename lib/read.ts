@@ -274,6 +274,18 @@ export function readToParagraph(read: TheRead): string {
   return [read.opener, read.tension, read.evidence, read.closer].filter(Boolean).join(' ');
 }
 
+/**
+ * The authored, speakable name for a gene value.
+ *
+ * Gene values are written for the prompt renderer, not for prose: `normal-width`
+ * and `very low contrast` are fine inside a Mixfont prompt and wrong in a
+ * sentence. Falls back to the raw value so a missing label degrades to
+ * something true rather than to nothing.
+ */
+export function labelFor(axis: string, value: string): string {
+  return BANK.clauses?.[axis]?.[value]?.label ?? value;
+}
+
 /** Plain-language chips for the axes the person was most consistent about. */
 export function axisChips(profile: TasteProfile): { axis: QuizAxis; label: string; reads: string }[] {
   const out: { axis: QuizAxis; label: string; reads: string }[] = [];
