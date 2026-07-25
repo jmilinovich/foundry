@@ -59,8 +59,8 @@
         "nostalgic"
       ]
     },
-    "name": "Ypsilon Bastion",
-    "w": 3.17
+    "name": "Stygian Slab",
+    "w": 3.86
   },
   {
     "slug": "compressed-grot",
@@ -122,8 +122,8 @@
         "nostalgic"
       ]
     },
-    "name": "Razor Cathedral Didone",
-    "w": 1.45
+    "name": "Liminal Veil Display",
+    "w": 7.63
   },
   {
     "slug": "didone-02",
@@ -143,8 +143,8 @@
         "severe"
       ]
     },
-    "name": "Wraith Didone",
-    "w": 2.13
+    "name": "Umbral Didone",
+    "w": 2.59
   },
   {
     "slug": "didone-03",
@@ -164,8 +164,8 @@
         "elegant"
       ]
     },
-    "name": "Fathom Didone",
-    "w": 2.94
+    "name": "Yonder Nocturne",
+    "w": 7.04
   },
   {
     "slug": "didone-04",
@@ -206,8 +206,8 @@
         "severe"
       ]
     },
-    "name": "Yvaine Didone",
-    "w": 3.36
+    "name": "Celestial Razor Didone",
+    "w": 5.69
   },
   {
     "slug": "didone-06",
@@ -248,8 +248,8 @@
         "severe"
       ]
     },
-    "name": "Abyssal Velvet Didone",
-    "w": 2.49
+    "name": "Tidal Didone",
+    "w": 3.43
   },
   {
     "slug": "didone-08",
@@ -269,8 +269,8 @@
         "elegant"
       ]
     },
-    "name": "Feral Glass Didone",
-    "w": 1.89
+    "name": "Quorra Veil",
+    "w": 6.8
   },
   {
     "slug": "didone-09",
@@ -311,8 +311,8 @@
         "severe"
       ]
     },
-    "name": "Cathedral Veil Serif",
-    "w": 1.63
+    "name": "Zephyr Didone",
+    "w": 8.27
   },
   {
     "slug": "didone-11",
@@ -353,8 +353,8 @@
         "severe"
       ]
     },
-    "name": "Dolmen Nocturne",
-    "w": 3.04
+    "name": "Halcyon Nocturne",
+    "w": 5.22
   },
   {
     "slug": "didone-13",
@@ -416,8 +416,8 @@
         "severe"
       ]
     },
-    "name": "Cathedral Vapor Serif",
-    "w": 1.48
+    "name": "Ysolde Velvet Didone",
+    "w": 9.63
   },
   {
     "slug": "didone-classic",
@@ -521,8 +521,8 @@
         "ecclesiastical"
       ]
     },
-    "name": "Dusk Vellum Didone",
-    "w": 3.21
+    "name": "Xyric Veil Didone",
+    "w": 4.3
   },
   {
     "slug": "eroded-heavy",
@@ -689,8 +689,8 @@
         "editorial"
       ]
     },
-    "name": "Liminal Spire",
-    "w": 5.41
+    "name": "Wraith Meridian",
+    "w": 10.58
   },
   {
     "slug": "flared-07",
@@ -731,8 +731,8 @@
         "warm"
       ]
     },
-    "name": "Umbral Didone",
-    "w": 4.78
+    "name": "Monolith Velour",
+    "w": 6.61
   },
   {
     "slug": "flared-09",
@@ -836,8 +836,8 @@
         "warm"
       ]
     },
-    "name": "Rift Nocturne Serif",
-    "w": 3.54
+    "name": "Xenolith Nocturne",
+    "w": 7.65
   },
   {
     "slug": "flared-14",
@@ -857,8 +857,8 @@
         "ecclesiastical"
       ]
     },
-    "name": "Wraith Didone",
-    "w": 1.76
+    "name": "Marrow Didone",
+    "w": 3.49
   },
   {
     "slug": "flared-15",
@@ -878,8 +878,8 @@
         "elegant"
       ]
     },
-    "name": "Dissonant Grotesk",
-    "w": 4.04
+    "name": "Obsidian Cantata",
+    "w": 8.07
   },
   {
     "slug": "flared-editorial",
@@ -1004,8 +1004,8 @@
         "utilitarian"
       ]
     },
-    "name": "Kairo Obsidian",
-    "w": 4.79
+    "name": "Zenith Obsidian Grotesk",
+    "w": 7.02
   },
   {
     "slug": "geo-04",
@@ -1046,8 +1046,8 @@
         "playful"
       ]
     },
-    "name": "Yonder Molten Grotesk",
-    "w": 4.54
+    "name": "Helix Nocturne",
+    "w": 8.75
   },
   {
     "slug": "geo-06",
@@ -1151,8 +1151,8 @@
         "mechanical"
       ]
     },
-    "name": "Junction Aether Grotesk",
-    "w": 1.68
+    "name": "Tachyon Glass Mono",
+    "w": 9.55
   },
   {
     "slug": "geo-11",
@@ -1193,8 +1193,8 @@
         "futuristic"
       ]
     },
-    "name": "Aurex Grotesk",
-    "w": 3.67
+    "name": "Vanta Chrome Grotesk",
+    "w": 7.33
   },
   {
     "slug": "geo-13",
@@ -1298,8 +1298,8 @@
         "severe"
       ]
     },
-    "name": "Rift Obsidian Grotesk",
-    "w": 5.17
+    "name": "Ultravoid Sans",
+    "w": 8.04
   },
   {
     "slug": "grot-02",
@@ -1319,8 +1319,8 @@
         "nostalgic"
       ]
     },
-    "name": "Monolith Veil",
-    "w": 1.94
+    "name": "Duskline Grotesk",
+    "w": 2.57
   },
   {
     "slug": "grot-03",
@@ -1340,8 +1340,8 @@
         "utilitarian"
       ]
     },
-    "name": "Mordant Grotesk",
-    "w": 1.95
+    "name": "Gravemass Grotesk",
+    "w": 6.88
   },
   {
     "slug": "grot-04",
@@ -1361,8 +1361,8 @@
         "nostalgic"
       ]
     },
-    "name": "Liminal Spire Grotesk",
-    "w": 1.45
+    "name": "Aether Spire",
+    "w": 1.66
   },
   {
     "slug": "grot-05",
@@ -1382,8 +1382,8 @@
         "severe"
       ]
     },
-    "name": "Icarus Grotesk",
-    "w": 3.52
+    "name": "Tundra Grotesk",
+    "w": 5.12
   },
   {
     "slug": "grot-06",
@@ -1403,8 +1403,8 @@
         "industrial"
       ]
     },
-    "name": "Iron Veil",
-    "w": 2.03
+    "name": "Loom Monolith",
+    "w": 1.77
   },
   {
     "slug": "grot-07",
@@ -1445,8 +1445,8 @@
         "nostalgic"
       ]
     },
-    "name": "Havoc Obsidian Grotesk",
-    "w": 4.93
+    "name": "Kryon Vector Grotesk",
+    "w": 10.08
   },
   {
     "slug": "grot-09",
@@ -1466,8 +1466,8 @@
         "utilitarian"
       ]
     },
-    "name": "Eclipse Monolith Grotesk",
-    "w": 1.69
+    "name": "Rift Grotesk",
+    "w": 2.8
   },
   {
     "slug": "grot-10",
@@ -1487,8 +1487,8 @@
         "nostalgic"
       ]
     },
-    "name": "Black Vortex Grotesk",
-    "w": 3.85
+    "name": "Quasar Grotesk",
+    "w": 7.69
   },
   {
     "slug": "grot-11",
@@ -1592,8 +1592,8 @@
         "utilitarian"
       ]
     },
-    "name": "Axiom Grotesk",
-    "w": 2.41
+    "name": "Liminal Obsidian Grotesk",
+    "w": 5.84
   },
   {
     "slug": "hairline-neo",
@@ -1634,8 +1634,8 @@
         "severe"
       ]
     },
-    "name": "Lacuna Monolith",
-    "w": 3.05
+    "name": "Obsidian Pulse Grotesk",
+    "w": 3.83
   },
   {
     "slug": "humanist-light",
@@ -1718,8 +1718,8 @@
         "literary"
       ]
     },
-    "name": "Ypsilon Veil",
-    "w": 2.39
+    "name": "Duskline Grotesk",
+    "w": 3.12
   },
   {
     "slug": "humsans-02",
@@ -1739,8 +1739,8 @@
         "editorial"
       ]
     },
-    "name": "Umbra Velocity",
-    "w": 4.95
+    "name": "Pulse Meridian Italic",
+    "w": 7.57
   },
   {
     "slug": "humsans-03",
@@ -1844,8 +1844,8 @@
         "editorial"
       ]
     },
-    "name": "Eclipse Grotesk",
-    "w": 3.83
+    "name": "Ink Pulse Grotesk",
+    "w": 6.06
   },
   {
     "slug": "humsans-08",
@@ -1865,8 +1865,8 @@
         "botanical"
       ]
     },
-    "name": "Eidolon Mono",
-    "w": 2.23
+    "name": "Pale Orbit Grotesk",
+    "w": 3.82
   },
   {
     "slug": "humsans-09",
@@ -1886,8 +1886,8 @@
         "warm"
       ]
     },
-    "name": "Eclipse Velvet Serif",
-    "w": 4.78
+    "name": "Zephyr Grotesk",
+    "w": 6.59
   },
   {
     "slug": "humsans-10",
@@ -1991,8 +1991,8 @@
         "warm"
       ]
     },
-    "name": "Eclipse Vector Grotesk",
-    "w": 5.19
+    "name": "Radian Velocity Grotesk",
+    "w": 8.59
   },
   {
     "slug": "humsans-15",
@@ -2012,8 +2012,8 @@
         "editorial"
       ]
     },
-    "name": "Quasar Veil Didone",
-    "w": 1.99
+    "name": "Umbra Nocturne Didone",
+    "w": 3.15
   },
   {
     "slug": "humserif-01",
@@ -2096,8 +2096,8 @@
         "editorial"
       ]
     },
-    "name": "Ivory Eclipse Didone",
-    "w": 2.38
+    "name": "Liminal Serif",
+    "w": 7.04
   },
   {
     "slug": "humserif-05",
@@ -2117,8 +2117,8 @@
         "ecclesiastical"
       ]
     },
-    "name": "Umbral Didone",
-    "w": 2.54
+    "name": "Lumen Nocturne",
+    "w": 4.09
   },
   {
     "slug": "humserif-06",
@@ -2138,8 +2138,8 @@
         "literary"
       ]
     },
-    "name": "Opaline Didone",
-    "w": 4.6
+    "name": "Xyra Nocturne",
+    "w": 6.1
   },
   {
     "slug": "humserif-07",
@@ -2243,8 +2243,8 @@
         "literary"
       ]
     },
-    "name": "Xyra Nocturne Didot",
-    "w": 2.24
+    "name": "Moonlit Sonata",
+    "w": 7.05
   },
   {
     "slug": "humserif-12",
@@ -2264,8 +2264,8 @@
         "ecclesiastical"
       ]
     },
-    "name": "Tensile Obsidian Didone",
-    "w": 2.5
+    "name": "Black Mirage Didone",
+    "w": 2.69
   },
   {
     "slug": "humserif-13",
@@ -2285,8 +2285,8 @@
         "warm"
       ]
     },
-    "name": "Liminal Ivory Serif",
-    "w": 4.97
+    "name": "Raven Meridian Serif",
+    "w": 6.94
   },
   {
     "slug": "humserif-14",
@@ -2432,8 +2432,8 @@
         "severe"
       ]
     },
-    "name": "Bastion Grotesk",
-    "w": 3.47
+    "name": "Obsidian Vector Grotesk",
+    "w": 8.97
   },
   {
     "slug": "neo-03",
@@ -2474,8 +2474,8 @@
         "severe"
       ]
     },
-    "name": "Parallax Grotesk",
-    "w": 3.39
+    "name": "Molten Vector Grotesk",
+    "w": 7.14
   },
   {
     "slug": "neo-05",
@@ -2495,8 +2495,8 @@
         "futuristic"
       ]
     },
-    "name": "Spectral Meridian Grotesque",
-    "w": 1.67
+    "name": "Liminal Monoline",
+    "w": 1.86
   },
   {
     "slug": "neo-06",
@@ -2579,8 +2579,8 @@
         "clinical"
       ]
     },
-    "name": "Zeroth Monolith Grotesk",
-    "w": 2.75
+    "name": "Warped Obsidian Grotesk",
+    "w": 9.62
   },
   {
     "slug": "neo-10",
@@ -2600,8 +2600,8 @@
         "severe"
       ]
     },
-    "name": "Raven Obelisk",
-    "w": 1.83
+    "name": "Kinetic Monolith Grotesk",
+    "w": 2.95
   },
   {
     "slug": "neo-11",
@@ -2621,8 +2621,8 @@
         "futuristic"
       ]
     },
-    "name": "Titanium Monolith",
-    "w": 4.61
+    "name": "Parallax Obsidian",
+    "w": 7.36
   },
   {
     "slug": "neo-12",
@@ -2663,8 +2663,8 @@
         "futuristic"
       ]
     },
-    "name": "Spectral Forge Sans",
-    "w": 3.8
+    "name": "Ypsilon Vector",
+    "w": 5.31
   },
   {
     "slug": "neo-14",
@@ -2768,8 +2768,8 @@
         "nostalgic"
       ]
     },
-    "name": "Ysolde Nocturne",
-    "w": 1.76
+    "name": "Reverie Didone",
+    "w": 8.5
   },
   {
     "slug": "oldstyle-03",
@@ -2810,8 +2810,8 @@
         "literary"
       ]
     },
-    "name": "Mirage Ivory Display",
-    "w": 3.1
+    "name": "Quasar Didone",
+    "w": 6.68
   },
   {
     "slug": "oldstyle-05",
@@ -2915,8 +2915,8 @@
         "nostalgic"
       ]
     },
-    "name": "Pale Meridian Didone",
-    "w": 2.41
+    "name": "Velvet Antiqua",
+    "w": 6.72
   },
   {
     "slug": "oldstyle-10",
@@ -2957,8 +2957,8 @@
         "literary"
       ]
     },
-    "name": "Kithara Veil Serif",
-    "w": 4.43
+    "name": "Icarian Velvet Serif",
+    "w": 5.84
   },
   {
     "slug": "oldstyle-12",
@@ -3083,8 +3083,8 @@
         "nostalgic"
       ]
     },
-    "name": "Liminal Bastion",
-    "w": 3.25
+    "name": "Arcane Tuscan",
+    "w": 3.43
   },
   {
     "slug": "rounded-geo",
@@ -3167,8 +3167,8 @@
         "utilitarian"
       ]
     },
-    "name": "Nadir Grotesk",
-    "w": 2.82
+    "name": "Icarus Grotesk",
+    "w": 5.31
   },
   {
     "slug": "slab-01",
@@ -3188,8 +3188,8 @@
         "nostalgic"
       ]
     },
-    "name": "Morrow Spire",
-    "w": 2.08
+    "name": "Mordant Slab",
+    "w": 2.98
   },
   {
     "slug": "slab-02",
@@ -3209,8 +3209,8 @@
         "mechanical"
       ]
     },
-    "name": "Abyssal Carnival Slab",
-    "w": 3.4
+    "name": "Nox Monolith",
+    "w": 6.27
   },
   {
     "slug": "slab-03",
@@ -3314,8 +3314,8 @@
         "nostalgic"
       ]
     },
-    "name": "Ivory Spire Grotesk",
-    "w": 1.31
+    "name": "Ecliptic Servo Mono",
+    "w": 7.89
   },
   {
     "slug": "slab-08",
@@ -3356,8 +3356,8 @@
         "playful"
       ]
     },
-    "name": "Dreadnought Obsidian Slab",
-    "w": 4.22
+    "name": "Xenolith Slab",
+    "w": 6.24
   },
   {
     "slug": "slab-10",
@@ -3461,8 +3461,8 @@
         "mechanical"
       ]
     },
-    "name": "Ferro Mirage",
-    "w": 6.37
+    "name": "Quasar Velvet Mono",
+    "w": 8.75
   },
   {
     "slug": "slab-15",
@@ -3587,8 +3587,8 @@
         "elegant"
       ]
     },
-    "name": "Helix Didone",
-    "w": 1.52
+    "name": "Aurelian Void Display",
+    "w": 8.66
   },
   {
     "slug": "trans-04",
@@ -3629,8 +3629,8 @@
         "severe"
       ]
     },
-    "name": "Hesper Serif",
-    "w": 2.47
+    "name": "Ysolde Didone",
+    "w": 8.38
   },
   {
     "slug": "trans-06",
@@ -3671,8 +3671,8 @@
         "elegant"
       ]
     },
-    "name": "Liminal Didot",
-    "w": 3.7
+    "name": "Solstice Didone",
+    "w": 4.24
   },
   {
     "slug": "trans-08",
@@ -3734,8 +3734,8 @@
         "severe"
       ]
     },
-    "name": "Ravine Nocturne Serif",
-    "w": 2.08
+    "name": "Icarus Didone",
+    "w": 7.68
   },
   {
     "slug": "trans-11",
@@ -3755,8 +3755,8 @@
         "elegant"
       ]
     },
-    "name": "Nocturne Didone",
-    "w": 2.41
+    "name": "Zephyr Obelisk",
+    "w": 3.41
   },
   {
     "slug": "trans-12",
@@ -3776,8 +3776,8 @@
         "elegant"
       ]
     },
-    "name": "Boreal Veil Didone",
-    "w": 4.1
+    "name": "Juno Vesper",
+    "w": 7.99
   },
   {
     "slug": "trans-13",
@@ -3881,8 +3881,8 @@
         "mechanical"
       ]
     },
-    "name": "Gallows Velvet Gothic",
-    "w": 3.25
+    "name": "Talon Obsidian Gothic",
+    "w": 2.4
   },
   {
     "slug": "wedge-02",
@@ -3944,8 +3944,8 @@
         "industrial"
       ]
     },
-    "name": "Jade Obelisk Serif",
-    "w": 2.33
+    "name": "Umbra Didone",
+    "w": 3.05
   },
   {
     "slug": "wedge-05",
@@ -3965,8 +3965,8 @@
         "editorial"
       ]
     },
-    "name": "Eclipse Bastion",
-    "w": 1.78
+    "name": "Kronos Velvet Serif",
+    "w": 9.55
   },
   {
     "slug": "wedge-06",
@@ -3986,8 +3986,8 @@
         "mechanical"
       ]
     },
-    "name": "Javelin Noir Display",
-    "w": 2.51
+    "name": "Black Vertigo Didone",
+    "w": 3.17
   },
   {
     "slug": "wedge-07",
@@ -4007,8 +4007,8 @@
         "editorial"
       ]
     },
-    "name": "Rook Obsidian",
-    "w": 2.46
+    "name": "Ironclad Oracle",
+    "w": 9.31
   },
   {
     "slug": "wedge-08",
@@ -4049,8 +4049,8 @@
         "industrial"
       ]
     },
-    "name": "Fathom Vogue",
-    "w": 3.09
+    "name": "Eidolon Spire Serif",
+    "w": 5.75
   },
   {
     "slug": "wedge-10",
@@ -4112,8 +4112,8 @@
         "editorial"
       ]
     },
-    "name": "Quasar Obelisk",
-    "w": 1.96
+    "name": "Helion Veil Didone",
+    "w": 8.99
   },
   {
     "slug": "wedge-13",
@@ -4133,8 +4133,8 @@
         "severe"
       ]
     },
-    "name": "Krypte Gothic",
-    "w": 1.79
+    "name": "Riven Obelisk",
+    "w": 2.3
   },
   {
     "slug": "wedge-14",
@@ -4154,8 +4154,8 @@
         "industrial"
       ]
     },
-    "name": "Xenolith Didone",
-    "w": 3.09
+    "name": "Vesper Obelisk",
+    "w": 9.78
   },
   {
     "slug": "wedge-15",

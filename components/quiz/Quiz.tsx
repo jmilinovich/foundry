@@ -98,11 +98,15 @@ type PickState = 'idle' | 'chosen' | 'passed';
  * and needs no value. Unmeasured faces fall back to the atlas-wide worst case —
  * safe, just conservative.
  */
-const WIDEST_EM = 6.4;
+const FALLBACK_EM = 11;
 
 function duelEm(duel: Duel): number {
-  if (duel.kind !== 'type') return WIDEST_EM;
-  return Math.min(WIDEST_EM, Math.max(duel.a.w ?? WIDEST_EM, duel.b.w ?? WIDEST_EM));
+  if (duel.kind !== 'type') return FALLBACK_EM;
+  // No upper clamp. It used to cap at the widest face in the library, which was
+  // safe only because the library had no genuinely wide faces — once the width
+  // prompt was fixed and ultra-extended started arriving near 9em, a clamp
+  // would have divided by too small a number and run the specimen off the pane.
+  return Math.max(duel.a.w ?? FALLBACK_EM, duel.b.w ?? FALLBACK_EM);
 }
 
 const paneState: Record<PickState, string> = {

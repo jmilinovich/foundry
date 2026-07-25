@@ -75,18 +75,22 @@ body {
    asking about — an ultra-extended face has to *look* extended.
 
    That size comes from the WIDER OF THE TWO FACES ON SCREEN, not from the
-   widest in the library. "Handgloves" spans 1.21em to 6.37em across the atlas,
-   so sizing every round for the worst case rendered a pair of condensed faces
-   at a fifth of the size the bench could hold. The duel sets --duel-em from the
-   measured widths in the manifest (see scripts/measure-atlas.mjs); the fallback
-   is the global worst case, so a missing measurement can only ever be safe. */
+   widest in the library: sizing every round for the worst case rendered a pair
+   of condensed faces at a fifth of the size the bench could hold. The duel sets
+   --duel-em from the measured widths in the manifest (scripts/measure-atlas.mjs).
+
+   The fallback is the widest a face can plausibly be, so a missing measurement
+   errs small rather than off the edge. It was 6.4 while the library had no truly
+   wide faces; once the width prompt was fixed, ultra-extended began arriving
+   near 9em — the widest measured is 10.58em — and 6.4 would have divided by
+   too little. 11 carries headroom above that. */
 .duel-specimen {
-  font-size: clamp(1.75rem, calc((100vw - 64px) / var(--duel-em, 6.4)), 5.5rem);
+  font-size: clamp(1.75rem, calc((100vw - 64px) / var(--duel-em, 11)), 5.5rem);
 }
 @media (min-width: 640px) {
   /* Two panes inside the 1100px wrap: gutters 48, gap 16, pane padding 96. */
   .duel-specimen {
-    font-size: clamp(1.75rem, calc((min(100vw, 1100px) - 160px) / (var(--duel-em, 6.4) * 2)), 5.5rem);
+    font-size: clamp(1.75rem, calc((min(100vw, 1100px) - 160px) / (var(--duel-em, 11) * 2)), 5.5rem);
   }
 }
 

@@ -32,9 +32,33 @@ if (!KEY) {
 // these prompts, so drift can't bite.
 const article = (w) => ('aeiou'.includes(w[0].toLowerCase()) ? 'an' : 'a');
 
+// Width is asked for differently at each end of the axis, and the reason is
+// measured rather than stylistic — see the long note on WIDTH_ADJECTIVE in
+// lib/genome.ts. Kept byte-identical to that file; test/genome.test.ts asserts
+// the two renderers agree, because this script deliberately replicates rather
+// than imports and replication is how they drift.
+const WIDTH_ADJECTIVE = {
+  'ultra-condensed': 'ultra-condensed',
+  condensed: 'condensed',
+  narrow: 'slightly condensed',
+};
+
+const WIDTH_SENTENCE = {
+  'normal-width':
+    'The letterforms sit at classic proportions, neither condensed nor extended.',
+  wide: 'The letterforms are drawn wide, with open counters and generous spacing.',
+  extended:
+    'The letterforms are drawn very wide: each character is clearly wider than it is tall, ' +
+    'with broad counters.',
+  'ultra-extended':
+    'The letterforms are extremely wide: every character is far wider than it is tall, ' +
+    'with generous counters and open spacing.',
+};
+
 function toPrompt(g) {
   const shape = [];
-  if (g.width !== 'normal-width') shape.push(g.width);
+  const widthWord = WIDTH_ADJECTIVE[g.width];
+  if (widthWord) shape.push(widthWord);
   shape.push(g.weight, g.category);
 
   const details = [];
@@ -46,11 +70,14 @@ function toPrompt(g) {
 
   const last = details.pop();
   const detailText = details.length ? `${details.join(', ')}, and ${last}` : last;
+  const widthSentence = WIDTH_SENTENCE[g.width];
 
   return (
-    `A ${shape.join(' ')} with ${detailText}. ` +
+    `${article(shape[0]).toUpperCase().slice(0, 1)}${article(shape[0]).slice(1)} ` +
+    `${shape.join(' ')} with ${detailText}. ` +
     `${g.era} in spirit, ${g.mood[0]} and ${g.mood[1]}. ` +
-    `Drawn for ${g.useCase}.`
+    `Drawn for ${g.useCase}.` +
+    (widthSentence ? ` ${widthSentence}` : '')
   );
 }
 

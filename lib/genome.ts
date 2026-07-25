@@ -228,9 +228,57 @@ const STRUCTURAL: OrdinalKey[] = [
 /** "a eroded surface" reads as sloppy in a prompt the model actually consumes. */
 const article = (word: string) => ('aeiou'.includes(word[0].toLowerCase()) ? 'an' : 'a');
 
+/**
+ * How width gets asked for.
+ *
+ * As a bare adjective the wide half of this axis does not merely fail, it
+ * inverts: measured across 201 minted faces, "ultra-extended" produced 2.41em
+ * of "Handgloves" — narrower than "condensed" — while "wide" and "extended"
+ * landed at the same width as asking for nothing. Half the axis was decorative,
+ * and a library sampled evenly across it came out condensed.
+ *
+ * Controlled experiments (scripts/experiment-width.mjs, 38 fonts) found the
+ * mechanism: the model reads a width adjective as a style cue and drops it among
+ * the ten other attributes in the prompt, but it obeys a plain sentence about
+ * proportion. Fixing the article made it worse; a dedicated sentence took the
+ * same request from 2.29em to 9.20em, and rescued the category it failed on
+ * worst — didone went 1.89em → 7.46em.
+ *
+ * The measured ladder these produce, in ems of "Handgloves":
+ *   ultra-condensed 1.61 · condensed 2.39 · narrow 3.44 · normal 4.60
+ *   wide 5.41 · extended 6.70 · ultra-extended 8.90
+ * Monotonic, with roughly even steps. A normal-width grotesque is about 5.2em,
+ * so the scale straddles it rather than sitting entirely below it, which is what
+ * it did before.
+ *
+ * Note "normal-width" is no longer silent. Left unstated the model defaults to
+ * 3.56em — already condensed — which was the largest single contributor to the
+ * skew, since normal-width is the most common value in any population.
+ */
+const WIDTH_ADJECTIVE: Partial<Record<Genome['width'], string>> = {
+  'ultra-condensed': 'ultra-condensed',
+  condensed: 'condensed',
+  // "narrow" as a word barely moves the model; "slightly condensed" lands it
+  // between condensed and normal, which is what narrow means.
+  narrow: 'slightly condensed',
+};
+
+const WIDTH_SENTENCE: Partial<Record<Genome['width'], string>> = {
+  'normal-width':
+    'The letterforms sit at classic proportions, neither condensed nor extended.',
+  wide: 'The letterforms are drawn wide, with open counters and generous spacing.',
+  extended:
+    'The letterforms are drawn very wide: each character is clearly wider than it is tall, ' +
+    'with broad counters.',
+  'ultra-extended':
+    'The letterforms are extremely wide: every character is far wider than it is tall, ' +
+    'with generous counters and open spacing.',
+};
+
 export function toPrompt(g: Genome): string {
   const shape: string[] = [];
-  if (g.width !== 'normal-width') shape.push(g.width);
+  const widthWord = WIDTH_ADJECTIVE[g.width];
+  if (widthWord) shape.push(widthWord);
   shape.push(g.weight, g.category);
 
   const details: string[] = [];
@@ -243,10 +291,14 @@ export function toPrompt(g: Genome): string {
   const last = details.pop()!;
   const detailText = details.length ? `${details.join(', ')}, and ${last}` : last;
 
+  const widthSentence = WIDTH_SENTENCE[g.width];
+
   return (
-    `A ${shape.join(' ')} with ${detailText}. ` +
+    `${article(shape[0]).toUpperCase().slice(0, 1)}${article(shape[0]).slice(1)} ` +
+    `${shape.join(' ')} with ${detailText}. ` +
     `${g.era} in spirit, ${g.mood[0]} and ${g.mood[1]}. ` +
-    `Drawn for ${g.useCase}.`
+    `Drawn for ${g.useCase}.` +
+    (widthSentence ? ` ${widthSentence}` : '')
   );
 }
 

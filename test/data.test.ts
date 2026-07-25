@@ -155,15 +155,18 @@ describe('the atlas ships what it advertises', () => {
   });
 
   /**
-   * Both panes of a duel share one point size, because width is an axis being
-   * judged and scaling each face to its pane would erase the difference. That
-   * size is derived in globals.css from the widest face in the atlas — the
-   * `6.4` divisor in `.duel-specimen`. If a wider face is ever minted, the
-   * divisor is wrong and the specimen clips off the edge of a phone with no
-   * error anywhere, so the assumption is pinned here rather than trusted.
+   * Each duel sizes itself off the wider of its two faces, and falls back to
+   * `11` in `.duel-specimen` and `duelEm()` when a face has no measurement. A
+   * face wider than that fallback would run off the edge of a phone with no
+   * error anywhere, so the ceiling is pinned rather than trusted.
+   *
+   * It was 6.4 while the width prompt was broken and nothing in the library was
+   * genuinely wide. Fixing the prompt took ultra-extended from 2.41em to a
+   * measured 8.50em median and 10.58em at the widest, which is the whole point —
+   * but it moved this ceiling with it.
    */
   it('contains no face wider than the specimen sizing assumes', () => {
-    const WIDEST_EM = 6.4;
+    const WIDEST_EM = 11;
     const widest = manifest
       .map((e) => {
         const font = parse(readFileSync(`public/atlas/${e.slug}.ttf`).buffer as ArrayBuffer);
