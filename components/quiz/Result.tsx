@@ -106,14 +106,24 @@ function AtlasRow({ entry, strengths }: { entry: AtlasEntry; strengths: MatchDet
   const g = entry.genome;
   const why = matchReason(strengths);
   return (
-    <li className="border-b border-line py-6">
-      <div
-        className="specimen text-[clamp(1.9rem,5.5vw,3.1rem)] leading-[1.1]"
+    <li className="group border-b border-line py-6">
+      {/*
+        The name opens the face.
+
+        This is the payoff screen: someone has just judged twelve pairs and been
+        handed six typefaces described as theirs. The obvious next move is "show
+        me more of that one", and the name — the largest, most inviting thing in
+        the row — was inert. The only way out of the row was a TTF download,
+        which is the last step, not the next one.
+      */}
+      <Link
+        href={`/collection/${entry.slug}`}
+        className="specimen block text-[clamp(1.9rem,5.5vw,3.1rem)] leading-[1.1]"
         data-loaded={loaded}
         style={{ fontFamily: `"${family}", Georgia, serif` }}
       >
         {entry.name}
-      </div>
+      </Link>
       {why && (
         <p className="mt-3 text-[15px] leading-relaxed text-ink-dim">
           <span className="text-ink">Closest to you on {why.axes}.</span>
@@ -124,6 +134,20 @@ function AtlasRow({ entry, strengths }: { entry: AtlasEntry; strengths: MatchDet
         <span className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-faint">
           {g.category} · {g.contrast} · {g.weight} · {g.terminals}
         </span>
+        {/* Named explicitly as well as on the specimen, because a heading that
+            happens to be a link is not an affordance anyone can see. */}
+        <Link
+          href={`/collection/${entry.slug}`}
+          className="-my-3 inline-flex min-h-[44px] items-center font-mono text-[11px] text-ink-dim transition group-hover:text-ink hover:text-ink"
+        >
+          specimen →
+        </Link>
+        <Link
+          href={`/collection/${entry.slug}/pair`}
+          className="-my-3 inline-flex min-h-[44px] items-center font-mono text-[11px] text-ink-faint transition hover:text-ink"
+        >
+          what pairs with it →
+        </Link>
         <a
           href={`/atlas/${entry.slug}.ttf`}
           download={`${entry.name}.ttf`}
