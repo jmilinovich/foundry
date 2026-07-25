@@ -206,7 +206,7 @@ export function RunView({
               value={text}
               onChange={(e) => setText(e.target.value)}
               placeholder="Type to re-set every specimen"
-              className="w-full min-w-0 rounded border border-line bg-panel px-3 py-1.5 text-sm text-ink outline-none transition focus:border-ink sm:w-72"
+              className="w-full min-w-0 border border-line bg-panel px-3 py-1.5 text-sm text-ink outline-none transition focus:border-ink sm:w-72"
             />
             <label className="hidden items-center gap-2 font-mono text-[11px] text-ink-faint sm:flex">
               <input
@@ -235,7 +235,7 @@ export function RunView({
                 const [lockedRunId, lockedFontId] = e.target.value.split(':');
                 pairAction({ action: 'swap', lockedRunId, lockedFontId });
               }}
-              className="max-w-[280px] rounded border border-line bg-panel px-2 py-1 font-mono text-[11px] text-ink-dim outline-none focus:border-ink"
+              className="max-w-[280px] border border-line bg-panel px-2 py-1 font-mono text-[11px] text-ink-dim outline-none focus:border-ink"
             >
               {catalog.map((f) => (
                 <option key={f.id} value={`${f.runId}:${f.id}`}>
@@ -260,7 +260,7 @@ export function RunView({
                   setViewGen(g);
                   setSelected(new Set());
                 }}
-                className={`rounded px-2 py-0.5 font-mono text-[11px] transition ${
+                className={` px-2 py-0.5 font-mono text-[11px] transition ${
                   g === viewGen
                     ? 'bg-ink text-paper'
                     : 'text-ink-faint hover:bg-panel hover:text-ink-dim'
@@ -276,10 +276,18 @@ export function RunView({
         )}
       </header>
 
-      <main className="mx-auto w-full max-w-[1600px] flex-1 px-6 py-8">
+      {/* pb clears the sticky footer, which used to sit on top of the last row. */}
+      <main className="mx-auto w-full max-w-[1600px] flex-1 px-4 py-6 pb-28 sm:px-6 sm:py-8">
+        {/* Two columns from the smallest screen up.
+            DESIGN.md is explicit that the cull must stay a fast comparison, and
+            a single column put eight candidates across three phone screens —
+            you cannot compare what you have to remember. Two columns fit the
+            population in about a screen and a half. */}
         <div
-          className={`grid gap-4 ${
-            pairing ? 'md:grid-cols-2 2xl:grid-cols-3' : 'sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4'
+          className={`grid gap-3 sm:gap-4 ${
+            pairing
+              ? 'md:grid-cols-2 2xl:grid-cols-3'
+              : 'grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4'
           }`}
         >
           {generation.map((f, i) =>
@@ -358,7 +366,7 @@ export function RunView({
                     ? 'Settle on this partner'
                     : 'Select exactly one partner to settle on'
                 }
-                className="rounded border border-line px-3 py-2 text-sm text-ink-dim transition disabled:cursor-not-allowed disabled:opacity-40 hover:enabled:border-ink hover:enabled:text-ink"
+                className=" border border-line px-3 py-2 text-sm text-ink-dim transition disabled:cursor-not-allowed disabled:opacity-40 hover:enabled:border-ink hover:enabled:text-ink"
               >
                 settle on this pair
               </button>
@@ -367,7 +375,7 @@ export function RunView({
             <button
               onClick={breedNext}
               disabled={!isLatest || !selected.size || breeding || pending}
-              className="rounded bg-accent px-4 py-2 text-sm font-medium text-paper transition disabled:cursor-not-allowed disabled:bg-panel disabled:text-ink-faint hover:enabled:brightness-110"
+              className=" bg-accent px-4 py-2 text-sm font-medium text-paper transition disabled:cursor-not-allowed disabled:bg-panel disabled:text-ink-faint hover:enabled:brightness-110"
             >
               {breeding ? 'breeding…' : `breed generation ${run.generation + 1}`}
             </button>

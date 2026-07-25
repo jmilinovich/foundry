@@ -68,7 +68,7 @@ export function Specimen({
           : undefined
       }
       style={ready ? { animationDelay: `${Math.min(index, 12) * 45}ms` } : undefined}
-      className={`group relative flex flex-col overflow-hidden rounded-lg border p-5 text-left outline-none transition-all duration-300 focus-visible:border-accent ${shell} ${
+      className={`group relative flex flex-col overflow-hidden border p-3 text-left sm:p-5 outline-none transition-all duration-300 focus-visible:border-accent ${shell} ${
         ready ? 'rise cursor-pointer' : ''
       } ${dimmed && !selected ? 'opacity-45 hover:opacity-90' : 'opacity-100'}`}
     >
@@ -83,8 +83,11 @@ export function Specimen({
           {failed ? 'failed' : BADGE[font.lineage].label}
         </span>
 
+        {/* The row actions stay visible on touch. Revealing them on hover hides
+            them completely on a phone, where "open", "lineage" and the download
+            are the only ways out of the grid. */}
         {ready ? (
-          <span className="flex items-center gap-3 opacity-0 transition group-hover:opacity-100">
+          <span className="flex items-center gap-3 transition sm:opacity-0 sm:group-hover:opacity-100">
             <Link
               href={`/run/${runId}/font/${font.id}`}
               onClick={(e) => e.stopPropagation()}
@@ -128,9 +131,17 @@ export function Specimen({
       >
         {ready ? (
           <div
-            className="specimen w-full break-words leading-[1.05]"
+            className="specimen w-full overflow-hidden break-words leading-[1.05]"
             data-loaded={isLoaded}
-            style={{ fontFamily: `"${family}", serif`, fontSize: `${size}px` }}
+            // The slider sets the size for a desktop grid four cards wide. At
+            // two columns on a phone a card is about 150px across, so the
+            // viewport caps it — low enough that most faces keep the specimen
+            // on one line, since a word broken mid-stem ("Handgl / oves") is
+            // exactly the thing you cannot judge a letterform from.
+            style={{
+              fontFamily: `"${family}", serif`,
+              fontSize: `min(${size}px, 8.5vw)`,
+            }}
           >
             {text}
           </div>
@@ -142,7 +153,7 @@ export function Specimen({
                 e.stopPropagation();
                 onRetry(font.id);
               }}
-              className="mt-3 rounded border border-line px-2 py-1 font-mono text-[11px] text-ink-dim transition hover:border-ink hover:text-ink"
+              className="mt-3 border border-line px-2 py-1 font-mono text-[11px] text-ink-dim transition hover:border-ink hover:text-ink"
             >
               ↻ retry · $0.20
             </button>
@@ -173,11 +184,17 @@ export function Specimen({
         ) : (
           <div className="text-[15px] text-ink-faint">{font.name}</div>
         )}
+        {/* The full genotype is a three-line mono paragraph — on a phone card
+            it buries the specimen it is supposed to annotate. The three axes a
+            person actually culls on stay; the rest is on the detail page. */}
         <p
-          className="mt-1.5 font-mono text-[10.5px] leading-relaxed text-ink-faint"
+          className="mt-1.5 hidden font-mono text-[10.5px] leading-relaxed text-ink-faint sm:block"
           title={font.prompt}
         >
           {genotype}
+        </p>
+        <p className="mt-1 font-mono text-[9.5px] uppercase leading-relaxed tracking-[0.1em] text-ink-faint sm:hidden">
+          {font.genome.category} · {font.genome.weight}
         </p>
       </div>
     </div>
