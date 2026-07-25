@@ -100,6 +100,306 @@
     "name": "Monolith Veil"
   },
   {
+    "slug": "didone-01",
+    "genome": {
+      "category": "didone serif",
+      "weight": "hairline",
+      "width": "ultra-extended",
+      "contrast": "extreme contrast",
+      "terminals": "blunt cut",
+      "xheight": "normal",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "18th-century enlightenment",
+      "useCase": "a synthesizer front panel",
+      "mood": [
+        "severe",
+        "nostalgic"
+      ]
+    },
+    "name": "Razor Cathedral Didone"
+  },
+  {
+    "slug": "didone-02",
+    "genome": {
+      "category": "didone serif",
+      "weight": "medium",
+      "width": "narrow",
+      "contrast": "high contrast",
+      "terminals": "sheared",
+      "xheight": "very large",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "1970s phototypesetting",
+      "useCase": "a sports broadcast package",
+      "mood": [
+        "ecclesiastical",
+        "severe"
+      ]
+    },
+    "name": "Wraith Didone"
+  },
+  {
+    "slug": "didone-03",
+    "genome": {
+      "category": "didone serif",
+      "weight": "ultra-heavy",
+      "width": "extended",
+      "contrast": "extreme contrast",
+      "terminals": "ball",
+      "xheight": "modest",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "an architecture studio",
+      "mood": [
+        "nostalgic",
+        "elegant"
+      ]
+    },
+    "name": "Fathom Didone"
+  },
+  {
+    "slug": "didone-04",
+    "genome": {
+      "category": "didone serif",
+      "weight": "regular",
+      "width": "condensed",
+      "contrast": "high contrast",
+      "terminals": "blunt cut",
+      "xheight": "large",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "18th-century enlightenment",
+      "useCase": "a wellness app identity",
+      "mood": [
+        "elegant",
+        "ecclesiastical"
+      ]
+    },
+    "name": "Tallis Nocturne Serif"
+  },
+  {
+    "slug": "didone-05",
+    "genome": {
+      "category": "didone serif",
+      "weight": "black",
+      "width": "wide",
+      "contrast": "extreme contrast",
+      "terminals": "sheared",
+      "xheight": "small",
+      "corner": "razor-sharp",
+      "texture": "lightly inked",
+      "era": "1970s phototypesetting",
+      "useCase": "a science museum",
+      "mood": [
+        "editorial",
+        "severe"
+      ]
+    },
+    "name": "Yvaine Didone"
+  },
+  {
+    "slug": "didone-06",
+    "genome": {
+      "category": "didone serif",
+      "weight": "light",
+      "width": "ultra-condensed",
+      "contrast": "high contrast",
+      "terminals": "ball",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a fashion house",
+      "mood": [
+        "severe",
+        "nostalgic"
+      ]
+    },
+    "name": "Abyssal Didone"
+  },
+  {
+    "slug": "didone-07",
+    "genome": {
+      "category": "didone serif",
+      "weight": "bold",
+      "width": "normal-width",
+      "contrast": "extreme contrast",
+      "terminals": "blunt cut",
+      "xheight": "very large",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "18th-century enlightenment",
+      "useCase": "a financial dashboard",
+      "mood": [
+        "ecclesiastical",
+        "severe"
+      ]
+    },
+    "name": "Abyssal Velvet Didone"
+  },
+  {
+    "slug": "didone-08",
+    "genome": {
+      "category": "didone serif",
+      "weight": "extralight",
+      "width": "ultra-extended",
+      "contrast": "high contrast",
+      "terminals": "sheared",
+      "xheight": "modest",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "1970s phototypesetting",
+      "useCase": "a coffee packaging line",
+      "mood": [
+        "nostalgic",
+        "elegant"
+      ]
+    },
+    "name": "Feral Glass Didone"
+  },
+  {
+    "slug": "didone-09",
+    "genome": {
+      "category": "didone serif",
+      "weight": "semibold",
+      "width": "narrow",
+      "contrast": "extreme contrast",
+      "terminals": "ball",
+      "xheight": "large",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a children's picture book",
+      "mood": [
+        "elegant",
+        "ecclesiastical"
+      ]
+    },
+    "name": "Spectral Needle Didone"
+  },
+  {
+    "slug": "didone-10",
+    "genome": {
+      "category": "didone serif",
+      "weight": "hairline",
+      "width": "extended",
+      "contrast": "high contrast",
+      "terminals": "blunt cut",
+      "xheight": "small",
+      "corner": "crisp",
+      "texture": "engraved",
+      "era": "18th-century enlightenment",
+      "useCase": "an independent record label",
+      "mood": [
+        "editorial",
+        "severe"
+      ]
+    },
+    "name": "Cathedral Veil Serif"
+  },
+  {
+    "slug": "didone-11",
+    "genome": {
+      "category": "didone serif",
+      "weight": "medium",
+      "width": "condensed",
+      "contrast": "extreme contrast",
+      "terminals": "sheared",
+      "xheight": "normal",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "1970s phototypesetting",
+      "useCase": "a film title sequence",
+      "mood": [
+        "severe",
+        "nostalgic"
+      ]
+    },
+    "name": "Juno Nocturne"
+  },
+  {
+    "slug": "didone-12",
+    "genome": {
+      "category": "didone serif",
+      "weight": "ultra-heavy",
+      "width": "wide",
+      "contrast": "high contrast",
+      "terminals": "ball",
+      "xheight": "very large",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a legal document set",
+      "mood": [
+        "ecclesiastical",
+        "severe"
+      ]
+    },
+    "name": "Dolmen Nocturne"
+  },
+  {
+    "slug": "didone-13",
+    "genome": {
+      "category": "didone serif",
+      "weight": "regular",
+      "width": "ultra-condensed",
+      "contrast": "extreme contrast",
+      "terminals": "blunt cut",
+      "xheight": "modest",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "18th-century enlightenment",
+      "useCase": "a literary journal",
+      "mood": [
+        "nostalgic",
+        "elegant"
+      ]
+    },
+    "name": "Prismatic Veil Didone"
+  },
+  {
+    "slug": "didone-14",
+    "genome": {
+      "category": "didone serif",
+      "weight": "black",
+      "width": "normal-width",
+      "contrast": "high contrast",
+      "terminals": "sheared",
+      "xheight": "large",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "1970s phototypesetting",
+      "useCase": "a transit wayfinding system",
+      "mood": [
+        "elegant",
+        "ecclesiastical"
+      ]
+    },
+    "name": "Marble Nocturne Display"
+  },
+  {
+    "slug": "didone-15",
+    "genome": {
+      "category": "didone serif",
+      "weight": "light",
+      "width": "ultra-extended",
+      "contrast": "extreme contrast",
+      "terminals": "ball",
+      "xheight": "small",
+      "corner": "razor-sharp",
+      "texture": "slightly rough",
+      "era": "contemporary",
+      "useCase": "a synthesizer front panel",
+      "mood": [
+        "editorial",
+        "severe"
+      ]
+    },
+    "name": "Cathedral Vapor Serif"
+  },
+  {
     "slug": "didone-classic",
     "genome": {
       "width": "normal-width",
@@ -240,6 +540,306 @@
     "name": "Helix Nova"
   },
   {
+    "slug": "flared-01",
+    "genome": {
+      "category": "flared sans",
+      "weight": "regular",
+      "width": "extended",
+      "contrast": "low contrast",
+      "terminals": "tapered",
+      "xheight": "normal",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "15th-century humanist",
+      "useCase": "a legal document set",
+      "mood": [
+        "elegant",
+        "editorial"
+      ]
+    },
+    "name": "Pale Vesper Serif"
+  },
+  {
+    "slug": "flared-02",
+    "genome": {
+      "category": "flared sans",
+      "weight": "black",
+      "width": "condensed",
+      "contrast": "moderate contrast",
+      "terminals": "flared",
+      "xheight": "very large",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "1970s phototypesetting",
+      "useCase": "a literary journal",
+      "mood": [
+        "ecclesiastical",
+        "elegant"
+      ]
+    },
+    "name": "Vesper Obelisk Didone"
+  },
+  {
+    "slug": "flared-03",
+    "genome": {
+      "category": "flared sans",
+      "weight": "light",
+      "width": "wide",
+      "contrast": "very low contrast",
+      "terminals": "tapered",
+      "xheight": "modest",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a transit wayfinding system",
+      "mood": [
+        "editorial",
+        "warm"
+      ]
+    },
+    "name": "Prism Vapor Grotesk"
+  },
+  {
+    "slug": "flared-04",
+    "genome": {
+      "category": "flared sans",
+      "weight": "bold",
+      "width": "ultra-condensed",
+      "contrast": "low contrast",
+      "terminals": "flared",
+      "xheight": "large",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "15th-century humanist",
+      "useCase": "a synthesizer front panel",
+      "mood": [
+        "warm",
+        "ecclesiastical"
+      ]
+    },
+    "name": "Lacuna Obelisk"
+  },
+  {
+    "slug": "flared-05",
+    "genome": {
+      "category": "flared sans",
+      "weight": "extralight",
+      "width": "normal-width",
+      "contrast": "moderate contrast",
+      "terminals": "tapered",
+      "xheight": "small",
+      "corner": "softened",
+      "texture": "lightly inked",
+      "era": "1970s phototypesetting",
+      "useCase": "a sports broadcast package",
+      "mood": [
+        "literary",
+        "elegant"
+      ]
+    },
+    "name": "Dorian Veil"
+  },
+  {
+    "slug": "flared-06",
+    "genome": {
+      "category": "flared sans",
+      "weight": "semibold",
+      "width": "ultra-extended",
+      "contrast": "very low contrast",
+      "terminals": "flared",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "an architecture studio",
+      "mood": [
+        "elegant",
+        "editorial"
+      ]
+    },
+    "name": "Liminal Spire"
+  },
+  {
+    "slug": "flared-07",
+    "genome": {
+      "category": "flared sans",
+      "weight": "hairline",
+      "width": "narrow",
+      "contrast": "low contrast",
+      "terminals": "tapered",
+      "xheight": "very large",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "15th-century humanist",
+      "useCase": "a wellness app identity",
+      "mood": [
+        "ecclesiastical",
+        "elegant"
+      ]
+    },
+    "name": "Riven Nocturne"
+  },
+  {
+    "slug": "flared-08",
+    "genome": {
+      "category": "flared sans",
+      "weight": "medium",
+      "width": "extended",
+      "contrast": "moderate contrast",
+      "terminals": "flared",
+      "xheight": "modest",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "1970s phototypesetting",
+      "useCase": "a science museum",
+      "mood": [
+        "editorial",
+        "warm"
+      ]
+    },
+    "name": "Umbral Didone"
+  },
+  {
+    "slug": "flared-09",
+    "genome": {
+      "category": "flared sans",
+      "weight": "ultra-heavy",
+      "width": "condensed",
+      "contrast": "very low contrast",
+      "terminals": "tapered",
+      "xheight": "large",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a fashion house",
+      "mood": [
+        "warm",
+        "ecclesiastical"
+      ]
+    },
+    "name": "Ferrous Monolith"
+  },
+  {
+    "slug": "flared-10",
+    "genome": {
+      "category": "flared sans",
+      "weight": "regular",
+      "width": "wide",
+      "contrast": "low contrast",
+      "terminals": "flared",
+      "xheight": "small",
+      "corner": "crisp",
+      "texture": "engraved",
+      "era": "15th-century humanist",
+      "useCase": "a financial dashboard",
+      "mood": [
+        "literary",
+        "elegant"
+      ]
+    },
+    "name": "Umbral Vesper Serif"
+  },
+  {
+    "slug": "flared-11",
+    "genome": {
+      "category": "flared sans",
+      "weight": "black",
+      "width": "ultra-condensed",
+      "contrast": "moderate contrast",
+      "terminals": "tapered",
+      "xheight": "normal",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "1970s phototypesetting",
+      "useCase": "a coffee packaging line",
+      "mood": [
+        "elegant",
+        "editorial"
+      ]
+    },
+    "name": "Ypsilon Noir Display"
+  },
+  {
+    "slug": "flared-12",
+    "genome": {
+      "category": "flared sans",
+      "weight": "light",
+      "width": "normal-width",
+      "contrast": "very low contrast",
+      "terminals": "flared",
+      "xheight": "very large",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a children's picture book",
+      "mood": [
+        "ecclesiastical",
+        "elegant"
+      ]
+    },
+    "name": "Quasar Vellum"
+  },
+  {
+    "slug": "flared-13",
+    "genome": {
+      "category": "flared sans",
+      "weight": "bold",
+      "width": "ultra-extended",
+      "contrast": "low contrast",
+      "terminals": "tapered",
+      "xheight": "modest",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "15th-century humanist",
+      "useCase": "an independent record label",
+      "mood": [
+        "editorial",
+        "warm"
+      ]
+    },
+    "name": "Rift Nocturne Serif"
+  },
+  {
+    "slug": "flared-14",
+    "genome": {
+      "category": "flared sans",
+      "weight": "extralight",
+      "width": "narrow",
+      "contrast": "moderate contrast",
+      "terminals": "flared",
+      "xheight": "large",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "1970s phototypesetting",
+      "useCase": "a film title sequence",
+      "mood": [
+        "warm",
+        "ecclesiastical"
+      ]
+    },
+    "name": "Wraith Didone"
+  },
+  {
+    "slug": "flared-15",
+    "genome": {
+      "category": "flared sans",
+      "weight": "semibold",
+      "width": "extended",
+      "contrast": "very low contrast",
+      "terminals": "tapered",
+      "xheight": "small",
+      "corner": "softened",
+      "texture": "brush-drawn",
+      "era": "contemporary",
+      "useCase": "a legal document set",
+      "mood": [
+        "literary",
+        "elegant"
+      ]
+    },
+    "name": "Dissonant Grotesk"
+  },
+  {
     "slug": "flared-editorial",
     "genome": {
       "width": "normal-width",
@@ -300,6 +900,306 @@
     "name": "Pale Oracle Serif"
   },
   {
+    "slug": "geo-01",
+    "genome": {
+      "category": "geometric sans",
+      "weight": "hairline",
+      "width": "ultra-condensed",
+      "contrast": "monoline",
+      "terminals": "angled",
+      "xheight": "small",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "1920s Bauhaus",
+      "useCase": "a wellness app identity",
+      "mood": [
+        "futuristic",
+        "playful"
+      ]
+    },
+    "name": "Aether Reed Moderne"
+  },
+  {
+    "slug": "geo-02",
+    "genome": {
+      "category": "geometric sans",
+      "weight": "medium",
+      "width": "normal-width",
+      "contrast": "very low contrast",
+      "terminals": "rounded",
+      "xheight": "normal",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "1950s Swiss",
+      "useCase": "a science museum",
+      "mood": [
+        "clinical",
+        "mechanical"
+      ]
+    },
+    "name": "Halo Nocturne Sans"
+  },
+  {
+    "slug": "geo-03",
+    "genome": {
+      "category": "geometric sans",
+      "weight": "ultra-heavy",
+      "width": "ultra-extended",
+      "contrast": "low contrast",
+      "terminals": "blunt cut",
+      "xheight": "very large",
+      "corner": "rounded",
+      "texture": "clean",
+      "era": "1990s digital",
+      "useCase": "a fashion house",
+      "mood": [
+        "playful",
+        "utilitarian"
+      ]
+    },
+    "name": "Kairo Obsidian"
+  },
+  {
+    "slug": "geo-04",
+    "genome": {
+      "category": "geometric sans",
+      "weight": "regular",
+      "width": "narrow",
+      "contrast": "monoline",
+      "terminals": "angled",
+      "xheight": "modest",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a financial dashboard",
+      "mood": [
+        "utilitarian",
+        "mechanical"
+      ]
+    },
+    "name": "Javelin Void Grotesk"
+  },
+  {
+    "slug": "geo-05",
+    "genome": {
+      "category": "geometric sans",
+      "weight": "black",
+      "width": "extended",
+      "contrast": "very low contrast",
+      "terminals": "rounded",
+      "xheight": "large",
+      "corner": "crisp",
+      "texture": "slightly rough",
+      "era": "speculative near-future",
+      "useCase": "a coffee packaging line",
+      "mood": [
+        "elegant",
+        "playful"
+      ]
+    },
+    "name": "Yonder Molten Grotesk"
+  },
+  {
+    "slug": "geo-06",
+    "genome": {
+      "category": "geometric sans",
+      "weight": "light",
+      "width": "condensed",
+      "contrast": "low contrast",
+      "terminals": "blunt cut",
+      "xheight": "small",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "1920s Bauhaus",
+      "useCase": "a children's picture book",
+      "mood": [
+        "mechanical",
+        "futuristic"
+      ]
+    },
+    "name": "Velvet Monolith Sans"
+  },
+  {
+    "slug": "geo-07",
+    "genome": {
+      "category": "geometric sans",
+      "weight": "bold",
+      "width": "wide",
+      "contrast": "monoline",
+      "terminals": "angled",
+      "xheight": "normal",
+      "corner": "rounded",
+      "texture": "clean",
+      "era": "1950s Swiss",
+      "useCase": "an independent record label",
+      "mood": [
+        "futuristic",
+        "playful"
+      ]
+    },
+    "name": "Flux Obsidian Grotesk"
+  },
+  {
+    "slug": "geo-08",
+    "genome": {
+      "category": "geometric sans",
+      "weight": "extralight",
+      "width": "ultra-condensed",
+      "contrast": "very low contrast",
+      "terminals": "rounded",
+      "xheight": "very large",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "1990s digital",
+      "useCase": "a film title sequence",
+      "mood": [
+        "clinical",
+        "mechanical"
+      ]
+    },
+    "name": "Helix Nocturne"
+  },
+  {
+    "slug": "geo-09",
+    "genome": {
+      "category": "geometric sans",
+      "weight": "semibold",
+      "width": "normal-width",
+      "contrast": "low contrast",
+      "terminals": "blunt cut",
+      "xheight": "modest",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a legal document set",
+      "mood": [
+        "playful",
+        "utilitarian"
+      ]
+    },
+    "name": "Warden Obsidian Grotesque"
+  },
+  {
+    "slug": "geo-10",
+    "genome": {
+      "category": "geometric sans",
+      "weight": "hairline",
+      "width": "ultra-extended",
+      "contrast": "monoline",
+      "terminals": "angled",
+      "xheight": "large",
+      "corner": "softened",
+      "texture": "pixel-stepped",
+      "era": "speculative near-future",
+      "useCase": "a literary journal",
+      "mood": [
+        "utilitarian",
+        "mechanical"
+      ]
+    },
+    "name": "Junction Aether Grotesk"
+  },
+  {
+    "slug": "geo-11",
+    "genome": {
+      "category": "geometric sans",
+      "weight": "medium",
+      "width": "narrow",
+      "contrast": "very low contrast",
+      "terminals": "rounded",
+      "xheight": "small",
+      "corner": "rounded",
+      "texture": "clean",
+      "era": "1920s Bauhaus",
+      "useCase": "a transit wayfinding system",
+      "mood": [
+        "elegant",
+        "playful"
+      ]
+    },
+    "name": "Nebula Grotesk"
+  },
+  {
+    "slug": "geo-12",
+    "genome": {
+      "category": "geometric sans",
+      "weight": "ultra-heavy",
+      "width": "extended",
+      "contrast": "low contrast",
+      "terminals": "blunt cut",
+      "xheight": "normal",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "1950s Swiss",
+      "useCase": "a synthesizer front panel",
+      "mood": [
+        "mechanical",
+        "futuristic"
+      ]
+    },
+    "name": "Aurex Grotesk"
+  },
+  {
+    "slug": "geo-13",
+    "genome": {
+      "category": "geometric sans",
+      "weight": "regular",
+      "width": "condensed",
+      "contrast": "monoline",
+      "terminals": "angled",
+      "xheight": "very large",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "1990s digital",
+      "useCase": "a sports broadcast package",
+      "mood": [
+        "futuristic",
+        "playful"
+      ]
+    },
+    "name": "Tesserae Nocturne"
+  },
+  {
+    "slug": "geo-14",
+    "genome": {
+      "category": "geometric sans",
+      "weight": "black",
+      "width": "wide",
+      "contrast": "very low contrast",
+      "terminals": "rounded",
+      "xheight": "modest",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "an architecture studio",
+      "mood": [
+        "clinical",
+        "mechanical"
+      ]
+    },
+    "name": "Upsilon Grotesk"
+  },
+  {
+    "slug": "geo-15",
+    "genome": {
+      "category": "geometric sans",
+      "weight": "light",
+      "width": "ultra-condensed",
+      "contrast": "low contrast",
+      "terminals": "blunt cut",
+      "xheight": "large",
+      "corner": "rounded",
+      "texture": "stencil-cut",
+      "era": "speculative near-future",
+      "useCase": "a wellness app identity",
+      "mood": [
+        "playful",
+        "utilitarian"
+      ]
+    },
+    "name": "Obsidian Aperture"
+  },
+  {
     "slug": "geo-slab",
     "genome": {
       "width": "normal-width",
@@ -318,6 +1218,306 @@
       ]
     },
     "name": "Ebon Bastion"
+  },
+  {
+    "slug": "grot-01",
+    "genome": {
+      "category": "grotesque sans",
+      "weight": "bold",
+      "width": "ultra-extended",
+      "contrast": "very low contrast",
+      "terminals": "angled",
+      "xheight": "modest",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "1990s digital",
+      "useCase": "a coffee packaging line",
+      "mood": [
+        "industrial",
+        "severe"
+      ]
+    },
+    "name": "Rift Obsidian Grotesk"
+  },
+  {
+    "slug": "grot-02",
+    "genome": {
+      "category": "grotesque sans",
+      "weight": "extralight",
+      "width": "narrow",
+      "contrast": "low contrast",
+      "terminals": "spurred",
+      "xheight": "large",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a children's picture book",
+      "mood": [
+        "brutalist",
+        "nostalgic"
+      ]
+    },
+    "name": "Monolith Veil"
+  },
+  {
+    "slug": "grot-03",
+    "genome": {
+      "category": "grotesque sans",
+      "weight": "semibold",
+      "width": "extended",
+      "contrast": "moderate contrast",
+      "terminals": "blunt cut",
+      "xheight": "small",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "19th-century industrial",
+      "useCase": "an independent record label",
+      "mood": [
+        "severe",
+        "utilitarian"
+      ]
+    },
+    "name": "Mordant Grotesk"
+  },
+  {
+    "slug": "grot-04",
+    "genome": {
+      "category": "grotesque sans",
+      "weight": "hairline",
+      "width": "condensed",
+      "contrast": "very low contrast",
+      "terminals": "angled",
+      "xheight": "normal",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "1950s Swiss",
+      "useCase": "a film title sequence",
+      "mood": [
+        "utilitarian",
+        "nostalgic"
+      ]
+    },
+    "name": "Liminal Spire Grotesk"
+  },
+  {
+    "slug": "grot-05",
+    "genome": {
+      "category": "grotesque sans",
+      "weight": "medium",
+      "width": "wide",
+      "contrast": "low contrast",
+      "terminals": "spurred",
+      "xheight": "very large",
+      "corner": "razor-sharp",
+      "texture": "slightly rough",
+      "era": "1990s digital",
+      "useCase": "a legal document set",
+      "mood": [
+        "editorial",
+        "severe"
+      ]
+    },
+    "name": "Icarus Grotesk"
+  },
+  {
+    "slug": "grot-06",
+    "genome": {
+      "category": "grotesque sans",
+      "weight": "ultra-heavy",
+      "width": "ultra-condensed",
+      "contrast": "moderate contrast",
+      "terminals": "blunt cut",
+      "xheight": "modest",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a literary journal",
+      "mood": [
+        "nostalgic",
+        "industrial"
+      ]
+    },
+    "name": "Iron Veil"
+  },
+  {
+    "slug": "grot-07",
+    "genome": {
+      "category": "grotesque sans",
+      "weight": "regular",
+      "width": "normal-width",
+      "contrast": "very low contrast",
+      "terminals": "angled",
+      "xheight": "large",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "19th-century industrial",
+      "useCase": "a transit wayfinding system",
+      "mood": [
+        "industrial",
+        "severe"
+      ]
+    },
+    "name": "Dreadnought Grotesk"
+  },
+  {
+    "slug": "grot-08",
+    "genome": {
+      "category": "grotesque sans",
+      "weight": "black",
+      "width": "ultra-extended",
+      "contrast": "low contrast",
+      "terminals": "spurred",
+      "xheight": "small",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "1950s Swiss",
+      "useCase": "a synthesizer front panel",
+      "mood": [
+        "brutalist",
+        "nostalgic"
+      ]
+    },
+    "name": "Havoc Obsidian Grotesk"
+  },
+  {
+    "slug": "grot-09",
+    "genome": {
+      "category": "grotesque sans",
+      "weight": "light",
+      "width": "narrow",
+      "contrast": "moderate contrast",
+      "terminals": "blunt cut",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "1990s digital",
+      "useCase": "a sports broadcast package",
+      "mood": [
+        "severe",
+        "utilitarian"
+      ]
+    },
+    "name": "Eclipse Monolith Grotesk"
+  },
+  {
+    "slug": "grot-10",
+    "genome": {
+      "category": "grotesque sans",
+      "weight": "bold",
+      "width": "extended",
+      "contrast": "very low contrast",
+      "terminals": "angled",
+      "xheight": "very large",
+      "corner": "softened",
+      "texture": "eroded",
+      "era": "contemporary",
+      "useCase": "an architecture studio",
+      "mood": [
+        "utilitarian",
+        "nostalgic"
+      ]
+    },
+    "name": "Black Vortex Grotesk"
+  },
+  {
+    "slug": "grot-11",
+    "genome": {
+      "category": "grotesque sans",
+      "weight": "extralight",
+      "width": "condensed",
+      "contrast": "low contrast",
+      "terminals": "spurred",
+      "xheight": "modest",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "19th-century industrial",
+      "useCase": "a wellness app identity",
+      "mood": [
+        "editorial",
+        "severe"
+      ]
+    },
+    "name": "Yonder Spectral Grotesk"
+  },
+  {
+    "slug": "grot-12",
+    "genome": {
+      "category": "grotesque sans",
+      "weight": "semibold",
+      "width": "wide",
+      "contrast": "moderate contrast",
+      "terminals": "blunt cut",
+      "xheight": "large",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "1950s Swiss",
+      "useCase": "a science museum",
+      "mood": [
+        "nostalgic",
+        "industrial"
+      ]
+    },
+    "name": "Feral Grotesk"
+  },
+  {
+    "slug": "grot-13",
+    "genome": {
+      "category": "grotesque sans",
+      "weight": "hairline",
+      "width": "ultra-condensed",
+      "contrast": "very low contrast",
+      "terminals": "angled",
+      "xheight": "small",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "1990s digital",
+      "useCase": "a fashion house",
+      "mood": [
+        "industrial",
+        "severe"
+      ]
+    },
+    "name": "Umbra Filament Grotesque"
+  },
+  {
+    "slug": "grot-14",
+    "genome": {
+      "category": "grotesque sans",
+      "weight": "medium",
+      "width": "normal-width",
+      "contrast": "low contrast",
+      "terminals": "spurred",
+      "xheight": "normal",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a financial dashboard",
+      "mood": [
+        "brutalist",
+        "nostalgic"
+      ]
+    },
+    "name": "Xenolith Bastion"
+  },
+  {
+    "slug": "grot-15",
+    "genome": {
+      "category": "grotesque sans",
+      "weight": "ultra-heavy",
+      "width": "ultra-extended",
+      "contrast": "moderate contrast",
+      "terminals": "blunt cut",
+      "xheight": "very large",
+      "corner": "crisp",
+      "texture": "lightly inked",
+      "era": "19th-century industrial",
+      "useCase": "a coffee packaging line",
+      "mood": [
+        "severe",
+        "utilitarian"
+      ]
+    },
+    "name": "Axiom Grotesk"
   },
   {
     "slug": "hairline-neo",
@@ -420,6 +1620,606 @@
     "name": "Cinder Lyric"
   },
   {
+    "slug": "humsans-01",
+    "genome": {
+      "category": "humanist sans",
+      "weight": "hairline",
+      "width": "narrow",
+      "contrast": "very low contrast",
+      "terminals": "angled",
+      "xheight": "very large",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "15th-century humanist",
+      "useCase": "an architecture studio",
+      "mood": [
+        "editorial",
+        "literary"
+      ]
+    },
+    "name": "Ypsilon Veil"
+  },
+  {
+    "slug": "humsans-02",
+    "genome": {
+      "category": "humanist sans",
+      "weight": "medium",
+      "width": "extended",
+      "contrast": "low contrast",
+      "terminals": "sheared",
+      "xheight": "modest",
+      "corner": "rounded",
+      "texture": "clean",
+      "era": "1970s phototypesetting",
+      "useCase": "a wellness app identity",
+      "mood": [
+        "warm",
+        "editorial"
+      ]
+    },
+    "name": "Umbra Velocity"
+  },
+  {
+    "slug": "humsans-03",
+    "genome": {
+      "category": "humanist sans",
+      "weight": "ultra-heavy",
+      "width": "condensed",
+      "contrast": "moderate contrast",
+      "terminals": "tapered",
+      "xheight": "large",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a science museum",
+      "mood": [
+        "literary",
+        "botanical"
+      ]
+    },
+    "name": "Wraith Grotesk"
+  },
+  {
+    "slug": "humsans-04",
+    "genome": {
+      "category": "humanist sans",
+      "weight": "regular",
+      "width": "wide",
+      "contrast": "very low contrast",
+      "terminals": "flared",
+      "xheight": "small",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "15th-century humanist",
+      "useCase": "a fashion house",
+      "mood": [
+        "botanical",
+        "warm"
+      ]
+    },
+    "name": "Obsidian Lyric Serif"
+  },
+  {
+    "slug": "humsans-05",
+    "genome": {
+      "category": "humanist sans",
+      "weight": "black",
+      "width": "ultra-condensed",
+      "contrast": "low contrast",
+      "terminals": "angled",
+      "xheight": "normal",
+      "corner": "rounded",
+      "texture": "brush-drawn",
+      "era": "1970s phototypesetting",
+      "useCase": "a financial dashboard",
+      "mood": [
+        "elegant",
+        "editorial"
+      ]
+    },
+    "name": "Obsidian Pneuma"
+  },
+  {
+    "slug": "humsans-06",
+    "genome": {
+      "category": "humanist sans",
+      "weight": "light",
+      "width": "normal-width",
+      "contrast": "moderate contrast",
+      "terminals": "sheared",
+      "xheight": "very large",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a coffee packaging line",
+      "mood": [
+        "editorial",
+        "literary"
+      ]
+    },
+    "name": "Aether Grotesk"
+  },
+  {
+    "slug": "humsans-07",
+    "genome": {
+      "category": "humanist sans",
+      "weight": "bold",
+      "width": "ultra-extended",
+      "contrast": "very low contrast",
+      "terminals": "tapered",
+      "xheight": "modest",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "15th-century humanist",
+      "useCase": "a children's picture book",
+      "mood": [
+        "warm",
+        "editorial"
+      ]
+    },
+    "name": "Eclipse Grotesk"
+  },
+  {
+    "slug": "humsans-08",
+    "genome": {
+      "category": "humanist sans",
+      "weight": "extralight",
+      "width": "narrow",
+      "contrast": "low contrast",
+      "terminals": "flared",
+      "xheight": "large",
+      "corner": "rounded",
+      "texture": "clean",
+      "era": "1970s phototypesetting",
+      "useCase": "an independent record label",
+      "mood": [
+        "literary",
+        "botanical"
+      ]
+    },
+    "name": "Eidolon Mono"
+  },
+  {
+    "slug": "humsans-09",
+    "genome": {
+      "category": "humanist sans",
+      "weight": "semibold",
+      "width": "extended",
+      "contrast": "moderate contrast",
+      "terminals": "angled",
+      "xheight": "small",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a film title sequence",
+      "mood": [
+        "botanical",
+        "warm"
+      ]
+    },
+    "name": "Eclipse Velvet Serif"
+  },
+  {
+    "slug": "humsans-10",
+    "genome": {
+      "category": "humanist sans",
+      "weight": "hairline",
+      "width": "condensed",
+      "contrast": "very low contrast",
+      "terminals": "sheared",
+      "xheight": "normal",
+      "corner": "softened",
+      "texture": "lightly inked",
+      "era": "15th-century humanist",
+      "useCase": "a legal document set",
+      "mood": [
+        "elegant",
+        "editorial"
+      ]
+    },
+    "name": "Ypsilon Aether Grotesk"
+  },
+  {
+    "slug": "humsans-11",
+    "genome": {
+      "category": "humanist sans",
+      "weight": "medium",
+      "width": "wide",
+      "contrast": "low contrast",
+      "terminals": "tapered",
+      "xheight": "very large",
+      "corner": "rounded",
+      "texture": "clean",
+      "era": "1970s phototypesetting",
+      "useCase": "a literary journal",
+      "mood": [
+        "editorial",
+        "literary"
+      ]
+    },
+    "name": "Cipher Halo Grotesk"
+  },
+  {
+    "slug": "humsans-12",
+    "genome": {
+      "category": "humanist sans",
+      "weight": "ultra-heavy",
+      "width": "ultra-condensed",
+      "contrast": "moderate contrast",
+      "terminals": "flared",
+      "xheight": "modest",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a transit wayfinding system",
+      "mood": [
+        "warm",
+        "editorial"
+      ]
+    },
+    "name": "Kronos Monolith"
+  },
+  {
+    "slug": "humsans-13",
+    "genome": {
+      "category": "humanist sans",
+      "weight": "regular",
+      "width": "normal-width",
+      "contrast": "very low contrast",
+      "terminals": "angled",
+      "xheight": "large",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "15th-century humanist",
+      "useCase": "a synthesizer front panel",
+      "mood": [
+        "literary",
+        "botanical"
+      ]
+    },
+    "name": "Xyric Hollow Grotesque"
+  },
+  {
+    "slug": "humsans-14",
+    "genome": {
+      "category": "humanist sans",
+      "weight": "black",
+      "width": "ultra-extended",
+      "contrast": "low contrast",
+      "terminals": "sheared",
+      "xheight": "small",
+      "corner": "rounded",
+      "texture": "clean",
+      "era": "1970s phototypesetting",
+      "useCase": "a sports broadcast package",
+      "mood": [
+        "botanical",
+        "warm"
+      ]
+    },
+    "name": "Eclipse Vector Grotesk"
+  },
+  {
+    "slug": "humsans-15",
+    "genome": {
+      "category": "humanist sans",
+      "weight": "light",
+      "width": "narrow",
+      "contrast": "moderate contrast",
+      "terminals": "tapered",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "slightly rough",
+      "era": "contemporary",
+      "useCase": "an architecture studio",
+      "mood": [
+        "elegant",
+        "editorial"
+      ]
+    },
+    "name": "Quasar Veil Didone"
+  },
+  {
+    "slug": "humserif-01",
+    "genome": {
+      "category": "humanist serif",
+      "weight": "hairline",
+      "width": "wide",
+      "contrast": "low contrast",
+      "terminals": "flared",
+      "xheight": "large",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "15th-century humanist",
+      "useCase": "a sports broadcast package",
+      "mood": [
+        "ecclesiastical",
+        "literary"
+      ]
+    },
+    "name": "Liminal Didone"
+  },
+  {
+    "slug": "humserif-02",
+    "genome": {
+      "category": "humanist serif",
+      "weight": "medium",
+      "width": "ultra-condensed",
+      "contrast": "moderate contrast",
+      "terminals": "spurred",
+      "xheight": "small",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "18th-century enlightenment",
+      "useCase": "an architecture studio",
+      "mood": [
+        "editorial",
+        "ecclesiastical"
+      ]
+    },
+    "name": "Liminal Spire Didone"
+  },
+  {
+    "slug": "humserif-03",
+    "genome": {
+      "category": "humanist serif",
+      "weight": "ultra-heavy",
+      "width": "normal-width",
+      "contrast": "high contrast",
+      "terminals": "tapered",
+      "xheight": "normal",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a wellness app identity",
+      "mood": [
+        "literary",
+        "warm"
+      ]
+    },
+    "name": "Kairo Obsidian Didone"
+  },
+  {
+    "slug": "humserif-04",
+    "genome": {
+      "category": "humanist serif",
+      "weight": "regular",
+      "width": "ultra-extended",
+      "contrast": "low contrast",
+      "terminals": "flared",
+      "xheight": "very large",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "15th-century humanist",
+      "useCase": "a science museum",
+      "mood": [
+        "warm",
+        "editorial"
+      ]
+    },
+    "name": "Ivory Eclipse Didone"
+  },
+  {
+    "slug": "humserif-05",
+    "genome": {
+      "category": "humanist serif",
+      "weight": "black",
+      "width": "narrow",
+      "contrast": "moderate contrast",
+      "terminals": "spurred",
+      "xheight": "modest",
+      "corner": "softened",
+      "texture": "engraved",
+      "era": "18th-century enlightenment",
+      "useCase": "a fashion house",
+      "mood": [
+        "elegant",
+        "ecclesiastical"
+      ]
+    },
+    "name": "Umbral Didone"
+  },
+  {
+    "slug": "humserif-06",
+    "genome": {
+      "category": "humanist serif",
+      "weight": "light",
+      "width": "extended",
+      "contrast": "high contrast",
+      "terminals": "tapered",
+      "xheight": "large",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a financial dashboard",
+      "mood": [
+        "ecclesiastical",
+        "literary"
+      ]
+    },
+    "name": "Opaline Didone"
+  },
+  {
+    "slug": "humserif-07",
+    "genome": {
+      "category": "humanist serif",
+      "weight": "bold",
+      "width": "condensed",
+      "contrast": "low contrast",
+      "terminals": "flared",
+      "xheight": "small",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "15th-century humanist",
+      "useCase": "a coffee packaging line",
+      "mood": [
+        "editorial",
+        "ecclesiastical"
+      ]
+    },
+    "name": "Obsidian Vertigo Serif"
+  },
+  {
+    "slug": "humserif-08",
+    "genome": {
+      "category": "humanist serif",
+      "weight": "extralight",
+      "width": "wide",
+      "contrast": "moderate contrast",
+      "terminals": "spurred",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "18th-century enlightenment",
+      "useCase": "a children's picture book",
+      "mood": [
+        "literary",
+        "warm"
+      ]
+    },
+    "name": "Xylaria Veil Display"
+  },
+  {
+    "slug": "humserif-09",
+    "genome": {
+      "category": "humanist serif",
+      "weight": "semibold",
+      "width": "ultra-condensed",
+      "contrast": "high contrast",
+      "terminals": "tapered",
+      "xheight": "very large",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "an independent record label",
+      "mood": [
+        "warm",
+        "editorial"
+      ]
+    },
+    "name": "Fathom Spire"
+  },
+  {
+    "slug": "humserif-10",
+    "genome": {
+      "category": "humanist serif",
+      "weight": "hairline",
+      "width": "normal-width",
+      "contrast": "low contrast",
+      "terminals": "flared",
+      "xheight": "modest",
+      "corner": "crisp",
+      "texture": "lightly inked",
+      "era": "15th-century humanist",
+      "useCase": "a film title sequence",
+      "mood": [
+        "elegant",
+        "ecclesiastical"
+      ]
+    },
+    "name": "Talisman Didone"
+  },
+  {
+    "slug": "humserif-11",
+    "genome": {
+      "category": "humanist serif",
+      "weight": "medium",
+      "width": "ultra-extended",
+      "contrast": "moderate contrast",
+      "terminals": "spurred",
+      "xheight": "large",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "18th-century enlightenment",
+      "useCase": "a legal document set",
+      "mood": [
+        "ecclesiastical",
+        "literary"
+      ]
+    },
+    "name": "Xyra Nocturne Didot"
+  },
+  {
+    "slug": "humserif-12",
+    "genome": {
+      "category": "humanist serif",
+      "weight": "ultra-heavy",
+      "width": "narrow",
+      "contrast": "high contrast",
+      "terminals": "tapered",
+      "xheight": "small",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a literary journal",
+      "mood": [
+        "editorial",
+        "ecclesiastical"
+      ]
+    },
+    "name": "Tensile Obsidian Didone"
+  },
+  {
+    "slug": "humserif-13",
+    "genome": {
+      "category": "humanist serif",
+      "weight": "regular",
+      "width": "extended",
+      "contrast": "low contrast",
+      "terminals": "flared",
+      "xheight": "normal",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "15th-century humanist",
+      "useCase": "a transit wayfinding system",
+      "mood": [
+        "literary",
+        "warm"
+      ]
+    },
+    "name": "Liminal Ivory Serif"
+  },
+  {
+    "slug": "humserif-14",
+    "genome": {
+      "category": "humanist serif",
+      "weight": "black",
+      "width": "condensed",
+      "contrast": "moderate contrast",
+      "terminals": "spurred",
+      "xheight": "very large",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "18th-century enlightenment",
+      "useCase": "a synthesizer front panel",
+      "mood": [
+        "warm",
+        "editorial"
+      ]
+    },
+    "name": "Xyric Obelisk Serif"
+  },
+  {
+    "slug": "humserif-15",
+    "genome": {
+      "category": "humanist serif",
+      "weight": "light",
+      "width": "wide",
+      "contrast": "high contrast",
+      "terminals": "tapered",
+      "xheight": "modest",
+      "corner": "softened",
+      "texture": "brush-drawn",
+      "era": "contemporary",
+      "useCase": "a sports broadcast package",
+      "mood": [
+        "elegant",
+        "ecclesiastical"
+      ]
+    },
+    "name": "Palladium Veil"
+  },
+  {
     "slug": "industrial-grot",
     "genome": {
       "width": "normal-width",
@@ -480,6 +2280,306 @@
     "name": "Xyloid Meridian"
   },
   {
+    "slug": "neo-01",
+    "genome": {
+      "category": "neo-grotesque sans",
+      "weight": "regular",
+      "width": "normal-width",
+      "contrast": "monoline",
+      "terminals": "angled",
+      "xheight": "large",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a literary journal",
+      "mood": [
+        "editorial",
+        "futuristic"
+      ]
+    },
+    "name": "Xenon Axiom"
+  },
+  {
+    "slug": "neo-02",
+    "genome": {
+      "category": "neo-grotesque sans",
+      "weight": "black",
+      "width": "ultra-extended",
+      "contrast": "very low contrast",
+      "terminals": "sheared",
+      "xheight": "small",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "1950s Swiss",
+      "useCase": "a transit wayfinding system",
+      "mood": [
+        "industrial",
+        "severe"
+      ]
+    },
+    "name": "Bastion Grotesk"
+  },
+  {
+    "slug": "neo-03",
+    "genome": {
+      "category": "neo-grotesque sans",
+      "weight": "light",
+      "width": "narrow",
+      "contrast": "low contrast",
+      "terminals": "blunt cut",
+      "xheight": "normal",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "1970s phototypesetting",
+      "useCase": "a synthesizer front panel",
+      "mood": [
+        "futuristic",
+        "clinical"
+      ]
+    },
+    "name": "Glyphic Meridian Mono"
+  },
+  {
+    "slug": "neo-04",
+    "genome": {
+      "category": "neo-grotesque sans",
+      "weight": "bold",
+      "width": "extended",
+      "contrast": "monoline",
+      "terminals": "angled",
+      "xheight": "very large",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "1990s digital",
+      "useCase": "a sports broadcast package",
+      "mood": [
+        "clinical",
+        "severe"
+      ]
+    },
+    "name": "Parallax Grotesk"
+  },
+  {
+    "slug": "neo-05",
+    "genome": {
+      "category": "neo-grotesque sans",
+      "weight": "extralight",
+      "width": "condensed",
+      "contrast": "very low contrast",
+      "terminals": "sheared",
+      "xheight": "modest",
+      "corner": "softened",
+      "texture": "eroded",
+      "era": "contemporary",
+      "useCase": "an architecture studio",
+      "mood": [
+        "utilitarian",
+        "futuristic"
+      ]
+    },
+    "name": "Spectral Meridian Grotesque"
+  },
+  {
+    "slug": "neo-06",
+    "genome": {
+      "category": "neo-grotesque sans",
+      "weight": "semibold",
+      "width": "wide",
+      "contrast": "low contrast",
+      "terminals": "blunt cut",
+      "xheight": "large",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "1950s Swiss",
+      "useCase": "a wellness app identity",
+      "mood": [
+        "severe",
+        "editorial"
+      ]
+    },
+    "name": "Eidolon Grotesk"
+  },
+  {
+    "slug": "neo-07",
+    "genome": {
+      "category": "neo-grotesque sans",
+      "weight": "hairline",
+      "width": "ultra-condensed",
+      "contrast": "monoline",
+      "terminals": "angled",
+      "xheight": "small",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "1970s phototypesetting",
+      "useCase": "a science museum",
+      "mood": [
+        "editorial",
+        "futuristic"
+      ]
+    },
+    "name": "Obsidian Tension Grotesque"
+  },
+  {
+    "slug": "neo-08",
+    "genome": {
+      "category": "neo-grotesque sans",
+      "weight": "medium",
+      "width": "normal-width",
+      "contrast": "very low contrast",
+      "terminals": "sheared",
+      "xheight": "normal",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "1990s digital",
+      "useCase": "a fashion house",
+      "mood": [
+        "industrial",
+        "severe"
+      ]
+    },
+    "name": "Fathom Grotesk"
+  },
+  {
+    "slug": "neo-09",
+    "genome": {
+      "category": "neo-grotesque sans",
+      "weight": "ultra-heavy",
+      "width": "ultra-extended",
+      "contrast": "low contrast",
+      "terminals": "blunt cut",
+      "xheight": "very large",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a financial dashboard",
+      "mood": [
+        "futuristic",
+        "clinical"
+      ]
+    },
+    "name": "Zeroth Monolith Grotesk"
+  },
+  {
+    "slug": "neo-10",
+    "genome": {
+      "category": "neo-grotesque sans",
+      "weight": "regular",
+      "width": "narrow",
+      "contrast": "monoline",
+      "terminals": "angled",
+      "xheight": "modest",
+      "corner": "crisp",
+      "texture": "slightly rough",
+      "era": "1950s Swiss",
+      "useCase": "a coffee packaging line",
+      "mood": [
+        "clinical",
+        "severe"
+      ]
+    },
+    "name": "Raven Obelisk"
+  },
+  {
+    "slug": "neo-11",
+    "genome": {
+      "category": "neo-grotesque sans",
+      "weight": "black",
+      "width": "extended",
+      "contrast": "very low contrast",
+      "terminals": "sheared",
+      "xheight": "large",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "1970s phototypesetting",
+      "useCase": "a children's picture book",
+      "mood": [
+        "utilitarian",
+        "futuristic"
+      ]
+    },
+    "name": "Titanium Monolith"
+  },
+  {
+    "slug": "neo-12",
+    "genome": {
+      "category": "neo-grotesque sans",
+      "weight": "light",
+      "width": "condensed",
+      "contrast": "low contrast",
+      "terminals": "blunt cut",
+      "xheight": "small",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "1990s digital",
+      "useCase": "an independent record label",
+      "mood": [
+        "severe",
+        "editorial"
+      ]
+    },
+    "name": "Jet Obsidian Grotesk"
+  },
+  {
+    "slug": "neo-13",
+    "genome": {
+      "category": "neo-grotesque sans",
+      "weight": "bold",
+      "width": "wide",
+      "contrast": "monoline",
+      "terminals": "angled",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a film title sequence",
+      "mood": [
+        "editorial",
+        "futuristic"
+      ]
+    },
+    "name": "Spectral Forge Sans"
+  },
+  {
+    "slug": "neo-14",
+    "genome": {
+      "category": "neo-grotesque sans",
+      "weight": "extralight",
+      "width": "ultra-condensed",
+      "contrast": "very low contrast",
+      "terminals": "sheared",
+      "xheight": "very large",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "1950s Swiss",
+      "useCase": "a legal document set",
+      "mood": [
+        "industrial",
+        "severe"
+      ]
+    },
+    "name": "Xyloid Spire Grotesk"
+  },
+  {
+    "slug": "neo-15",
+    "genome": {
+      "category": "neo-grotesque sans",
+      "weight": "semibold",
+      "width": "normal-width",
+      "contrast": "low contrast",
+      "terminals": "blunt cut",
+      "xheight": "modest",
+      "corner": "razor-sharp",
+      "texture": "stencil-cut",
+      "era": "1970s phototypesetting",
+      "useCase": "a literary journal",
+      "mood": [
+        "futuristic",
+        "clinical"
+      ]
+    },
+    "name": "Umbra Cut Grotesk"
+  },
+  {
     "slug": "nostalgic-serif",
     "genome": {
       "width": "normal-width",
@@ -498,6 +2598,306 @@
       ]
     },
     "name": "Nocturne Ivory Serif"
+  },
+  {
+    "slug": "oldstyle-01",
+    "genome": {
+      "category": "old-style serif",
+      "weight": "bold",
+      "width": "normal-width",
+      "contrast": "low contrast",
+      "terminals": "flared",
+      "xheight": "very large",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "15th-century humanist",
+      "useCase": "a fashion house",
+      "mood": [
+        "literary",
+        "nostalgic"
+      ]
+    },
+    "name": "Liminal Obsidian Antiqua"
+  },
+  {
+    "slug": "oldstyle-02",
+    "genome": {
+      "category": "old-style serif",
+      "weight": "extralight",
+      "width": "ultra-extended",
+      "contrast": "moderate contrast",
+      "terminals": "spurred",
+      "xheight": "modest",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "18th-century enlightenment",
+      "useCase": "a financial dashboard",
+      "mood": [
+        "warm",
+        "nostalgic"
+      ]
+    },
+    "name": "Ysolde Nocturne"
+  },
+  {
+    "slug": "oldstyle-03",
+    "genome": {
+      "category": "old-style serif",
+      "weight": "semibold",
+      "width": "narrow",
+      "contrast": "low contrast",
+      "terminals": "tapered",
+      "xheight": "large",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "15th-century humanist",
+      "useCase": "a coffee packaging line",
+      "mood": [
+        "nostalgic",
+        "literary"
+      ]
+    },
+    "name": "Blackthorn Echo Serif"
+  },
+  {
+    "slug": "oldstyle-04",
+    "genome": {
+      "category": "old-style serif",
+      "weight": "hairline",
+      "width": "extended",
+      "contrast": "moderate contrast",
+      "terminals": "flared",
+      "xheight": "small",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "18th-century enlightenment",
+      "useCase": "a children's picture book",
+      "mood": [
+        "ecclesiastical",
+        "literary"
+      ]
+    },
+    "name": "Mirage Ivory Display"
+  },
+  {
+    "slug": "oldstyle-05",
+    "genome": {
+      "category": "old-style serif",
+      "weight": "medium",
+      "width": "condensed",
+      "contrast": "low contrast",
+      "terminals": "spurred",
+      "xheight": "normal",
+      "corner": "softened",
+      "texture": "engraved",
+      "era": "15th-century humanist",
+      "useCase": "an independent record label",
+      "mood": [
+        "literary",
+        "nostalgic"
+      ]
+    },
+    "name": "Gloam Spire"
+  },
+  {
+    "slug": "oldstyle-06",
+    "genome": {
+      "category": "old-style serif",
+      "weight": "ultra-heavy",
+      "width": "wide",
+      "contrast": "moderate contrast",
+      "terminals": "tapered",
+      "xheight": "very large",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "18th-century enlightenment",
+      "useCase": "a film title sequence",
+      "mood": [
+        "warm",
+        "nostalgic"
+      ]
+    },
+    "name": "Ravine Didone"
+  },
+  {
+    "slug": "oldstyle-07",
+    "genome": {
+      "category": "old-style serif",
+      "weight": "regular",
+      "width": "ultra-condensed",
+      "contrast": "low contrast",
+      "terminals": "flared",
+      "xheight": "modest",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "15th-century humanist",
+      "useCase": "a legal document set",
+      "mood": [
+        "nostalgic",
+        "literary"
+      ]
+    },
+    "name": "Dread Meridian Serif"
+  },
+  {
+    "slug": "oldstyle-08",
+    "genome": {
+      "category": "old-style serif",
+      "weight": "black",
+      "width": "normal-width",
+      "contrast": "moderate contrast",
+      "terminals": "spurred",
+      "xheight": "large",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "18th-century enlightenment",
+      "useCase": "a literary journal",
+      "mood": [
+        "ecclesiastical",
+        "literary"
+      ]
+    },
+    "name": "Tesseract Serif"
+  },
+  {
+    "slug": "oldstyle-09",
+    "genome": {
+      "category": "old-style serif",
+      "weight": "light",
+      "width": "ultra-extended",
+      "contrast": "low contrast",
+      "terminals": "tapered",
+      "xheight": "small",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "15th-century humanist",
+      "useCase": "a transit wayfinding system",
+      "mood": [
+        "literary",
+        "nostalgic"
+      ]
+    },
+    "name": "Pale Meridian Didone"
+  },
+  {
+    "slug": "oldstyle-10",
+    "genome": {
+      "category": "old-style serif",
+      "weight": "bold",
+      "width": "narrow",
+      "contrast": "moderate contrast",
+      "terminals": "flared",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "lightly inked",
+      "era": "18th-century enlightenment",
+      "useCase": "a synthesizer front panel",
+      "mood": [
+        "warm",
+        "nostalgic"
+      ]
+    },
+    "name": "Gloaming Spire Didone"
+  },
+  {
+    "slug": "oldstyle-11",
+    "genome": {
+      "category": "old-style serif",
+      "weight": "extralight",
+      "width": "extended",
+      "contrast": "low contrast",
+      "terminals": "spurred",
+      "xheight": "very large",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "15th-century humanist",
+      "useCase": "a sports broadcast package",
+      "mood": [
+        "nostalgic",
+        "literary"
+      ]
+    },
+    "name": "Kithara Veil Serif"
+  },
+  {
+    "slug": "oldstyle-12",
+    "genome": {
+      "category": "old-style serif",
+      "weight": "semibold",
+      "width": "condensed",
+      "contrast": "moderate contrast",
+      "terminals": "tapered",
+      "xheight": "modest",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "18th-century enlightenment",
+      "useCase": "an architecture studio",
+      "mood": [
+        "ecclesiastical",
+        "literary"
+      ]
+    },
+    "name": "Helix Mourning Didone"
+  },
+  {
+    "slug": "oldstyle-13",
+    "genome": {
+      "category": "old-style serif",
+      "weight": "hairline",
+      "width": "wide",
+      "contrast": "low contrast",
+      "terminals": "flared",
+      "xheight": "large",
+      "corner": "softened",
+      "texture": "clean",
+      "era": "15th-century humanist",
+      "useCase": "a wellness app identity",
+      "mood": [
+        "literary",
+        "nostalgic"
+      ]
+    },
+    "name": "Marrow Aster Serif"
+  },
+  {
+    "slug": "oldstyle-14",
+    "genome": {
+      "category": "old-style serif",
+      "weight": "medium",
+      "width": "ultra-condensed",
+      "contrast": "moderate contrast",
+      "terminals": "spurred",
+      "xheight": "small",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "18th-century enlightenment",
+      "useCase": "a science museum",
+      "mood": [
+        "warm",
+        "nostalgic"
+      ]
+    },
+    "name": "Basilica Phantom Didone"
+  },
+  {
+    "slug": "oldstyle-15",
+    "genome": {
+      "category": "old-style serif",
+      "weight": "ultra-heavy",
+      "width": "normal-width",
+      "contrast": "low contrast",
+      "terminals": "tapered",
+      "xheight": "normal",
+      "corner": "softened",
+      "texture": "eroded",
+      "era": "15th-century humanist",
+      "useCase": "a fashion house",
+      "mood": [
+        "nostalgic",
+        "literary"
+      ]
+    },
+    "name": "Bramble Oratorio"
   },
   {
     "slug": "pixel-geo",
@@ -620,6 +3020,306 @@
     "name": "Nadir Grotesk"
   },
   {
+    "slug": "slab-01",
+    "genome": {
+      "category": "slab serif",
+      "weight": "regular",
+      "width": "narrow",
+      "contrast": "low contrast",
+      "terminals": "angled",
+      "xheight": "small",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "19th-century industrial",
+      "useCase": "an independent record label",
+      "mood": [
+        "industrial",
+        "nostalgic"
+      ]
+    },
+    "name": "Morrow Spire"
+  },
+  {
+    "slug": "slab-02",
+    "genome": {
+      "category": "slab serif",
+      "weight": "black",
+      "width": "extended",
+      "contrast": "reverse contrast",
+      "terminals": "blunt cut",
+      "xheight": "normal",
+      "corner": "rounded",
+      "texture": "clean",
+      "era": "1970s phototypesetting",
+      "useCase": "a film title sequence",
+      "mood": [
+        "utilitarian",
+        "mechanical"
+      ]
+    },
+    "name": "Abyssal Carnival Slab"
+  },
+  {
+    "slug": "slab-03",
+    "genome": {
+      "category": "slab serif",
+      "weight": "light",
+      "width": "condensed",
+      "contrast": "monoline",
+      "terminals": "spurred",
+      "xheight": "very large",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a legal document set",
+      "mood": [
+        "nostalgic",
+        "playful"
+      ]
+    },
+    "name": "Pale Cathedral Serif"
+  },
+  {
+    "slug": "slab-04",
+    "genome": {
+      "category": "slab serif",
+      "weight": "bold",
+      "width": "wide",
+      "contrast": "very low contrast",
+      "terminals": "rounded",
+      "xheight": "modest",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "19th-century industrial",
+      "useCase": "a literary journal",
+      "mood": [
+        "playful",
+        "mechanical"
+      ]
+    },
+    "name": "Wraith Velvet Slab"
+  },
+  {
+    "slug": "slab-05",
+    "genome": {
+      "category": "slab serif",
+      "weight": "extralight",
+      "width": "ultra-condensed",
+      "contrast": "low contrast",
+      "terminals": "angled",
+      "xheight": "large",
+      "corner": "rounded",
+      "texture": "eroded",
+      "era": "1970s phototypesetting",
+      "useCase": "a transit wayfinding system",
+      "mood": [
+        "brutalist",
+        "nostalgic"
+      ]
+    },
+    "name": "Dusk Monolith Grotesk"
+  },
+  {
+    "slug": "slab-06",
+    "genome": {
+      "category": "slab serif",
+      "weight": "semibold",
+      "width": "normal-width",
+      "contrast": "reverse contrast",
+      "terminals": "blunt cut",
+      "xheight": "small",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a synthesizer front panel",
+      "mood": [
+        "mechanical",
+        "industrial"
+      ]
+    },
+    "name": "Raven Citadel"
+  },
+  {
+    "slug": "slab-07",
+    "genome": {
+      "category": "slab serif",
+      "weight": "hairline",
+      "width": "ultra-extended",
+      "contrast": "monoline",
+      "terminals": "spurred",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "19th-century industrial",
+      "useCase": "a sports broadcast package",
+      "mood": [
+        "industrial",
+        "nostalgic"
+      ]
+    },
+    "name": "Ivory Spire Grotesk"
+  },
+  {
+    "slug": "slab-08",
+    "genome": {
+      "category": "slab serif",
+      "weight": "medium",
+      "width": "narrow",
+      "contrast": "very low contrast",
+      "terminals": "rounded",
+      "xheight": "very large",
+      "corner": "rounded",
+      "texture": "clean",
+      "era": "1970s phototypesetting",
+      "useCase": "an architecture studio",
+      "mood": [
+        "utilitarian",
+        "mechanical"
+      ]
+    },
+    "name": "Sable Meridian"
+  },
+  {
+    "slug": "slab-09",
+    "genome": {
+      "category": "slab serif",
+      "weight": "ultra-heavy",
+      "width": "extended",
+      "contrast": "low contrast",
+      "terminals": "angled",
+      "xheight": "modest",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a wellness app identity",
+      "mood": [
+        "nostalgic",
+        "playful"
+      ]
+    },
+    "name": "Dreadnought Obsidian Slab"
+  },
+  {
+    "slug": "slab-10",
+    "genome": {
+      "category": "slab serif",
+      "weight": "regular",
+      "width": "condensed",
+      "contrast": "reverse contrast",
+      "terminals": "blunt cut",
+      "xheight": "large",
+      "corner": "crisp",
+      "texture": "stencil-cut",
+      "era": "19th-century industrial",
+      "useCase": "a science museum",
+      "mood": [
+        "playful",
+        "mechanical"
+      ]
+    },
+    "name": "Dolmen Spur"
+  },
+  {
+    "slug": "slab-11",
+    "genome": {
+      "category": "slab serif",
+      "weight": "black",
+      "width": "wide",
+      "contrast": "monoline",
+      "terminals": "spurred",
+      "xheight": "small",
+      "corner": "rounded",
+      "texture": "clean",
+      "era": "1970s phototypesetting",
+      "useCase": "a fashion house",
+      "mood": [
+        "brutalist",
+        "nostalgic"
+      ]
+    },
+    "name": "Xyloid Bastion Slab"
+  },
+  {
+    "slug": "slab-12",
+    "genome": {
+      "category": "slab serif",
+      "weight": "light",
+      "width": "ultra-condensed",
+      "contrast": "very low contrast",
+      "terminals": "rounded",
+      "xheight": "normal",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a financial dashboard",
+      "mood": [
+        "mechanical",
+        "industrial"
+      ]
+    },
+    "name": "Umbral Monolith Gothic"
+  },
+  {
+    "slug": "slab-13",
+    "genome": {
+      "category": "slab serif",
+      "weight": "bold",
+      "width": "normal-width",
+      "contrast": "low contrast",
+      "terminals": "angled",
+      "xheight": "very large",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "19th-century industrial",
+      "useCase": "a coffee packaging line",
+      "mood": [
+        "industrial",
+        "nostalgic"
+      ]
+    },
+    "name": "Sable Citadel"
+  },
+  {
+    "slug": "slab-14",
+    "genome": {
+      "category": "slab serif",
+      "weight": "extralight",
+      "width": "ultra-extended",
+      "contrast": "reverse contrast",
+      "terminals": "blunt cut",
+      "xheight": "modest",
+      "corner": "rounded",
+      "texture": "clean",
+      "era": "1970s phototypesetting",
+      "useCase": "a children's picture book",
+      "mood": [
+        "utilitarian",
+        "mechanical"
+      ]
+    },
+    "name": "Ferro Mirage"
+  },
+  {
+    "slug": "slab-15",
+    "genome": {
+      "category": "slab serif",
+      "weight": "semibold",
+      "width": "narrow",
+      "contrast": "monoline",
+      "terminals": "spurred",
+      "xheight": "large",
+      "corner": "razor-sharp",
+      "texture": "slightly rough",
+      "era": "contemporary",
+      "useCase": "an independent record label",
+      "mood": [
+        "nostalgic",
+        "playful"
+      ]
+    },
+    "name": "Harmonic Obsidian Serif"
+  },
+  {
     "slug": "stencil-slab",
     "genome": {
       "width": "normal-width",
@@ -660,6 +3360,306 @@
     "name": "Rift Obsidian Grotesk"
   },
   {
+    "slug": "trans-01",
+    "genome": {
+      "category": "transitional serif",
+      "weight": "regular",
+      "width": "ultra-condensed",
+      "contrast": "high contrast",
+      "terminals": "ball",
+      "xheight": "modest",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "18th-century enlightenment",
+      "useCase": "a film title sequence",
+      "mood": [
+        "elegant",
+        "severe"
+      ]
+    },
+    "name": "Razor Cathedral Display"
+  },
+  {
+    "slug": "trans-02",
+    "genome": {
+      "category": "transitional serif",
+      "weight": "black",
+      "width": "normal-width",
+      "contrast": "moderate contrast",
+      "terminals": "spurred",
+      "xheight": "large",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "1970s phototypesetting",
+      "useCase": "a legal document set",
+      "mood": [
+        "literary",
+        "severe"
+      ]
+    },
+    "name": "Ebon Vesper Serif"
+  },
+  {
+    "slug": "trans-03",
+    "genome": {
+      "category": "transitional serif",
+      "weight": "light",
+      "width": "ultra-extended",
+      "contrast": "high contrast",
+      "terminals": "tapered",
+      "xheight": "small",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a literary journal",
+      "mood": [
+        "severe",
+        "elegant"
+      ]
+    },
+    "name": "Helix Didone"
+  },
+  {
+    "slug": "trans-04",
+    "genome": {
+      "category": "transitional serif",
+      "weight": "bold",
+      "width": "narrow",
+      "contrast": "moderate contrast",
+      "terminals": "ball",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "18th-century enlightenment",
+      "useCase": "a transit wayfinding system",
+      "mood": [
+        "editorial",
+        "elegant"
+      ]
+    },
+    "name": "Jade Vertigo Didone"
+  },
+  {
+    "slug": "trans-05",
+    "genome": {
+      "category": "transitional serif",
+      "weight": "extralight",
+      "width": "extended",
+      "contrast": "high contrast",
+      "terminals": "spurred",
+      "xheight": "very large",
+      "corner": "razor-sharp",
+      "texture": "lightly inked",
+      "era": "1970s phototypesetting",
+      "useCase": "a synthesizer front panel",
+      "mood": [
+        "elegant",
+        "severe"
+      ]
+    },
+    "name": "Hesper Serif"
+  },
+  {
+    "slug": "trans-06",
+    "genome": {
+      "category": "transitional serif",
+      "weight": "semibold",
+      "width": "condensed",
+      "contrast": "moderate contrast",
+      "terminals": "tapered",
+      "xheight": "modest",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a sports broadcast package",
+      "mood": [
+        "literary",
+        "severe"
+      ]
+    },
+    "name": "Nocturne Didone"
+  },
+  {
+    "slug": "trans-07",
+    "genome": {
+      "category": "transitional serif",
+      "weight": "hairline",
+      "width": "wide",
+      "contrast": "high contrast",
+      "terminals": "ball",
+      "xheight": "large",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "18th-century enlightenment",
+      "useCase": "an architecture studio",
+      "mood": [
+        "severe",
+        "elegant"
+      ]
+    },
+    "name": "Liminal Didot"
+  },
+  {
+    "slug": "trans-08",
+    "genome": {
+      "category": "transitional serif",
+      "weight": "medium",
+      "width": "ultra-condensed",
+      "contrast": "moderate contrast",
+      "terminals": "spurred",
+      "xheight": "small",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "1970s phototypesetting",
+      "useCase": "a wellness app identity",
+      "mood": [
+        "editorial",
+        "elegant"
+      ]
+    },
+    "name": "Basilisk Vertigo Display"
+  },
+  {
+    "slug": "trans-09",
+    "genome": {
+      "category": "transitional serif",
+      "weight": "ultra-heavy",
+      "width": "normal-width",
+      "contrast": "high contrast",
+      "terminals": "tapered",
+      "xheight": "normal",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a science museum",
+      "mood": [
+        "elegant",
+        "severe"
+      ]
+    },
+    "name": "Wraith Velvet Didone"
+  },
+  {
+    "slug": "trans-10",
+    "genome": {
+      "category": "transitional serif",
+      "weight": "regular",
+      "width": "ultra-extended",
+      "contrast": "moderate contrast",
+      "terminals": "ball",
+      "xheight": "very large",
+      "corner": "crisp",
+      "texture": "engraved",
+      "era": "18th-century enlightenment",
+      "useCase": "a fashion house",
+      "mood": [
+        "literary",
+        "severe"
+      ]
+    },
+    "name": "Ravine Nocturne Serif"
+  },
+  {
+    "slug": "trans-11",
+    "genome": {
+      "category": "transitional serif",
+      "weight": "black",
+      "width": "narrow",
+      "contrast": "high contrast",
+      "terminals": "spurred",
+      "xheight": "modest",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "1970s phototypesetting",
+      "useCase": "a financial dashboard",
+      "mood": [
+        "severe",
+        "elegant"
+      ]
+    },
+    "name": "Nocturne Didone"
+  },
+  {
+    "slug": "trans-12",
+    "genome": {
+      "category": "transitional serif",
+      "weight": "light",
+      "width": "extended",
+      "contrast": "moderate contrast",
+      "terminals": "tapered",
+      "xheight": "large",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a coffee packaging line",
+      "mood": [
+        "editorial",
+        "elegant"
+      ]
+    },
+    "name": "Boreal Veil Didone"
+  },
+  {
+    "slug": "trans-13",
+    "genome": {
+      "category": "transitional serif",
+      "weight": "bold",
+      "width": "condensed",
+      "contrast": "high contrast",
+      "terminals": "ball",
+      "xheight": "small",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "18th-century enlightenment",
+      "useCase": "a children's picture book",
+      "mood": [
+        "elegant",
+        "severe"
+      ]
+    },
+    "name": "Fathom Vogue"
+  },
+  {
+    "slug": "trans-14",
+    "genome": {
+      "category": "transitional serif",
+      "weight": "extralight",
+      "width": "wide",
+      "contrast": "moderate contrast",
+      "terminals": "spurred",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "1970s phototypesetting",
+      "useCase": "an independent record label",
+      "mood": [
+        "literary",
+        "severe"
+      ]
+    },
+    "name": "Eclipse Didone"
+  },
+  {
+    "slug": "trans-15",
+    "genome": {
+      "category": "transitional serif",
+      "weight": "semibold",
+      "width": "ultra-condensed",
+      "contrast": "high contrast",
+      "terminals": "tapered",
+      "xheight": "very large",
+      "corner": "razor-sharp",
+      "texture": "slightly rough",
+      "era": "contemporary",
+      "useCase": "a film title sequence",
+      "mood": [
+        "severe",
+        "elegant"
+      ]
+    },
+    "name": "Nocturne Vellum Display"
+  },
+  {
     "slug": "transitional",
     "genome": {
       "width": "normal-width",
@@ -678,6 +3678,306 @@
       ]
     },
     "name": "Dorian Veil"
+  },
+  {
+    "slug": "wedge-01",
+    "genome": {
+      "category": "wedge serif",
+      "weight": "bold",
+      "width": "condensed",
+      "contrast": "low contrast",
+      "terminals": "angled",
+      "xheight": "small",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "19th-century industrial",
+      "useCase": "a financial dashboard",
+      "mood": [
+        "editorial",
+        "mechanical"
+      ]
+    },
+    "name": "Gallows Velvet Gothic"
+  },
+  {
+    "slug": "wedge-02",
+    "genome": {
+      "category": "wedge serif",
+      "weight": "extralight",
+      "width": "wide",
+      "contrast": "moderate contrast",
+      "terminals": "sheared",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "1950s Swiss",
+      "useCase": "a coffee packaging line",
+      "mood": [
+        "industrial",
+        "editorial"
+      ]
+    },
+    "name": "Obsidian Veil Didone"
+  },
+  {
+    "slug": "wedge-03",
+    "genome": {
+      "category": "wedge serif",
+      "weight": "semibold",
+      "width": "ultra-condensed",
+      "contrast": "high contrast",
+      "terminals": "spurred",
+      "xheight": "very large",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a children's picture book",
+      "mood": [
+        "mechanical",
+        "severe"
+      ]
+    },
+    "name": "Raven Obsidian Condensed"
+  },
+  {
+    "slug": "wedge-04",
+    "genome": {
+      "category": "wedge serif",
+      "weight": "hairline",
+      "width": "normal-width",
+      "contrast": "low contrast",
+      "terminals": "angled",
+      "xheight": "modest",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "19th-century industrial",
+      "useCase": "an independent record label",
+      "mood": [
+        "severe",
+        "industrial"
+      ]
+    },
+    "name": "Jade Obelisk Serif"
+  },
+  {
+    "slug": "wedge-05",
+    "genome": {
+      "category": "wedge serif",
+      "weight": "medium",
+      "width": "ultra-extended",
+      "contrast": "moderate contrast",
+      "terminals": "sheared",
+      "xheight": "large",
+      "corner": "razor-sharp",
+      "texture": "slightly rough",
+      "era": "1950s Swiss",
+      "useCase": "a film title sequence",
+      "mood": [
+        "literary",
+        "editorial"
+      ]
+    },
+    "name": "Eclipse Bastion"
+  },
+  {
+    "slug": "wedge-06",
+    "genome": {
+      "category": "wedge serif",
+      "weight": "ultra-heavy",
+      "width": "narrow",
+      "contrast": "high contrast",
+      "terminals": "spurred",
+      "xheight": "small",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a legal document set",
+      "mood": [
+        "editorial",
+        "mechanical"
+      ]
+    },
+    "name": "Javelin Noir Display"
+  },
+  {
+    "slug": "wedge-07",
+    "genome": {
+      "category": "wedge serif",
+      "weight": "regular",
+      "width": "extended",
+      "contrast": "low contrast",
+      "terminals": "angled",
+      "xheight": "normal",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "19th-century industrial",
+      "useCase": "a literary journal",
+      "mood": [
+        "industrial",
+        "editorial"
+      ]
+    },
+    "name": "Rook Obsidian"
+  },
+  {
+    "slug": "wedge-08",
+    "genome": {
+      "category": "wedge serif",
+      "weight": "black",
+      "width": "condensed",
+      "contrast": "moderate contrast",
+      "terminals": "sheared",
+      "xheight": "very large",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "1950s Swiss",
+      "useCase": "a transit wayfinding system",
+      "mood": [
+        "mechanical",
+        "severe"
+      ]
+    },
+    "name": "Fathom Gothic"
+  },
+  {
+    "slug": "wedge-09",
+    "genome": {
+      "category": "wedge serif",
+      "weight": "light",
+      "width": "wide",
+      "contrast": "high contrast",
+      "terminals": "spurred",
+      "xheight": "modest",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a synthesizer front panel",
+      "mood": [
+        "severe",
+        "industrial"
+      ]
+    },
+    "name": "Fathom Vogue"
+  },
+  {
+    "slug": "wedge-10",
+    "genome": {
+      "category": "wedge serif",
+      "weight": "bold",
+      "width": "ultra-condensed",
+      "contrast": "low contrast",
+      "terminals": "angled",
+      "xheight": "large",
+      "corner": "crisp",
+      "texture": "engraved",
+      "era": "19th-century industrial",
+      "useCase": "a sports broadcast package",
+      "mood": [
+        "literary",
+        "editorial"
+      ]
+    },
+    "name": "Xyloid Obsidian Grotesk"
+  },
+  {
+    "slug": "wedge-11",
+    "genome": {
+      "category": "wedge serif",
+      "weight": "extralight",
+      "width": "normal-width",
+      "contrast": "moderate contrast",
+      "terminals": "sheared",
+      "xheight": "small",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "1950s Swiss",
+      "useCase": "an architecture studio",
+      "mood": [
+        "editorial",
+        "mechanical"
+      ]
+    },
+    "name": "Kairo Nocturne Display"
+  },
+  {
+    "slug": "wedge-12",
+    "genome": {
+      "category": "wedge serif",
+      "weight": "semibold",
+      "width": "ultra-extended",
+      "contrast": "high contrast",
+      "terminals": "spurred",
+      "xheight": "normal",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "contemporary",
+      "useCase": "a wellness app identity",
+      "mood": [
+        "industrial",
+        "editorial"
+      ]
+    },
+    "name": "Quasar Obelisk"
+  },
+  {
+    "slug": "wedge-13",
+    "genome": {
+      "category": "wedge serif",
+      "weight": "hairline",
+      "width": "narrow",
+      "contrast": "low contrast",
+      "terminals": "angled",
+      "xheight": "very large",
+      "corner": "razor-sharp",
+      "texture": "clean",
+      "era": "19th-century industrial",
+      "useCase": "a science museum",
+      "mood": [
+        "mechanical",
+        "severe"
+      ]
+    },
+    "name": "Krypte Gothic"
+  },
+  {
+    "slug": "wedge-14",
+    "genome": {
+      "category": "wedge serif",
+      "weight": "medium",
+      "width": "extended",
+      "contrast": "moderate contrast",
+      "terminals": "sheared",
+      "xheight": "modest",
+      "corner": "crisp",
+      "texture": "clean",
+      "era": "1950s Swiss",
+      "useCase": "a fashion house",
+      "mood": [
+        "severe",
+        "industrial"
+      ]
+    },
+    "name": "Xenolith Didone"
+  },
+  {
+    "slug": "wedge-15",
+    "genome": {
+      "category": "wedge serif",
+      "weight": "ultra-heavy",
+      "width": "condensed",
+      "contrast": "high contrast",
+      "terminals": "spurred",
+      "xheight": "large",
+      "corner": "razor-sharp",
+      "texture": "lightly inked",
+      "era": "contemporary",
+      "useCase": "a financial dashboard",
+      "mood": [
+        "literary",
+        "editorial"
+      ]
+    },
+    "name": "Dusk Vesper Didone"
   },
   {
     "slug": "wedge-news",

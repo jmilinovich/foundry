@@ -1,0 +1,755 @@
+{
+ "openers": {
+  "geometric:cool": [
+   "You want the circle to be a circle and the reasoning to stay visible, like a Bauhaus preliminary exercise that somehow ended up on a bank's letterhead.",
+   "You pick like a Vignelli associate in 1972, everything set with compass and rule and a quiet contempt for anything decided by hand."
+  ],
+  "geometric:warm": [
+   "You keep reaching for Renner's compass and then asking it to be friendly, which is the argument Futura has lost with every children's book art director since 1930.",
+   "Your picks want Bauhaus geometry with a fire lit inside it, the way Dessau looks in photographs taken late in the afternoon rather than in the catalogue."
+  ],
+  "geometric:loud": [
+   "You take the circle and the bar and then turn the volume up, which is what the poster shops of 1970s Milan did once the Swiss stopped watching.",
+   "You are using geometry as percussion, closer to a Neville Brody spread than to anything Herbert Bayer would sign, and you seem entirely comfortable there."
+  ],
+  "geometric:refined": [
+   "You are running Renner through a fashion house, circles kept pure and spacing kept wide, the way Avant Garde looked before everyone abused the ligatures.",
+   "You want geometry with manners: Kabel's discipline on a magazine's margins, and the assumption that your reader will notice the sidebearings."
+  ],
+  "geometric:forward": [
+   "You are shopping the aisle every space agency mockup shops in, though your circles are drawn better than theirs and you know which decade you are quoting.",
+   "Your picks read as a Bauhaus alphabet that received a firmware update, the geometry kept intact while the terminals start behaving like an interface."
+  ],
+  "neogrotesque:cool": [
+   "You are a Haas employee in 1957 with a scalpel and a deadline, and you would remove one more thing from this if the client allowed it.",
+   "You pick the way a Swiss identity manual reads, with no author's name anywhere and a grid that assumes the content will behave itself."
+  ],
+  "neogrotesque:warm": [
+   "You want Helvetica to be kind to you, a request Miedinger never once entertained, and your picks keep smuggling the warmth back in through the terminals.",
+   "You are the person who defends Univers at dinner by talking about the humanist part of its ancestry rather than the Swiss part everyone else means."
+  ],
+  "neogrotesque:loud": [
+   "You set Swiss neutrality at four hundred point and let it shout, the trick every hardcore record sleeve borrowed from annual reports it had never read.",
+   "Your picks want a Vignelli signage system played through a stadium, neutral letters doing work that no neutral letter was ever drawn to do."
+  ],
+  "neogrotesque:refined": [
+   "You edit like a mid-century art director who trusts a grid more than a photograph, and your Helvetica is set tighter than Helvetica wants to be.",
+   "You want the anonymity to read as luxury, the move every fashion house made in 2016 when logos went flat and everyone pretended it was new."
+  ],
+  "neogrotesque:forward": [
+   "You are the Swiss rationalist who bought a synthesizer, keeping the closed apertures and even colour while the terminals get cut like machined parts.",
+   "Your picks want Univers to be operating-system furniture, legible at four in the morning on a screen nobody is especially proud of owning."
+  ],
+  "grotesque:cool": [
+   "You are working from Berthold's 1898 specimen with the sentiment removed, keeping the letters that make a timetable legible from the far end of a platform.",
+   "You want Akzidenz before anyone tidied it, the slightly uneven one, on the grounds that irregularity reads as evidence rather than as decoration."
+  ],
+  "grotesque:warm": [
+   "You like the nineteenth-century jobbing grotesque the way people like a worn tool, and your picks keep the small irregularities Monotype spent decades sanding off.",
+   "You are drawn to Franklin Gothic in a newspaper you read as a child, nostalgia arriving through a face that was drawn with no interest in nostalgia."
+  ],
+  "grotesque:loud": [
+   "You want Schmalfette on a poster in a doorway, the kind of grotesque cut for prices and boxing matches rather than for identity systems.",
+   "Your picks come from the wood type end of the nineteenth century, where letters were sold by the pound and subtlety cost extra."
+  ],
+  "grotesque:refined": [
+   "You are the art director who takes Benton's Franklin Gothic for a masthead and then sets the rest of the page in something that will never argue with it.",
+   "You want the industrial grotesque with its collar buttoned: ATF bones on an editorial margin, and spacing that has been fought over at least twice."
+  ],
+  "grotesque:forward": [
+   "You are pulling a nineteenth-century jobbing face into a future it was not invited to, keeping the closed apertures and losing every trace of the pressman.",
+   "Your picks read as Akzidenz redrawn by someone building an interface for a vehicle, industrial bones with the ink squeeze engineered away."
+  ],
+  "humanist-sans:cool": [
+   "You want Frutiger's airport signage without Frutiger's charm, calligraphic bones kept only because they survive being read fast, at an angle, in bad light.",
+   "You pick like a Syntax user, since Hans Meier's pen is in there somewhere, but you are using it to label things rather than to be liked."
+  ],
+  "humanist-sans:warm": [
+   "Your picks have Edward Johnston's broad nib behind them, which is why they feel like a face someone drew rather than a face someone specified.",
+   "You want the sans that still remembers handwriting, the Gill Sans argument minus Gill himself, whose biography most people now decline to discuss."
+  ],
+  "humanist-sans:loud": [
+   "You take a calligraphic sans and make it lean on you, which is what Spiekermann's Meta did to every startup that mistook it for something polite.",
+   "You want the pen strokes visible and the volume high, closer to a festival poster in Amsterdam than to the wayfinding manual these shapes came from."
+  ],
+  "humanist-sans:refined": [
+   "You are setting a literary journal in Scala Sans, humanist proportions kept intact, and you will move the folio three millimetres until it sits right.",
+   "You want a sans with Renaissance proportions and a magazine's manners, the Frutiger idea taken indoors and given considerably better paper."
+  ],
+  "humanist-sans:forward": [
+   "You keep the calligraphic skeleton and send it forward, which is the move behind every variable interface face released since 2018, and behind most of the bad ones.",
+   "You want Johnston's underground alphabet running on a display that did not exist when Johnston drew it, with warmth retained as a system requirement."
+  ],
+  "flared:cool": [
+   "You want Zapf's flare with the sentiment drained out, stems that swell just enough to prove a hand was present and then say nothing further.",
+   "You pick like an engineer who once studied lettering, Optima's tapered stems in a laboratory's vocabulary, with no serifs allowed on the premises."
+  ],
+  "flared:warm": [
+   "You are living inside Optima, which Zapf sketched from grave slabs in Santa Croce onto a banknote, stems breathing outward, letters carved rather than assembled.",
+   "Your picks want Wolpe's Albertus, the face on every London street sign and the one people photograph constantly without ever learning its name."
+  ],
+  "flared:loud": [
+   "You want Albertus doing the work it does on horror paperbacks and Portmeirion village signs, incised warmth turned into something faintly threatening.",
+   "You take a chiselled sans and push it until the flares read as claws, closer to a 1970s film title than to any war memorial."
+  ],
+  "flared:refined": [
+   "You are the person who specifies Optima for a fashion house and gets away with it, which takes better spacing judgment than most people bring.",
+   "You want inscriptional dignity without the serifs, Zapf's answer to the Roman capital, set with the margins of an exhibition catalogue."
+  ],
+  "flared:forward": [
+   "You want the carved stem to survive the screen, Optima's swelling kept as a signal rather than as a memory of a stonecutter's chisel.",
+   "Your picks read as lapidary lettering issued by an institution that does not exist yet and has already settled its identity guidelines."
+  ],
+  "wedge:cool": [
+   "You want Frutiger's Meridien with the poetry removed, serifs cut to a triangle because a triangle survives reduction and a bracketed serif does not.",
+   "You pick like a technical documentation team that read exactly one book about Roman inscriptions and took precisely the useful part of it."
+  ],
+  "wedge:warm": [
+   "Your picks sit where the chisel meets the pen, which is where Meridien lives, and you appear to want the paper it was printed on too.",
+   "You like a serif that admits it was cut rather than drawn, the way stone lettering in a country church admits the mason had a bad afternoon."
+  ],
+  "wedge:loud": [
+   "You want Friz Quadrata doing what it did to a thousand heavy metal sleeves, the wedge sharpened until it stops reading as a serif at all.",
+   "Your picks take an incised face and make it aggressive, closer to a fight poster than to the Roman inscription these shapes were stolen from."
+  ],
+  "wedge:refined": [
+   "You are setting a museum's wall text, Trajan's proportions with a wedge instead of a bracket, and nothing on that wall competing with the object.",
+   "You want the authority of carved capitals in a face that also has to hold a paragraph, the exact problem Meridien was drawn to solve."
+  ],
+  "wedge:forward": [
+   "You keep the chisel and lose the century, incised serifs treated as engineering rather than as heritage, which is how science fiction title cards get made.",
+   "Your picks read as inscriptional lettering for a facility with no visitors, sharp and institutional, confident that legibility outlives style."
+  ],
+  "humanist-serif:cool": [
+   "You want Jenson's skeleton with the romance audited out, Venetian proportions kept because they read well and not because Aldus Manutius printed with them.",
+   "You pick like a scholar setting a critical edition, humanist bones with no flourish and a footnote size you have already tested twice."
+  ],
+  "humanist-serif:warm": [
+   "You are in Venice in 1470 with the ink still wet, choosing the slanted bar on the e and everything warm that arrives with it.",
+   "Your picks want Bruce Rogers' Centaur on decent paper, the letters that made typographers believe the Renaissance had already solved this problem."
+  ],
+  "humanist-serif:loud": [
+   "You take a Venetian face and print it too heavily on purpose, closer to a fanzine's photocopier than to anything Nicolas Jenson pulled off a press.",
+   "You want humanist warmth with its voice raised, Bembo dragged onto a poster where nobody in the room expected to find it."
+  ],
+  "humanist-serif:refined": [
+   "You are the person who reads the colophon, and your picks say Bembo with wide margins, plus an argument about the ampersand nobody asked to hear.",
+   "You want the Aldine page, generous leading over Venetian proportions, set for a reader you fully expect to stay for eight hundred pages."
+  ],
+  "humanist-serif:forward": [
+   "You keep Jenson's calligraphic angle and put it somewhere new, which is what every screen-first text face has quietly attempted since Georgia shipped.",
+   "Your picks want a Renaissance skeleton rendered by a machine that has never seen paper, warmth retained as a deliberate engineering decision."
+  ],
+  "transitional:cool": [
+   "You want Baskerville with the Birmingham showmanship removed, vertical stress and even colour, because a legal document set has no interest in being admired.",
+   "You pick like a typographer who trusts the eighteenth century's arithmetic more than any argument anyone has made about type since."
+  ],
+  "transitional:warm": [
+   "You are reading Baskerville's own specimen and enjoying his vanity, wove paper, hot-pressed sheets, and letters that look lit from behind.",
+   "Your picks want a face from the Enlightenment that still sounds like a person talking, Bell or Fournier rather than the colder end of that shelf."
+  ],
+  "transitional:loud": [
+   "You take an eighteenth-century book face and set it at a size no book would tolerate, which is broadly how a broadside gets made.",
+   "You want Baskerville's precision doing something impolite, the same instinct that put refined book faces on hardcore record sleeves throughout the 1990s."
+  ],
+  "transitional:refined": [
+   "You are an editor at a magazine that still runs long features, and your Baskerville is set with the ligatures on and the widows hunted down.",
+   "You want the eighteenth century's manners without the museum, Fournier's proportions on a page designed for somebody who reads for two hours."
+  ],
+  "transitional:forward": [
+   "You keep Baskerville's vertical stress and hand it to a rendering engine, which is roughly what happened to Times, and that did not end well.",
+   "Your picks want Enlightenment structure held to contemporary tolerances, the eighteenth century's logic applied to a screen it would have found appalling."
+  ],
+  "oldstyle:cool": [
+   "You want Garamond's bones without Garamond's charm, closer to Plantin's working faces in Antwerp than to anything the French court ever admired.",
+   "You pick like an archivist, taking old-style proportions because they read cleanly at nine point rather than because 1530 was a good year."
+  ],
+  "oldstyle:warm": [
+   "You are in Claude Garamont's Paris with the light coming in sideways, choosing the angled stress and the ink that spreads a little into damp paper.",
+   "Your picks want Caslon on rough stock, the face that set the Declaration of Independence and roughly half the ale labels in England."
+  ],
+  "oldstyle:loud": [
+   "You take Caslon and print it like a handbill nailed to a post, which is what Caslon actually spent most of its first century doing.",
+   "You want an old-style face with the press pushed too hard, ink filling the counters, far closer to a broadside than to a bible."
+  ],
+  "oldstyle:refined": [
+   "You are setting a poetry list at a small press, Garamond with deep margins, and a decision about the em space you will defend for an hour.",
+   "You want Plantin's Antwerp workshop and its unfussy authority, old-style letters set by somebody who has never once been tempted by a display face."
+  ],
+  "oldstyle:forward": [
+   "You are asking a 1530s punchcutter's alphabet to run inside an interface, which mostly works until somebody tries the italic at eleven point.",
+   "Your picks keep the angled stress and the small aperture and then look forward, which is the Sabon problem restated for a screen."
+  ],
+  "didone:cool": [
+   "You want Bodoni's hairlines with none of the seduction, a flat wall of extreme contrast that behaves like an instrument panel and reads like a verdict.",
+   "You pick like Napoleon's printer on a bad day, rational, vertical, cold, and entirely indifferent to whether the reader is comfortable."
+  ],
+  "didone:warm": [
+   "You want Walbaum rather than Didot, the German didone with some blood left in it, which is the correct answer and not the fashionable one.",
+   "Your picks are Bodoni printed on paper soft enough to hold the hairlines, warmth arriving through the press rather than through the drawing."
+  ],
+  "didone:loud": [
+   "You take a fashion masthead face and blow it up until the hairlines break, which is precisely what a poster from 1968 wanted out of it.",
+   "You want Didot's extreme contrast used as a weapon, closer to a magazine cover screaming than to anything Firmin Didot did carefully in Paris."
+  ],
+  "didone:refined": [
+   "You are Brodovitch at Harper's Bazaar, hairlines held at display size, white space treated as the most expensive material on the page.",
+   "You want Didot the way a fashion house wants it, thin strokes and wide margins, with a nameplate nobody has been allowed to redraw in fifty years."
+  ],
+  "didone:forward": [
+   "You want Bodoni's contrast to survive a screen, which is a hardware argument as much as a taste one, and you have clearly picked a side.",
+   "Your picks read as a didone drawn for a display that renders hairlines properly, the nineteenth century's ambition finally given the resolution it wanted."
+  ],
+  "slab:cool": [
+   "You want Figgins' Egyptian with the fairground removed, rectangular serifs kept because they hold up at small sizes and under genuinely bad printing.",
+   "You pick like a transit authority, taking slab serifs because they survive dirt, vibration, weather, and the reader's total lack of interest."
+  ],
+  "slab:warm": [
+   "Your picks want Clarendon on a jar label, the nineteenth-century Egyptian that came to mean warmth simply by outliving everything printed beside it.",
+   "You are in a country print shop in 1890, choosing the face that sold seed and horses and now sells coffee at a considerable markup."
+  ],
+  "slab:loud": [
+   "You want the wanted poster, Figgins in 1815 selling ink by the acre, serifs squared off so nobody at the back can claim not to have seen it.",
+   "Your picks push Clarendon into the territory of a boxing bill, heavy slabs and tight spacing, with no interest at all in a quiet room."
+  ],
+  "slab:refined": [
+   "You want Memphis or Rockwell behaving in a catalogue, geometric slabs held at a size where the serifs read as structure rather than as costume.",
+   "You are the editor who sets decks in a slab and body in something else, a 1930s magazine move that still works and still annoys purists."
+  ],
+  "slab:forward": [
+   "You want the Egyptian's rectangles as engineering, slabs treated like machined parts rather than like a nineteenth-century circus, which is roughly the Caecilia argument.",
+   "Your picks read as slab serifs for a control room, rectangles chosen because they hold at any size and never ask anyone for sympathy."
+  ]
+ },
+ "tensions": {
+  "serif-brutal": [
+   "You kept choosing serifs and then asking them to behave like poured concrete. That combination already has a name, and it is Clarendon on a demolition notice.",
+   "The brackets say reading room and the moods say loading dock. Crouwel would have cut the serifs off; you kept them and turned the volume up instead.",
+   "Nineteenth-century poster shops hit this wall and got out of it by fattening the serifs until they were structural rather than decorative. Your picks want the bracket kept delicate and the impression kept heavy, which is the one combination the wood-letter men never bothered to cut."
+  ],
+  "sans-literary": [
+   "You want a sans that reads like a novel, which is the problem Gill and later Frutiger spent whole careers on. Nothing you picked has a serif to hide behind.",
+   "Every category vote went sans and every mood went bookish. That is a request for warmth without the parts that traditionally carry it, so the x-height is doing all the work.",
+   "The face that solved this is Optima, and Zapf solved it by smuggling broad-nib proportions in under a sans exterior. Your picks have no flare in them, so the literary quality has to come out of the spacing and the spacing alone."
+  ],
+  "heavy-fine": [
+   "Heavy and high-contrast at once is a fat didone, which is where display type goes to become unreadable below 60px. Bodoni’s heirs have been fighting that for two centuries.",
+   "You asked for mass and then asked for hairlines inside it. The thin strokes go first at small sizes, and you will blame the printer when they do.",
+   "Poster Bodoni takes this trade honestly: below a certain size the hairlines stop pretending to be hairlines and get thickened until they survive the press. Your picks have not made that concession, so the genome will draw the thin strokes at full nerve and let them break."
+  ],
+  "light-loud": [
+   "Hairlines doing brutalist work is a strange assignment. Brutalism took its type from wood letter and grotesque bold, where the shouting is done entirely by ink coverage, and you have asked for the shout with the ink removed.",
+   "The weights you picked would disappear on a poster, yet the moods you picked only really exist on posters. Something has to give, and it is usually the weight.",
+   "A hairline can carry a loud face, but only at a metre and a half across a wall, where the stroke is still four millimetres of ink. At any size a screen can offer you, the loudness has to come from somewhere your weight votes refuse to fund."
+  ],
+  "wide-severe": [
+   "Extended widths read as leisure, which is why they end up on car badges and wine labels. You then asked for clinical, and clinical does not sprawl.",
+   "Wide letters take up room that the severe moods would rather ration. Your picks want the authority of a Swiss grid and the footprint of a cinema marquee.",
+   "Wide and severe do meet, on instrument panels and record sleeves from about 1969, and they survive there by never setting more than three words at a time. Ask the same drawing to hold a caption and it goes slack."
+  ],
+  "narrow-warm": [
+   "Condensed is an economy measure out of newspaper columns and price lists, and you have asked it to feel hospitable. Narrow type does not invite anyone to linger.",
+   "You compressed the letters and then asked them to be warm. The warmth will have to come from the terminals, because the counters have nowhere left to go.",
+   "Bell Gothic was condensed so a phone book would fit, and nobody in eighty years has described it as welcoming. Compression is a decision about cost, and you have asked the genome to make it read as generosity."
+  ],
+  "soft-cold": [
+   "Ball terminals come out of the eighteenth-century writing master’s hand, which is not a clinical instrument. You picked the softest endings on offer and then asked for a laboratory.",
+   "Rounded ends stay friendly at every size, so the severity would have to be carried by the skeleton instead, in flat sidewalls and tight spacing. Nothing in your picks asked for either.",
+   "Cooper Black is the far end of this: the softness becomes the entire personality, and no amount of discipline elsewhere in the drawing pulls it back toward cold. Your terminal votes sit closer to that end than to anything with a laboratory in it."
+  ],
+  "hard-warm": [
+   "You cut every stroke off flat and then asked the result to feel warm. Blunt terminals are the reason DIN reads as a road sign rather than as a letter.",
+   "Warmth in type usually arrives at the ends of the strokes, and you cut yours square. That leaves the counters to supply it, which gets you a face that is generous in the o and unhelpful in the l.",
+   "Flat terminals were an engineering convenience before anyone called them a style; they cut cleanly on a pantograph and they still read that way. What is left to make the face hospitable is wide counters and loose fitting, and your picks funded neither."
+  ],
+  "old-future": [
+   "You picked eras that predate the light bulb and moods that postdate the keyboard. Every revival has this problem, and most solve it by lying about one of the two.",
+   "The Renaissance and the near-future are not natural partners, though phototypesetting had a good run pretending otherwise around 1972.",
+   "This is the Trajan-on-a-spaceship problem. It works when one era supplies the skeleton and the other supplies the surface, and it fails when both are asked to be the point, which is what your votes asked for."
+  ],
+  "split-category": [
+   "Half your votes went to serifs and half went away from them, which is either open-mindedness or a refusal to decide. The genome cannot tell those apart.",
+   "You split the category axis straight down the middle. Sitting between the options on that axis produces a flared sans, which almost nobody chooses on purpose.",
+   "You voted for both sides of the oldest argument in type and left the genome to arbitrate. It arbitrates by averaging, and the average of a serif and a sans is a face neither camp asked for and neither will defend."
+  ],
+  "extreme-taste": [
+   "You went to the end of every axis available. Type drawn entirely from extremes works at one size in one word, and stops being type the moment it has to hold a sentence.",
+   "Nothing you chose sits anywhere near the middle of its range. That is a display face, and it will be an awkward afternoon when somebody asks you for body copy.",
+   "Every axis pushed to its limit is how display foundries have always made a living, and also why their catalogues run one weight deep. The drawing has no room left to give you a second style."
+  ],
+  "middle-taste": [
+   "Every pick landed near the centre of its axis, which is roughly how Times New Roman happened. Moderate is a real position; it just has a lot of prior occupants.",
+   "You avoided every extreme on offer. The result will be eminently usable and will be mistaken for a system font by anyone who is not looking hard.",
+   "Centrist votes on all five axes produce the faces that ship with operating systems and get approved by committees. It will set anything you hand it, and you will not pick it out of a lineup a week later."
+  ],
+  "no-tension": [
+   "There is no contradiction to point at. You picked a consistent set, which means either you knew what you wanted or the quiz never found the axis you would fight over.",
+   "Your picks agree with each other, which is rarer than it sounds. The risk here is not incoherence, it is the whole population converging by generation three.",
+   "Nothing in your votes argues with anything else, so there is no contradiction to report. Watch the third generation instead: agreement this clean is how a population ends up as one face wearing five names."
+  ]
+ },
+ "closers": {
+  "decisive": [
+   "Three axes are pinned, so the population will not wander far. Breed twice before you judge anything, because the first generation mostly repeats what you already told it.",
+   "You have given the genome enough constraints that it can stop guessing. Spend the wildcard slot generously; it is the only thing keeping the next four generations from looking alike.",
+   "Take the pinned axes into the pairing view and set the specimen text to something you actually have to publish. Constraints this firm flatter a headline and show their limits in a paragraph."
+  ],
+  "leaning": [
+   "One or two axes are settled and the rest are still negotiable. Breed from here rather than returning to the quiz, because the loose axes resolve faster against real specimens than against paired questions.",
+   "You have a direction and not yet a specification. Keep two candidates per generation instead of one, and let the disagreement between them do the work.",
+   "The quiz found a preference before it found a face. Run a generation, keep the one that surprises you, and check whether the leaning still holds when the same drawing is set at 14px."
+  ],
+  "open": [
+   "Nothing is pinned, so the first generation covers a lot of ground. Use that: cull hard and fast rather than trying to be fair to everything on screen.",
+   "You kept your options open, so the genome will too. The seed population is a spread by design, which makes the opening screen a survey rather than a shortlist.",
+   "No axis held still long enough to pin, so the search stays wide. Pick on instinct for a round or two, since the genome reads a fast cull exactly the way it reads a slow one and you will cover more of the space."
+  ]
+ },
+ "clauses": {
+  "category": {
+   "geometric sans": {
+    "label": "geometric sans",
+    "clause": "a geometric sans drawn with a compass, Futura's argument that a letter is a circle and a line",
+    "reads": "The o is a near-perfect ring and the a has no bowl of its own"
+   },
+   "neo-grotesque sans": {
+    "label": "neo-grotesque sans",
+    "clause": "a neo-grotesque in the Helvetica line, everything cut flat and nothing allowed to stick out",
+    "reads": "The sans of airports and annual reports, with stroke ends sheared level"
+   },
+   "grotesque sans": {
+    "label": "grotesque sans",
+    "clause": "a nineteenth-century grotesque, Akzidenz before Zurich tidied it up",
+    "reads": "An older sans whose letters were plainly not all drawn on the same afternoon"
+   },
+   "humanist sans": {
+    "label": "humanist sans",
+    "clause": "a humanist sans that still remembers the pen, the position Gill took and Frutiger refined",
+    "reads": "A sans with the proportions of a roman, and a g that looks written rather than assembled"
+   },
+   "flared sans": {
+    "label": "flared sans",
+    "clause": "a flared sans in the Optima mode, serifs implied and never actually drawn",
+    "reads": "No serifs, but stems that swell at the ends where the serifs would have gone"
+   },
+   "wedge serif": {
+    "label": "wedge serif",
+    "clause": "a wedge serif, Meridien's triangle where a bracket usually sits",
+    "reads": "Serifs sharpened into small triangles instead of laid down flat"
+   },
+   "humanist serif": {
+    "label": "humanist serif",
+    "clause": "a humanist serif out of Jenson's Venice, with the slanted bar on the e",
+    "reads": "Sloped stress and low contrast, the shapes of the first roman types"
+   },
+   "transitional serif": {
+    "label": "transitional serif",
+    "clause": "a transitional serif in Baskerville's territory, colder than Venice and warmer than Parma",
+    "reads": "Upright stress and crisper serifs, the working roman of the last three centuries"
+   },
+   "old-style serif": {
+    "label": "old-style serif",
+    "clause": "an old-style serif of the Garamond persuasion, every serif bracketed into its stem",
+    "reads": "Angled stress and serifs that curve where they meet the stem"
+   },
+   "didone serif": {
+    "label": "didone serif",
+    "clause": "a didone in Didot's Paris manner, hairline serifs meeting the stem at a right angle",
+    "reads": "Very thick against very thin, with flat unbracketed serifs; the fashion-magazine roman"
+   },
+   "slab serif": {
+    "label": "slab serif",
+    "clause": "a slab serif out of the Egyptian craze of the 1820s, serifs as heavy as the stems",
+    "reads": "Rectangular serifs with little bracketing, drawn originally for handbills"
+   }
+  },
+  "weight": {
+   "hairline": {
+    "label": "hairline",
+    "clause": "a hairline you could lose in a bright room",
+    "reads": "Almost nothing on the page until you lean in and look"
+   },
+   "extralight": {
+    "label": "extra light",
+    "clause": "a weight that survives at poster size and nowhere else",
+    "reads": "Thin enough that it wants scale; at caption size it disappears"
+   },
+   "light": {
+    "label": "light",
+    "clause": "a light in the Univers 45 register, open without going faint",
+    "reads": "Open and quiet, but still solidly there at reading size"
+   },
+   "regular": {
+    "label": "regular",
+    "clause": "a regular, which is the weight a text face is actually judged at",
+    "reads": "The neutral setting, the one you would actually read a book in"
+   },
+   "medium": {
+    "label": "medium",
+    "clause": "a medium, the weight interfaces reach for when regular goes weak on a screen",
+    "reads": "Slightly firmer than text weight; it holds a line together"
+   },
+   "semibold": {
+    "label": "semibold",
+    "clause": "a semibold, the weight subheads were invented for",
+    "reads": "Heavier than the paragraph around it, and clearly meant to lead"
+   },
+   "bold": {
+    "label": "bold",
+    "clause": "a bold with the counters still open, the way Helvetica Bold protects its e",
+    "reads": "Emphatic at a glance, the weight headlines have used for a century"
+   },
+   "black": {
+    "label": "black",
+    "clause": "a black in the Helvetica Inserat tradition, ink over air",
+    "reads": "More ink than paper; the white gaps inside letters go narrow"
+   },
+   "ultra-heavy": {
+    "label": "ultra heavy",
+    "clause": "an ultra-heavy where the counters have nearly closed shut",
+    "reads": "So heavy the holes in the letters shrink to slits"
+   }
+  },
+  "width": {
+   "ultra-condensed": {
+    "label": "ultra-condensed",
+    "clause": "an ultra-condensed cut in the wood-type broadside tradition",
+    "reads": "Squeezed to the edge of legibility, the way old poster type was"
+   },
+   "condensed": {
+    "label": "condensed",
+    "clause": "a condensed that fits the headline the editor actually wrote",
+    "reads": "Narrow enough to fit more words per line without straining"
+   },
+   "narrow": {
+    "label": "narrow",
+    "clause": "a narrow set, the width a wayfinding panel uses to get the place name in",
+    "reads": "Slightly tight, the sort of thing you notice only in comparison"
+   },
+   "normal-width": {
+    "label": "normal",
+    "clause": "a normal width, the proportion the Renaissance settled and nobody has reopened",
+    "reads": "Standard proportions; nothing about the spacing calls attention to itself"
+   },
+   "wide": {
+    "label": "wide",
+    "clause": "a wide set with room around the o, closer to a Roman inscription than to a headline",
+    "reads": "Letters sit open and generous, taking more space per word"
+   },
+   "extended": {
+    "label": "extended",
+    "clause": "an extended in the Eurostile mode, horizontal and deliberate",
+    "reads": "Stretched sideways; a short word suddenly occupies a whole line"
+   },
+   "ultra-extended": {
+    "label": "ultra-extended",
+    "clause": "an ultra-extended that treats a five-letter word as a mural",
+    "reads": "So wide that only a few letters fit across the page"
+   }
+  },
+  "contrast": {
+   "monoline": {
+    "label": "monoline",
+    "clause": "a monoline stroke of the Avant Garde kind, one thickness from start to finish",
+    "reads": "Every stroke the same thickness, as if drawn with one pen"
+   },
+   "very low contrast": {
+    "label": "near-monoline",
+    "clause": "a near-monoline with the small swell Frutiger uses to keep a sans from looking drafted",
+    "reads": "Strokes look even until you compare a straight part with a curve"
+   },
+   "low contrast": {
+    "label": "gently modulated",
+    "clause": "a low contrast that holds its colour at 9pt",
+    "reads": "Thick and thin differ a little, enough to feel handwritten"
+   },
+   "moderate contrast": {
+    "label": "modulated",
+    "clause": "a moderate contrast, the working range of book faces",
+    "reads": "Clear difference between thick and thin, still comfortable in paragraphs"
+   },
+   "high contrast": {
+    "label": "thick-and-thin",
+    "clause": "a high contrast lifted from an engraved title page",
+    "reads": "Thin strokes go hairline against heavy ones, dramatic and a little fragile"
+   },
+   "extreme contrast": {
+    "label": "knife-thin",
+    "clause": "an extreme contrast of the Bodoni-at-72pt kind, hairlines and slabs",
+    "reads": "Hairlines beside very heavy strokes; it falls apart at small sizes"
+   },
+   "reverse contrast": {
+    "label": "reversed",
+    "clause": "a reverse contrast, the French Clarendon trick from circus bills",
+    "reads": "Weight lands where you do not expect it, horizontals heavier than uprights"
+   }
+  },
+  "terminals": {
+   "blunt cut": {
+    "label": "blunt",
+    "clause": "a blunt cut terminal, sawn off at the horizontal",
+    "reads": "Stroke ends stop flat, cut straight across with no shaping"
+   },
+   "angled": {
+    "label": "angled",
+    "clause": "angled terminals cut off the vertical, the habit that gives Frutiger its lean",
+    "reads": "Stroke ends cut on a slant, which gives words a small lean"
+   },
+   "sheared": {
+    "label": "sheared",
+    "clause": "sheared terminals, the Helvetica answer to a stroke ending",
+    "reads": "Ends sliced at a steep angle, tidy and mechanical"
+   },
+   "spurred": {
+    "label": "spurred",
+    "clause": "spurs at the joins, a nod to nineteenth-century grotesques",
+    "reads": "Small pointed nubs where strokes end, a Victorian habit"
+   },
+   "flared": {
+    "label": "flared",
+    "clause": "flared endings borrowed from carved Roman capitals",
+    "reads": "Ends widen slightly, like letters chiselled into stone"
+   },
+   "tapered": {
+    "label": "tapered",
+    "clause": "tapered strokes that thin out the way a brush lifts",
+    "reads": "Ends narrow to a point, as if the pen was lifting"
+   },
+   "rounded": {
+    "label": "rounded",
+    "clause": "rounded ends in the VAG Rounded manner, friendly by construction",
+    "reads": "Every stroke ends in a soft dome; nothing has a sharp edge"
+   },
+   "ball": {
+    "label": "ball",
+    "clause": "ball terminals, the little drops Baskerville hangs on an a",
+    "reads": "Strokes finish in a small round drop, a bookish flourish"
+   }
+  },
+  "xheight": {
+   "small": {
+    "label": "small x-height",
+    "clause": "a small x-height with the long ascenders that implies",
+    "reads": "Lowercase letters sit low, so the tall ones stand out"
+   },
+   "modest": {
+    "label": "modest x-height",
+    "clause": "a modest x-height in the old-style habit, Garamond's proportion",
+    "reads": "Slightly small lowercase, which gives the line an even, quiet texture"
+   },
+   "normal": {
+    "label": "normal x-height",
+    "clause": "a normal x-height, the proportion nobody argues about",
+    "reads": "Lowercase sits where you expect it, neither cramped nor looming"
+   },
+   "large": {
+    "label": "large x-height",
+    "clause": "a large x-height that buys legibility at small sizes",
+    "reads": "Lowercase letters run tall, so text holds up when set small"
+   },
+   "very large": {
+    "label": "very large x-height",
+    "clause": "a very large x-height, ascenders barely clearing the lowercase",
+    "reads": "Lowercase nearly as tall as the capitals; the line looks dense"
+   }
+  },
+  "corner": {
+   "razor-sharp": {
+    "label": "razor corners",
+    "clause": "corners left razor sharp, the drawing as the Bézier handles delivered it",
+    "reads": "Every join comes to a hard point, with nothing rounded off"
+   },
+   "crisp": {
+    "label": "crisp corners",
+    "clause": "crisp joins with about as much rounding as ink gain used to add",
+    "reads": "Angles read sharp, though the corners are not quite surgical up close"
+   },
+   "softened": {
+    "label": "softened corners",
+    "clause": "corners taken down the way a face comes back from newsprint",
+    "reads": "Angles are visibly eased, so the letters look worn in rather than filed"
+   },
+   "rounded": {
+    "label": "rounded corners",
+    "clause": "corners turned to one consistent radius, the router-bit finish of moulded lettering",
+    "reads": "Each angle is a small curve; the edges look tumbled instead of cut"
+   },
+   "pillowy": {
+    "label": "pillowy corners",
+    "clause": "a radius pushed well past comfort, in the bubble-lettering habit of 1972",
+    "reads": "Corners so round the letters look inflated, nearer a logo than a text face"
+   }
+  },
+  "texture": {
+   "clean": {
+    "label": "clean",
+    "clause": "a clean outline with no surface at all, drawn for vector and vinyl",
+    "reads": "Smooth edges, exactly as the drawing program left them"
+   },
+   "lightly inked": {
+    "label": "lightly inked",
+    "clause": "a light ink gain along the edge, the weight letterpress hands back",
+    "reads": "Strokes thicken very slightly, as if pressed into damp paper"
+   },
+   "slightly rough": {
+    "label": "slightly rough",
+    "clause": "an outline roughened just enough to look printed rather than plotted",
+    "reads": "Small irregularities along the stems, obvious at poster size and invisible in text"
+   },
+   "engraved": {
+    "label": "engraved",
+    "clause": "an engraved surface with the burin lines still sitting in the stems, banknote practice",
+    "reads": "Fine cut lines inside the strokes, the look of a share certificate"
+   },
+   "brush-drawn": {
+    "label": "brush-drawn",
+    "clause": "a brush-drawn edge that keeps the bristle marks, sign painter rather than punchcutter",
+    "reads": "Strokes swell and go dry the way a loaded brush does across a board"
+   },
+   "eroded": {
+    "label": "eroded",
+    "clause": "an eroded outline, type that has been left out in the weather",
+    "reads": "Bitten, pitted edges; some counters start closing where the ink has eaten in"
+   },
+   "stencil-cut": {
+    "label": "stencil-cut",
+    "clause": "a stencil cut with the bridges left in, out of the crate-and-airfield tradition",
+    "reads": "Gaps break the strokes where a stencil needs a bridge, so the o comes apart"
+   },
+   "pixel-stepped": {
+    "label": "pixel-stepped",
+    "clause": "a pixel-stepped outline that admits its grid, screen-font logic blown up to poster size",
+    "reads": "Curves climb in visible steps, as though drawn on a coarse grid"
+   }
+  },
+  "mood": {
+   "editorial": {
+    "label": "editorial",
+    "clause": "an editorial voice, drawn to be read on deadline",
+    "reads": "Feels like a magazine page, built to carry a headline and a story"
+   },
+   "brutalist": {
+    "label": "brutalist",
+    "clause": "a brutalist streak, nearer a poured concrete signboard than a typeface with manners",
+    "reads": "Heavy and plain, with every refinement stripped out on purpose"
+   },
+   "warm": {
+    "label": "warm",
+    "clause": "a warmth carried in the curves, the way Sabon stays friendly with no flourishes at all",
+    "reads": "Softer shapes that feel written by a person rather than machined"
+   },
+   "clinical": {
+    "label": "clinical",
+    "clause": "a clinical evenness, the register of a lab label",
+    "reads": "Cool and exact, the tone of instructions you are meant to follow"
+   },
+   "nostalgic": {
+    "label": "nostalgic",
+    "clause": "a nostalgia for the shopfront lettering nobody repaints",
+    "reads": "Looks like something remembered from an older sign or record sleeve"
+   },
+   "futuristic": {
+    "label": "futuristic",
+    "clause": "a futurism that dates itself the moment it lands",
+    "reads": "Forward-looking shapes, the kind every decade thinks it invented"
+   },
+   "literary": {
+    "label": "literary",
+    "clause": "a literary temperament that assumes long paragraphs",
+    "reads": "Made for sustained reading, the tone of a printed book"
+   },
+   "industrial": {
+    "label": "industrial",
+    "clause": "an industrial register borrowed from stencilled crate lettering",
+    "reads": "Built for signs on machinery rather than for pages"
+   },
+   "playful": {
+    "label": "playful",
+    "clause": "a playfulness that stops just short of a cartoon",
+    "reads": "Loose and cheerful, more at home on a toy box than a contract"
+   },
+   "severe": {
+    "label": "severe",
+    "clause": "a severity in the DIN register, drawn to instruct rather than to please",
+    "reads": "Stern and unfriendly on purpose, with nothing soft to hold onto"
+   },
+   "elegant": {
+    "label": "elegant",
+    "clause": "an elegance that depends on generous margins",
+    "reads": "Refined and slightly formal, the look of an invitation"
+   },
+   "utilitarian": {
+    "label": "utilitarian",
+    "clause": "a utilitarian bias, drawn for the job and looked at afterwards",
+    "reads": "Plain and practical; it wants to be useful before it is admired"
+   },
+   "psychedelic": {
+    "label": "psychedelic",
+    "clause": "a psychedelic streak out of the Fillmore poster shop",
+    "reads": "Letters bend and crowd each other, like a 1967 concert poster"
+   },
+   "ecclesiastical": {
+    "label": "ecclesiastical",
+    "clause": "an ecclesiastical air, blackletter without the blackletter",
+    "reads": "Solemn and churchy, the tone of an inscription or a hymnal"
+   },
+   "botanical": {
+    "label": "botanical",
+    "clause": "a botanical line, closer to a stem than a girder",
+    "reads": "Growing, organic curves, the feel of a plant guide or apothecary label"
+   },
+   "mechanical": {
+    "label": "mechanical",
+    "clause": "a mechanical construction you could redraw with a compass",
+    "reads": "Built from repeated parts, as if assembled rather than drawn"
+   }
+  },
+  "era": {
+   "15th-century humanist": {
+    "label": "early renaissance",
+    "clause": "a fifteenth-century hand, Jenson's Venice by way of the pen",
+    "reads": "The shapes of the first printed books, still close to handwriting"
+   },
+   "18th-century enlightenment": {
+    "label": "enlightenment",
+    "clause": "an eighteenth-century rationalism, Baskerville arguing with the pen",
+    "reads": "Cooler and more even than handwriting, the age of the printed page"
+   },
+   "19th-century industrial": {
+    "label": "industrial century",
+    "clause": "the nineteenth century's poster trade, wood type and volume",
+    "reads": "Loud commercial lettering from the age of playbills and shopfronts"
+   },
+   "1920s Bauhaus": {
+    "label": "bauhaus",
+    "clause": "a 1920s geometry, Bayer's circle-and-line dogma",
+    "reads": "Letters reduced to circles and straight lines on principle"
+   },
+   "1950s Swiss": {
+    "label": "swiss modern",
+    "clause": "the Swiss fifties, a grid and no adjectives",
+    "reads": "Neutral, tightly spaced and orderly, the look of postwar Zurich"
+   },
+   "1970s phototypesetting": {
+    "label": "phototype era",
+    "clause": "the phototype seventies, letters tight enough to touch",
+    "reads": "Close-set, curvy lettering from the era of film and airbrush"
+   },
+   "1990s digital": {
+    "label": "early digital",
+    "clause": "the nineties, when Emigre made bad screens a style",
+    "reads": "Early computer type, when low resolution shaped how letters were drawn"
+   },
+   "contemporary": {
+    "label": "contemporary",
+    "clause": "a contemporary drawing, variable axes and no nostalgia",
+    "reads": "Current practice: flexible, made for screens and print at once"
+   },
+   "speculative near-future": {
+    "label": "near-future",
+    "clause": "a near-future guess, the kind film titles make",
+    "reads": "Shapes that read as tomorrow, borrowed from science fiction more than research"
+   }
+  }
+ }
+}

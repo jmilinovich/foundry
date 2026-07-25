@@ -21,6 +21,12 @@ import {
   type Genome,
   type Rng,
 } from './genome';
+import {
+  isWorldRound,
+  WORLD_AXIS_WEIGHT,
+  WORLD_MOOD_WEIGHT,
+  type WorldImage,
+} from './world';
 
 export type AtlasEntry = { slug: string; genome: Genome; name: string };
 
@@ -52,21 +58,51 @@ const VALUES: Record<QuizAxis, readonly string[]> = {
 export type TasteProfile = {
   round: number;
   axis: Record<QuizAxis, Record<string, number>>;
+  /**
+   * Votes cast when this axis was the *deciding* difference in the duel, as a
+   * plain count. `axis` blends decisive picks (1.0), ride-alongs (0.25) and
+   * world picks (0.4) into one number, which is the right thing to sample a
+   * seed from but useless as evidence: you cannot say "7 times out of 9" from a
+   * weighted sum. The read cites this instead, so its claims are literally true.
+   */
+  decisive: Record<QuizAxis, Record<string, number>>;
   moods: Record<string, number>;
+  /**
+   * Era votes. Not a quiz axis — no duel is ever chosen to isolate it — but
+   * both specimen and world picks carry an era, and it's the single most
+   * legible thing about a photograph, so it's worth tallying for the read.
+   */
+  eras: Record<string, number>;
   seen: Record<QuizAxis, number>;
   /** slugs shown, so we don't repeat a specimen. */
   shown: string[];
+  /** world image ids shown, same reason. */
+  worldShown: string[];
 };
 
 export function emptyProfile(): TasteProfile {
   const axis = {} as TasteProfile['axis'];
+  const decisive = {} as TasteProfile['decisive'];
   const seen = {} as TasteProfile['seen'];
   for (const a of QUIZ_AXES) {
     axis[a] = {};
+    decisive[a] = {};
     seen[a] = 0;
   }
-  return { round: 0, axis, moods: {}, seen, shown: [] };
+  return { round: 0, axis, decisive, moods: {}, eras: {}, seen, shown: [], worldShown: [] };
 }
+
+/**
+ * Snap a tally to the 1/20 grid.
+ *
+ * Votes arrive in units of 0.25, 0.4 and 1.0, none of which are exact in binary
+ * floating point, so a dozen `+=`s drift a tally to 2.4499999999999997. That is
+ * invisible in a recommendation but it breaks a property we actually depend on:
+ * a profile must survive the round trip through a shared URL *identically*, and
+ * the URL stores twentieths. Snapping on accumulation keeps the in-memory value
+ * and the encoded value the same number rather than merely equal to 15 places.
+ */
+const q20 = (n: number) => Math.round(n * 20) / 20;
 
 const ordinalDistance = (values: readonly string[], a: string, b: string) =>
   Math.abs(values.indexOf(a) - values.indexOf(b));
@@ -83,17 +119,69 @@ function axisSpread(a: Genome, b: Genome): { total: number; per: Record<QuizAxis
   return { total, per };
 }
 
-export type Duel = { a: AtlasEntry; b: AtlasEntry; targets: QuizAxis[] };
+export type TypeDuel = { kind: 'type'; a: AtlasEntry; b: AtlasEntry; targets: QuizAxis[] };
+export type WorldDuel = { kind: 'world'; a: WorldImage; b: WorldImage };
+export type Duel = TypeDuel | WorldDuel;
 
 /**
- * Choose the next pair.
+ * Choose the next pair — a specimen duel or a world duel, per the schedule.
+ *
+ * The schedule is fixed rather than random so the quiz has a rhythm: you get a
+ * photograph every third round, which resets attention and stops twelve rounds
+ * of Handgloves from going numb. If the image bank is missing or exhausted the
+ * round silently falls back to a specimen duel, so the quiz never dead-ends.
+ */
+export function nextDuel(
+  profile: TasteProfile,
+  atlas: AtlasEntry[],
+  rng: Rng,
+  world: WorldImage[] = [],
+): Duel | null {
+  if (isWorldRound(profile.round)) {
+    const w = nextWorldDuel(profile, world, rng);
+    if (w) return w;
+  }
+  return nextTypeDuel(profile, atlas, rng);
+}
+
+/**
+ * Two photographs that disagree.
+ *
+ * Same principle as the specimen duel: a pick is only informative if the two
+ * options differ. We pair across mood and era and avoid showing two images of
+ * the same theme, since "two neon signs" tests nothing but colour preference.
+ */
+export function nextWorldDuel(
+  profile: TasteProfile,
+  world: WorldImage[],
+  rng: Rng,
+): WorldDuel | null {
+  const pool = world.filter((w) => !profile.worldShown.includes(w.id));
+  if (pool.length < 2) return null;
+
+  let best: { a: WorldImage; b: WorldImage; score: number } | null = null;
+  for (let i = 0; i < 80; i++) {
+    const a = pool[Math.floor(rng() * pool.length)];
+    const b = pool[Math.floor(rng() * pool.length)];
+    if (a.id === b.id) continue;
+    const moodOverlap = a.mood.filter((m) => b.mood.includes(m)).length;
+    const eraApart = a.era === b.era ? 0 : 1;
+    const themeApart = a.theme === b.theme ? 0 : 1;
+    const score = (2 - moodOverlap) * 1.4 + eraApart * 1.1 + themeApart * 0.8 + rng() * 0.2;
+    if (!best || score > best.score) best = { a, b, score };
+  }
+  return best ? { kind: 'world', a: best.a, b: best.b } : null;
+}
+
+/**
+ * Choose the next specimen pair.
  *
  * Adaptive on two fronts: it targets the axis you've *seen* least (coverage),
  * and among candidate pairs it prefers ones that are far apart on that axis but
  * otherwise similar, so your pick is attributable rather than muddy. Seeded RNG
  * keeps a session reproducible.
  */
-export function nextDuel(profile: TasteProfile, atlas: AtlasEntry[], rng: Rng): Duel | null {
+export function nextTypeDuel(profile: TasteProfile, atlas: AtlasEntry[], rng: Rng): TypeDuel | null {
   const pool = atlas.filter((e) => !profile.shown.includes(e.slug));
   if (pool.length < 2) return null;
 
@@ -119,7 +207,7 @@ export function nextDuel(profile: TasteProfile, atlas: AtlasEntry[], rng: Rng): 
 
   const spread = axisSpread(best.a.genome, best.b.genome);
   const targets = QUIZ_AXES.filter((ax) => spread.per[ax] > 0.18);
-  return { a: best.a, b: best.b, targets };
+  return { kind: 'type', a: best.a, b: best.b, targets };
 }
 
 /**
@@ -134,24 +222,61 @@ export function recordPick(
   duel: Duel,
   winner: 'a' | 'b',
 ): TasteProfile {
-  const won = winner === 'a' ? duel.a : duel.b;
   const next: TasteProfile = {
     ...profile,
     round: profile.round + 1,
     axis: structuredClone(profile.axis),
+    decisive: structuredClone(profile.decisive),
     moods: { ...profile.moods },
+    eras: { ...profile.eras },
     seen: { ...profile.seen },
-    shown: [...profile.shown, duel.a.slug, duel.b.slug],
+    shown: [...profile.shown],
+    worldShown: [...profile.worldShown],
   };
+
+  if (duel.kind === 'world') {
+    const won = winner === 'a' ? duel.a : duel.b;
+    next.worldShown.push(duel.a.id, duel.b.id);
+
+    // The loud signal, at full strength.
+    for (const m of won.mood) next.moods[m] = q20((next.moods[m] ?? 0) + WORLD_MOOD_WEIGHT);
+    next.eras[won.era] = q20((next.eras[won.era] ?? 0) + 1);
+
+    // The quiet signal, discounted — a photograph is weak evidence about
+    // letterforms, and only counted where the lettering was legible enough for
+    // the tagging pass to commit to a value at all.
+    for (const ax of QUIZ_AXES) {
+      const v = won[ax as keyof WorldImage] as string | undefined;
+      if (!v) continue;
+      next.axis[ax][v] = q20((next.axis[ax][v] ?? 0) + WORLD_AXIS_WEIGHT);
+    }
+    return next;
+  }
+
+  const won = winner === 'a' ? duel.a : duel.b;
+  next.shown.push(duel.a.slug, duel.b.slug);
 
   for (const ax of QUIZ_AXES) {
     const differed = duel.targets.includes(ax);
     const v = won.genome[ax] as string;
-    next.axis[ax][v] = (next.axis[ax][v] ?? 0) + (differed ? 1 : 0.25);
-    if (differed) next.seen[ax] += 1;
+    next.axis[ax][v] = q20((next.axis[ax][v] ?? 0) + (differed ? 1 : 0.25));
+    if (differed) {
+      next.seen[ax] += 1;
+      next.decisive[ax][v] = (next.decisive[ax][v] ?? 0) + 1;
+    }
   }
-  for (const m of won.genome.mood) next.moods[m] = (next.moods[m] ?? 0) + 1;
+  for (const m of won.genome.mood) next.moods[m] = q20((next.moods[m] ?? 0) + 1);
+  next.eras[won.genome.era] = q20((next.eras[won.genome.era] ?? 0) + 1);
 
+  return next;
+}
+
+/** Advance a round without recording a vote, for "no preference". */
+export function recordSkip(profile: TasteProfile, duel: Duel | null): TasteProfile {
+  const next: TasteProfile = { ...profile, round: profile.round + 1 };
+  if (!duel) return next;
+  if (duel.kind === 'world') next.worldShown = [...profile.worldShown, duel.a.id, duel.b.id];
+  else next.shown = [...profile.shown, duel.a.slug, duel.b.slug];
   return next;
 }
 

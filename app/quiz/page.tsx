@@ -2,11 +2,16 @@ import Link from 'next/link';
 
 import { Quiz } from '@/components/quiz/Quiz';
 import { loadAtlas } from '@/lib/atlas';
+import googleFonts from '@/lib/data/google-fonts.json';
+import { loadWorld } from '@/lib/atlas';
+import type { GoogleFont } from '@/lib/recommend';
 
 export const dynamic = 'force-dynamic';
 
+const GOOGLE = googleFonts as unknown as GoogleFont[];
+
 export default async function QuizPage() {
-  const atlas = await loadAtlas();
+  const [atlas, world] = await Promise.all([loadAtlas(), loadWorld()]);
 
   if (atlas.length < 4) {
     return (
@@ -22,17 +27,8 @@ export default async function QuizPage() {
     );
   }
 
-  return (
-    <div className="surface-judge flex min-h-full flex-1 flex-col">
-      <header className="border-b border-line">
-        <div className="mx-auto flex max-w-[1100px] items-center justify-between px-6 py-3.5">
-          <Link href="/" className="font-mono text-[11px] tracking-widest text-ink-dim hover:text-ink">
-            ← FOUNDRY
-          </Link>
-          <span className="font-mono text-[11px] text-ink-faint">find your type</span>
-        </div>
-      </header>
-      <Quiz atlas={atlas} />
-    </div>
-  );
+  // No header here: the quiz owns its own chrome, because the duels and the
+  // result are different surfaces (cool bench vs warm paper) with different
+  // mastheads, and a shared one would sit on the wrong ground for half the run.
+  return <Quiz atlas={atlas} world={world} google={GOOGLE} />;
 }

@@ -1,10 +1,13 @@
 'use client';
 
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { mulberry32 } from '@/lib/genome';
+import type { GoogleFont } from '@/lib/recommend';
 import { apiFetch } from '@/lib/userKey';
+import type { WorldImage } from '@/lib/world';
 import { useEnsureKey } from '../KeyGateProvider';
 import {
   emptyProfile,
@@ -12,16 +15,27 @@ import {
   profileToSeed,
   QUIZ_LENGTH,
   recordPick,
+  recordSkip,
   summarize,
   type AtlasEntry,
   type Duel,
   type TasteProfile,
 } from '@/lib/taste';
-import { useAtlasFont } from './useAtlasFont';
+import { Result } from './Result';
+import { useAtlasFont, useAtlasPreload } from './useAtlasFont';
 
+/**
+ * The specimen word. Must stay within the glyphs subset by
+ * scripts/subset-atlas.mjs — `npm test` asserts the two agree, because a
+ * character outside the subset renders as .notdef with no visible error.
+ */
 const SPECIMEN = 'Handgloves';
 
-function Card({
+// ---------------------------------------------------------------------------
+// Panes
+// ---------------------------------------------------------------------------
+
+function SpecimenPane({
   entry,
   side,
   onPick,
@@ -34,10 +48,10 @@ function Card({
   return (
     <button
       onClick={onPick}
-      className="group relative flex flex-1 flex-col items-center justify-center overflow-hidden rounded-xl border border-line bg-panel px-6 py-12 transition-all duration-200 hover:border-ink-faint focus-visible:border-accent focus-visible:outline-none"
+      className="group relative flex h-[42vh] max-h-[430px] min-h-[220px] flex-col items-center justify-center border border-line bg-panel px-6 py-10 transition-colors duration-200 hover:border-ink-faint focus-visible:border-ink focus-visible:outline-none"
     >
       <div
-        className="specimen text-center leading-[0.95] transition-transform duration-200 group-hover:scale-[1.03]"
+        className="specimen text-center leading-[0.95] transition-transform duration-200 group-hover:scale-[1.02]"
         data-loaded={loaded}
         style={{ fontFamily: `"${family}", serif`, fontSize: 'clamp(2.75rem, 7vw, 5.5rem)' }}
       >
@@ -50,15 +64,79 @@ function Card({
   );
 }
 
-export function Quiz({ atlas }: { atlas: AtlasEntry[] }) {
+function WorldPane({
+  image,
+  side,
+  onPick,
+}: {
+  image: WorldImage;
+  side: 'left' | 'right';
+  onPick: () => void;
+}) {
+  return (
+    <button
+      onClick={onPick}
+      className="group relative flex flex-1 flex-col overflow-hidden border border-line bg-panel text-left transition-colors duration-200 hover:border-ink-faint focus-visible:border-ink focus-visible:outline-none"
+    >
+      {/* `contain`, not `cover`. The lettering is the thing being judged, and a
+          cover crop routinely slices the top off a poster or the end off a shop
+          sign — which would make the vote a verdict on our cropping. Letterboxed
+          on the panel ground it reads as a plate in a catalogue. */}
+      <div className="relative flex h-[42vh] max-h-[430px] min-h-[220px] items-center justify-center overflow-hidden">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={`/world/${image.file}`}
+          alt={image.caption}
+          className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+          loading="eager"
+        />
+      </div>
+      <div className="border-t border-line px-4 py-3">
+        <p className="text-[14px] leading-snug text-ink">{image.caption}</p>
+        {/* The credit rides with the image everywhere it appears — these are
+            other people's photographs, used under the licence named here. */}
+        <p className="mt-1 font-mono text-[9.5px] uppercase tracking-[0.12em] text-ink-faint">
+          {image.credit.artist} · {image.credit.licence}
+        </p>
+        <span className="mt-2 block font-mono text-[11px] uppercase tracking-[0.25em] text-ink-faint transition group-hover:text-ink">
+          {side === 'left' ? '← this' : 'that →'}
+        </span>
+      </div>
+    </button>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// The quiz
+// ---------------------------------------------------------------------------
+
+export function Quiz({
+  atlas,
+  world,
+  google,
+}: {
+  atlas: AtlasEntry[];
+  world: WorldImage[];
+  google: GoogleFont[];
+}) {
   const router = useRouter();
   const [profile, setProfile] = useState<TasteProfile>(emptyProfile);
-  const [duel, setDuel] = useState<Duel | null>(null);
   const [starting, setStarting] = useState(false);
 
   // One seeded RNG for the whole session, so a run is reproducible and the
   // duels don't reshuffle on every render.
   const rng = useMemo(() => mulberry32(0xf0f0 ^ atlas.length), [atlas.length]);
+
+  // The first duel is computed during the initial render rather than in a mount
+  // effect, so round one paints with real specimens instead of an empty frame
+  // that fills in a tick later. Safe because the RNG is seeded: the server and
+  // the client independently derive the same pair, so there's no hydration gap.
+  const [duel, setDuel] = useState<Duel | null>(() => nextDuel(emptyProfile(), atlas, rng, world));
+
+  // Warm the whole atlas from the first paint. Each duel still waits for its
+  // own two faces, but after round one that wait is already over.
+  const slugs = useMemo(() => atlas.map((a) => a.slug), [atlas]);
+  useAtlasPreload(slugs);
 
   const advance = useCallback(
     (p: TasteProfile) => {
@@ -66,15 +144,10 @@ export function Quiz({ atlas }: { atlas: AtlasEntry[] }) {
         setDuel(null);
         return;
       }
-      setDuel(nextDuel(p, atlas, rng));
+      setDuel(nextDuel(p, atlas, rng, world));
     },
-    [atlas, rng],
+    [atlas, rng, world],
   );
-
-  useEffect(() => {
-    advance(emptyProfile());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const pick = useCallback(
     (winner: 'a' | 'b') => {
@@ -87,8 +160,7 @@ export function Quiz({ atlas }: { atlas: AtlasEntry[] }) {
   );
 
   const skip = useCallback(() => {
-    // Advance the round counter without recording a vote.
-    const next = { ...profile, round: profile.round + 1, shown: duel ? [...profile.shown, duel.a.slug, duel.b.slug] : profile.shown };
+    const next = recordSkip(profile, duel);
     setProfile(next);
     advance(next);
   }, [profile, duel, advance]);
@@ -135,11 +207,37 @@ export function Quiz({ atlas }: { atlas: AtlasEntry[] }) {
   const pct = Math.round((Math.min(profile.round, QUIZ_LENGTH) / QUIZ_LENGTH) * 100);
 
   if (done) {
-    return <Summary profile={profile} onBegin={beginRun} starting={starting} />;
+    return (
+      <Result
+        profile={profile}
+        atlas={atlas}
+        google={google}
+        onBegin={beginRun}
+        starting={starting}
+      />
+    );
   }
 
+  const prompt =
+    duel?.kind === 'world'
+      ? 'which world would you rather live in?'
+      : 'pick the one you like more';
+
   return (
-    <div className="mx-auto flex min-h-full w-full max-w-[1100px] flex-1 flex-col px-6 py-6">
+    <div className="surface-judge flex min-h-full flex-1 flex-col">
+      <header className="border-b border-line">
+        <div className="mx-auto flex max-w-[1100px] items-center justify-between px-6 py-3.5">
+          <Link
+            href="/"
+            className="font-mono text-[11px] tracking-widest text-ink-dim transition hover:text-ink"
+          >
+            ← FOUNDRY
+          </Link>
+          <span className="font-mono text-[11px] text-ink-faint">find your type</span>
+        </div>
+      </header>
+
+      <div className="mx-auto flex w-full max-w-[1100px] flex-1 flex-col justify-center px-6 py-6">
       <div className="flex items-center justify-between">
         <span className="font-mono text-[11px] tracking-widest text-ink-faint">
           {profile.round + 1} / {QUIZ_LENGTH}
@@ -153,73 +251,25 @@ export function Quiz({ atlas }: { atlas: AtlasEntry[] }) {
       </div>
 
       {duel && (
-        <div className="mt-6 grid flex-1 grid-cols-1 gap-4 sm:grid-cols-2">
-          <Card entry={duel.a} side="left" onPick={() => pick('a')} />
-          <Card entry={duel.b} side="right" onPick={() => pick('b')} />
+        <div className="mt-6 grid grid-cols-1 items-start gap-4 sm:grid-cols-2">
+          {duel.kind === 'world' ? (
+            <>
+              <WorldPane image={duel.a} side="left" onPick={() => pick('a')} />
+              <WorldPane image={duel.b} side="right" onPick={() => pick('b')} />
+            </>
+          ) : (
+            <>
+              <SpecimenPane entry={duel.a} side="left" onPick={() => pick('a')} />
+              <SpecimenPane entry={duel.b} side="right" onPick={() => pick('b')} />
+            </>
+          )}
         </div>
       )}
 
-      <p className="mt-6 text-center font-mono text-[11px] text-ink-faint">
-        pick the one you like more · ← / → · this isn&rsquo;t a test, go on instinct
-      </p>
-    </div>
-  );
-}
-
-function Summary({
-  profile,
-  onBegin,
-  starting,
-}: {
-  profile: TasteProfile;
-  onBegin: () => void;
-  starting: boolean;
-}) {
-  const summary = summarize(profile);
-  const seed = profileToSeed(profile);
-  const pins = Object.entries(seed.pinned);
-
-  return (
-    <div className="mx-auto flex w-full max-w-xl flex-1 flex-col justify-center px-6 py-16">
-      <p className="font-mono text-[11px] uppercase tracking-widest text-ink-faint">your type leans</p>
-      <h1 className="mt-4 text-[clamp(1.75rem,5vw,2.75rem)] font-medium leading-tight tracking-tight">
-        {summary}
-      </h1>
-
-      <p className="mt-6 text-sm leading-relaxed text-ink-dim">
-        That&rsquo;s the profile your picks describe. Generation 0 will be drawn from it — biased
-        toward what you liked, but still exploring around the edges, because the whole point is to
-        find something you couldn&rsquo;t have named.
-      </p>
-
-      {pins.length > 0 && (
-        <div className="mt-6">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-ink-faint">
-            you were consistent about
-          </p>
-          <div className="mt-2 flex flex-wrap gap-1.5">
-            {pins.map(([k, v]) => (
-              <span
-                key={k}
-                className="rounded border border-ink/40 px-2 py-0.5 font-mono text-[11px] text-ink"
-              >
-                {String(v)}
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
-
-      <button
-        onClick={onBegin}
-        disabled={starting}
-        className="mt-10 rounded bg-accent px-5 py-3 text-sm font-medium text-paper transition disabled:bg-panel disabled:text-ink-faint hover:enabled:brightness-110"
-      >
-        {starting ? 'minting generation 0…' : 'generate my fonts →'}
-      </button>
-      <p className="mt-3 font-mono text-[11px] text-ink-faint">
-        eight fonts, about $1.60 · you&rsquo;ll add your Mixfont key next
-      </p>
+        <p className="mt-6 text-center font-mono text-[11px] text-ink-faint">
+          {prompt} · ← / → · this isn&rsquo;t a test, go on instinct
+        </p>
+      </div>
     </div>
   );
 }
