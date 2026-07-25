@@ -48,16 +48,18 @@ function SpecimenPane({
   return (
     <button
       onClick={onPick}
-      className="group relative flex h-[42vh] max-h-[430px] min-h-[220px] flex-col items-center justify-center border border-line bg-panel px-6 py-10 transition-colors duration-200 hover:border-ink-faint focus-visible:border-ink focus-visible:outline-none"
+      className="pane group relative flex h-full min-h-0 select-none flex-col items-center justify-center overflow-hidden border border-line bg-panel px-3 py-4 transition-colors duration-200 hover:border-ink-faint focus-visible:border-ink focus-visible:outline-none sm:h-[42vh] sm:max-h-[430px] sm:min-h-[160px] sm:px-6 sm:py-10"
     >
       <div
-        className="specimen text-center leading-[0.95] transition-transform duration-200 group-hover:scale-[1.02]"
+        className="specimen duel-specimen max-w-full text-center leading-[0.95] transition-transform duration-200 group-hover:scale-[1.02]"
         data-loaded={loaded}
-        style={{ fontFamily: `"${family}", serif`, fontSize: 'clamp(2.75rem, 7vw, 5.5rem)' }}
+        style={{ fontFamily: `"${family}", serif` }}
       >
         {SPECIMEN}
       </div>
-      <span className="mt-8 font-mono text-[11px] uppercase tracking-[0.25em] text-ink-faint transition group-hover:text-ink">
+      {/* Hidden on mobile: the panes are stacked there, so a left/right arrow
+          points at nothing, and the row is worth more as specimen height. */}
+      <span className="mt-8 hidden font-mono text-[11px] uppercase tracking-[0.25em] text-ink-faint transition group-hover:text-ink sm:block">
         {side === 'left' ? '← this' : 'that →'}
       </span>
     </button>
@@ -76,13 +78,13 @@ function WorldPane({
   return (
     <button
       onClick={onPick}
-      className="group relative flex flex-1 flex-col overflow-hidden border border-line bg-panel text-left transition-colors duration-200 hover:border-ink-faint focus-visible:border-ink focus-visible:outline-none"
+      className="pane group relative flex h-full min-h-0 select-none flex-col overflow-hidden border border-line bg-panel text-left transition-colors duration-200 hover:border-ink-faint focus-visible:border-ink focus-visible:outline-none sm:h-auto"
     >
       {/* `contain`, not `cover`. The lettering is the thing being judged, and a
           cover crop routinely slices the top off a poster or the end off a shop
           sign — which would make the vote a verdict on our cropping. Letterboxed
           on the panel ground it reads as a plate in a catalogue. */}
-      <div className="relative flex h-[42vh] max-h-[430px] min-h-[220px] items-center justify-center overflow-hidden">
+      <div className="relative flex min-h-0 flex-1 items-center justify-center overflow-hidden p-1 sm:h-[42vh] sm:max-h-[430px] sm:min-h-[160px] sm:flex-none sm:p-0">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={`/world/${image.file}`}
@@ -91,14 +93,14 @@ function WorldPane({
           loading="eager"
         />
       </div>
-      <div className="border-t border-line px-4 py-3">
-        <p className="text-[14px] leading-snug text-ink">{image.caption}</p>
+      <div className="shrink-0 border-t border-line px-3 py-2 sm:px-4 sm:py-3">
+        <p className="text-[13px] leading-snug text-ink sm:text-[14px]">{image.caption}</p>
         {/* The credit rides with the image everywhere it appears — these are
             other people's photographs, used under the licence named here. */}
-        <p className="mt-1 font-mono text-[9.5px] uppercase tracking-[0.12em] text-ink-faint">
+        <p className="mt-0.5 truncate font-mono text-[9.5px] uppercase tracking-[0.12em] text-ink-faint sm:mt-1">
           {image.credit.artist} · {image.credit.licence}
         </p>
-        <span className="mt-2 block font-mono text-[11px] uppercase tracking-[0.25em] text-ink-faint transition group-hover:text-ink">
+        <span className="mt-2 hidden font-mono text-[11px] uppercase tracking-[0.25em] text-ink-faint transition group-hover:text-ink sm:block">
           {side === 'left' ? '← this' : 'that →'}
         </span>
       </div>
@@ -114,23 +116,27 @@ export function Quiz({
   atlas,
   world,
   google,
+  seed,
 }: {
   atlas: AtlasEntry[];
   world: WorldImage[];
   google: GoogleFont[];
+  /** Rolled per request on the server; see app/quiz/page.tsx. */
+  seed: number;
 }) {
   const router = useRouter();
   const [profile, setProfile] = useState<TasteProfile>(emptyProfile);
   const [starting, setStarting] = useState(false);
 
-  // One seeded RNG for the whole session, so a run is reproducible and the
-  // duels don't reshuffle on every render.
-  const rng = useMemo(() => mulberry32(0xf0f0 ^ atlas.length), [atlas.length]);
+  // One RNG for the whole run, seeded from the server's per-request number, so
+  // every visitor gets a different twelve rounds while a single run stays
+  // internally consistent and doesn't reshuffle on every render.
+  const rng = useMemo(() => mulberry32(seed), [seed]);
 
   // The first duel is computed during the initial render rather than in a mount
   // effect, so round one paints with real specimens instead of an empty frame
-  // that fills in a tick later. Safe because the RNG is seeded: the server and
-  // the client independently derive the same pair, so there's no hydration gap.
+  // that fills in a tick later. Safe because both sides derive it from the same
+  // server-supplied seed, so there's no hydration gap.
   const [duel, setDuel] = useState<Duel | null>(() => nextDuel(emptyProfile(), atlas, rng, world));
 
   // Warm the whole atlas from the first paint. Each duel still waits for its
@@ -241,9 +247,15 @@ export function Quiz({
       : 'pick the one you like more';
 
   return (
-    <div className="surface-judge flex min-h-full flex-1 flex-col">
-      <header className="border-b border-line">
-        <div className="mx-auto flex max-w-[1100px] items-center justify-between px-6 py-3.5">
+    // One viewport tall, never scrolling. On a phone the two options stack, and
+    // both still have to be on screen at once — an A/B you have to scroll
+    // through is not an A/B.
+    // overflow-y-auto rather than hidden: the layout is built so the pair always
+    // fits, but a short landscape window is a real device state and losing the
+    // prompt off the bottom edge would be worse than a scrollbar nobody uses.
+    <div className="quiz-viewport surface-judge flex flex-col overflow-y-auto">
+      <header className="shrink-0 border-b border-line">
+        <div className="mx-auto flex max-w-[1100px] items-center justify-between px-5 py-3 sm:px-6 sm:py-3.5">
           <Link
             href="/"
             className="font-mono text-[11px] tracking-widest text-ink-dim transition hover:text-ink"
@@ -254,21 +266,27 @@ export function Quiz({
         </div>
       </header>
 
-      <div className="mx-auto flex w-full max-w-[1100px] flex-1 flex-col justify-center px-6 py-6">
-      <div className="flex items-center justify-between">
+      <div className="mx-auto flex w-full min-h-0 max-w-[1100px] flex-1 flex-col justify-center px-5 py-4 sm:px-6 sm:py-6">
+      <div className="flex shrink-0 items-center justify-between">
         <span className="font-mono text-[11px] tracking-widest text-ink-faint">
           {profile.round + 1} / {QUIZ_LENGTH}
         </span>
-        <button onClick={skip} className="font-mono text-[11px] text-ink-faint hover:text-ink">
+        {/* Padded well past the text so it's a real 44px target on a phone. */}
+        <button
+          onClick={skip}
+          className="-m-2 p-2 font-mono text-[11px] text-ink-faint transition hover:text-ink"
+        >
           no preference ↓
         </button>
       </div>
-      <div className="mt-3 h-px w-full bg-line">
+      <div className="mt-3 h-px w-full shrink-0 bg-line">
         <div className="h-px bg-signal transition-all duration-500" style={{ width: `${pct}%` }} />
       </div>
 
       {duel && (
-        <div className="mt-6 grid grid-cols-1 items-start gap-4 sm:grid-cols-2">
+        // Mobile: two rows sharing the leftover height, so the pair always fits.
+        // Desktop: two columns at their own fixed height, centred.
+        <div className="mt-4 grid min-h-0 flex-1 grid-cols-1 grid-rows-2 gap-3 sm:mt-6 sm:flex-none sm:grid-cols-2 sm:grid-rows-1 sm:gap-4">
           {/* The keys are load-bearing, not hygiene. Without them React reuses
               the same specimen node across duels: one commit swaps fontFamily to
               the incoming face *and* flips data-loaded to false, so the .specimen
@@ -291,8 +309,14 @@ export function Quiz({
         </div>
       )}
 
-        <p className="mt-6 text-center font-mono text-[11px] text-ink-faint">
-          {prompt} · ← / → · this isn&rsquo;t a test, go on instinct
+        <p className="mt-4 shrink-0 text-center font-mono text-[11px] leading-relaxed text-ink-faint sm:mt-6">
+          {/* The keyboard hint is meaningless on a touch device, and the
+              instruction differs: you tap a pane rather than press an arrow. */}
+          <span className="sm:hidden">
+            {duel?.kind === 'world' ? 'tap the world you’d rather live in' : 'tap the one you like more'}
+          </span>
+          <span className="hidden sm:inline">{prompt} · ← / →</span>
+          <span className="hidden sm:inline"> · this isn&rsquo;t a test, go on instinct</span>
         </p>
       </div>
     </div>

@@ -45,6 +45,43 @@ body {
   font-family: var(--font-hanken), system-ui, sans-serif;
 }
 
+/* The duel screen is exactly one viewport tall and never scrolls.
+   `dvh` tracks the real visible area as mobile browser chrome slides in and
+   out; `vh` is the fallback and is what older engines will use. A this-or-that
+   comparison where you have to scroll to see the second option isn't a
+   comparison, so the panes divide whatever height is actually available rather
+   than claiming a fixed one. */
+.quiz-viewport {
+  height: 100vh;
+  height: 100dvh;
+}
+
+/* Taps shouldn't paint a grey box over a specimen, and a double-tap on a pane
+   should register as two picks rather than a zoom gesture. */
+.pane {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* The duel specimen.
+   Both panes must share ONE point size. Width is one of the axes being judged,
+   so fitting each face to its own pane would scale away the very difference the
+   round is asking about — an ultra-extended face has to *look* extended.
+   The size is therefore set by the widest face in the atlas: "Handgloves"
+   measures 6.37em in slab-14 against 1.21em in neo-14, and 6.4 is that worst
+   case plus a hair. Divide the available width by it and nothing can ever clip,
+   while every face is as large as the narrowest pane allows.
+   Re-measure if the specimen word or the atlas changes; a test pins the ratio. */
+.duel-specimen {
+  font-size: clamp(1.75rem, calc((100vw - 64px) / 6.4), 4.5rem);
+}
+@media (min-width: 640px) {
+  /* Two panes inside the 1100px wrap: gutters 48, gap 16, pane padding 96. */
+  .duel-specimen {
+    font-size: clamp(1.75rem, calc((min(100vw, 1100px) - 160px) / 12.8), 4.5rem);
+  }
+}
+
 /* The specimen fades in only once its FontFace has actually loaded, so you
    never see the string flash in a fallback face and then snap. */
 .specimen {

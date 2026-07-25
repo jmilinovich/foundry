@@ -172,7 +172,7 @@ export function Result({
   return (
     <div className="surface-publish flex min-h-full flex-1 flex-col">
       <header className="border-b border-line">
-        <div className="mx-auto flex max-w-[1180px] items-center justify-between px-6 py-3.5">
+        <div className="mx-auto flex max-w-[1180px] items-center justify-between px-5 py-3.5 sm:px-6">
           <Link href="/" className="font-display text-[15px] tracking-tight text-ink">
             Foundry
           </Link>
@@ -182,7 +182,7 @@ export function Result({
         </div>
       </header>
 
-      <div className="mx-auto w-full max-w-[720px] px-6 py-14">
+      <div className="mx-auto w-full max-w-[720px] px-5 py-12 sm:px-6 sm:py-14">
         {/* ── the read ─────────────────────────────────────────────────── */}
         <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-faint">
           the read
@@ -291,12 +291,25 @@ export function Result({
             <p className="font-mono text-[11px] text-ink-faint">
               the whole profile lives inside this link. nothing is stored.
             </p>
-            <button
-              onClick={share}
-              className="font-mono text-[11px] text-ink-dim transition hover:text-ink"
-            >
-              {copied ? '✓ copied' : failed ? 'select it →' : '⧉ copy link'}
-            </button>
+            <div className="flex items-center gap-5">
+              {/* Every run draws a different twelve rounds now, so retaking is
+                  a real thing to offer rather than a reset button. A full
+                  navigation is what fetches a new seed from the server. */}
+              {!shared && (
+                <a
+                  href="/quiz"
+                  className="-m-2 p-2 font-mono text-[11px] text-ink-faint transition hover:text-ink"
+                >
+                  ↻ new questions
+                </a>
+              )}
+              <button
+                onClick={share}
+                className="-m-2 p-2 font-mono text-[11px] text-ink-dim transition hover:text-ink"
+              >
+                {copied ? '✓ copied' : failed ? 'select it →' : '⧉ copy link'}
+              </button>
+            </div>
           </div>
           {/* Always present and always selectable, so the link is obtainable
               even where the clipboard API isn't. */}

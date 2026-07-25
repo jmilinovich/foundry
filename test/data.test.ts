@@ -1,4 +1,5 @@
 import { existsSync, readFileSync } from 'node:fs';
+import { parse } from 'opentype.js';
 import { describe, expect, it } from 'vitest';
 
 import googleFonts from '@/lib/data/google-fonts.json';
@@ -6,6 +7,9 @@ import world from '@/lib/data/world.json';
 import { CATEGORY, CONTRAST, ERA, MOOD, TERMINALS, WEIGHT, WIDTH } from '@/lib/genome';
 import type { GoogleFont } from '@/lib/recommend';
 import type { WorldImage } from '@/lib/world';
+
+/** Must match SPECIMEN in components/quiz/Quiz.tsx. */
+const SPECIMEN = 'Handgloves';
 
 const GOOGLE = googleFonts as unknown as GoogleFont[];
 const WORLD = world as unknown as WorldImage[];
@@ -102,6 +106,31 @@ describe('the atlas ships what it advertises', () => {
 
   it('is large enough that a 12-round quiz never runs out of specimens', () => {
     expect(manifest.length).toBeGreaterThanOrEqual(24);
+  });
+
+  /**
+   * Both panes of a duel share one point size, because width is an axis being
+   * judged and scaling each face to its pane would erase the difference. That
+   * size is derived in globals.css from the widest face in the atlas — the
+   * `6.4` divisor in `.duel-specimen`. If a wider face is ever minted, the
+   * divisor is wrong and the specimen clips off the edge of a phone with no
+   * error anywhere, so the assumption is pinned here rather than trusted.
+   */
+  it('contains no face wider than the specimen sizing assumes', () => {
+    const WIDEST_EM = 6.4;
+    const widest = manifest
+      .map((e) => {
+        const font = parse(readFileSync(`public/atlas/${e.slug}.ttf`).buffer as ArrayBuffer);
+        let w = 0;
+        for (const ch of SPECIMEN) w += font.charToGlyph(ch).advanceWidth ?? 0;
+        return { slug: e.slug, em: w / font.unitsPerEm };
+      })
+      .sort((a, b) => b.em - a.em)[0];
+
+    expect(
+      widest.em,
+      `${widest.slug} needs ${widest.em.toFixed(2)}em; update the divisor in .duel-specimen`,
+    ).toBeLessThanOrEqual(WIDEST_EM);
   });
 
   it('has unique slugs and a name for every font', () => {
