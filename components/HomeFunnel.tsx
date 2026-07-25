@@ -58,9 +58,9 @@ export function HomeFunnel() {
         className="group flex items-center justify-between border-2 border-ink px-6 py-5 transition hover:bg-ink hover:text-paper"
       >
         <span>
-          <span className="block text-lg font-medium">Find your type</span>
+          <span className="block text-lg font-medium">Have your taste read</span>
           <span className="block text-[13px] text-ink-dim transition group-hover:text-paper/80">
-            a dozen this-or-that pairs · no key needed · free
+            twelve pairs, about two minutes, no key and no charge
           </span>
         </span>
         <span className="text-2xl transition group-hover:translate-x-1">→</span>
@@ -71,7 +71,7 @@ export function HomeFunnel() {
           onClick={() => setTyped(true)}
           className="mt-4 font-mono text-[12px] text-ink-faint transition hover:text-ink"
         >
-          or describe it yourself →
+          or name it yourself, if you can →
         </button>
       ) : (
         <div className="mt-5 rounded-lg border border-line bg-panel p-5">

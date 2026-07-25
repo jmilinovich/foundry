@@ -28,6 +28,17 @@ import { QUIZ_AXES, type QuizAxis, type TasteProfile } from './taste';
 
 export type Clause = { label: string; clause: string; reads: string };
 export type ReadBank = {
+  /**
+   * The verdict: four to nine words, keyed the same way as the opener.
+   *
+   * Every opener is one ~28-word sentence, which set as the page H1 came to
+   * eight lines of display type on a phone before the reader got anything, and
+   * was what the share card truncated. The verdict carries the headline and the
+   * OG card; the sentence it belongs to becomes the first line of the read.
+   * Both are constrained the same way — they may lean on the category family
+   * and the mood, and on nothing else.
+   */
+  verdicts: Record<string, string>;
   openers: Record<string, string[]>;
   tensions: Record<string, string[]>;
   closers: Record<string, string[]>;
@@ -239,6 +250,8 @@ function choose<T>(options: T[] | undefined, seed: number, salt: number): T | nu
 }
 
 export type TheRead = {
+  /** The headline. Short enough to read at a glance and to survive an OG card. */
+  verdict: string;
   opener: string;
   tension: string | null;
   evidence: string | null;
@@ -259,8 +272,13 @@ export function composeRead(profile: TasteProfile, pinnedCount: number): TheRead
     choose(BANK.openers?.[openerKey], seed, 1) ??
     choose(BANK.openers?.[`${family}:cool`], seed, 2) ??
     'Your picks describe a face that has not been drawn yet.';
+  const verdict =
+    BANK.verdicts?.[openerKey] ??
+    BANK.verdicts?.[`${family}:cool`] ??
+    'You know it when you see it.';
 
   return {
+    verdict,
     opener,
     tension: choose(BANK.tensions?.[tensionKey], seed, 3),
     evidence: evidenceSentence(profile),
@@ -271,7 +289,9 @@ export function composeRead(profile: TasteProfile, pinnedCount: number): TheRead
 
 /** The read as one paragraph, for share images and meta descriptions. */
 export function readToParagraph(read: TheRead): string {
-  return [read.opener, read.tension, read.evidence, read.closer].filter(Boolean).join(' ');
+  return [read.verdict, read.opener, read.tension, read.evidence, read.closer]
+    .filter(Boolean)
+    .join(' ');
 }
 
 /**

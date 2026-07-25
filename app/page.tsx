@@ -18,11 +18,12 @@ export default function Home() {
         Nobody can write the prompt for the font they want. Everybody can point at the one they like
         better.
       </p>
-      <p className="mt-4 max-w-lg text-sm leading-relaxed text-ink-faint">
-        Answer a dozen this-or-that pairs and Foundry reads your taste back to you, then names the
-        typefaces that fit it — the ones you can install this afternoon, and the ones that exist
-        only here. If none of them is quite right, mint a population and breed your own: keep what
-        you like, and the next generation is drawn from what survived.
+      {/* One line, not four. The explainer used to spend seventy words on the
+          machinery — breeding, generations, survival — before anyone was
+          allowed to want it. That belongs on /about; this is the payoff. */}
+      <p className="mt-4 max-w-lg text-[15px] leading-relaxed text-ink-dim">
+        Point at enough of them and Foundry reads your taste back to you, then names twelve
+        typefaces that fit it, all free to download.
       </p>
 
       <div className="mt-12">

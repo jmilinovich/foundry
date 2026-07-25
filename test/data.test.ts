@@ -34,6 +34,24 @@ describe('the world image bank', () => {
    * These are other people's photographs on a public site. The licence, the
    * attribution and a checkable source must survive all the way to the page.
    */
+  /**
+   * The credit is printed under the photograph on the judging surface, so it
+   * has to read as a credit. These strings arrive raw from Wikimedia's Author
+   * field and shipped as "AS", "Self Scanned" and "Unknown author Unknown
+   * author" until scripts/clean-credits.mjs was run over them.
+   */
+  it('never prints scraper output as an attribution', () => {
+    for (const w of WORLD) {
+      const a = w.credit.artist;
+      expect(a, `${w.id}`).not.toMatch(/unknown author unknown author/i);
+      expect(a, `${w.id}`).not.toMatch(/^(unknown|anonymous|self[- ]?scanned|n\.? ?n\.?)$/i);
+      expect(a, `${w.id}`).not.toMatch(/^user:/i);
+      expect(a, `${w.id}`).not.toMatch(/www\.|https?:/i);
+      // Bare initials attribute nobody.
+      expect(a.replace(/[^A-Za-z]/g, '').length, `${w.id}: "${a}"`).toBeGreaterThan(2);
+    }
+  });
+
   it('carries an attributable credit for every image', () => {
     for (const w of WORLD) {
       expect(w.credit?.artist, `${w.id} has no artist`).toBeTruthy();

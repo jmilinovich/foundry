@@ -6,7 +6,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { mulberry32 } from '@/lib/genome';
 import { encodeProfile } from '@/lib/profileCode';
-import type { GoogleFont } from '@/lib/recommend';
 import type { WorldImage } from '@/lib/world';
 import {
   emptyProfile,
@@ -35,7 +34,7 @@ const SPECIMEN = 'Handgloves';
  * tap is ignored. Long enough to read as deliberate, short enough that twelve
  * of them do not feel like waiting.
  */
-const PICK_HOLD_MS = 140;
+const PICK_HOLD_MS = 190;
 
 /**
  * Mid-run state, kept for the length of the tab.
@@ -181,12 +180,10 @@ function WorldPane({
 export function Quiz({
   atlas,
   world,
-  google,
   seed,
 }: {
   atlas: AtlasEntry[];
   world: WorldImage[];
-  google: GoogleFont[];
   /** Rolled per request on the server; see app/quiz/page.tsx. */
   seed: number;
 }) {
@@ -350,14 +347,17 @@ export function Quiz({
    * client markup identical; the cost is one frame of round 1 before the real
    * round appears, on the rare path where there is anything to resume at all.
    */
+  /* eslint-disable react-hooks/set-state-in-effect, react-hooks/exhaustive-deps --
+     Reading sessionStorage is inherently a post-mount operation: doing it during
+     render would diverge from the server markup. Mount only, because a later run
+     would fight the live profile. */
   useEffect(() => {
     const saved = loadSaved();
     if (!saved) return;
     setProfile(saved);
     setDuel(nextDuel(saved, atlas, rng, world));
-    // Mount only: a later run of this would fight the live profile.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  /* eslint-enable react-hooks/set-state-in-effect, react-hooks/exhaustive-deps */
 
   const done = profile.round >= QUIZ_LENGTH || (!duel && profile.round > 0);
 
@@ -410,8 +410,8 @@ export function Quiz({
 
   const prompt =
     duel?.kind === 'world'
-      ? 'which world would you rather live in?'
-      : 'pick the one you like more';
+      ? '← or → for the world you would rather live in · ↓ if neither · judge the lettering, not the photograph'
+      : '← or → for the one you would rather set · ↓ if neither earns it';
 
   return (
     // One viewport tall, never scrolling. On a phone the two options stack, and
@@ -429,7 +429,7 @@ export function Quiz({
           >
             ← FOUNDRY
           </Link>
-          <span className="font-mono text-[11px] text-ink-faint">find your type</span>
+          <span className="font-mono text-[11px] text-ink-faint">nothing you pick leaves this browser</span>
         </div>
       </header>
 
@@ -493,10 +493,9 @@ export function Quiz({
           {/* The keyboard hint is meaningless on a touch device, and the
               instruction differs: you tap a pane rather than press an arrow. */}
           <span className="sm:hidden">
-            {duel?.kind === 'world' ? 'tap the world you’d rather live in' : 'tap the one you like more'}
+            {duel?.kind === 'world' ? 'tap the world you would rather live in · judge the lettering, not the photograph' : 'tap the one you would rather set · neither is a real answer'}
           </span>
-          <span className="hidden sm:inline">{prompt} · ← / →</span>
-          <span className="hidden sm:inline"> · this isn&rsquo;t a test, go on instinct</span>
+          <span className="hidden sm:inline">{prompt}</span>
         </p>
       </div>
     </div>

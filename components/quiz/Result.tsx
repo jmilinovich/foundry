@@ -250,8 +250,11 @@ export function Result({
         <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-faint">
           the read
         </p>
-        <h1 className="mt-5 font-display text-[clamp(1.6rem,4.4vw,2.35rem)] font-normal leading-[1.28] tracking-[-0.01em]">
-          {read.opener}
+        {/* The verdict is the headline; the long sentence it belongs to is the
+            first line of the read below it. Set as the H1, that sentence ran to
+            eight lines of Fraunces on a phone before the reader got anything. */}
+        <h1 className="mt-5 font-display text-[clamp(1.9rem,6vw,3rem)] font-normal leading-[1.15] tracking-[-0.015em]">
+          {read.verdict}
         </h1>
         {/* The closers are advice to somebody about to run a generation ("spend
             the wildcard slot generously"). A visitor arriving on a shared link
@@ -259,27 +262,30 @@ export function Result({
             nonsense addressed to someone else. They get the verdict; the
             operating advice belongs to the person who earned it. */}
         <div className="mt-5 space-y-3 text-[17px] leading-[1.65] text-ink-dim">
+          <p className="text-ink">{read.opener}</p>
           {read.tension && <p>{read.tension}</p>}
           {read.evidence && <p className="text-ink">{read.evidence}</p>}
           {!shared && read.closer && <p>{read.closer}</p>}
         </div>
 
-        <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.16em] text-ink-faint">
-          in short
-        </p>
-        <p className="mt-2 font-mono text-[12.5px] leading-relaxed text-ink-dim">
-          {summarize(profile)}
+        {/* The summary line that used to sit here restated the table below it
+            word for word — and it was `summarize()`, which builds a string for
+            the Mixfont prompt and emits raw gene slugs like "normal-width".
+            That function still does its real job on the API payload; it just
+            has no business being read by a person. */}
+        <p className="mt-10 font-mono text-[10px] uppercase tracking-[0.16em] text-ink-faint">
+          on the axes
         </p>
 
         {chips.length > 0 && (
-          <ul className="mt-6 space-y-2">
+          <ul className="mt-3 space-y-2">
             {chips.map((c) => (
               <li key={c.axis} className="flex gap-3 border-t border-line pt-2">
                 <span className="w-[92px] shrink-0 font-mono text-[10px] uppercase tracking-[0.14em] text-ink-faint">
                   {c.axis}
                 </span>
                 <span className="text-[14px] text-ink">{c.label}</span>
-                {c.reads && <span className="text-[14px] text-ink-faint">{c.reads}</span>}
+                {c.reads && <span className="text-[14px] text-ink-dim">{c.reads}</span>}
               </li>
             ))}
           </ul>
@@ -300,7 +306,7 @@ export function Result({
         )}
 
         {/* ── what exists ──────────────────────────────────────────────── */}
-        <Rule label="what exists" note="Free, and installable this afternoon." />
+        <Rule label="off the shelf" note="Free from Google Fonts, and installed in about a minute. Not one of them is ours." />
         <ul className="mt-2">
           {googleMatches.map((m) => (
             <GoogleRow key={m.item.family} font={m.item} why={m.item.why} />
@@ -308,12 +314,25 @@ export function Result({
         </ul>
 
         {/* ── what doesn't ─────────────────────────────────────────────── */}
-        <Rule label="from the foundry" note="Drawn for this profile. They exist nowhere else." />
+        <Rule label="the house library" note="The house cut 201 faces and froze the lot long before you arrived. These six landed nearest your votes, and they are on no type site but this one." />
         <ul className="mt-2">
           {atlasMatches.map((m) => (
             <AtlasRow key={m.item.slug} entry={m.item} />
           ))}
         </ul>
+        {/* The free path used to stop here at a $1.60 wall behind a third-party
+            API key. These six are static files that cost nothing to serve. */}
+        <div className="mt-6 flex flex-wrap items-baseline gap-x-5 gap-y-2">
+          <a
+            href={`/api/atlas/kit?p=${encodeURIComponent(code)}`}
+            className="inline-flex min-h-[44px] items-center border-2 border-ink px-5 text-[15px] font-medium transition hover:bg-ink hover:text-paper"
+          >
+            take all six ↓
+          </a>
+          <span className="font-mono text-[11px] text-ink-dim">
+            Six TTFs in one zip, ready to install.
+          </span>
+        </div>
 
         {/* ── the verb ─────────────────────────────────────────────────── */}
         <div className="mt-16 border-t-2 border-ink pt-8">
@@ -328,7 +347,7 @@ export function Result({
               disabled={starting}
               className="mt-6 border border-accent px-5 py-3 text-[15px] font-medium text-accent transition hover:bg-accent hover:text-paper disabled:border-line disabled:text-ink-faint disabled:hover:bg-transparent"
             >
-              {starting ? 'minting generation 0…' : 'breed your own →'}
+              {starting ? 'minting the first eight…' : 'mint the first eight →'}
             </button>
           ) : (
             // Not Proof Red. On a shared page there is no Breed action, so the
@@ -338,13 +357,16 @@ export function Result({
               href="/quiz"
               className="mt-6 inline-block border-2 border-ink px-5 py-3 text-[15px] font-medium transition hover:bg-ink hover:text-paper"
             >
-              take it yourself →
+              get your own read →
             </Link>
           )}
-          <p className="mt-3 font-mono text-[11px] text-ink-faint">
+          {/* Who bills, and where the key lives — before the click, not after.
+              "eight fonts, about $1.60" named a price with no biller, which a
+              first-time reader reasonably parses as Foundry charging them. */}
+          <p className="mt-3 max-w-md font-mono text-[11px] leading-relaxed text-ink-dim">
             {!shared
-              ? 'eight fonts, about $1.60 · you’ll add your Mixfont key next'
-              : 'twelve rounds, no key, free'}
+              ? 'about $1.60 for eight fonts, billed by Mixfont to the key you add next. Foundry takes none of it, and the key is stored nowhere but this browser.'
+              : 'twelve pairs, no key, no charge'}
           </p>
         </div>
 
@@ -352,7 +374,7 @@ export function Result({
         <div className="mt-12 border-t border-line pt-6">
           <div className="flex flex-wrap items-baseline justify-between gap-3">
             <p className="font-mono text-[11px] text-ink-faint">
-              the whole profile lives inside this link. nothing is stored.
+              whoever opens it gets your verdict and all twelve faces, downloads included. the profile rides inside the link, so nothing about you sits on a server.
             </p>
             <div className="flex items-center gap-5">
               {/* Every run draws a different twelve rounds now, so retaking is
@@ -363,14 +385,14 @@ export function Result({
                   href="/quiz"
                   className="-m-2 p-2 font-mono text-[11px] text-ink-faint transition hover:text-ink"
                 >
-                  ↻ new questions
+                  ↻ twelve new pairs
                 </a>
               )}
               <button
                 onClick={share}
                 className="-m-2 p-2 font-mono text-[11px] text-ink-dim transition hover:text-ink"
               >
-                {copied ? '✓ copied' : failed ? 'select it →' : '⧉ copy link'}
+                {copied ? '✓ copied' : failed ? 'blocked, it is selected below ↓' : '⧉ share the link'}
               </button>
             </div>
           </div>

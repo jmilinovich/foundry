@@ -2,16 +2,25 @@ import Link from 'next/link';
 
 import { Quiz } from '@/components/quiz/Quiz';
 import { loadAtlas } from '@/lib/atlas';
-import googleFonts from '@/lib/data/google-fonts.json';
 import { loadWorld } from '@/lib/atlas';
-import type { GoogleFont } from '@/lib/recommend';
 
 export const dynamic = 'force-dynamic';
 
-const GOOGLE = googleFonts as unknown as GoogleFont[];
+/**
+ * A fresh seed per request.
+ *
+ * Deliberately behind an await rather than called inline: rolling a random
+ * number in the body of a render is impure, and the lint rule that says so is
+ * right even though this component is force-dynamic and only ever runs once per
+ * request. Resolving it as part of the same Promise.all keeps it honest and
+ * costs nothing.
+ */
+async function rollSeed(): Promise<number> {
+  return (Math.random() * 0xffffffff) >>> 0;
+}
 
 export default async function QuizPage() {
-  const [atlas, world] = await Promise.all([loadAtlas(), loadWorld()]);
+  const [atlas, world, seed] = await Promise.all([loadAtlas(), loadWorld(), rollSeed()]);
 
   if (atlas.length < 4) {
     return (
@@ -27,20 +36,9 @@ export default async function QuizPage() {
     );
   }
 
-  // A fresh seed per request, generated here rather than in the browser.
-  //
-  // The quiz needs a different twelve rounds for each visitor, but the first
-  // duel is computed during the initial render so round one paints with real
-  // specimens instead of an empty frame. Rolling the seed on the client would
-  // therefore mean the server and the browser independently pick *different*
-  // opening pairs — a hydration mismatch on the most-seen screen in the app.
-  // Generating it server-side and passing it down keeps both sides in
-  // agreement while still giving every visit its own run. The page is already
-  // force-dynamic, so this really is per-request.
-  const seed = (Math.random() * 0xffffffff) >>> 0;
 
   // No header here: the quiz owns its own chrome, because the duels and the
   // result are different surfaces (cool bench vs warm paper) with different
   // mastheads, and a shared one would sit on the wrong ground for half the run.
-  return <Quiz atlas={atlas} world={world} google={GOOGLE} seed={seed} />;
+  return <Quiz atlas={atlas} world={world} seed={seed} />;
 }

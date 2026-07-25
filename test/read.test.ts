@@ -23,6 +23,7 @@ import {
 } from '@/lib/taste';
 
 const BANK = bank as unknown as {
+  verdicts: Record<string, string>;
   openers: Record<string, string[]>;
   tensions: Record<string, string[]>;
   closers: Record<string, string[]>;
@@ -91,6 +92,23 @@ describe('the authored bank', () => {
     }
   });
 
+  it('has a verdict for every family and mood cluster', () => {
+    for (const f of FAMILIES) {
+      for (const c of CLUSTERS) {
+        const v = BANK.verdicts[`${f}:${c}`];
+        expect(v, `missing verdict ${f}:${c}`).toBeTruthy();
+        // It is the H1 and the OG line: short enough to read at a glance.
+        expect(v.split(/\s+/).length, `${f}:${c} too long: "${v}"`).toBeLessThanOrEqual(11);
+        expect(v.trim()).toMatch(/[.!?]$/);
+      }
+    }
+  });
+
+  it('never repeats a verdict across keys', () => {
+    const all = Object.values(BANK.verdicts);
+    expect(new Set(all).size).toBe(all.length);
+  });
+
   it('has a line for every tension the detector can emit', () => {
     for (const t of TENSIONS) {
       expect(BANK.tensions[t], `missing tension ${t}`).toBeTruthy();
@@ -108,6 +126,7 @@ describe('the authored bank', () => {
     const banned =
       /\b(leverage|testament|journey|elevate|curated|timeless|unapologetic|seamless|delve|tapestry|resonate)\b/i;
     const lines = [
+      ...Object.values(BANK.verdicts),
       ...Object.values(BANK.openers).flat(),
       ...Object.values(BANK.tensions).flat(),
       ...Object.values(BANK.closers).flat(),
@@ -129,6 +148,7 @@ describe('the authored bank', () => {
     const hedged = new RegExp(`\\b(${NUM}) or (${NUM})\\b`, 'i');
 
     const lines = [
+      ...Object.values(BANK.verdicts),
       ...Object.values(BANK.openers).flat(),
       ...Object.values(BANK.tensions).flat(),
       ...Object.values(BANK.closers).flat(),
@@ -139,6 +159,7 @@ describe('the authored bank', () => {
 
   it('punctuates consistently — one apostrophe character, not two', () => {
     const lines = [
+      ...Object.values(BANK.verdicts),
       ...Object.values(BANK.openers).flat(),
       ...Object.values(BANK.tensions).flat(),
       ...Object.values(BANK.closers).flat(),
@@ -149,6 +170,7 @@ describe('the authored bank', () => {
 
   it('does not lean on em-dashes as default punctuation', () => {
     const lines = [
+      ...Object.values(BANK.verdicts),
       ...Object.values(BANK.openers).flat(),
       ...Object.values(BANK.tensions).flat(),
       ...Object.values(BANK.closers).flat(),
