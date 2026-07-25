@@ -81,6 +81,8 @@ export function CollectionView({ atlas }: { atlas: AtlasEntry[] }) {
   });
   /** Rendered in pages so a filter change doesn't mount 201 FontFaces at once. */
   const [shown, setShown] = useState(30);
+  /** Phone only — the `sm:block` above keeps the block permanent on a wide screen. */
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   const matching = useMemo(
     () =>
@@ -124,7 +126,32 @@ export function CollectionView({ atlas }: { atlas: AtlasEntry[] }) {
         </p>
 
         {/* ── filters ──────────────────────────────────────────────────── */}
-        <div className="mt-10 space-y-3 border-t border-line pt-5">
+        {/*
+          Thumb-sized chips and an always-open filter block cannot both fit on a
+          phone. Giving 34 chips a 44px target each turned the category row
+          alone into roughly 600px, so four axes buried the first typeface under
+          a wall of controls — solving the tap problem by creating a worse one.
+
+          So the block is disclosed on a phone and permanent from `sm` up. On a
+          narrow screen the honest default is the 201 faces, with filtering one
+          deliberate tap away; on a wide one there is room for the whole control
+          surface and it costs nothing to leave open.
+        */}
+        <button
+          onClick={() => setFiltersOpen((o) => !o)}
+          aria-expanded={filtersOpen}
+          className="mt-10 flex min-h-[44px] w-full items-center justify-between border-t border-line pt-5 font-mono text-[11px] text-ink-dim transition hover:text-ink sm:hidden"
+        >
+          <span>
+            filter{active ? ` · ${FILTERS.filter((f) => filters[f.key] !== ANY).length} on` : ''}
+          </span>
+          <span aria-hidden>{filtersOpen ? '−' : '+'}</span>
+        </button>
+        <div
+          className={`space-y-3 border-line pt-5 sm:mt-10 sm:block sm:border-t ${
+            filtersOpen ? 'block' : 'hidden'
+          }`}
+        >
           {/*
             These 34 chips are the only way to filter 201 faces, and as bare
             text they were 16.5px tall with 4px between rows — a fingertip
