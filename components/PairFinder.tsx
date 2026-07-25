@@ -57,11 +57,16 @@ export function PairFinder({
   name,
   genome,
   lists,
+  pools,
+  googleCount,
 }: {
   slug: string;
   name: string;
   genome: Genome;
   lists: Record<string, Partner[]>;
+  /** How many faces were actually in the running, per slot. Counted, not claimed. */
+  pools: Record<string, number>;
+  googleCount: number;
 }) {
   const [slot, setSlot] = useState<Slot>('text');
   const [stance, setStance] = useState<Stance>('classic');
@@ -118,9 +123,9 @@ export function PairFinder({
           What sits well with {name}
         </h1>
         <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-ink-dim">
-          Ranked against every face in the house library and {' '}
-          <span className="text-ink">149 Google families</span>, on how well each one answers this
-          one. Free, and nothing is generated.
+          Ranked against every face in the house library and{' '}
+          <span className="text-ink">{googleCount} Google families</span>, on how well each one
+          answers this one. Free, and nothing is generated.
         </p>
 
         {/* What we're looking for. */}
@@ -201,7 +206,8 @@ export function PairFinder({
         {/* The ranking. */}
         <section className="mt-12">
           <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-faint">
-            best {partners.length} of 350
+            best {partners.length} of {pools[slot] ?? partners.length}
+            {slot === 'text' && ' that can hold body copy'}
           </p>
           <ul className="mt-4">
             {partners.map((p, i) => {

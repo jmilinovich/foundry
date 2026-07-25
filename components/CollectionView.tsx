@@ -125,14 +125,30 @@ export function CollectionView({ atlas }: { atlas: AtlasEntry[] }) {
 
         {/* ── filters ──────────────────────────────────────────────────── */}
         <div className="mt-10 space-y-3 border-t border-line pt-5">
+          {/*
+            These 34 chips are the only way to filter 201 faces, and as bare
+            text they were 16.5px tall with 4px between rows — a fingertip
+            covers two rows at once, so a tap either selected the value below
+            the one you aimed at or landed in the gap and did nothing. Either
+            way the whole result set changes under you.
+
+            The target only exists where there is a finger: below `sm` each chip
+            is a 44px box with its own padding, and the row gaps tighten so the
+            boxes tile without overlapping. From `sm` up every one of those
+            rules is switched off and the dense baseline row returns unchanged,
+            because a pointer is exact and the filters are annotation.
+          */}
           {FILTERS.map((f) => (
-            <div key={f.key} className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <div
+              key={f.key}
+              className="flex flex-wrap items-center gap-x-1 gap-y-1 sm:items-baseline sm:gap-x-3"
+            >
               <span className="w-[70px] shrink-0 font-mono text-[10px] uppercase tracking-[0.14em] text-ink-faint">
                 {f.label}
               </span>
               <button
                 onClick={() => set(f.key, ANY)}
-                className={`font-mono text-[11px] transition ${
+                className={`inline-flex min-h-[44px] items-center px-2 font-mono text-[11px] transition sm:min-h-0 sm:px-0 ${
                   filters[f.key] === ANY ? 'text-ink' : 'text-ink-faint hover:text-ink-dim'
                 }`}
               >
@@ -142,7 +158,7 @@ export function CollectionView({ atlas }: { atlas: AtlasEntry[] }) {
                 <button
                   key={v}
                   onClick={() => set(f.key, v)}
-                  className={`font-mono text-[11px] transition ${
+                  className={`inline-flex min-h-[44px] items-center px-2 font-mono text-[11px] transition sm:min-h-0 sm:px-0 ${
                     filters[f.key] === v ? 'text-ink' : 'text-ink-faint hover:text-ink-dim'
                   }`}
                 >
@@ -162,7 +178,9 @@ export function CollectionView({ atlas }: { atlas: AtlasEntry[] }) {
               onClick={() =>
                 setFilters({ category: ANY, weight: ANY, width: ANY, contrast: ANY })
               }
-              className="font-mono text-[11px] text-ink-faint transition hover:text-ink"
+              /* The recovery affordance for a mis-tap, so it needs a target of
+                 its own more than anything else in this block. */
+              className="-my-3 inline-flex min-h-[44px] items-center font-mono text-[11px] text-ink-faint transition hover:text-ink"
             >
               clear
             </button>

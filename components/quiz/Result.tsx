@@ -79,7 +79,7 @@ function GoogleRow({ font, why, strengths }: { font: GoogleFont; why: string; st
           href={googleSpecimenUrl(font)}
           target="_blank"
           rel="noreferrer noopener"
-          className="font-mono text-[11px] text-ink-faint transition hover:text-ink"
+          className="-my-3 inline-flex min-h-[44px] items-center font-mono text-[11px] text-ink-faint transition hover:text-ink"
         >
           ↗ google fonts
         </a>
@@ -127,7 +127,7 @@ function AtlasRow({ entry, strengths }: { entry: AtlasEntry; strengths: MatchDet
         <a
           href={`/atlas/${entry.slug}.ttf`}
           download={`${entry.name}.ttf`}
-          className="font-mono text-[11px] text-ink-faint transition hover:text-ink"
+          className="-my-3 inline-flex min-h-[44px] items-center font-mono text-[11px] text-ink-faint transition hover:text-ink"
         >
           ↓ ttf
         </a>

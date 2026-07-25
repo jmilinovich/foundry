@@ -220,8 +220,14 @@ export function PairingView({
                   <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-faint">
                     {role} face
                   </div>
+                  {/* A house face has no run, so /run/atlas/font/<slug> 404s.
+                      Its home is the specimen sheet, which exists for all 201. */}
                   <Link
-                    href={`/run/${rid}/font/${font.id}`}
+                    href={
+                      rid === ATLAS_RUN
+                        ? `/collection/${font.id}`
+                        : `/run/${rid}/font/${font.id}`
+                    }
                     className="specimen mt-2 block text-[26px] leading-tight transition hover:text-ink"
                     data-loaded={loaded}
                     style={{ fontFamily: fam }}

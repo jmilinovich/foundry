@@ -50,6 +50,8 @@ export default async function PairPage({ params }: { params: Promise<{ slug: str
   if (!entry) notFound();
 
   const lists: Record<string, Partner[]> = {};
+  const pools: Record<string, number> = {};
+
   for (const slot of SLOTS) {
     for (const { id: stance } of STANCES) {
       lists[`${slot}:${stance}`] = findPartners(entry.genome, {
@@ -61,6 +63,26 @@ export default async function PairPage({ params }: { params: Promise<{ slug: str
         excludeSlug: slug,
       });
     }
+    /**
+     * How many faces were actually in the running, counted rather than claimed.
+     *
+     * The page said "best 6 of 350", which is the size of both libraries added
+     * together and is only true of the display slot. Body copy throws out every
+     * display, script and mono family and every house face too extreme to read
+     * at 16px, which takes the real pool to about a hundred. Overstating it by
+     * three times on the default tab is the kind of number nobody checks and
+     * everybody would be annoyed to discover. The guards live in findPartners
+     * and depend only on the slot, so counting through it cannot drift from
+     * what was actually ranked.
+     */
+    pools[slot] = findPartners(entry.genome, {
+      slot,
+      stance: 'classic',
+      house: atlas,
+      google: GOOGLE,
+      limit: Number.MAX_SAFE_INTEGER,
+      excludeSlug: slug,
+    }).length;
   }
 
   return (
@@ -69,6 +91,8 @@ export default async function PairPage({ params }: { params: Promise<{ slug: str
       name={entry.name}
       genome={entry.genome}
       lists={lists}
+      pools={pools}
+      googleCount={GOOGLE.length}
     />
   );
 }

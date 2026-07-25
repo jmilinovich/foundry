@@ -34,9 +34,15 @@ const ATLAS = path.join(HERE, '..', 'public', 'atlas');
 export const QUIZ_TEXT = 'Handgloves';
 
 /** Everything the results page, name plates and detail views can need. */
+// The curly quotes are here because every specimen sentence in the app uses
+// them — "arm’s length" in the sample paragraph is a U+2019, not an ASCII
+// apostrophe. Without them the pairing preview set one character of its body
+// copy in Georgia, inside a page whose entire job is to show you a typeface.
+// All 201 house TTFs carry these in their cmap, so nothing falls back.
 const FULL_TEXT =
   'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789' +
-  " .,:;!?'\"&()[]{}/\\|-–—_+=*@#$%^~<>`";
+  " .,:;!?'\"&()[]{}/\\|-–—_+=*@#$%^~<>`" +
+  '‘’“”';
 
 async function newerThan(a, b) {
   try {
